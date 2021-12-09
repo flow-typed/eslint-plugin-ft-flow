@@ -19,7 +19,8 @@
     "documentation-add-assertions": "babel-node ./src/bin/addAssertions",
     "format-json": "jsonlint --sort-keys --in-place --indent \"  \" ./src/configs/recommended.json",
     "lint": "eslint ./src ./tests",
-    "test": "mocha --require @babel/register ./tests/rules/index.js"
+    "test": "mocha --require @babel/register ./tests/rules/index.js",
+    "prepublishOnly": "yarn create-readme && yarn documentation-add-assertions && yarn build"
   },
   "dependencies": {
     "lodash": "^4.17.21",
