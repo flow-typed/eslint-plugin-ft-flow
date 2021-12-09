@@ -1,7 +1,7 @@
 {
   "name": "eslint-plugin-flow-typed",
   "description": "Flowtype linting rules for ESLint.",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha-0",
   "license": "MIT",
   "main": "./dist/index.js",
   "repository": {
@@ -68,6 +68,7 @@
   },
   "keywords": [
     "eslint",
+    "eslintplugin",
     "plugin",
     "flowtype",
     "flow-typed"
