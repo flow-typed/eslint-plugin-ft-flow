@@ -3,7 +3,10 @@
   "parserOptions": {
     "babelOptions": {
       "parserOpts": {
-        "plugins": ["flow", "jsx"]
+        "plugins": [
+          "flow",
+          "jsx"
+        ]
       }
     }
   },
