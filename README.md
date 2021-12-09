@@ -1,77 +1,78 @@
-<a name="eslint-plugin-flow-typed"></a>
-# eslint-plugin-flow-typed
+<a name="flowtype-eslint-plugin-flowtype"></a>
+# @flowtype/eslint-plugin-flowtype
 
-[![NPM version](http://img.shields.io/npm/v/eslint-plugin-flow-typed.svg?style=flat-square)](https://www.npmjs.org/package/eslint-plugin-flow-typed)
+[![NPM version](http://img.shields.io/npm/v/@flowtype/eslint-plugin-flowtype.svg?style=flat-square)](https://www.npmjs.org/package/@flowtype/eslint-plugin-flowtype)
 
-[Flowtype](http://flowtype.org/) linting rules for ESLint.
+[Flow type](http://flowtype.org/) linting rules for ESLint.
 
-* [eslint-plugin-flowtype](#eslint-plugin-flowtype)
-    * [Installation](#eslint-plugin-flowtype-installation)
-    * [Configuration](#eslint-plugin-flowtype-configuration)
-        * [Shareable configurations](#eslint-plugin-flowtype-configuration-shareable-configurations)
-        * [Community maintained configurations](#eslint-plugin-flowtype-configuration-community-maintained-configurations)
-    * [Settings](#eslint-plugin-flowtype-settings)
-        * [`onlyFilesWithFlowAnnotation`](#eslint-plugin-flowtype-settings-onlyfileswithflowannotation)
-    * [Rules](#eslint-plugin-flowtype-rules)
-        * [`array-style-complex-type`](#eslint-plugin-flowtype-rules-array-style-complex-type)
-        * [`array-style-simple-type`](#eslint-plugin-flowtype-rules-array-style-simple-type)
-        * [`arrow-parens`](#eslint-plugin-flowtype-rules-arrow-parens)
-        * [`boolean-style`](#eslint-plugin-flowtype-rules-boolean-style)
-        * [`define-flow-type`](#eslint-plugin-flowtype-rules-define-flow-type)
-        * [`delimiter-dangle`](#eslint-plugin-flowtype-rules-delimiter-dangle)
-        * [`enforce-line-break`](#eslint-plugin-flowtype-rules-enforce-line-break)
-        * [`generic-spacing`](#eslint-plugin-flowtype-rules-generic-spacing)
-        * [`interface-id-match`](#eslint-plugin-flowtype-rules-interface-id-match)
-        * [`newline-after-flow-annotation`](#eslint-plugin-flowtype-rules-newline-after-flow-annotation)
-        * [`no-dupe-keys`](#eslint-plugin-flowtype-rules-no-dupe-keys)
-        * [`no-duplicate-type-union-intersection-members`](#eslint-plugin-flowtype-rules-no-duplicate-type-union-intersection-members)
-        * [`no-existential-type`](#eslint-plugin-flowtype-rules-no-existential-type)
-        * [`no-flow-fix-me-comments`](#eslint-plugin-flowtype-rules-no-flow-fix-me-comments)
-        * [`no-internal-flow-type`](#eslint-plugin-flowtype-rules-no-internal-flow-type)
-        * [`no-mixed`](#eslint-plugin-flowtype-rules-no-mixed)
-        * [`no-mutable-array`](#eslint-plugin-flowtype-rules-no-mutable-array)
-        * [`no-primitive-constructor-types`](#eslint-plugin-flowtype-rules-no-primitive-constructor-types)
-        * [`no-types-missing-file-annotation`](#eslint-plugin-flowtype-rules-no-types-missing-file-annotation)
-        * [`no-unused-expressions`](#eslint-plugin-flowtype-rules-no-unused-expressions)
-        * [`no-weak-types`](#eslint-plugin-flowtype-rules-no-weak-types)
-        * [`object-type-curly-spacing`](#eslint-plugin-flowtype-rules-object-type-curly-spacing)
-        * [`object-type-delimiter`](#eslint-plugin-flowtype-rules-object-type-delimiter)
-        * [`quotes`](#eslint-plugin-flowtype-rules-quotes)
-        * [`require-compound-type-alias`](#eslint-plugin-flowtype-rules-require-compound-type-alias)
-        * [`require-exact-type`](#eslint-plugin-flowtype-rules-require-exact-type)
-        * [`require-indexer-name`](#eslint-plugin-flowtype-rules-require-indexer-name)
-        * [`require-inexact-type`](#eslint-plugin-flowtype-rules-require-inexact-type)
-        * [`require-parameter-type`](#eslint-plugin-flowtype-rules-require-parameter-type)
-        * [`require-readonly-react-props`](#eslint-plugin-flowtype-rules-require-readonly-react-props)
-        * [`require-return-type`](#eslint-plugin-flowtype-rules-require-return-type)
-        * [`require-types-at-top`](#eslint-plugin-flowtype-rules-require-types-at-top)
-        * [`require-valid-file-annotation`](#eslint-plugin-flowtype-rules-require-valid-file-annotation)
-        * [`require-variable-type`](#eslint-plugin-flowtype-rules-require-variable-type)
-        * [`semi`](#eslint-plugin-flowtype-rules-semi)
-        * [`sort-keys`](#eslint-plugin-flowtype-rules-sort-keys)
-        * [`sort-type-union-intersection-members`](#eslint-plugin-flowtype-rules-sort-type-union-intersection-members)
-        * [`space-after-type-colon`](#eslint-plugin-flowtype-rules-space-after-type-colon)
-        * [`space-before-generic-bracket`](#eslint-plugin-flowtype-rules-space-before-generic-bracket)
-        * [`space-before-type-colon`](#eslint-plugin-flowtype-rules-space-before-type-colon)
-        * [`spread-exact-type`](#eslint-plugin-flowtype-rules-spread-exact-type)
-        * [`type-id-match`](#eslint-plugin-flowtype-rules-type-id-match)
-        * [`type-import-style`](#eslint-plugin-flowtype-rules-type-import-style)
-        * [`union-intersection-spacing`](#eslint-plugin-flowtype-rules-union-intersection-spacing)
-        * [`use-flow-type`](#eslint-plugin-flowtype-rules-use-flow-type)
-        * [`use-read-only-spread`](#eslint-plugin-flowtype-rules-use-read-only-spread)
-        * [`valid-syntax`](#eslint-plugin-flowtype-rules-valid-syntax)
+* [@flowtype/eslint-plugin-flowtype](#flowtype-eslint-plugin-flowtype)
+    * [Installation](#flowtype-eslint-plugin-flowtype-installation)
+    * [Configuration](#flowtype-eslint-plugin-flowtype-configuration)
+        * [Shareable configurations](#flowtype-eslint-plugin-flowtype-configuration-shareable-configurations)
+        * [Community maintained configurations](#flowtype-eslint-plugin-flowtype-configuration-community-maintained-configurations)
+    * [Settings](#flowtype-eslint-plugin-flowtype-settings)
+        * [`onlyFilesWithFlowAnnotation`](#flowtype-eslint-plugin-flowtype-settings-onlyfileswithflowannotation)
+    * [Rules](#flowtype-eslint-plugin-flowtype-rules)
+        * [`array-style-complex-type`](#flowtype-eslint-plugin-flowtype-rules-array-style-complex-type)
+        * [`array-style-simple-type`](#flowtype-eslint-plugin-flowtype-rules-array-style-simple-type)
+        * [`arrow-parens`](#flowtype-eslint-plugin-flowtype-rules-arrow-parens)
+        * [`boolean-style`](#flowtype-eslint-plugin-flowtype-rules-boolean-style)
+        * [`define-flow-type`](#flowtype-eslint-plugin-flowtype-rules-define-flow-type)
+        * [`delimiter-dangle`](#flowtype-eslint-plugin-flowtype-rules-delimiter-dangle)
+        * [`enforce-line-break`](#flowtype-eslint-plugin-flowtype-rules-enforce-line-break)
+        * [`generic-spacing`](#flowtype-eslint-plugin-flowtype-rules-generic-spacing)
+        * [`interface-id-match`](#flowtype-eslint-plugin-flowtype-rules-interface-id-match)
+        * [`newline-after-flow-annotation`](#flowtype-eslint-plugin-flowtype-rules-newline-after-flow-annotation)
+        * [`no-dupe-keys`](#flowtype-eslint-plugin-flowtype-rules-no-dupe-keys)
+        * [`no-duplicate-type-union-intersection-members`](#flowtype-eslint-plugin-flowtype-rules-no-duplicate-type-union-intersection-members)
+        * [`no-existential-type`](#flowtype-eslint-plugin-flowtype-rules-no-existential-type)
+        * [`no-flow-fix-me-comments`](#flowtype-eslint-plugin-flowtype-rules-no-flow-fix-me-comments)
+        * [`no-internal-flow-type`](#flowtype-eslint-plugin-flowtype-rules-no-internal-flow-type)
+        * [`no-mixed`](#flowtype-eslint-plugin-flowtype-rules-no-mixed)
+        * [`no-mutable-array`](#flowtype-eslint-plugin-flowtype-rules-no-mutable-array)
+        * [`no-primitive-constructor-types`](#flowtype-eslint-plugin-flowtype-rules-no-primitive-constructor-types)
+        * [`no-types-missing-file-annotation`](#flowtype-eslint-plugin-flowtype-rules-no-types-missing-file-annotation)
+        * [`no-unused-expressions`](#flowtype-eslint-plugin-flowtype-rules-no-unused-expressions)
+        * [`no-weak-types`](#flowtype-eslint-plugin-flowtype-rules-no-weak-types)
+        * [`object-type-curly-spacing`](#flowtype-eslint-plugin-flowtype-rules-object-type-curly-spacing)
+        * [`object-type-delimiter`](#flowtype-eslint-plugin-flowtype-rules-object-type-delimiter)
+        * [`quotes`](#flowtype-eslint-plugin-flowtype-rules-quotes)
+        * [`require-compound-type-alias`](#flowtype-eslint-plugin-flowtype-rules-require-compound-type-alias)
+        * [`require-exact-type`](#flowtype-eslint-plugin-flowtype-rules-require-exact-type)
+        * [`require-indexer-name`](#flowtype-eslint-plugin-flowtype-rules-require-indexer-name)
+        * [`require-inexact-type`](#flowtype-eslint-plugin-flowtype-rules-require-inexact-type)
+        * [`require-parameter-type`](#flowtype-eslint-plugin-flowtype-rules-require-parameter-type)
+        * [`require-readonly-react-props`](#flowtype-eslint-plugin-flowtype-rules-require-readonly-react-props)
+        * [`require-return-type`](#flowtype-eslint-plugin-flowtype-rules-require-return-type)
+        * [`require-types-at-top`](#flowtype-eslint-plugin-flowtype-rules-require-types-at-top)
+        * [`require-valid-file-annotation`](#flowtype-eslint-plugin-flowtype-rules-require-valid-file-annotation)
+        * [`require-variable-type`](#flowtype-eslint-plugin-flowtype-rules-require-variable-type)
+        * [`semi`](#flowtype-eslint-plugin-flowtype-rules-semi)
+        * [`sort-keys`](#flowtype-eslint-plugin-flowtype-rules-sort-keys)
+        * [`sort-type-union-intersection-members`](#flowtype-eslint-plugin-flowtype-rules-sort-type-union-intersection-members)
+        * [`space-after-type-colon`](#flowtype-eslint-plugin-flowtype-rules-space-after-type-colon)
+        * [`space-before-generic-bracket`](#flowtype-eslint-plugin-flowtype-rules-space-before-generic-bracket)
+        * [`space-before-type-colon`](#flowtype-eslint-plugin-flowtype-rules-space-before-type-colon)
+        * [`spread-exact-type`](#flowtype-eslint-plugin-flowtype-rules-spread-exact-type)
+        * [`type-id-match`](#flowtype-eslint-plugin-flowtype-rules-type-id-match)
+        * [`type-import-style`](#flowtype-eslint-plugin-flowtype-rules-type-import-style)
+        * [`union-intersection-spacing`](#flowtype-eslint-plugin-flowtype-rules-union-intersection-spacing)
+        * [`use-flow-type`](#flowtype-eslint-plugin-flowtype-rules-use-flow-type)
+        * [`use-read-only-spread`](#flowtype-eslint-plugin-flowtype-rules-use-read-only-spread)
+        * [`valid-syntax`](#flowtype-eslint-plugin-flowtype-rules-valid-syntax)
 
 
-<a name="eslint-plugin-flowtype-installation"></a>
+<a name="flowtype-eslint-plugin-flowtype-installation"></a>
 ## Installation
 
 ```bash
-npm install eslint --save-dev
-npm install @babel/eslint-parser --save-dev
-npm install eslint-plugin-flowtype --save-dev
+npm install eslint @babel/eslint-parser @babel/plugin-syntax-flow @babel/plugin-syntax-jsx  --save-dev
+
+# or with yarn
+yarn add -D eslint @babel/eslint-parser @babel/plugin-syntax-flow @babel/plugin-syntax-jsx
 ```
 
-<a name="eslint-plugin-flowtype-configuration"></a>
+<a name="flowtype-eslint-plugin-flowtype-configuration"></a>
 ## Configuration
 
 1. Set `parser` property to `@babel/eslint-parser`.
@@ -157,10 +158,10 @@ npm install eslint-plugin-flowtype --save-dev
 }
 ```
 
-<a name="eslint-plugin-flowtype-configuration-shareable-configurations"></a>
+<a name="flowtype-eslint-plugin-flowtype-configuration-shareable-configurations"></a>
 ### Shareable configurations
 
-<a name="eslint-plugin-flowtype-configuration-shareable-configurations-recommended"></a>
+<a name="flowtype-eslint-plugin-flowtype-configuration-shareable-configurations-recommended"></a>
 #### Recommended
 
 This plugin exports a [recommended configuration](./src/configs/recommended.json) that enforces Flow type good practices.
@@ -180,17 +181,17 @@ To enable this configuration use the extends property in your `.eslintrc` config
 
 See [ESLint documentation](http://eslint.org/docs/user-guide/configuring#extending-configuration-files) for more information about extending configuration files.
 
-<a name="eslint-plugin-flowtype-configuration-community-maintained-configurations"></a>
+<a name="flowtype-eslint-plugin-flowtype-configuration-community-maintained-configurations"></a>
 ### Community maintained configurations
 
 The following are third-party submitted/ maintained configurations of `eslint-plugin-flowtype`:
 
 * https://github.com/wemake-services/eslint-config-flowtype-essential
 
-<a name="eslint-plugin-flowtype-settings"></a>
+<a name="flowtype-eslint-plugin-flowtype-settings"></a>
 ## Settings
 
-<a name="eslint-plugin-flowtype-settings-onlyfileswithflowannotation"></a>
+<a name="flowtype-eslint-plugin-flowtype-settings-onlyfileswithflowannotation"></a>
 ### <code>onlyFilesWithFlowAnnotation</code>
 
 When `true`, only checks files with a [`@flow` annotation](http://flowtype.org/docs/about-flow.html#gradual) in the first comment.
@@ -205,12 +206,12 @@ When `true`, only checks files with a [`@flow` annotation](http://flowtype.org/d
 }
 ```
 
-<a name="eslint-plugin-flowtype-rules"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules"></a>
 ## Rules
 
 <!-- Rules are sorted alphabetically. -->
 
-<a name="eslint-plugin-flowtype-rules-array-style-complex-type"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-array-style-complex-type"></a>
 ### <code>array-style-complex-type</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
@@ -303,7 +304,7 @@ type X = Array<?string>
 
 
 
-<a name="eslint-plugin-flowtype-rules-array-style-simple-type"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-array-style-simple-type"></a>
 ### <code>array-style-simple-type</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
@@ -404,7 +405,7 @@ type X = typeof Array
 
 
 
-<a name="eslint-plugin-flowtype-rules-arrow-parens"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-arrow-parens"></a>
 ### <code>arrow-parens</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
@@ -620,7 +621,7 @@ async a => a
 
 
 
-<a name="eslint-plugin-flowtype-rules-boolean-style"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-boolean-style"></a>
 ### <code>boolean-style</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
@@ -666,7 +667,7 @@ type X = bool
 
 
 
-<a name="eslint-plugin-flowtype-rules-define-flow-type"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-define-flow-type"></a>
 ### <code>define-flow-type</code>
 
 Marks Flow type identifiers as defined.
@@ -811,7 +812,7 @@ type Foo = $ReadOnly<{}>
 
 
 
-<a name="eslint-plugin-flowtype-rules-delimiter-dangle"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-delimiter-dangle"></a>
 ### <code>delimiter-dangle</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
@@ -1658,7 +1659,7 @@ type X = []
 
 
 
-<a name="eslint-plugin-flowtype-rules-enforce-line-break"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-enforce-line-break"></a>
 ### <code>enforce-line-break</code>
 
 This rule enforces line breaks between type definitions.
@@ -1756,7 +1757,7 @@ type A = string
 
 
 
-<a name="eslint-plugin-flowtype-rules-generic-spacing"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-generic-spacing"></a>
 ### <code>generic-spacing</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
@@ -1853,12 +1854,12 @@ type X = Promise< (foo), bar, (((baz))) >
 
 
 
-<a name="eslint-plugin-flowtype-rules-interface-id-match"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-interface-id-match"></a>
 ### <code>interface-id-match</code>
 
 Enforces a consistent naming pattern for interfaces.
 
-<a name="eslint-plugin-flowtype-rules-interface-id-match-options"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-interface-id-match-options"></a>
 #### Options
 
 This rule requires a text RegExp:
@@ -1901,12 +1902,12 @@ interface foo {};
 
 
 
-<a name="eslint-plugin-flowtype-rules-newline-after-flow-annotation"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-newline-after-flow-annotation"></a>
 ### <code>newline-after-flow-annotation</code>
 
 This rule requires an empty line after the Flow annotation.
 
-<a name="eslint-plugin-flowtype-rules-newline-after-flow-annotation-options-1"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-newline-after-flow-annotation-options-1"></a>
 #### Options
 
 The rule has a string option:
@@ -1971,7 +1972,7 @@ import Foo from './foo';
 
 
 
-<a name="eslint-plugin-flowtype-rules-no-dupe-keys"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-no-dupe-keys"></a>
 ### <code>no-dupe-keys</code>
 
 Checks for duplicate properties in Object annotations.
@@ -2073,14 +2074,14 @@ export interface Foo { get foo(): boolean; get bar(): string; }
 
 
 
-<a name="eslint-plugin-flowtype-rules-no-duplicate-type-union-intersection-members"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-no-duplicate-type-union-intersection-members"></a>
 ### <code>no-duplicate-type-union-intersection-members</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
 Checks for duplicate members of a type union/intersection.
 
-<a name="eslint-plugin-flowtype-rules-no-duplicate-type-union-intersection-members-options-2"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-no-duplicate-type-union-intersection-members-options-2"></a>
 #### Options
 
 You can disable checking intersection types using `checkIntersections`.
@@ -2151,7 +2152,7 @@ type C = A & B;
 
 
 
-<a name="eslint-plugin-flowtype-rules-no-existential-type"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-no-existential-type"></a>
 ### <code>no-existential-type</code>
 
 Disallows use of the existential type (*). [See more](https://flow.org/en/docs/types/utilities/#toc-existential-type)
@@ -2187,14 +2188,14 @@ type T = string | null
 
 
 
-<a name="eslint-plugin-flowtype-rules-no-flow-fix-me-comments"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-no-flow-fix-me-comments"></a>
 ### <code>no-flow-fix-me-comments</code>
 
 Disallows `$FlowFixMe` comment suppressions.
 
 This is especially useful as a warning to ensure instances of `$FlowFixMe` in your codebase get fixed over time.
 
-<a name="eslint-plugin-flowtype-rules-no-flow-fix-me-comments-options-3"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-no-flow-fix-me-comments-options-3"></a>
 #### Options
 
 This rule takes an optional RegExp that comments a text RegExp that makes the supression valid.
@@ -2249,7 +2250,7 @@ const text = 'HELLO';
 
 
 
-<a name="eslint-plugin-flowtype-rules-no-internal-flow-type"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-no-internal-flow-type"></a>
 ### <code>no-internal-flow-type</code>
 
 Warns against using internal Flow types such as `React$Node`, `React$Ref` and others and suggests using public alternatives instead (`React.Node`, `React.Ref`, …).
@@ -2331,7 +2332,7 @@ type X = React$Rocks
 
 
 
-<a name="eslint-plugin-flowtype-rules-no-mixed"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-no-mixed"></a>
 ### <code>no-mixed</code>
 
 Warns against "mixed" type annotations.
@@ -2386,7 +2387,7 @@ class Foo { props: string }
 
 
 
-<a name="eslint-plugin-flowtype-rules-no-mutable-array"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-no-mutable-array"></a>
 ### <code>no-mutable-array</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
@@ -2437,7 +2438,7 @@ const values: Array<$ReadOnlyArray<string>> = Array();
 
 
 
-<a name="eslint-plugin-flowtype-rules-no-primitive-constructor-types"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-no-primitive-constructor-types"></a>
 ### <code>no-primitive-constructor-types</code>
 
 Disallows use of primitive constructors as types, such as `Boolean`, `Number` and `String`. [See more](https://flowtype.org/docs/builtins.html).
@@ -2511,7 +2512,7 @@ type x = MyBoolean
 
 
 
-<a name="eslint-plugin-flowtype-rules-no-types-missing-file-annotation"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-no-types-missing-file-annotation"></a>
 ### <code>no-types-missing-file-annotation</code>
 
 Disallows Flow type imports, aliases, and annotations in files missing a valid Flow file declaration (or a @noflow annotation).
@@ -2581,7 +2582,7 @@ export type {A} from "a"
 
 
 
-<a name="eslint-plugin-flowtype-rules-no-unused-expressions"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-no-unused-expressions"></a>
 ### <code>no-unused-expressions</code>
 
 An extension of [ESLint's `no-unused-expressions`](https://eslint.org/docs/rules/no-unused-expressions).
@@ -2635,7 +2636,7 @@ x?.y()
 
 
 
-<a name="eslint-plugin-flowtype-rules-no-weak-types"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-no-weak-types"></a>
 ### <code>no-weak-types</code>
 
 Warns against weak type annotations *any*, *Object* and *Function*.
@@ -2811,14 +2812,14 @@ function foo(thing): Function {}
 
 
 
-<a name="eslint-plugin-flowtype-rules-object-type-curly-spacing"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-object-type-curly-spacing"></a>
 ### <code>object-type-curly-spacing</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
 This rule enforces consistent spacing inside braces of object types.
 
-<a name="eslint-plugin-flowtype-rules-object-type-curly-spacing-options-4"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-object-type-curly-spacing-options-4"></a>
 #### Options
 
 The rule has a string option:
@@ -2949,7 +2950,7 @@ type obj = {
 
 
 
-<a name="eslint-plugin-flowtype-rules-object-type-delimiter"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-object-type-delimiter"></a>
 ### <code>object-type-delimiter</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
@@ -3078,12 +3079,12 @@ type Foo = { a: Foo, b: Bar }
 
 
 
-<a name="eslint-plugin-flowtype-rules-quotes"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-quotes"></a>
 ### <code>quotes</code>
 
 Enforces single quotes or double quotes around string literals.
 
-<a name="eslint-plugin-flowtype-rules-quotes-options-5"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-quotes-options-5"></a>
 #### Options
 
 The rule has string options of:
@@ -3145,12 +3146,12 @@ type T = { test: 'hello' | 'test', t: 'hello' }
 
 
 
-<a name="eslint-plugin-flowtype-rules-require-compound-type-alias"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-require-compound-type-alias"></a>
 ### <code>require-compound-type-alias</code>
 
 Requires to make a type alias for all [union](https://flow.org/en/docs/types/unions/) and [intersection](https://flow.org/en/docs/types/intersections/) types. If these are used in "raw" forms it might be tempting to just copy & paste them around the code. However, this brings sort of a source code pollution and unnecessary changes on several parts when these compound types need to be changed.
 
-<a name="eslint-plugin-flowtype-rules-require-compound-type-alias-options-6"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-require-compound-type-alias-options-6"></a>
 #### Options
 
 The rule has two options:
@@ -3237,14 +3238,14 @@ function foo(bar: { n: number } & { s: string }) {}
 
 
 
-<a name="eslint-plugin-flowtype-rules-require-exact-type"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-require-exact-type"></a>
 ### <code>require-exact-type</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
 This rule enforces [exact object types](https://flow.org/en/docs/types/objects/#toc-exact-object-types).
 
-<a name="eslint-plugin-flowtype-rules-require-exact-type-options-7"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-require-exact-type-options-7"></a>
 #### Options
 
 The rule has one string option:
@@ -3395,14 +3396,14 @@ type A = { a: string, ... }
 
 
 
-<a name="eslint-plugin-flowtype-rules-require-indexer-name"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-require-indexer-name"></a>
 ### <code>require-indexer-name</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
 This rule validates Flow object indexer name.
 
-<a name="eslint-plugin-flowtype-rules-require-indexer-name-options-8"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-require-indexer-name-options-8"></a>
 #### Options
 
 The rule has a string option:
@@ -3442,12 +3443,12 @@ type foo = { [string]: number };
 
 
 
-<a name="eslint-plugin-flowtype-rules-require-inexact-type"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-require-inexact-type"></a>
 ### <code>require-inexact-type</code>
 
 This rule enforces explicit inexact object types.
 
-<a name="eslint-plugin-flowtype-rules-require-inexact-type-options-9"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-require-inexact-type-options-9"></a>
 #### Options
 
 The rule has one string option:
@@ -3551,12 +3552,12 @@ type foo = number;
 
 
 
-<a name="eslint-plugin-flowtype-rules-require-parameter-type"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-require-parameter-type"></a>
 ### <code>require-parameter-type</code>
 
 Requires that all function parameters have type annotations.
 
-<a name="eslint-plugin-flowtype-rules-require-parameter-type-options-10"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-require-parameter-type-options-10"></a>
 #### Options
 
 You can skip all arrow functions by providing the `excludeArrowFunctions` option with `true`.
@@ -3694,7 +3695,7 @@ const f: fn = (a, b) => {}
 
 
 
-<a name="eslint-plugin-flowtype-rules-require-readonly-react-props"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-require-readonly-react-props"></a>
 ### <code>require-readonly-react-props</code>
 
 This rule validates that React props are marked as `$ReadOnly`. React props are immutable and modifying them could lead to unexpected results. Marking prop shapes as `$ReadOnly` avoids these issues.
@@ -3923,12 +3924,12 @@ function Foo(props: {}) { return <p /> }
 
 
 
-<a name="eslint-plugin-flowtype-rules-require-return-type"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-require-return-type"></a>
 ### <code>require-return-type</code>
 
 Requires that functions have return type annotation.
 
-<a name="eslint-plugin-flowtype-rules-require-return-type-options-11"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-require-return-type-options-11"></a>
 #### Options
 
 You can skip all arrow functions by providing the `excludeArrowFunctions` option with `true`.
@@ -4285,12 +4286,12 @@ async function * foo(): AsyncIterable<number> { yield 2; }
 
 
 
-<a name="eslint-plugin-flowtype-rules-require-types-at-top"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-require-types-at-top"></a>
 ### <code>require-types-at-top</code>
 
 Requires all type declarations to be at the top of the file, after any import declarations.
 
-<a name="eslint-plugin-flowtype-rules-require-types-at-top-options-12"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-require-types-at-top-options-12"></a>
 #### Options
 
 The rule has a string option:
@@ -4360,14 +4361,14 @@ type Foo = number;
 
 
 
-<a name="eslint-plugin-flowtype-rules-require-valid-file-annotation"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-require-valid-file-annotation"></a>
 ### <code>require-valid-file-annotation</code>
 
 This rule validates Flow file annotations.
 
 This rule can optionally report missing or missed placed annotations, common typos (e.g. `// @floww`), and enforce a consistent annotation style.
 
-<a name="eslint-plugin-flowtype-rules-require-valid-file-annotation-options-13"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-require-valid-file-annotation-options-13"></a>
 #### Options
 
 The rule has a string option:
@@ -4555,12 +4556,12 @@ a;
 
 
 
-<a name="eslint-plugin-flowtype-rules-require-variable-type"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-require-variable-type"></a>
 ### <code>require-variable-type</code>
 
 Requires that all variable declarators have type annotations.
 
-<a name="eslint-plugin-flowtype-rules-require-variable-type-options-14"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-require-variable-type-options-14"></a>
 #### Options
 
 You can exclude variables that match a certain regex by using `excludeVariableMatch`.
@@ -4643,7 +4644,7 @@ var foo = "bar", bar = 1; const oob : string = "oob"; let hey = "yah"
 
 
 
-<a name="eslint-plugin-flowtype-rules-semi"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-semi"></a>
 ### <code>semi</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
@@ -4720,14 +4721,14 @@ opaque type FooType = {};
 
 
 
-<a name="eslint-plugin-flowtype-rules-sort-keys"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-sort-keys"></a>
 ### <code>sort-keys</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
 Enforces natural, case-insensitive sorting of Object annotations.
 
-<a name="eslint-plugin-flowtype-rules-sort-keys-options-15"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-sort-keys-options-15"></a>
 #### Options
 
 The first option specifies sort order.
@@ -4781,7 +4782,7 @@ type FooType = { a: number, c: number, b: string }
           c: number,
           b: string,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -4790,7 +4791,7 @@ type FooType = { a: number, c: number, b: string }
           c: $ReadOnlyMap<string, number>,
           b: Map<string, Array<Map<string, number>>>,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -4816,7 +4817,7 @@ type FooType = { a: number, c: number, b: string }
             },
           }>>>,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "x" must be before "y".
 // Message: Expected type annotations to be in ascending order. "k" must be before "l".
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
@@ -4830,7 +4831,7 @@ type FooType = { a: number, c: number, b: string }
           c: string,
           b: number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -4843,7 +4844,7 @@ type FooType = { a: number, c: number, b: string }
           e: string,
           d: number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 // Message: Expected type annotations to be in ascending order. "d" must be before "e".
 
@@ -4854,7 +4855,7 @@ type FooType = { a: number, c: number, b: string }
           c: string,
           b: number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -4871,7 +4872,7 @@ type FooType = { a: number, c: number, b: string }
           b: number,
           dWithoutComma: boolean
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -4880,7 +4881,7 @@ type FooType = { a: number, c: number, b: string }
           c: number,
           b: string,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -4889,7 +4890,7 @@ type FooType = { a: number, c: number, b: string }
           c: number,
           b: string,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -4898,7 +4899,7 @@ type FooType = { a: number, c: number, b: string }
           c: ?number,
           b: string,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -4907,7 +4908,7 @@ type FooType = { a: number, c: number, b: string }
           c: number,
           b: (param: string) => number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -4916,7 +4917,7 @@ type FooType = { a: number, c: number, b: string }
           c: number,
           b: (param: string) => number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -4925,7 +4926,7 @@ type FooType = { a: number, c: number, b: string }
           a: number | string | boolean,
           b: (param: string) => number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "a" must be before "c".
 
 
@@ -4938,7 +4939,7 @@ type FooType = { a: number, c: number, b: string }
           a: number | string | boolean,
           b: (param: string) => number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "x" must be before "z".
 // Message: Expected type annotations to be in ascending order. "a" must be before "c".
 
@@ -4956,7 +4957,7 @@ type FooType = { a: number, c: number, b: string }
           a: number | string | boolean,
           b: (param: string) => number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "k" must be before "l".
 // Message: Expected type annotations to be in ascending order. "x" must be before "z".
 // Message: Expected type annotations to be in ascending order. "a" must be before "c".
@@ -4967,7 +4968,7 @@ type FooType = { a: number, c: number, b: string }
           -b: number,
           a: number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 // Message: Expected type annotations to be in ascending order. "a" must be before "b".
 
@@ -4977,7 +4978,7 @@ type FooType = { a: number, c: number, b: string }
           -b: number,
           a: number,
         |}
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 // Message: Expected type annotations to be in ascending order. "a" must be before "b".
 
@@ -4987,7 +4988,7 @@ type FooType = { a: number, c: number, b: string }
           c: number,
           b(param: string): number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -4996,7 +4997,7 @@ type FooType = { a: number, c: number, b: string }
           c: number,
           b(param: string): number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -5005,7 +5006,7 @@ type FooType = { a: number, c: number, b: string }
           a: number | string | boolean,
           b(param: string): number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "a" must be before "c".
 
 
@@ -5018,7 +5019,7 @@ type FooType = { a: number, c: number, b: string }
           a: number | string | boolean,
           b(param: string): number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "x" must be before "z".
 // Message: Expected type annotations to be in ascending order. "a" must be before "c".
 
@@ -5036,7 +5037,7 @@ type FooType = { a: number, c: number, b: string }
           a: number | string | boolean,
           b(param: string): number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "k" must be before "l".
 // Message: Expected type annotations to be in ascending order. "x" must be before "z".
 // Message: Expected type annotations to be in ascending order. "a" must be before "c".
@@ -5050,7 +5051,7 @@ type FooType = { a: number, c: number, b: string }
           /* preserves block comment before b */
           b(param: string): number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -5068,7 +5069,7 @@ type FooType = { a: number, c: number, b: string }
             IncludesLegacyOrder: boolean
           |}
         |};
-
+      
 // Message: Expected type annotations to be in ascending order. "code" must be before "isSuccess".
 // Message: Expected type annotations to be in ascending order. "errorMessage" must be before "message".
 // Message: Expected type annotations to be in ascending order. "ReturnText" must be before "Status".
@@ -5105,14 +5106,14 @@ type FooType = { a(): string, b: number, c: boolean }
 
 
 
-<a name="eslint-plugin-flowtype-rules-sort-type-union-intersection-members"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-sort-type-union-intersection-members"></a>
 ### <code>sort-type-union-intersection-members</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
 Enforces that members of a type union/intersection are sorted alphabetically.
 
-<a name="eslint-plugin-flowtype-rules-sort-type-union-intersection-members-options-16"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-sort-type-union-intersection-members-options-16"></a>
 #### Options
 
 You can specify the sort order using `order`.
@@ -5237,7 +5238,7 @@ type T3 = [1, 2, 4] & [1, 2, 3];
           | A
           | string
           | any;
-
+      
 // Message: Expected union members to be in ascending order. "[1, 2, 3]" should be before "[1, 2, 4]".
 // Message: Expected union members to be in ascending order. "{ b: string }" should be before "[1, 2, 3]".
 // Message: Expected union members to be in ascending order. "{ a: string }" should be before "{ b: string }".
@@ -5282,19 +5283,19 @@ type T3 = [1, 2, 3] & [1, 2, 4];
           | { b: string }
           | [1, 2, 3]
           | [1, 2, 4];
-
+      
 ```
 
 
 
-<a name="eslint-plugin-flowtype-rules-space-after-type-colon"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-space-after-type-colon"></a>
 ### <code>space-after-type-colon</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
 Enforces consistent spacing after the type annotation colon.
 
-<a name="eslint-plugin-flowtype-rules-space-after-type-colon-options-17"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-space-after-type-colon-options-17"></a>
 #### Options
 
 This rule has a string argument.
@@ -5372,7 +5373,7 @@ The following patterns are considered problems:
 { a: string, b: number }) => {}
 // Message: There must not be a line break after "foo" parameter type annotation colon.
 
-(foo:
+(foo: 
 { a: string, b: number }) => {}
 // Message: There must not be a line break after "foo" parameter type annotation colon.
 
@@ -6013,7 +6014,7 @@ var x: number = 42;
 
 
 
-<a name="eslint-plugin-flowtype-rules-space-before-generic-bracket"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-space-before-generic-bracket"></a>
 ### <code>space-before-generic-bracket</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
@@ -6057,7 +6058,7 @@ type X = Promise <string>
 
 
 
-<a name="eslint-plugin-flowtype-rules-space-before-type-colon"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-space-before-type-colon"></a>
 ### <code>space-before-type-colon</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
@@ -6633,7 +6634,7 @@ var x :number = 42;
 
 
 
-<a name="eslint-plugin-flowtype-rules-spread-exact-type"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-spread-exact-type"></a>
 ### <code>spread-exact-type</code>
 
 Enforce object types, that are spread to be exact type explicitly.
@@ -6658,12 +6659,12 @@ type foo = {test: number}; type bar = {...$Exact<foo>}
 
 
 
-<a name="eslint-plugin-flowtype-rules-type-id-match"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-type-id-match"></a>
 ### <code>type-id-match</code>
 
 Enforces a consistent naming pattern for type aliases.
 
-<a name="eslint-plugin-flowtype-rules-type-id-match-options-18"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-type-id-match-options-18"></a>
 #### Options
 
 This rule requires a text RegExp:
@@ -6709,7 +6710,7 @@ type foo = {};
 
 
 
-<a name="eslint-plugin-flowtype-rules-type-import-style"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-type-import-style"></a>
 ### <code>type-import-style</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
@@ -6724,7 +6725,7 @@ import {type T, type U, type V} from '...';
 import type {T, U, V} from '...';
 ```
 
-<a name="eslint-plugin-flowtype-rules-type-import-style-options-19"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-type-import-style-options-19"></a>
 #### Options
 
 The rule has a string option:
@@ -6785,7 +6786,7 @@ declare module "m" { import type A from 'a'; }
 
 
 
-<a name="eslint-plugin-flowtype-rules-union-intersection-spacing"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-union-intersection-spacing"></a>
 ### <code>union-intersection-spacing</code>
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
@@ -6938,7 +6939,7 @@ type X = string& number;
 
 
 
-<a name="eslint-plugin-flowtype-rules-use-flow-type"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-use-flow-type"></a>
 ### <code>use-flow-type</code>
 
 Marks Flow [type alias](https://flowtype.org/docs/type-aliases.html) declarations as used.
@@ -6972,7 +6973,7 @@ import type A from "a"; type X<B = A<string>> = { b: B }; let x: X; console.log(
 
 
 
-<a name="eslint-plugin-flowtype-rules-use-read-only-spread"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-use-read-only-spread"></a>
 ### <code>use-read-only-spread</code>
 
 Warns against accidentally creating an object which is no longer read-only because of how spread operator works in Flow. Imagine the following code:
@@ -7071,7 +7072,7 @@ type Identifier = $ReadOnly<{|
 
 
 
-<a name="eslint-plugin-flowtype-rules-valid-syntax"></a>
+<a name="flowtype-eslint-plugin-flowtype-rules-valid-syntax"></a>
 ### <code>valid-syntax</code>
 
 **Deprecated** Babylon (the Babel parser) v6.10.0 fixes parsing of the invalid syntax this plugin warned against.

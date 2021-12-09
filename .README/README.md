@@ -1,8 +1,6 @@
-# eslint-plugin-flowtype
+# @flowtype/eslint-plugin-flowtype
 
-[![NPM version](http://img.shields.io/npm/v/eslint-plugin-flowtype.svg?style=flat-square)](https://www.npmjs.org/package/eslint-plugin-flowtype)
-[![Travis build status](http://img.shields.io/travis/gajus/eslint-plugin-flowtype/master.svg?style=flat-square)](https://travis-ci.com/github/gajus/eslint-plugin-flowtype)
-[![js-canonical-style](https://img.shields.io/badge/code%20style-canonical-blue.svg?style=flat-square)](https://github.com/gajus/canonical)
+[![NPM version](http://img.shields.io/npm/v/@flowtype/eslint-plugin-flowtype.svg?style=flat-square)](https://www.npmjs.org/package/@flowtype/eslint-plugin-flowtype)
 
 [Flow type](http://flowtype.org/) linting rules for ESLint.
 
@@ -11,9 +9,10 @@
 ## Installation
 
 ```bash
-npm install eslint --save-dev
-npm install @babel/eslint-parser --save-dev
-npm install eslint-plugin-flowtype --save-dev
+npm install eslint @babel/eslint-parser @babel/plugin-syntax-flow @babel/plugin-syntax-jsx  --save-dev
+
+# or with yarn
+yarn add -D eslint @babel/eslint-parser @babel/plugin-syntax-flow @babel/plugin-syntax-jsx
 ```
 
 ## Configuration
