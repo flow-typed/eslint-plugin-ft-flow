@@ -8,7 +8,10 @@ jobs:
   publish-npm:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - uses: CultureHQ/actions-yarn@v1.0.1
 
