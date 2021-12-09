@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 import recommended from './configs/recommended.json';
 import arrayStyleComplexType from './rules/arrayStyleComplexType';
 import arrayStyleSimpleType from './rules/arrayStyleSimpleType';

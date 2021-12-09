@@ -1,11 +1,10 @@
 {
-  "parser": "@babel/eslint",
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "babelOptions": {
-      "plugins": [
-        "@babel/plugin-syntax-jsx",
-        "@babel/plugin-syntax-flow"
-      ]
+      "parserOpts": {
+        "plugins": ["flow", "jsx"]
+      }
     }
   },
   "plugins": [
