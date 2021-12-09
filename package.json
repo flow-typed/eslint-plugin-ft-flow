@@ -6,7 +6,7 @@
   "main": "./dist/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/flow-typed/eslint-plugin-flow-typed"
+    "url": "https://github.com/flow-typed/eslint-plugin-flowtype"
   },
   "engines": {
     "node": ">=14.0.0"
