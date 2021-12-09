@@ -29,5 +29,8 @@ jobs:
     - uses: CultureHQ/actions-yarn@v1.0.1
 
     - run: yarn
+    - run: yarn check-docs
+    - run: yarn check-tests
+    - run: yarn lint
     - run: yarn test
     - run: yarn build
