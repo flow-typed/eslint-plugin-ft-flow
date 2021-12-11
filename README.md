@@ -91,63 +91,7 @@ yarn add -D eslint-plugin-ft-flow eslint @babel/eslint-parser @babel/plugin-synt
       2,
       "boolean"
     ],
-    "ft-flow/define-ft-flow": 1,
-    "ft-flow/delimiter-dangle": [
-      2,
-      "never"
-    ],
-    "ft-flow/generic-spacing": [
-      2,
-      "never"
-    ],
-    "ft-flow/interface-id-match": [
-      2,
-      "^([A-Z][a-z0-9]+)+Type$"
-    ],
-    "ft-flow/no-mixed": 2,
-    "ft-flow/no-primitive-constructor-types": 2,
-    "ft-flow/no-types-missing-file-annotation": 2,
-    "ft-flow/no-weak-types": 2,
-    "ft-flow/object-type-delimiter": [
-      2,
-      "comma"
-    ],
-    "ft-flow/require-parameter-type": 2,
-    "ft-flow/require-readonly-react-props": 0,
-    "ft-flow/require-return-type": [
-      2,
-      "always",
-      {
-        "annotateUndefined": "never"
-      }
-    ],
-    "ft-flow/require-valid-file-annotation": 2,
-    "ft-flow/semi": [
-      2,
-      "always"
-    ],
-    "ft-flow/space-after-type-colon": [
-      2,
-      "always"
-    ],
-    "ft-flow/space-before-generic-bracket": [
-      2,
-      "never"
-    ],
-    "ft-flow/space-before-type-colon": [
-      2,
-      "never"
-    ],
-    "ft-flow/type-id-match": [
-      2,
-      "^([A-Z][a-z0-9]+)+Type$"
-    ],
-    "ft-flow/union-intersection-spacing": [
-      2,
-      "always"
-    ],
-    "ft-flow/use-ft-flow": 1,
-    "ft-flow/valid-syntax": 1
+    // ... more rules
   },
   "settings": {
     "ft-flow": {

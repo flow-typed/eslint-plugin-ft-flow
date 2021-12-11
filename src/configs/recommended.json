@@ -18,7 +18,7 @@
       2,
       "boolean"
     ],
-    "ft-flow/define-ft-flow": 1,
+    "ft-flow/define-flow-type": 1,
     "ft-flow/delimiter-dangle": 0,
     "ft-flow/generic-spacing": [
       2,
@@ -49,7 +49,7 @@
       2,
       "always"
     ],
-    "ft-flow/use-ft-flow": 1
+    "ft-flow/use-flow-type": 1
   },
   "settings": {
     "ft-flow": {
