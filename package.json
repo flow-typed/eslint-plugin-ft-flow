@@ -1,6 +1,6 @@
 {
-  "name": "eslint-plugin-flow-type",
-  "description": "Flowtype linting rules for ESLint.",
+  "name": "eslint-plugin-ft-flow",
+  "description": "Flowtype linting rules for ESLint by flow-typed",
   "version": "0.1.0",
   "license": "MIT",
   "main": "./dist/index.js",
