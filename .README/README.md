@@ -1,6 +1,6 @@
-# eslint-plugin-flow-type
+# eslint-plugin-ft-flow
 
-[![NPM version](http://img.shields.io/npm/v/eslint-plugin-flow-type.svg?style=flat-square)](https://www.npmjs.org/package/eslint-plugin-flow-type)
+[![NPM version](http://img.shields.io/npm/v/eslint-plugin-ft-flow.svg?style=flat-square)](https://www.npmjs.org/package/eslint-plugin-ft-flow)
 
 [Flow type](http://flow.org/) linting rules for ESLint.
 
@@ -9,17 +9,17 @@
 ## Installation
 
 ```bash
-npm install eslint-plugin-flow-type eslint @babel/eslint-parser @babel/plugin-syntax-flow @babel/plugin-syntax-jsx  --save-dev
+npm install eslint-plugin-ft-flow eslint @babel/eslint-parser @babel/plugin-syntax-flow @babel/plugin-syntax-jsx  --save-dev
 
 # or with yarn
-yarn add -D eslint-plugin-flow-type eslint @babel/eslint-parser @babel/plugin-syntax-flow @babel/plugin-syntax-jsx
+yarn add -D eslint-plugin-ft-flow eslint @babel/eslint-parser @babel/plugin-syntax-flow @babel/plugin-syntax-jsx
 ```
 
 ## Configuration
 
 1. Set `parser` property to `@babel/eslint-parser`.
-1. Add `plugins` section and specify `eslint-plugin-flow-type` as a plugin.
-1. Enable rules.
+2. Add `plugins` section and specify `eslint-plugin-ft-flow` as a plugin.
+3. Enable rules.
 
 <!-- -->
 
@@ -27,73 +27,73 @@ yarn add -D eslint-plugin-flow-type eslint @babel/eslint-parser @babel/plugin-sy
 {
   "parser": "@babel/eslint-parser",
   "plugins": [
-    "flow-type"
+    "ft-flow"
   ],
   "rules": {
-    "flow-type/boolean-style": [
+    "ft-flow/boolean-style": [
       2,
       "boolean"
     ],
-    "flow-type/define-flow-type": 1,
-    "flow-type/delimiter-dangle": [
+    "ft-flow/define-ft-flow": 1,
+    "ft-flow/delimiter-dangle": [
       2,
       "never"
     ],
-    "flow-type/generic-spacing": [
+    "ft-flow/generic-spacing": [
       2,
       "never"
     ],
-    "flow-type/interface-id-match": [
+    "ft-flow/interface-id-match": [
       2,
       "^([A-Z][a-z0-9]+)+Type$"
     ],
-    "flow-type/no-mixed": 2,
-    "flow-type/no-primitive-constructor-types": 2,
-    "flow-type/no-types-missing-file-annotation": 2,
-    "flow-type/no-weak-types": 2,
-    "flow-type/object-type-delimiter": [
+    "ft-flow/no-mixed": 2,
+    "ft-flow/no-primitive-constructor-types": 2,
+    "ft-flow/no-types-missing-file-annotation": 2,
+    "ft-flow/no-weak-types": 2,
+    "ft-flow/object-type-delimiter": [
       2,
       "comma"
     ],
-    "flow-type/require-parameter-type": 2,
-    "flow-type/require-readonly-react-props": 0,
-    "flow-type/require-return-type": [
+    "ft-flow/require-parameter-type": 2,
+    "ft-flow/require-readonly-react-props": 0,
+    "ft-flow/require-return-type": [
       2,
       "always",
       {
         "annotateUndefined": "never"
       }
     ],
-    "flow-type/require-valid-file-annotation": 2,
-    "flow-type/semi": [
+    "ft-flow/require-valid-file-annotation": 2,
+    "ft-flow/semi": [
       2,
       "always"
     ],
-    "flow-type/space-after-type-colon": [
+    "ft-flow/space-after-type-colon": [
       2,
       "always"
     ],
-    "flow-type/space-before-generic-bracket": [
+    "ft-flow/space-before-generic-bracket": [
       2,
       "never"
     ],
-    "flow-type/space-before-type-colon": [
+    "ft-flow/space-before-type-colon": [
       2,
       "never"
     ],
-    "flow-type/type-id-match": [
+    "ft-flow/type-id-match": [
       2,
       "^([A-Z][a-z0-9]+)+Type$"
     ],
-    "flow-type/union-intersection-spacing": [
+    "ft-flow/union-intersection-spacing": [
       2,
       "always"
     ],
-    "flow-type/use-flow-type": 1,
-    "flow-type/valid-syntax": 1
+    "ft-flow/use-ft-flow": 1,
+    "ft-flow/valid-syntax": 1
   },
   "settings": {
-    "flow-type": {
+    "ft-flow": {
       "onlyFilesWithFlowAnnotation": false
     }
   }
@@ -111,10 +111,10 @@ To enable this configuration use the extends property in your `.eslintrc` config
 ```json
 {
   "extends": [
-    "plugin:flow-type/recommended"
+    "plugin:ft-flow/recommended"
   ],
   "plugins": [
-    "flow-type"
+    "ft-flow"
   ]
 }
 ```
@@ -130,7 +130,7 @@ When `true`, only checks files with a [`@flow` annotation](http://flow.org/docs/
 ```js
 {
   "settings": {
-    "flow-type": {
+    "ft-flow": {
       "onlyFilesWithFlowAnnotation": true
     }
   }

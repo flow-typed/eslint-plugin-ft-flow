@@ -11,48 +11,48 @@
     }
   },
   "plugins": [
-    "flow-type"
+    "ft-flow"
   ],
   "rules": {
-    "flow-type/boolean-style": [
+    "ft-flow/boolean-style": [
       2,
       "boolean"
     ],
-    "flow-type/define-flow-type": 1,
-    "flow-type/delimiter-dangle": 0,
-    "flow-type/generic-spacing": [
+    "ft-flow/define-ft-flow": 1,
+    "ft-flow/delimiter-dangle": 0,
+    "ft-flow/generic-spacing": [
       2,
       "never"
     ],
-    "flow-type/no-mixed": 0,
-    "flow-type/no-types-missing-file-annotation": 2,
-    "flow-type/no-weak-types": 0,
-    "flow-type/require-parameter-type": 0,
-    "flow-type/require-readonly-react-props": 0,
-    "flow-type/require-return-type": 0,
-    "flow-type/require-valid-file-annotation": 0,
-    "flow-type/semi": 0,
-    "flow-type/space-after-type-colon": [
+    "ft-flow/no-mixed": 0,
+    "ft-flow/no-types-missing-file-annotation": 2,
+    "ft-flow/no-weak-types": 0,
+    "ft-flow/require-parameter-type": 0,
+    "ft-flow/require-readonly-react-props": 0,
+    "ft-flow/require-return-type": 0,
+    "ft-flow/require-valid-file-annotation": 0,
+    "ft-flow/semi": 0,
+    "ft-flow/space-after-type-colon": [
       2,
       "always"
     ],
-    "flow-type/space-before-generic-bracket": [
+    "ft-flow/space-before-generic-bracket": [
       2,
       "never"
     ],
-    "flow-type/space-before-type-colon": [
+    "ft-flow/space-before-type-colon": [
       2,
       "never"
     ],
-    "flow-type/type-id-match": 0,
-    "flow-type/union-intersection-spacing": [
+    "ft-flow/type-id-match": 0,
+    "ft-flow/union-intersection-spacing": [
       2,
       "always"
     ],
-    "flow-type/use-flow-type": 1
+    "ft-flow/use-ft-flow": 1
   },
   "settings": {
-    "flow-type": {
+    "ft-flow": {
       "onlyFilesWithFlowAnnotation": false
     }
   }
