@@ -1,24 +1,24 @@
-# @flowtype/eslint-plugin-flowtype
+# eslint-plugin-flow-type
 
-[![NPM version](http://img.shields.io/npm/v/@flowtype/eslint-plugin-flowtype.svg?style=flat-square)](https://www.npmjs.org/package/@flowtype/eslint-plugin-flowtype)
+[![NPM version](http://img.shields.io/npm/v/eslint-plugin-flow-type.svg?style=flat-square)](https://www.npmjs.org/package/eslint-plugin-flow-type)
 
-[Flow type](http://flowtype.org/) linting rules for ESLint.
+[Flow type](http://flow.org/) linting rules for ESLint.
 
 {"gitdown": "contents"}
 
 ## Installation
 
 ```bash
-npm install eslint @babel/eslint-parser @babel/plugin-syntax-flow @babel/plugin-syntax-jsx  --save-dev
+npm install eslint-plugin-flow-type eslint @babel/eslint-parser @babel/plugin-syntax-flow @babel/plugin-syntax-jsx  --save-dev
 
 # or with yarn
-yarn add -D eslint @babel/eslint-parser @babel/plugin-syntax-flow @babel/plugin-syntax-jsx
+yarn add -D eslint-plugin-flow-type eslint @babel/eslint-parser @babel/plugin-syntax-flow @babel/plugin-syntax-jsx
 ```
 
 ## Configuration
 
 1. Set `parser` property to `@babel/eslint-parser`.
-1. Add `plugins` section and specify `eslint-plugin-flowtype` as a plugin.
+1. Add `plugins` section and specify `eslint-plugin-flow-type` as a plugin.
 1. Enable rules.
 
 <!-- -->
@@ -27,73 +27,73 @@ yarn add -D eslint @babel/eslint-parser @babel/plugin-syntax-flow @babel/plugin-
 {
   "parser": "@babel/eslint-parser",
   "plugins": [
-    "flowtype"
+    "flow-type"
   ],
   "rules": {
-    "flowtype/boolean-style": [
+    "flow-type/boolean-style": [
       2,
       "boolean"
     ],
-    "flowtype/define-flow-type": 1,
-    "flowtype/delimiter-dangle": [
+    "flow-type/define-flow-type": 1,
+    "flow-type/delimiter-dangle": [
       2,
       "never"
     ],
-    "flowtype/generic-spacing": [
+    "flow-type/generic-spacing": [
       2,
       "never"
     ],
-    "flowtype/interface-id-match": [
+    "flow-type/interface-id-match": [
       2,
       "^([A-Z][a-z0-9]+)+Type$"
     ],
-    "flowtype/no-mixed": 2,
-    "flowtype/no-primitive-constructor-types": 2,
-    "flowtype/no-types-missing-file-annotation": 2,
-    "flowtype/no-weak-types": 2,
-    "flowtype/object-type-delimiter": [
+    "flow-type/no-mixed": 2,
+    "flow-type/no-primitive-constructor-types": 2,
+    "flow-type/no-types-missing-file-annotation": 2,
+    "flow-type/no-weak-types": 2,
+    "flow-type/object-type-delimiter": [
       2,
       "comma"
     ],
-    "flowtype/require-parameter-type": 2,
-    "flowtype/require-readonly-react-props": 0,
-    "flowtype/require-return-type": [
+    "flow-type/require-parameter-type": 2,
+    "flow-type/require-readonly-react-props": 0,
+    "flow-type/require-return-type": [
       2,
       "always",
       {
         "annotateUndefined": "never"
       }
     ],
-    "flowtype/require-valid-file-annotation": 2,
-    "flowtype/semi": [
+    "flow-type/require-valid-file-annotation": 2,
+    "flow-type/semi": [
       2,
       "always"
     ],
-    "flowtype/space-after-type-colon": [
+    "flow-type/space-after-type-colon": [
       2,
       "always"
     ],
-    "flowtype/space-before-generic-bracket": [
+    "flow-type/space-before-generic-bracket": [
       2,
       "never"
     ],
-    "flowtype/space-before-type-colon": [
+    "flow-type/space-before-type-colon": [
       2,
       "never"
     ],
-    "flowtype/type-id-match": [
+    "flow-type/type-id-match": [
       2,
       "^([A-Z][a-z0-9]+)+Type$"
     ],
-    "flowtype/union-intersection-spacing": [
+    "flow-type/union-intersection-spacing": [
       2,
       "always"
     ],
-    "flowtype/use-flow-type": 1,
-    "flowtype/valid-syntax": 1
+    "flow-type/use-flow-type": 1,
+    "flow-type/valid-syntax": 1
   },
   "settings": {
-    "flowtype": {
+    "flow-type": {
       "onlyFilesWithFlowAnnotation": false
     }
   }
@@ -104,39 +104,33 @@ yarn add -D eslint @babel/eslint-parser @babel/plugin-syntax-flow @babel/plugin-
 
 #### Recommended
 
-This plugin exports a [recommended configuration](./src/configs/recommended.json) that enforces Flow type good practices.
+This plugin exports a [recommended configuration](./src/configs/recommended.json) that enforces Flowtype best practices.
 
 To enable this configuration use the extends property in your `.eslintrc` config file:
 
 ```json
 {
   "extends": [
-    "plugin:flowtype/recommended"
+    "plugin:flow-type/recommended"
   ],
   "plugins": [
-    "flowtype"
+    "flow-type"
   ]
 }
 ```
 
 See [ESLint documentation](http://eslint.org/docs/user-guide/configuring#extending-configuration-files) for more information about extending configuration files.
 
-### Community maintained configurations
-
-The following are third-party submitted/ maintained configurations of `eslint-plugin-flowtype`:
-
-* https://github.com/wemake-services/eslint-config-flowtype-essential
-
 ## Settings
 
 ### `onlyFilesWithFlowAnnotation`
 
-When `true`, only checks files with a [`@flow` annotation](http://flowtype.org/docs/about-flow.html#gradual) in the first comment.
+When `true`, only checks files with a [`@flow` annotation](http://flow.org/docs/about-flow.html#gradual) in the first comment.
 
 ```js
 {
   "settings": {
-    "flowtype": {
+    "flow-type": {
       "onlyFilesWithFlowAnnotation": true
     }
   }

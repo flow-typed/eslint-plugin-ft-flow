@@ -1,15 +1,15 @@
 {
-  "name": "@flowtyped/eslint-plugin-flowtype",
+  "name": "eslint-plugin-flow-type",
   "description": "Flowtype linting rules for ESLint.",
   "version": "1.0.0",
   "license": "MIT",
   "main": "./dist/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/flow-typed/eslint-plugin-flowtype"
+    "url": "https://github.com/flow-typed/eslint-plugin-flow-type"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=12.0.0"
   },
   "scripts": {
     "build": "rimraf ./dist && NODE_ENV=production babel ./src --out-dir ./dist --copy-files",
@@ -73,6 +73,7 @@
     "flow",
     "flow-bin",
     "flowtype",
+    "flow-type",
     "flow-typed"
   ],
   "lint-staged": {
