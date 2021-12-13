@@ -16,6 +16,7 @@ import noDupeKeys from './rules/noDupeKeys';
 import noDuplicateTypeUnionIntersectionMembers from './rules/noDuplicateTypeUnionIntersectionMembers';
 import noExistentialType from './rules/noExistentialType';
 import noFlowFixMeComments from './rules/noFlowFixMeComments';
+import noFlowFixMeInStrictFiles from './rules/noFlowFixMeInStrictFiles';
 import noInternalFlowType from './rules/noInternalFlowType';
 import noMixed from './rules/noMixed';
 import noMutableArray from './rules/noMutableArray';
@@ -69,6 +70,7 @@ const rules = {
   'no-duplicate-type-union-intersection-members': noDuplicateTypeUnionIntersectionMembers,
   'no-existential-type': noExistentialType,
   'no-flow-fix-me-comments': noFlowFixMeComments,
+  'no-flow-fix-me-in-strict-files': noFlowFixMeInStrictFiles,
   'no-internal-flow-type': noInternalFlowType,
   'no-mixed': noMixed,
   'no-mutable-array': noMutableArray,

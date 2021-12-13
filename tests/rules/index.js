@@ -6,6 +6,7 @@ import {
 import {
   camelCase,
 } from 'lodash';
+
 import plugin from '../../src';
 
 const ruleTester = new RuleTester({
@@ -36,6 +37,7 @@ const reportingRules = [
   'no-duplicate-type-union-intersection-members',
   'no-existential-type',
   'no-flow-fix-me-comments',
+  'no-flow-fix-me-in-strict-files',
   'no-mutable-array',
   'no-primitive-constructor-types',
   'no-types-missing-file-annotation',
@@ -76,9 +78,10 @@ const ajv = new Ajv({
   verbose: true,
 });
 
+// eslint-disable-next-line no-restricted-syntax
 for (const ruleName of reportingRules) {
   // eslint-disable-next-line import/no-dynamic-require
-  const assertions = require('./assertions/' + camelCase(ruleName));
+  const assertions = require(`./assertions/${camelCase(ruleName)}`);
 
   if (assertions.misconfigured) {
     for (const misconfiguration of assertions.misconfigured) {
