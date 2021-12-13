@@ -5,9 +5,7 @@ const schema = [
   },
 ];
 
-const isSemicolon = (token) => {
-  return token.type === 'Punctuator' && token.value === ';';
-};
+const isSemicolon = (token) => token.type === 'Punctuator' && token.value === ';';
 
 const create = (context) => {
   const never = (context.options[0] || 'always') === 'never';
@@ -17,20 +15,16 @@ const create = (context) => {
     const lastToken = sourceCode.getLastToken(node);
     let fix;
     let message;
-    let {loc} = lastToken;
+    let { loc } = lastToken;
 
     if (missing) {
       message = 'Missing semicolon.';
       loc = loc.end;
-      fix = (fixer) => {
-        return fixer.insertTextAfter(lastToken, ';');
-      };
+      fix = (fixer) => fixer.insertTextAfter(lastToken, ';');
     } else {
       message = 'Extra semicolon.';
       loc = loc.start;
-      fix = (fixer) => {
-        return fixer.remove(lastToken);
-      };
+      fix = (fixer) => fixer.remove(lastToken);
     }
 
     context.report({
@@ -58,7 +52,7 @@ const create = (context) => {
     OpaqueType: checkForSemicolon,
     TypeAlias: checkForSemicolon,
     TypeAnnotation: (node) => {
-      if (node.parent.type === 'ClassProperty') {
+      if (['PropertyDefinition', 'ClassProperty'].includes(node.parent.type)) {
         checkForSemicolon(node.parent);
       }
     },

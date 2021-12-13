@@ -7,11 +7,9 @@ const schema = [
   },
 ];
 
-const create = (context) => {
-  return makeSpacing('before', context, {
-    always: context.options[0] === 'always',
-  });
-};
+const create = (context) => makeSpacing('before', context, {
+  always: context.options[0] === 'always',
+});
 
 export default {
   create,
