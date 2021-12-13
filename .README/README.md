@@ -1,6 +1,19 @@
-# eslint-plugin-ft-flow
+<h1 align="center">
+  eslint-plugin-ft-flow
+</h1>
 
-[![NPM version](http://img.shields.io/npm/v/eslint-plugin-ft-flow.svg?style=flat-square)](https://www.npmjs.org/package/eslint-plugin-ft-flow)
+<p align="center">
+  <a href="https://github.com/flow-typed/eslint-plugin-ft-flow/actions/workflows/build.yml">
+    <img src="https://github.com/flow-typed/eslint-plugin-ft-flow/workflows/build/badge.svg" alt="ci status">
+  </a>
+  <a href="https://www.npmjs.com/package/eslint-plugin-ft-flow"><img src="https://img.shields.io/npm/v/eslint-plugin-ft-flow.svg" alt="npm package"></a>
+  <a href="https://discordapp.com/invite/8ezwRUK">
+    <img src="https://img.shields.io/discord/539606376339734558.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=555555&cacheSeconds=60" alt="discord">
+  </a>
+  <a href="https://snyk.io/advisor/npm-package/eslint-plugin-ft-flow">
+    <img src="https://snyk.io/advisor/npm-package/eslint-plugin-ft-flow/badge.svg?" alt="package health">
+  </a>
+</p>
 
 [Flow type](http://flow.org/) linting rules for ESLint.
 
