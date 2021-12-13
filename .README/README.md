@@ -100,6 +100,7 @@ When `true`, only checks files with a [`@flow` annotation](http://flow.org/docs/
 {"gitdown": "include", "file": "./rules/no-duplicate-type-union-intersection-members.md"}
 {"gitdown": "include", "file": "./rules/no-existential-type.md"}
 {"gitdown": "include", "file": "./rules/no-flow-fix-me-comments.md"}
+{"gitdown": "include", "file": "./rules/no-flow-fix-me-in-strict-files.md"}
 {"gitdown": "include", "file": "./rules/no-internal-flow-type.md"}
 {"gitdown": "include", "file": "./rules/no-mixed.md"}
 {"gitdown": "include", "file": "./rules/no-mutable-array.md"}
