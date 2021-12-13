@@ -33,17 +33,31 @@ const create = (context) => {
     }
   };
 
+  // NOTE: For future contributors, if you ever need to add support for a new identifier,
+  // use `Identifier(node) {}` to find out which identifiers should be handled.
   return {
-    ClassImplements (node) {
+    ClassImplements(node) {
       makeDefined(node.id);
     },
-    DeclareInterface (node) {
+    DeclareInterface(node) {
       makeDefined(node.id);
     },
-    DeclareTypeAlias (node) {
+    DeclareTypeAlias(node) {
       makeDefined(node.id);
     },
-    GenericTypeAnnotation (node) {
+    EnumDeclaration(node) {
+      makeDefined(node.id);
+    },
+    EnumDefaultedMember(node) {
+      makeDefined(node.id);
+    },
+    EnumNumberMember(node) {
+      makeDefined(node.id);
+    },
+    EnumStringMember(node) {
+      makeDefined(node.id);
+    },
+    GenericTypeAnnotation(node) {
       if (node.id.type === 'Identifier') {
         makeDefined(node.id);
       } else if (node.id.type === 'QualifiedTypeIdentifier') {
@@ -59,15 +73,15 @@ const create = (context) => {
     },
 
     // Can be removed once https://github.com/babel/babel-eslint/pull/696 is published
-    OpaqueType (node) {
+    OpaqueType(node) {
       if (node.id.type === 'Identifier') {
         makeDefined(node.id);
       }
     },
-    Program () {
+    Program() {
       globalScope = context.getScope();
     },
-    TypeParameterDeclaration (node) {
+    TypeParameterDeclaration(node) {
       for (const param of node.params) {
         makeDefined(param);
       }

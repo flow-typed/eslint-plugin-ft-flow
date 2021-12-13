@@ -13,6 +13,7 @@ const ruleTester = new RuleTester({
   parserOptions: {
     babelOptions: {
       plugins: [
+        'babel-plugin-transform-flow-enums',
         '@babel/plugin-transform-react-jsx',
         '@babel/plugin-syntax-flow',
       ],
@@ -78,9 +79,8 @@ const ajv = new Ajv({
   verbose: true,
 });
 
-// eslint-disable-next-line no-restricted-syntax
 for (const ruleName of reportingRules) {
-  // eslint-disable-next-line import/no-dynamic-require
+  // eslint-disable-next-line global-require, import/no-dynamic-require
   const assertions = require(`./assertions/${camelCase(ruleName)}`);
 
   if (assertions.misconfigured) {
@@ -112,12 +112,14 @@ for (const ruleName of reportingRules) {
   }
 
   assertions.invalid = assertions.invalid.map((assertion) => {
+    // eslint-disable-next-line no-param-reassign
     assertion.parser = parser;
 
     return assertion;
   });
 
   assertions.valid = assertions.valid.map((assertion) => {
+    // eslint-disable-next-line no-param-reassign
     assertion.parser = parser;
 
     return assertion;
