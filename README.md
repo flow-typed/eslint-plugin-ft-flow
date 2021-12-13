@@ -10,9 +10,6 @@
   <a href="https://discordapp.com/invite/8ezwRUK">
     <img src="https://img.shields.io/discord/539606376339734558.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=555555&cacheSeconds=60" alt="discord">
   </a>
-  <a href="https://snyk.io/advisor/npm-package/eslint-plugin-ft-flow">
-    <img src="https://snyk.io/advisor/npm-package/eslint-plugin-ft-flow/badge.svg?" alt="package health">
-  </a>
 </p>
 
 [Flow type](http://flow.org/) linting rules for ESLint.
