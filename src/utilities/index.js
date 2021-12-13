@@ -1,5 +1,4 @@
 // @flow
-
 // eslint-disable-next-line import/no-namespace
 import * as spacingFixers from './spacingFixers';
 
@@ -33,6 +32,7 @@ export {
 export {
   default as quoteName,
 } from './quoteName';
+export { default as suppressionTypes } from './suppressionTypes';
 
 export {
   spacingFixers,

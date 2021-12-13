@@ -8,6 +8,7 @@ import booleanStyle from './rules/booleanStyle';
 import defineFlowType from './rules/defineFlowType';
 import delimiterDangle from './rules/delimiterDangle';
 import enforceLineBreak from './rules/enforceLineBreak';
+import enforceSuppressionCode from './rules/enforceSuppressionCode';
 import genericSpacing from './rules/genericSpacing';
 import interfaceIdMatch from './rules/interfaceIdMatch';
 import newlineAfterFlowAnnotation from './rules/newlineAfterFlowAnnotation';
@@ -60,6 +61,7 @@ const rules = {
   'define-flow-type': defineFlowType,
   'delimiter-dangle': delimiterDangle,
   'enforce-line-break': enforceLineBreak,
+  'enforce-suppression-code': enforceSuppressionCode,
   'generic-spacing': genericSpacing,
   'interface-id-match': interfaceIdMatch,
   'newline-after-flow-annotation': newlineAfterFlowAnnotation,
