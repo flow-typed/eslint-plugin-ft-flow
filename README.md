@@ -681,6 +681,15 @@ type X = {Y<AType>(): BType}
 type Foo = $ReadOnly<{}>
 // Additional rules: {"no-undef":2}
 
+enum Status { Active, Paused }
+// Additional rules: {"no-undef":2}
+
+enum Status { Active = 'active', Paused = 'paused' }
+// Additional rules: {"no-undef":2}
+
+enum Status { Active = 1, Paused = 2 }
+// Additional rules: {"no-undef":2}
+
 var a: AType
 // Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
 
@@ -745,6 +754,15 @@ type X = {Y<AType>(): BType}
 * @flow
 */
 type Foo = $ReadOnly<{}>
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+enum Status { Active, Paused }
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+enum Status { Active = 'active', Paused = 'paused' }
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+enum Status { Active = 1, Paused = 2 }
 // Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
 ```
 
