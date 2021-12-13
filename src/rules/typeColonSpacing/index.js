@@ -12,6 +12,7 @@ export default (direction, context, options) => {
   return {
     ...evaluateFunctions(context, report),
     ClassProperty: evaluateTypical(context, report, 'class property'),
+    PropertyDefinition: evaluateTypical(context, report, 'class property'),
     ObjectTypeIndexer: evaluateObjectTypeIndexer(context, report),
     ObjectTypeProperty: evaluateObjectTypeProperty(context, report),
     TypeCastExpression: evaluateTypeCastExpression(context, report),
