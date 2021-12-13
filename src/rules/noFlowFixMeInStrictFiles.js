@@ -21,7 +21,6 @@ const create = (context) => {
         .getAllComments()
         .filter((node) => node.type === 'Block' || node.type === 'Line');
 
-      // eslint-disable-next-line no-restricted-syntax
       for (const commentNode of comments) {
         const comment = commentNode.value.trimStart();
         const match = suppressionTypes.some((prefix) => comment.startsWith(prefix));

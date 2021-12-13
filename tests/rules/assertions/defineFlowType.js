@@ -1,6 +1,7 @@
 import {
   RuleTester,
 } from 'eslint';
+
 import {
   getBuiltinRule,
 } from '../../../src/utilities/getBuiltinRule';
@@ -150,6 +151,34 @@ type Foo = $ReadOnly<{}>`,
       },
     },
   },
+
+  // Enum types
+  {
+    code: 'enum Status { Active, Paused }',
+    errors: [
+      '\'Status\' is not defined.',
+      '\'Active\' is not defined.',
+      '\'Paused\' is not defined.',
+    ],
+  },
+  {
+    // eslint-disable-next-line quotes
+    code: `enum Status { Active = 'active', Paused = 'paused' }`,
+    errors: [
+      '\'Status\' is not defined.',
+      '\'Active\' is not defined.',
+      '\'Paused\' is not defined.',
+    ],
+  },
+  {
+    // eslint-disable-next-line quotes
+    code: `enum Status { Active = 1, Paused = 2 }`,
+    errors: [
+      '\'Status\' is not defined.',
+      '\'Active\' is not defined.',
+      '\'Paused\' is not defined.',
+    ],
+  },
 ];
 
 const ALWAYS_INVALID = [
@@ -205,7 +234,10 @@ const ALWAYS_VALID = [
     parser: require.resolve('@babel/eslint-parser'),
     parserOptions: {
       babelOptions: {
-        plugins: ['@babel/plugin-syntax-flow'],
+        plugins: [
+          'babel-plugin-transform-flow-enums',
+          '@babel/plugin-syntax-flow',
+        ],
       },
       requireConfigFile: false,
     },
@@ -222,7 +254,10 @@ const ALWAYS_VALID = [
     parser: require.resolve('@babel/eslint-parser'),
     parserOptions: {
       babelOptions: {
-        plugins: ['@babel/plugin-syntax-flow'],
+        plugins: [
+          'babel-plugin-transform-flow-enums',
+          '@babel/plugin-syntax-flow',
+        ],
       },
       requireConfigFile: false,
     },
@@ -240,27 +275,23 @@ const ALWAYS_VALID = [
 export default {
   invalid: [],
   valid: [
-    ...VALID_WITH_DEFINE_FLOW_TYPE.map((subject) => {
-      return {
-        code: subject.code,
-        rules: {
-          'no-undef': 2,
-        },
-        settings: subject.settings,
-      };
-    }),
-    ...VALID_WITH_DEFINE_FLOW_TYPE.map((subject) => {
-      return {
-        code: subject.code,
-        rules: {
-          'no-undef': 2,
-          'no-use-before-define': [
-            2,
-            'nofunc',
-          ],
-        },
-        settings: subject.settings,
-      };
-    }),
+    ...VALID_WITH_DEFINE_FLOW_TYPE.map((subject) => ({
+      code: subject.code,
+      rules: {
+        'no-undef': 2,
+      },
+      settings: subject.settings,
+    })),
+    ...VALID_WITH_DEFINE_FLOW_TYPE.map((subject) => ({
+      code: subject.code,
+      rules: {
+        'no-undef': 2,
+        'no-use-before-define': [
+          2,
+          'nofunc',
+        ],
+      },
+      settings: subject.settings,
+    })),
   ],
 };
