@@ -19,6 +19,7 @@
         * [`define-flow-type`](#eslint-plugin-ft-flow-rules-define-flow-type)
         * [`delimiter-dangle`](#eslint-plugin-ft-flow-rules-delimiter-dangle)
         * [`enforce-line-break`](#eslint-plugin-ft-flow-rules-enforce-line-break)
+        * [`enforce-suppression-code`](#eslint-plugin-ft-flow-rules-enforce-suppression-code)
         * [`generic-spacing`](#eslint-plugin-ft-flow-rules-generic-spacing)
         * [`interface-id-match`](#eslint-plugin-ft-flow-rules-interface-id-match)
         * [`newline-after-flow-annotation`](#eslint-plugin-ft-flow-rules-newline-after-flow-annotation)
@@ -26,6 +27,7 @@
         * [`no-duplicate-type-union-intersection-members`](#eslint-plugin-ft-flow-rules-no-duplicate-type-union-intersection-members)
         * [`no-existential-type`](#eslint-plugin-ft-flow-rules-no-existential-type)
         * [`no-flow-fix-me-comments`](#eslint-plugin-ft-flow-rules-no-flow-fix-me-comments)
+        * [`no-flow-fix-me-in-strict-files`](#eslint-plugin-ft-flow-rules-no-flow-fix-me-in-strict-files)
         * [`no-internal-flow-type`](#eslint-plugin-ft-flow-rules-no-internal-flow-type)
         * [`no-mixed`](#eslint-plugin-ft-flow-rules-no-mixed)
         * [`no-mutable-array`](#eslint-plugin-ft-flow-rules-no-mutable-array)
@@ -1693,6 +1695,70 @@ type A = string
 
 
 
+<a name="eslint-plugin-ft-flow-rules-enforce-suppression-code"></a>
+### <code>enforce-suppression-code</code>
+
+This rule enforces a suppression code on flow suppression comments such as `$FlowFixMe` and `$FlowExpectedError`.
+
+The following patterns are considered problems:
+
+```js
+// $FlowFixMe I am doing something evil here
+const text = 'HELLO';
+// Message: $FlowFixMe is missing a suppression error code. Please update this suppression to use an error code: $FlowFixMe[…]
+
+// $FlowExpectedError I am doing something evil here
+const text = 'HELLO';
+// Message: $FlowExpectedError is missing a suppression error code. Please update this suppression to use an error code: $FlowExpectedError[…]
+
+// $FlowIssue I am doing something evil here
+const text = 'HELLO';
+// Message: $FlowIssue is missing a suppression error code. Please update this suppression to use an error code: $FlowIssue[…]
+
+// $FlowIgnore I am doing something evil here
+const text = 'HELLO';
+// Message: $FlowIgnore is missing a suppression error code. Please update this suppression to use an error code: $FlowIgnore[…]
+
+/* $FlowIgnore I am doing something evil here */
+// Message: $FlowIgnore is missing a suppression error code. Please update this suppression to use an error code: $FlowIgnore[…]
+
+{ /* $FlowIgnore I am doing something evil here */ }
+// Message: $FlowIgnore is missing a suppression error code. Please update this suppression to use an error code: $FlowIgnore[…]
+
+/**
+  * $FlowIgnore I am doing something evil here
+  */
+// Message: $FlowIgnore is missing a suppression error code. Please update this suppression to use an error code: $FlowIgnore[…]
+```
+
+The following patterns are not considered problems:
+
+```js
+const text = 'HELLO';
+
+// $FlowFixMe[incompatible-call] TODO 48
+const text = 'HELLO';
+
+// $FlowExpectedError[incompatible-call] TODO 48
+const text = 'HELLO';
+
+// $FlowIssue[incompatible-call] TODO 48
+const text = 'HELLO';
+
+// $FlowIgnore[incompatible-call] TODO 48
+const text = 'HELLO';
+
+/* $FlowIgnore[incompatible-call] TODO 48 */
+
+/**
+ * $FlowIgnore[incompatible-call] TODO 48
+ */
+
+/* $FlowIgnore[incompatible-call] TODO 48 */
+```
+
+
+
 <a name="eslint-plugin-ft-flow-rules-generic-spacing"></a>
 ### <code>generic-spacing</code>
 
@@ -2182,6 +2248,71 @@ const text = 'HELLO';
 // Options: ["TODO [0-9]+"]
 // $FlowFixMe TODO 48
 const text = 'HELLO';
+```
+
+
+
+<a name="eslint-plugin-ft-flow-rules-no-flow-fix-me-in-strict-files"></a>
+### <code>no-flow-fix-me-in-strict-files</code>
+
+This rule validates that no error suppression comments (e.g. `$FlowFixMe`) are used in `// @flow strict` (or `// @flow strict-local`) files.
+
+This codifies the best practices [as documented here](https://flow.org/en/docs/strict/#toc-adoption):
+
+> _"Do not add `$FlowFixMe` to suppress the new errors as they appear; just add `@flow strict` once all issues have been resolved."_
+<a name="eslint-plugin-ft-flow-rules-no-flow-fix-me-in-strict-files-options-4"></a>
+#### Options
+
+The rule has no options.
+
+```js
+{
+  "rules": {
+    "flowtype/no-flow-fix-me-in-strict-files": 2,
+  }
+}
+```
+
+The following patterns are considered problems:
+
+```js
+// @flow strict
+
+// $FlowFixMe
+const text: string = 42;
+// Message: No suppression comments are allowed in "strict" Flow files. Either remove the error suppression, or lower the strictness of this module.
+
+// @flow strict-local
+
+// $FlowFixMe
+const text: string = 42;
+// Message: No suppression comments are allowed in "strict" Flow files. Either remove the error suppression, or lower the strictness of this module.
+
+// @flow strict
+
+// $FlowExpectedError[xxx]
+const text: string = 42;
+// Message: No suppression comments are allowed in "strict" Flow files. Either remove the error suppression, or lower the strictness of this module.
+```
+
+The following patterns are not considered problems:
+
+```js
+// @flow
+
+// Error suppressions are fine in "normal" Flow files
+// $FlowFixMe
+const text: string = 42;
+
+// @flow-strict
+
+// Definitely nothing to suppress here
+// ...
+
+// @flow-strict-local
+
+// Definitely nothing to suppress here
+// ...
 ```
 
 
@@ -2755,7 +2886,7 @@ _The `--fix` option on the command line automatically fixes problems reported by
 
 This rule enforces consistent spacing inside braces of object types.
 
-<a name="eslint-plugin-ft-flow-rules-object-type-curly-spacing-options-4"></a>
+<a name="eslint-plugin-ft-flow-rules-object-type-curly-spacing-options-5"></a>
 #### Options
 
 The rule has a string option:
@@ -3020,7 +3151,7 @@ type Foo = { a: Foo, b: Bar }
 
 Enforces single quotes or double quotes around string literals.
 
-<a name="eslint-plugin-ft-flow-rules-quotes-options-5"></a>
+<a name="eslint-plugin-ft-flow-rules-quotes-options-6"></a>
 #### Options
 
 The rule has string options of:
@@ -3087,7 +3218,7 @@ type T = { test: 'hello' | 'test', t: 'hello' }
 
 Requires to make a type alias for all [union](https://flow.org/en/docs/types/unions/) and [intersection](https://flow.org/en/docs/types/intersections/) types. If these are used in "raw" forms it might be tempting to just copy & paste them around the code. However, this brings sort of a source code pollution and unnecessary changes on several parts when these compound types need to be changed.
 
-<a name="eslint-plugin-ft-flow-rules-require-compound-type-alias-options-6"></a>
+<a name="eslint-plugin-ft-flow-rules-require-compound-type-alias-options-7"></a>
 #### Options
 
 The rule has two options:
@@ -3181,7 +3312,7 @@ _The `--fix` option on the command line automatically fixes problems reported by
 
 This rule enforces [exact object types](https://flow.org/en/docs/types/objects/#toc-exact-object-types).
 
-<a name="eslint-plugin-ft-flow-rules-require-exact-type-options-7"></a>
+<a name="eslint-plugin-ft-flow-rules-require-exact-type-options-8"></a>
 #### Options
 
 The rule has one string option:
@@ -3339,7 +3470,7 @@ _The `--fix` option on the command line automatically fixes problems reported by
 
 This rule validates Flow object indexer name.
 
-<a name="eslint-plugin-ft-flow-rules-require-indexer-name-options-8"></a>
+<a name="eslint-plugin-ft-flow-rules-require-indexer-name-options-9"></a>
 #### Options
 
 The rule has a string option:
@@ -3384,7 +3515,7 @@ type foo = { [string]: number };
 
 This rule enforces explicit inexact object types.
 
-<a name="eslint-plugin-ft-flow-rules-require-inexact-type-options-9"></a>
+<a name="eslint-plugin-ft-flow-rules-require-inexact-type-options-10"></a>
 #### Options
 
 The rule has one string option:
@@ -3493,7 +3624,7 @@ type foo = number;
 
 Requires that all function parameters have type annotations.
 
-<a name="eslint-plugin-ft-flow-rules-require-parameter-type-options-10"></a>
+<a name="eslint-plugin-ft-flow-rules-require-parameter-type-options-11"></a>
 #### Options
 
 You can skip all arrow functions by providing the `excludeArrowFunctions` option with `true`.
@@ -3865,7 +3996,7 @@ function Foo(props: {}) { return <p /> }
 
 Requires that functions have return type annotation.
 
-<a name="eslint-plugin-ft-flow-rules-require-return-type-options-11"></a>
+<a name="eslint-plugin-ft-flow-rules-require-return-type-options-12"></a>
 #### Options
 
 You can skip all arrow functions by providing the `excludeArrowFunctions` option with `true`.
@@ -4227,7 +4358,7 @@ async function * foo(): AsyncIterable<number> { yield 2; }
 
 Requires all type declarations to be at the top of the file, after any import declarations.
 
-<a name="eslint-plugin-ft-flow-rules-require-types-at-top-options-12"></a>
+<a name="eslint-plugin-ft-flow-rules-require-types-at-top-options-13"></a>
 #### Options
 
 The rule has a string option:
@@ -4304,7 +4435,7 @@ This rule validates Flow file annotations.
 
 This rule can optionally report missing or missed placed annotations, common typos (e.g. `// @floww`), and enforce a consistent annotation style.
 
-<a name="eslint-plugin-ft-flow-rules-require-valid-file-annotation-options-13"></a>
+<a name="eslint-plugin-ft-flow-rules-require-valid-file-annotation-options-14"></a>
 #### Options
 
 The rule has a string option:
@@ -4497,7 +4628,7 @@ a;
 
 Requires that all variable declarators have type annotations.
 
-<a name="eslint-plugin-ft-flow-rules-require-variable-type-options-14"></a>
+<a name="eslint-plugin-ft-flow-rules-require-variable-type-options-15"></a>
 #### Options
 
 You can exclude variables that match a certain regex by using `excludeVariableMatch`.
@@ -4664,7 +4795,7 @@ _The `--fix` option on the command line automatically fixes problems reported by
 
 Enforces natural, case-insensitive sorting of Object annotations.
 
-<a name="eslint-plugin-ft-flow-rules-sort-keys-options-15"></a>
+<a name="eslint-plugin-ft-flow-rules-sort-keys-options-16"></a>
 #### Options
 
 The first option specifies sort order.
@@ -5049,7 +5180,7 @@ _The `--fix` option on the command line automatically fixes problems reported by
 
 Enforces that members of a type union/intersection are sorted alphabetically.
 
-<a name="eslint-plugin-ft-flow-rules-sort-type-union-intersection-members-options-16"></a>
+<a name="eslint-plugin-ft-flow-rules-sort-type-union-intersection-members-options-17"></a>
 #### Options
 
 You can specify the sort order using `order`.
@@ -5231,7 +5362,7 @@ _The `--fix` option on the command line automatically fixes problems reported by
 
 Enforces consistent spacing after the type annotation colon.
 
-<a name="eslint-plugin-ft-flow-rules-space-after-type-colon-options-17"></a>
+<a name="eslint-plugin-ft-flow-rules-space-after-type-colon-options-18"></a>
 #### Options
 
 This rule has a string argument.
@@ -6600,7 +6731,7 @@ type foo = {test: number}; type bar = {...$Exact<foo>}
 
 Enforces a consistent naming pattern for type aliases.
 
-<a name="eslint-plugin-ft-flow-rules-type-id-match-options-18"></a>
+<a name="eslint-plugin-ft-flow-rules-type-id-match-options-19"></a>
 #### Options
 
 This rule requires a text RegExp:
@@ -6661,7 +6792,7 @@ import {type T, type U, type V} from '...';
 import type {T, U, V} from '...';
 ```
 
-<a name="eslint-plugin-ft-flow-rules-type-import-style-options-19"></a>
+<a name="eslint-plugin-ft-flow-rules-type-import-style-options-20"></a>
 #### Options
 
 The rule has a string option:

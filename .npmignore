@@ -1,3 +1,6 @@
+.github
+.husky
+.README
 src
 tests
 coverage
