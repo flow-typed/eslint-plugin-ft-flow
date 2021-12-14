@@ -14,7 +14,7 @@ const create = (context) => {
   const sourceCode = context.getSourceCode();
 
   return {
-    ObjectTypeAnnotation (node) {
+    ObjectTypeAnnotation(node) {
       const {
         exact,
         indexers,
@@ -23,12 +23,10 @@ const create = (context) => {
 
       if (!['DeclareClass', 'InterfaceDeclaration'].includes(node.parent.type) && always && !exact && !inexact && indexers.length === 0) {
         context.report({
-          fix: (fixer) => {
-            return [
-              fixer.replaceText(sourceCode.getFirstToken(node), '{|'),
-              fixer.replaceText(sourceCode.getLastToken(node), '|}'),
-            ];
-          },
+          fix: (fixer) => [
+            fixer.replaceText(sourceCode.getFirstToken(node), '{|'),
+            fixer.replaceText(sourceCode.getLastToken(node), '|}'),
+          ],
           message: 'Object type must be exact.',
           node,
         });
@@ -36,12 +34,10 @@ const create = (context) => {
 
       if (!always && exact) {
         context.report({
-          fix: (fixer) => {
-            return [
-              fixer.replaceText(sourceCode.getFirstToken(node), '{'),
-              fixer.replaceText(sourceCode.getLastToken(node), '}'),
-            ];
-          },
+          fix: (fixer) => [
+            fixer.replaceText(sourceCode.getFirstToken(node), '{'),
+            fixer.replaceText(sourceCode.getLastToken(node), '}'),
+          ],
           message: 'Object type must not be exact.',
           node,
         });

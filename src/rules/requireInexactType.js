@@ -9,8 +9,8 @@ const create = (context) => {
   const always = (context.options[0] || 'always') === 'always';
 
   return {
-    ObjectTypeAnnotation (node) {
-      const {inexact, exact} = node;
+    ObjectTypeAnnotation(node) {
+      const { inexact, exact } = node;
 
       if (!Object.prototype.hasOwnProperty.call(node, 'inexact')) {
         return;

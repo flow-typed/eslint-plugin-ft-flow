@@ -1,4 +1,5 @@
 import _ from 'lodash/';
+
 import {
   getParameterName,
 } from '../utilities';
@@ -15,24 +16,24 @@ const create = (context) => {
   };
 
   const analizeElement = (element) => {
-    const {type} = element;
+    const { type } = element;
     let value;
 
     switch (type) {
-    case 'GenericTypeAnnotation':
-      value = element.id.name;
-      break;
-    case 'ObjectTypeAnnotation':
+      case 'GenericTypeAnnotation':
+        value = element.id.name;
+        break;
+      case 'ObjectTypeAnnotation':
       // eslint-disable-next-line no-use-before-define
-      value = builObjectStructure(element.properties);
-      break;
-    case 'TupleTypeAnnotation':
+        value = builObjectStructure(element.properties);
+        break;
+      case 'TupleTypeAnnotation':
       // eslint-disable-next-line no-use-before-define
-      value = buildArrayStructure(element.types);
-      break;
-    default:
-      value = element.value;
-      break;
+        value = buildArrayStructure(element.types);
+        break;
+      default:
+        value = element.value;
+        break;
     }
 
     return {
@@ -41,45 +42,35 @@ const create = (context) => {
     };
   };
 
-  const buildArrayStructure = (elements) => {
-    return _.map(elements, (element) => {
-      return analizeElement(element);
-    });
-  };
+  const buildArrayStructure = (elements) => _.map(elements, (element) => analizeElement(element));
 
-  const builObjectStructure = (properties) => {
-    return _.map(properties, (property) => {
-      const element = analizeElement(
-        property.type === 'ObjectTypeSpreadProperty' ?
-          property.argument :
-          property.value,
-      );
+  const builObjectStructure = (properties) => _.map(properties, (property) => {
+    const element = analizeElement(
+      property.type === 'ObjectTypeSpreadProperty'
+        ? property.argument
+        : property.value,
+    );
 
-      return {
-        ...element,
-        name: getParameterName(property, context),
-      };
-    });
-  };
+    return {
+      ...element,
+      name: getParameterName(property, context),
+    };
+  });
 
   const checkForDuplicates = (node) => {
     const haystack = [];
 
     // filter out complex object types, like ObjectTypeSpreadProperty
-    const identifierNodes = _.filter(node.properties, {type: 'ObjectTypeProperty'});
+    const identifierNodes = _.filter(node.properties, { type: 'ObjectTypeProperty' });
 
     for (const identifierNode of identifierNodes) {
-      const needle = {name: getParameterName(identifierNode, context)};
+      const needle = { name: getParameterName(identifierNode, context) };
 
       if (identifierNode.value.type === 'FunctionTypeAnnotation') {
-        needle.args = _.map(identifierNode.value.params, (param) => {
-          return analizeElement(param.typeAnnotation);
-        });
+        needle.args = _.map(identifierNode.value.params, (param) => analizeElement(param.typeAnnotation));
       }
 
-      const match = _.some(haystack, (existingNeedle) => {
-        return _.isEqual(existingNeedle, needle);
-      });
+      const match = _.some(haystack, (existingNeedle) => _.isEqual(existingNeedle, needle));
 
       if (match) {
         report(identifierNode);

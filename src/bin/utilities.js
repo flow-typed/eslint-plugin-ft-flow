@@ -1,5 +1,4 @@
 // @flow
-
 import fs from 'fs';
 import path from 'path';
 import glob from 'glob';
@@ -9,12 +8,8 @@ export const getRules = () => {
   const rulesFiles = glob.sync(path.resolve(__dirname, '../rules/*.js'));
 
   const rulesNames = rulesFiles
-    .map((file) => {
-      return path.basename(file, '.js');
-    })
-    .map((name) => {
-      return [name, _.kebabCase(name)];
-    });
+    .map((file) => path.basename(file, '.js'))
+    .map((name) => [name, _.kebabCase(name)]);
 
   return rulesNames;
 };

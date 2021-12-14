@@ -7,7 +7,6 @@ import isFlowFileAnnotation from './isFlowFileAnnotation';
  * @param [strict] - By default, the function returns true if the file starts with @flow but not if it
  * starts by @noflow. When the strict flag is set to false, the function returns true if the flag has @noflow also.
  */
-
 export default (context, strict = true) => {
   const comments = context.getAllComments();
 
@@ -15,7 +14,5 @@ export default (context, strict = true) => {
     return false;
   }
 
-  return comments.some((comment) => {
-    return isFlowFileAnnotation(comment.value, strict);
-  });
+  return comments.some((comment) => isFlowFileAnnotation(comment.value, strict));
 };

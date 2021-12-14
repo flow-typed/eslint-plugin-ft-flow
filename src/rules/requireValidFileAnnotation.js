@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 import {
   isFlowFileAnnotation,
   fuzzyStringMatch,
@@ -9,9 +10,7 @@ const defaults = {
   strict: false,
 };
 
-const looksLikeFlowFileAnnotation = (comment) => {
-  return /@(?:no)?flo/ui.test(comment);
-};
+const looksLikeFlowFileAnnotation = (comment) => /@(?:no)?flo/ui.test(comment);
 
 const isValidAnnotationStyle = (node, style) => {
   if (style === 'none') {
@@ -21,17 +20,11 @@ const isValidAnnotationStyle = (node, style) => {
   return style === node.type.toLowerCase();
 };
 
-const checkAnnotationSpelling = (comment) => {
-  return /@[a-z]+\b/u.test(comment) && fuzzyStringMatch(comment.replace(/no/ui, ''), '@flow', 0.2);
-};
+const checkAnnotationSpelling = (comment) => /@[a-z]+\b/u.test(comment) && fuzzyStringMatch(comment.replace(/no/ui, ''), '@flow', 0.2);
 
-const isFlowStrict = (comment) => {
-  return /^@flow\sstrict\b/u.test(comment);
-};
+const isFlowStrict = (comment) => /^@flow\sstrict\b/u.test(comment);
 
-const noFlowAnnotation = (comment) => {
-  return /^@noflow\b/u.test(comment);
-};
+const noFlowAnnotation = (comment) => /^@noflow\b/u.test(comment);
 
 const schema = [
   {
@@ -60,35 +53,31 @@ const create = (context) => {
   const flowStrict = _.get(context, 'options[1].strict', defaults.strict);
 
   return {
-    Program (node) {
+    Program(node) {
       const firstToken = node.tokens[0];
 
-      const potentialFlowFileAnnotation = _.find(context.getSourceCode().getAllComments(), (comment) => {
-        return looksLikeFlowFileAnnotation(comment.value);
-      });
+      const potentialFlowFileAnnotation = _.find(context.getSourceCode().getAllComments(), (comment) => looksLikeFlowFileAnnotation(comment.value));
 
       if (potentialFlowFileAnnotation) {
         if (firstToken && firstToken.range[0] < potentialFlowFileAnnotation.range[0]) {
-          context.report({message: 'Flow file annotation not at the top of the file.', node: potentialFlowFileAnnotation});
+          context.report({ message: 'Flow file annotation not at the top of the file.', node: potentialFlowFileAnnotation });
         }
 
         const annotationValue = potentialFlowFileAnnotation.value.trim();
 
         if (isFlowFileAnnotation(annotationValue)) {
           if (!isValidAnnotationStyle(potentialFlowFileAnnotation, style)) {
-            const annotation = style === 'line' ? '// ' + annotationValue : '/* ' + annotationValue + ' */';
+            const annotation = style === 'line' ? `// ${annotationValue}` : `/* ${annotationValue} */`;
 
             context.report({
-              fix: (fixer) => {
-                return fixer.replaceTextRange(
-                  [
-                    potentialFlowFileAnnotation.range[0],
-                    potentialFlowFileAnnotation.range[1],
-                  ],
-                  annotation,
-                );
-              },
-              message: 'Flow file annotation style must be `' + annotation + '`',
+              fix: (fixer) => fixer.replaceTextRange(
+                [
+                  potentialFlowFileAnnotation.range[0],
+                  potentialFlowFileAnnotation.range[1],
+                ],
+                annotation,
+              ),
+              message: `Flow file annotation style must be \`${annotation}\``,
               node: potentialFlowFileAnnotation,
             });
           }
@@ -105,14 +94,14 @@ const create = (context) => {
                   potentialFlowFileAnnotation.range[1],
                 ], annotation);
               },
-              message: 'Strict Flow file annotation is required, must be ' + str,
+              message: `Strict Flow file annotation is required, must be ${str}`,
               node,
             });
           }
         } else if (checkAnnotationSpelling(annotationValue)) {
-          context.report({message: 'Misspelled or malformed Flow file annotation.', node: potentialFlowFileAnnotation});
+          context.report({ message: 'Misspelled or malformed Flow file annotation.', node: potentialFlowFileAnnotation });
         } else {
-          context.report({message: 'Malformed Flow file annotation.', node: potentialFlowFileAnnotation});
+          context.report({ message: 'Malformed Flow file annotation.', node: potentialFlowFileAnnotation });
         }
       } else if (always && !_.get(context, 'settings.flowtype.onlyFilesWithFlowAnnotation')) {
         context.report({
@@ -134,7 +123,7 @@ const create = (context) => {
                     firstComment.range[1],
                     firstComment.range[1],
                   ],
-                  '\n' + annotation.trim(),
+                  `\n${annotation.trim()}`,
                 );
             }
 

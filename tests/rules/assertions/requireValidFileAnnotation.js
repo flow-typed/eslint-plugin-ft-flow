@@ -333,7 +333,7 @@ export default {
           schemaPath: '#/items/1/properties/annotationStyle/enum',
         },
       ],
-      options: ['never', {annotationStyle: 'upside-down'}],
+      options: ['never', { annotationStyle: 'upside-down' }],
     },
   ],
   valid: [

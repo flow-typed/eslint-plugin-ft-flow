@@ -17,34 +17,32 @@ const create = (context) => {
 
   const reporter = (node, type) => {
     context.report({
-      data: {type},
+      data: { type },
       message: 'Type {{type}} require valid Flow declaration.',
       node,
     });
   };
 
   return {
-    ExportNamedDeclaration (node) {
+    ExportNamedDeclaration(node) {
       if (node.exportKind === 'type') {
         reporter(node, 'exports');
       }
     },
-    ImportDeclaration (node) {
+    ImportDeclaration(node) {
       if (node.importKind === 'type') {
         reporter(node, 'imports');
       }
 
-      if (node.importKind === 'value' &&
-      node.specifiers.some((specifier) => {
-        return specifier.importKind === 'type';
-      })) {
+      if (node.importKind === 'value'
+      && node.specifiers.some((specifier) => specifier.importKind === 'type')) {
         reporter(node, 'imports');
       }
     },
-    TypeAlias (node) {
+    TypeAlias(node) {
       reporter(node, 'aliases');
     },
-    TypeAnnotation (node) {
+    TypeAnnotation(node) {
       reporter(node, 'annotations');
     },
   };

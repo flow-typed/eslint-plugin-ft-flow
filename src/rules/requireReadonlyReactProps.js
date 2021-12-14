@@ -24,17 +24,17 @@ const isReactComponent = (node) => {
 
     // class Foo extends Component { }
     // class Foo extends PureComponent { }
-    node.superClass.type === 'Identifier' && reComponentName.test(node.superClass.name) ||
+    node.superClass.type === 'Identifier' && reComponentName.test(node.superClass.name)
 
     // class Foo extends React.Component { }
     // class Foo extends React.PureComponent { }
-    node.superClass.type === 'MemberExpression' &&
-    (node.superClass.object.name === 'React' && reComponentName.test(node.superClass.property.name))
+    || node.superClass.type === 'MemberExpression'
+    && (node.superClass.object.name === 'React' && reComponentName.test(node.superClass.property.name))
   );
 };
 
 // type Props = {| +foo: string |}
-const isReadOnlyObjectType = (node, {useImplicitExactTypes}) => {
+const isReadOnlyObjectType = (node, { useImplicitExactTypes }) => {
   if (!node || node.type !== 'ObjectTypeAnnotation') {
     return false;
   }
@@ -52,10 +52,8 @@ const isReadOnlyObjectType = (node, {useImplicitExactTypes}) => {
   }
 
   // { +foo: ..., +bar: ..., ... }
-  return node.properties.length > 0 &&
-        node.properties.every((prop) => {
-          return prop.variance && prop.variance.kind === 'plus';
-        });
+  return node.properties.length > 0
+        && node.properties.every((prop) => prop.variance && prop.variance.kind === 'plus');
 };
 
 // type Props = {| +foo: string |} | {| +bar: number |}
@@ -64,20 +62,16 @@ const isReadOnlyObjectUnionType = (node, options) => {
     return false;
   }
 
-  return node.types.every((type) => {
-    return isReadOnlyObjectType(type, options);
-  });
+  return node.types.every((type) => isReadOnlyObjectType(type, options));
 };
 
-const isReadOnlyType = (node, options) => {
-  return node.right.id && reReadOnly.test(node.right.id.name) ||
-    isReadOnlyObjectType(node.right, options) ||
-    isReadOnlyObjectUnionType(node.right, options);
-};
+const isReadOnlyType = (node, options) => node.right.id && reReadOnly.test(node.right.id.name)
+    || isReadOnlyObjectType(node.right, options)
+    || isReadOnlyObjectUnionType(node.right, options);
 
 const create = (context) => {
   const useImplicitExactTypes = _.get(context, ['options', 0, 'useImplicitExactTypes'], false);
-  const options = {useImplicitExactTypes};
+  const options = { useImplicitExactTypes };
 
   const readOnlyTypes = [];
   const foundTypes = [];
@@ -99,9 +93,9 @@ const create = (context) => {
       typeNode = node;
 
       // export type Props = $ReadOnly<{}>
-    } else if (node.type === 'ExportNamedDeclaration' &&
-        node.declaration &&
-        node.declaration.type === 'TypeAlias') {
+    } else if (node.type === 'ExportNamedDeclaration'
+        && node.declaration
+        && node.declaration.type === 'TypeAlias') {
       idName = node.declaration.id.name;
       typeNode = node.declaration;
     }
@@ -117,24 +111,24 @@ const create = (context) => {
   return {
 
     // class components
-    ClassDeclaration (node) {
+    ClassDeclaration(node) {
       if (isReactComponent(node) && isReadOnlyClassProp(node)) {
         context.report({
-          message: node.superTypeParameters.params[0].id.name + ' must be $ReadOnly',
+          message: `${node.superTypeParameters.params[0].id.name} must be $ReadOnly`,
           node,
         });
-      } else if (node.superTypeParameters &&
-                node.superTypeParameters.params[0].type === 'ObjectTypeAnnotation' &&
-                !isReadOnlyObjectType(node.superTypeParameters.params[0], options)) {
+      } else if (node.superTypeParameters
+                && node.superTypeParameters.params[0].type === 'ObjectTypeAnnotation'
+                && !isReadOnlyObjectType(node.superTypeParameters.params[0], options)) {
         context.report({
-          message: node.id.name + ' class props must be $ReadOnly',
+          message: `${node.id.name} class props must be $ReadOnly`,
           node,
         });
       }
     },
 
     // functional components
-    JSXElement (node) {
+    JSXElement(node) {
       let currentNode = node;
       let identifier;
       let typeAnnotation;
@@ -148,18 +142,18 @@ const create = (context) => {
         return;
       }
 
-      if (currentNode.params[0].type === 'Identifier' &&
-          (typeAnnotation = currentNode.params[0].typeAnnotation)) {
-        if ((identifier = typeAnnotation.typeAnnotation.id) &&
-            foundTypes.includes(identifier.name) &&
-            !readOnlyTypes.includes(identifier.name) &&
-            !reReadOnly.test(identifier.name)) {
+      if (currentNode.params[0].type === 'Identifier'
+          && (typeAnnotation = currentNode.params[0].typeAnnotation)) {
+        if ((identifier = typeAnnotation.typeAnnotation.id)
+            && foundTypes.includes(identifier.name)
+            && !readOnlyTypes.includes(identifier.name)
+            && !reReadOnly.test(identifier.name)) {
           if (reportedFunctionalComponents.includes(identifier)) {
             return;
           }
 
           context.report({
-            message: identifier.name + ' must be $ReadOnly',
+            message: `${identifier.name} must be $ReadOnly`,
             node: identifier,
           });
 
@@ -168,10 +162,10 @@ const create = (context) => {
           return;
         }
 
-        if (typeAnnotation.typeAnnotation.type === 'ObjectTypeAnnotation' &&
-            !isReadOnlyObjectType(typeAnnotation.typeAnnotation, options)) {
+        if (typeAnnotation.typeAnnotation.type === 'ObjectTypeAnnotation'
+            && !isReadOnlyObjectType(typeAnnotation.typeAnnotation, options)) {
           context.report({
-            message: currentNode.id.name + ' component props must be $ReadOnly',
+            message: `${currentNode.id.name} component props must be $ReadOnly`,
             node,
           });
         }

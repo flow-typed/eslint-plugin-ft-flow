@@ -3,9 +3,7 @@ import _ from 'lodash';
 const schema = [];
 
 // const x = [];
-const isEmptyArrayLiteral = (node) => {
-  return _.get(node, 'init.type') === 'ArrayExpression' && _.get(node, 'init.elements.length') === 0;
-};
+const isEmptyArrayLiteral = (node) => _.get(node, 'init.type') === 'ArrayExpression' && _.get(node, 'init.elements.length') === 0;
 
 // const x = new Array(); const y = Array();
 const isEmptyArrayInstance = (node) => {
@@ -27,34 +25,32 @@ const isAnnotationOfEmptyArrayInit = (node) => {
   return false;
 };
 
-const create = (context) => {
-  return {
-    ArrayTypeAnnotation (node) {
-      if (!isAnnotationOfEmptyArrayInit(node)) {
-        context.report({
-          fix (fixer) {
-            const rawElementType = context.getSourceCode().getText(node.elementType);
+const create = (context) => ({
+  ArrayTypeAnnotation(node) {
+    if (!isAnnotationOfEmptyArrayInit(node)) {
+      context.report({
+        fix(fixer) {
+          const rawElementType = context.getSourceCode().getText(node.elementType);
 
-            return fixer.replaceText(node, '$ReadOnlyArray<' + rawElementType + '>');
-          },
-          message: 'Use "$ReadOnlyArray" instead of array shorthand notation',
-          node,
-        });
-      }
-    },
-    GenericTypeAnnotation (node) {
-      if (node.id.name === 'Array' && !isAnnotationOfEmptyArrayInit(node)) {
-        context.report({
-          fix (fixer) {
-            return fixer.replaceText(node.id, '$ReadOnlyArray');
-          },
-          message: 'Use "$ReadOnlyArray" instead of "Array"',
-          node,
-        });
-      }
-    },
-  };
-};
+          return fixer.replaceText(node, `$ReadOnlyArray<${rawElementType}>`);
+        },
+        message: 'Use "$ReadOnlyArray" instead of array shorthand notation',
+        node,
+      });
+    }
+  },
+  GenericTypeAnnotation(node) {
+    if (node.id.name === 'Array' && !isAnnotationOfEmptyArrayInit(node)) {
+      context.report({
+        fix(fixer) {
+          return fixer.replaceText(node.id, '$ReadOnlyArray');
+        },
+        message: 'Use "$ReadOnlyArray" instead of "Array"',
+        node,
+      });
+    }
+  },
+});
 
 export default {
   create,

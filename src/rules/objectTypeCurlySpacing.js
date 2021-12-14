@@ -13,16 +13,14 @@ const meta = {
   fixable: 'code',
 };
 
-const sameLine = (left, right) => {
-  return left.loc.end.line === right.loc.start.line;
-};
+const sameLine = (left, right) => left.loc.end.line === right.loc.start.line;
 
 const create = (context) => {
   const never = (context?.options[0] ?? 'never') === 'never';
   const sourceCode = context.getSourceCode();
 
   return {
-    ObjectTypeAnnotation (node) {
+    ObjectTypeAnnotation(node) {
       const {
         properties,
       } = node;

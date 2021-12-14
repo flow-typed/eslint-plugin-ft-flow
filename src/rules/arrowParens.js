@@ -1,20 +1,14 @@
-const getLocation = (node) => {
-  return {
-    end: node.params[node.params.length - 1].loc.end,
-    start: node.params[0].loc.start,
-  };
-};
+const getLocation = (node) => ({
+  end: node.params[node.params.length - 1].loc.end,
+  start: node.params[0].loc.start,
+});
 
-const isOpeningParenToken = (token) => {
-  return token.value === '(' && token.type === 'Punctuator';
-};
+const isOpeningParenToken = (token) => token.value === '(' && token.type === 'Punctuator';
 
-const isClosingParenToken = (token) => {
-  return token.value === ')' && token.type === 'Punctuator';
-};
+const isClosingParenToken = (token) => token.value === ')' && token.type === 'Punctuator';
 
 export default {
-  create (context) {
+  create(context) {
     const asNeeded = context.options[0] === 'as-needed';
     const requireForBlockBody = asNeeded && context.options[1] && context.options[1].requireForBlockBody === true;
 
@@ -58,12 +52,12 @@ export default {
 
       // "as-needed", { "requireForBlockBody": true }: x => x
       if (
-        requireForBlockBody &&
-                node.params.length === 1 &&
-                node.params[0].type === 'Identifier' &&
-                !node.params[0].typeAnnotation &&
-                node.body.type !== 'BlockStatement' &&
-                !node.returnType
+        requireForBlockBody
+                && node.params.length === 1
+                && node.params[0].type === 'Identifier'
+                && !node.params[0].typeAnnotation
+                && node.body.type !== 'BlockStatement'
+                && !node.returnType
       ) {
         if (isOpeningParenToken(firstTokenOfParam)) {
           context.report({
@@ -78,12 +72,12 @@ export default {
       }
 
       if (
-        requireForBlockBody &&
-                node.body.type === 'BlockStatement'
+        requireForBlockBody
+                && node.body.type === 'BlockStatement'
       ) {
         if (!isOpeningParenToken(firstTokenOfParam)) {
           context.report({
-            fix (fixer) {
+            fix(fixer) {
               return fixer.replaceText(firstTokenOfParam, `(${firstTokenOfParam.value})`);
             },
             loc: getLocation(node),
@@ -96,11 +90,11 @@ export default {
       }
 
       // "as-needed": x => x
-      if (asNeeded &&
-                node.params.length === 1 &&
-                node.params[0].type === 'Identifier' &&
-                !node.params[0].typeAnnotation &&
-                !node.returnType
+      if (asNeeded
+                && node.params.length === 1
+                && node.params[0].type === 'Identifier'
+                && !node.params[0].typeAnnotation
+                && !node.returnType
       ) {
         if (isOpeningParenToken(firstTokenOfParam)) {
           context.report({
@@ -120,7 +114,7 @@ export default {
         // (x) => x
         if (after.value !== ')') {
           context.report({
-            fix (fixer) {
+            fix(fixer) {
               return fixer.replaceText(firstTokenOfParam, `(${firstTokenOfParam.value})`);
             },
             loc: getLocation(node),

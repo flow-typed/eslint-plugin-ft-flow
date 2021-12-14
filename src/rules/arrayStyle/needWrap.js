@@ -5,6 +5,4 @@ const complexTypesWithoutWrap = new Set([
   'ObjectTypeAnnotation',
 ]);
 
-export default (node) => {
-  return !isSimpleType(node) && !complexTypesWithoutWrap.has(node.type);
-};
+export default (node) => !isSimpleType(node) && !complexTypesWithoutWrap.has(node.type);

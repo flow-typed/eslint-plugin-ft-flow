@@ -1,8 +1,6 @@
 import _ from 'lodash';
 
-const looksLikeFlowFileAnnotation = (comment) => {
-  return /@(?:no)?flo/ui.test(comment);
-};
+const looksLikeFlowFileAnnotation = (comment) => /@(?:no)?flo/ui.test(comment);
 
 const schema = [
   {
@@ -18,28 +16,24 @@ const create = (context) => {
   const newline = mode === 'always-windows' ? '\r\n' : '\n';
 
   return {
-    Program (node) {
+    Program(node) {
       const sourceCode = context.getSourceCode();
 
       const potentialFlowFileAnnotation = _.find(
         context.getSourceCode().getAllComments(),
-        (comment) => {
-          return looksLikeFlowFileAnnotation(comment.value);
-        },
+        (comment) => looksLikeFlowFileAnnotation(comment.value),
       );
 
       if (potentialFlowFileAnnotation) {
-        const {line} = potentialFlowFileAnnotation.loc.end;
+        const { line } = potentialFlowFileAnnotation.loc.end;
         const nextLineIsEmpty = sourceCode.lines[line] === '';
 
         if (!never && !nextLineIsEmpty) {
           context.report({
-            fix: (fixer) => {
-              return fixer.insertTextAfter(
-                potentialFlowFileAnnotation,
-                newline,
-              );
-            },
+            fix: (fixer) => fixer.insertTextAfter(
+              potentialFlowFileAnnotation,
+              newline,
+            ),
             message: 'Expected newline after flow annotation',
             node,
           });

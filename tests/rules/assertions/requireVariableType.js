@@ -87,7 +87,7 @@ export default {
           schemaPath: '#/items/0/additionalProperties',
         },
       ],
-      options: [{excludeOtherStuff: true}],
+      options: [{ excludeOtherStuff: true }],
     },
     {
       errors: [
@@ -106,7 +106,7 @@ export default {
           schemaPath: '#/items/0/properties/excludeVariableMatch/type',
         },
       ],
-      options: [{excludeVariableMatch: 99}],
+      options: [{ excludeVariableMatch: 99 }],
     },
     {
       errors: [
@@ -139,7 +139,7 @@ export default {
           schemaPath: '#/items/0/properties/excludeVariableTypes/additionalProperties',
         },
       ],
-      options: [{excludeVariableTypes: {declare: false}}],
+      options: [{ excludeVariableTypes: { declare: false } }],
     },
     {
       errors: [
@@ -158,7 +158,7 @@ export default {
           schemaPath: '#/items/0/properties/excludeVariableTypes/properties/let/type',
         },
       ],
-      options: [{excludeVariableTypes: {let: 'yes'}}],
+      options: [{ excludeVariableTypes: { let: 'yes' } }],
     },
   ],
   valid: [

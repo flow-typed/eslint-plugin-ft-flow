@@ -21,13 +21,13 @@ const create = (context) => {
 
   if (always) {
     return {
-      IntersectionTypeAnnotation (node) {
+      IntersectionTypeAnnotation(node) {
         if (
-          allowNull &&
-          node.types.length === 2 &&
-          (
-            node.types[0].type === 'NullLiteralTypeAnnotation' ||
-            node.types[1].type === 'NullLiteralTypeAnnotation'
+          allowNull
+          && node.types.length === 2
+          && (
+            node.types[0].type === 'NullLiteralTypeAnnotation'
+            || node.types[1].type === 'NullLiteralTypeAnnotation'
           )
         ) {
           return;
@@ -40,13 +40,13 @@ const create = (context) => {
           });
         }
       },
-      UnionTypeAnnotation (node) {
+      UnionTypeAnnotation(node) {
         if (
-          allowNull &&
-          node.types.length === 2 &&
-          (
-            node.types[0].type === 'NullLiteralTypeAnnotation' ||
-            node.types[1].type === 'NullLiteralTypeAnnotation'
+          allowNull
+          && node.types.length === 2
+          && (
+            node.types[0].type === 'NullLiteralTypeAnnotation'
+            || node.types[1].type === 'NullLiteralTypeAnnotation'
           )
         ) {
           return;

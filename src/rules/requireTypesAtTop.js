@@ -16,27 +16,19 @@ const create = (context) => {
     // nodes representing type and import declarations
     const ignoredNodes = [
       // import ...
-      (node) => {
-        return node.type === 'ImportDeclaration';
-      },
+      (node) => node.type === 'ImportDeclaration',
 
       // export type Foo = ...
       // export opaque type Foo = ...
       // export type Foo from ...
       // export opaque type Foo from ...
-      (node) => {
-        return node.type === 'ExportNamedDeclaration' && node.exportKind === 'type';
-      },
+      (node) => node.type === 'ExportNamedDeclaration' && node.exportKind === 'type',
 
       // type Foo = ...
-      (node) => {
-        return node.type === 'TypeAlias';
-      },
+      (node) => node.type === 'TypeAlias',
 
       // opaque type Foo = ...
-      (node) => {
-        return node.type === 'OpaqueType';
-      },
+      (node) => node.type === 'OpaqueType',
     ];
 
     const isIgnoredNode = (node) => {
@@ -64,7 +56,7 @@ const create = (context) => {
     }
 
     return {
-      'TypeAlias, OpaqueType' (node) {
+      'TypeAlias, OpaqueType': function (node) {
         if (node.range[0] > regularCodeStartRange[0]) {
           context.report({
             message: 'All type declaration must be at the top of the file, after any import declarations.',

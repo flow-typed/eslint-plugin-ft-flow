@@ -1,6 +1,7 @@
 import {
   RuleTester,
 } from 'eslint';
+
 import useFlowType from '../../../src/rules/useFlowType';
 import {
   getBuiltinRule,
@@ -155,13 +156,11 @@ const ALWAYS_VALID = [
 export default {
   invalid: [],
   valid: [
-    ...VALID_WITH_USE_FLOW_TYPE.map((subject) => {
-      return {
-        code: subject.code,
-        rules: {
-          'no-unused-vars': 1,
-        },
-      };
-    }),
+    ...VALID_WITH_USE_FLOW_TYPE.map((subject) => ({
+      code: subject.code,
+      rules: {
+        'no-unused-vars': 1,
+      },
+    })),
   ],
 };

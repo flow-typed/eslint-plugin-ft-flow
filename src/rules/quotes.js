@@ -14,28 +14,24 @@ const create = (context) => {
   const sourceCode = context.getSourceCode();
 
   return {
-    StringLiteralTypeAnnotation (node) {
+    StringLiteralTypeAnnotation(node) {
       if (double && sourceCode.text[node.range[0]] !== '"') {
         // double
         context.report({
-          fix: (fixer) => {
-            return [
-              fixer.replaceTextRange([node.range[0], node.range[0] + 1], '"'),
-              fixer.replaceTextRange([node.range[1] - 1, node.range[1]], '"'),
-            ];
-          },
+          fix: (fixer) => [
+            fixer.replaceTextRange([node.range[0], node.range[0] + 1], '"'),
+            fixer.replaceTextRange([node.range[1] - 1, node.range[1]], '"'),
+          ],
           message: 'String literals must use double quote.',
           node,
         });
       } else if (!double && sourceCode.text[node.range[0]] !== '\'') {
         // single
         context.report({
-          fix: (fixer) => {
-            return [
-              fixer.replaceTextRange([node.range[0], node.range[0] + 1], '\''),
-              fixer.replaceTextRange([node.range[1] - 1, node.range[1]], '\''),
-            ];
-          },
+          fix: (fixer) => [
+            fixer.replaceTextRange([node.range[0], node.range[0] + 1], '\''),
+            fixer.replaceTextRange([node.range[1] - 1, node.range[1]], '\''),
+          ],
           message: 'String literals must use single quote.',
           node,
         });

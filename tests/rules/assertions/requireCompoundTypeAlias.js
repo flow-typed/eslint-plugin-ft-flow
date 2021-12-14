@@ -2,7 +2,7 @@ export default {
   invalid: [
     {
       code: 'const foo: string | null = null;',
-      errors: [{message: 'All union types must be declared with named type alias.'}],
+      errors: [{ message: 'All union types must be declared with named type alias.' }],
       options: [
         'always',
         {
@@ -12,35 +12,35 @@ export default {
     },
     {
       code: 'function foo(bar: "A" | "B") {}',
-      errors: [{message: 'All union types must be declared with named type alias.'}],
+      errors: [{ message: 'All union types must be declared with named type alias.' }],
     },
     {
       code: 'const foo: "A" | "B" = "A";',
-      errors: [{message: 'All union types must be declared with named type alias.'}],
+      errors: [{ message: 'All union types must be declared with named type alias.' }],
     },
     {
       code: 'type Foo = { bar: "A" | "B" };',
-      errors: [{message: 'All union types must be declared with named type alias.'}],
+      errors: [{ message: 'All union types must be declared with named type alias.' }],
     },
     {
       code: 'function foo(bar: { n: number } | { s: string }) {}',
-      errors: [{message: 'All union types must be declared with named type alias.'}],
+      errors: [{ message: 'All union types must be declared with named type alias.' }],
     },
     {
       code: 'function foo(bar: { n: number } & { s: string }) {}',
-      errors: [{message: 'All intersection types must be declared with named type alias.'}],
+      errors: [{ message: 'All intersection types must be declared with named type alias.' }],
     },
     {
       code: 'const foo: { n: number } & { s: string } = { n: 0, s: "" };',
-      errors: [{message: 'All intersection types must be declared with named type alias.'}],
+      errors: [{ message: 'All intersection types must be declared with named type alias.' }],
     },
     {
       code: 'type Foo = { bar: { n: number } & { s: string } };',
-      errors: [{message: 'All intersection types must be declared with named type alias.'}],
+      errors: [{ message: 'All intersection types must be declared with named type alias.' }],
     },
     {
       code: 'function foo(bar: { n: number } & { s: string }) {}',
-      errors: [{message: 'All intersection types must be declared with named type alias.'}],
+      errors: [{ message: 'All intersection types must be declared with named type alias.' }],
     },
   ],
   misconfigured: [

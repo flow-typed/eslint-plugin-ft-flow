@@ -15,44 +15,44 @@ const groups = {
 const getGroup = (node) => {
   // eslint-disable-next-line default-case
   switch (node.type) {
-  case 'FunctionTypeAnnotation':
-    return groups.function;
+    case 'FunctionTypeAnnotation':
+      return groups.function;
 
-  case 'IntersectionTypeAnnotation':
-    return groups.intersection;
+    case 'IntersectionTypeAnnotation':
+      return groups.intersection;
 
-  case 'AnyTypeAnnotation':
-  case 'BooleanTypeAnnotation':
-  case 'NumberTypeAnnotation':
-  case 'StringTypeAnnotation':
-  case 'SymbolTypeAnnotation':
-  case 'ThisTypeAnnotation':
-    return groups.keyword;
+    case 'AnyTypeAnnotation':
+    case 'BooleanTypeAnnotation':
+    case 'NumberTypeAnnotation':
+    case 'StringTypeAnnotation':
+    case 'SymbolTypeAnnotation':
+    case 'ThisTypeAnnotation':
+      return groups.keyword;
 
-  case 'NullLiteralTypeAnnotation':
-  case 'NullableTypeAnnotation':
-  case 'VoidTypeAnnotation':
-    return groups.nullish;
+    case 'NullLiteralTypeAnnotation':
+    case 'NullableTypeAnnotation':
+    case 'VoidTypeAnnotation':
+      return groups.nullish;
 
-  case 'BooleanLiteralTypeAnnotation':
-  case 'NumberLiteralTypeAnnotation':
-  case 'StringLiteralTypeAnnotation':
-    return groups.literal;
+    case 'BooleanLiteralTypeAnnotation':
+    case 'NumberLiteralTypeAnnotation':
+    case 'StringLiteralTypeAnnotation':
+      return groups.literal;
 
-  case 'ArrayTypeAnnotation':
-  case 'IndexedAccessType':
-  case 'GenericTypeAnnotation':
-  case 'OptionalIndexedAccessType':
-    return groups.named;
+    case 'ArrayTypeAnnotation':
+    case 'IndexedAccessType':
+    case 'GenericTypeAnnotation':
+    case 'OptionalIndexedAccessType':
+      return groups.named;
 
-  case 'ObjectTypeAnnotation':
-    return groups.object;
+    case 'ObjectTypeAnnotation':
+      return groups.object;
 
-  case 'TupleTypeAnnotation':
-    return groups.tuple;
+    case 'TupleTypeAnnotation':
+      return groups.tuple;
 
-  case 'UnionTypeAnnotation':
-    return groups.union;
+    case 'UnionTypeAnnotation':
+      return groups.union;
   }
 
   return groups.unknown;
@@ -71,12 +71,8 @@ const fallbackSort = (a, b) => {
 };
 
 const sorters = {
-  asc: (collator, a, b) => {
-    return collator.compare(a, b) || fallbackSort(a, b);
-  },
-  desc: (collator, a, b) => {
-    return collator.compare(b, a) || fallbackSort(b, a);
-  },
+  asc: (collator, a, b) => collator.compare(a, b) || fallbackSort(a, b),
+  desc: (collator, a, b) => collator.compare(b, a) || fallbackSort(b, a),
 };
 
 const create = (context) => {
@@ -126,9 +122,8 @@ const create = (context) => {
     });
 
     const hasComments = node.types.some((type) => {
-      const count =
-        sourceCode.getCommentsBefore(type).length +
-        sourceCode.getCommentsAfter(type).length;
+      const count = sourceCode.getCommentsBefore(type).length
+        + sourceCode.getCommentsAfter(type).length;
 
       return count > 0;
     });
@@ -157,9 +152,7 @@ const create = (context) => {
 
         const fix = (fixer) => {
           const sorted = expectedOrder
-            .map((t) => {
-              return t.text;
-            })
+            .map((t) => t.text)
             .join(
               node.type === 'UnionTypeAnnotation' ? ' | ' : ' & ',
             );
@@ -174,28 +167,28 @@ const create = (context) => {
 
           // don't autofix if any of the types have leading/trailing comments
           // the logic for preserving them correctly is a pain - we may implement this later
-          ...hasComments ?
-            {
+          ...hasComments
+            ? {
               suggest: [
                 {
                   fix,
                   messageId: 'suggestFix',
                 },
               ],
-            } :
-            {fix},
+            }
+            : { fix },
         });
       }
     }
   };
 
   return {
-    IntersectionTypeAnnotation (node) {
+    IntersectionTypeAnnotation(node) {
       if (checkIntersections === true) {
         checkSorting(node);
       }
     },
-    UnionTypeAnnotation (node) {
+    UnionTypeAnnotation(node) {
       if (checkUnions === true) {
         checkSorting(node);
       }

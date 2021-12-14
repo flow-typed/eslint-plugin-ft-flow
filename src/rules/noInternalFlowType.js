@@ -19,28 +19,26 @@ const ReactComponents = [
   'StatelessFunctionalComponent',
 ];
 
-const create = (context) => {
-  return {
-    Identifier (node) {
-      const match = node.name.match(/^React\$(?<internalTypeName>.+)/u);
-      if (match !== null && match.groups !== null && match.groups !== undefined) {
-        const {internalTypeName} = match.groups;
-        if (ReactComponents.includes(internalTypeName)) {
-          const validName = `React.${internalTypeName}`;
-          context.report({
-            data: {
-              invalidName: node.name,
-              validName,
-            },
-            message:
+const create = (context) => ({
+  Identifier(node) {
+    const match = node.name.match(/^React\$(?<internalTypeName>.+)/u);
+    if (match !== null && match.groups !== null && match.groups !== undefined) {
+      const { internalTypeName } = match.groups;
+      if (ReactComponents.includes(internalTypeName)) {
+        const validName = `React.${internalTypeName}`;
+        context.report({
+          data: {
+            invalidName: node.name,
+            validName,
+          },
+          message:
               'Type identifier \'{{invalidName}}\' is not allowed. Use \'{{validName}}\' instead.',
-            node,
-          });
-        }
+          node,
+        });
       }
-    },
-  };
-};
+    }
+  },
+});
 
 export default {
   create,

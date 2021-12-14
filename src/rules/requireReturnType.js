@@ -35,13 +35,9 @@ const schema = [
   },
 ];
 
-const makeRegExp = (str) => {
-  return new RegExp(str, 'u');
-};
+const makeRegExp = (str) => new RegExp(str, 'u');
 
-const isUndefinedReturnType = (returnNode) => {
-  return returnNode.argument === null || returnNode.argument.name === 'undefined' || returnNode.argument.operator === 'void';
-};
+const isUndefinedReturnType = (returnNode) => returnNode.argument === null || returnNode.argument.name === 'undefined' || returnNode.argument.operator === 'void';
 
 const create = (context) => {
   const annotateReturn = (_.get(context, 'options[0]') || 'always') === 'always';
@@ -62,14 +58,14 @@ const create = (context) => {
   };
 
   const getIsReturnTypeAnnotationUndefined = (targetNode) => {
-    const isReturnTypeAnnotationLiteralUndefined = _.get(targetNode, 'functionNode.returnType.typeAnnotation.id.name') === 'undefined' &&
-      _.get(targetNode, 'functionNode.returnType.typeAnnotation.type') === 'GenericTypeAnnotation';
+    const isReturnTypeAnnotationLiteralUndefined = _.get(targetNode, 'functionNode.returnType.typeAnnotation.id.name') === 'undefined'
+      && _.get(targetNode, 'functionNode.returnType.typeAnnotation.type') === 'GenericTypeAnnotation';
     const isReturnTypeAnnotationVoid = _.get(targetNode, 'functionNode.returnType.typeAnnotation.type') === 'VoidTypeAnnotation';
-    const isAsyncReturnTypeAnnotationVoid = _.get(targetNode, 'functionNode.async') &&
-      _.get(targetNode, 'functionNode.returnType.typeAnnotation.id.name') === 'Promise' && (
-      _.get(targetNode, 'functionNode.returnType.typeAnnotation.typeParameters.params[0].type') === 'VoidTypeAnnotation' ||
-      _.get(targetNode, 'functionNode.returnType.typeAnnotation.typeParameters.params[0].id.name') === 'undefined' &&
-      _.get(targetNode, 'functionNode.returnType.typeAnnotation.typeParameters.params[0].type') === 'GenericTypeAnnotation'
+    const isAsyncReturnTypeAnnotationVoid = _.get(targetNode, 'functionNode.async')
+      && _.get(targetNode, 'functionNode.returnType.typeAnnotation.id.name') === 'Promise' && (
+      _.get(targetNode, 'functionNode.returnType.typeAnnotation.typeParameters.params[0].type') === 'VoidTypeAnnotation'
+      || _.get(targetNode, 'functionNode.returnType.typeAnnotation.typeParameters.params[0].id.name') === 'undefined'
+      && _.get(targetNode, 'functionNode.returnType.typeAnnotation.typeParameters.params[0].type') === 'GenericTypeAnnotation'
     );
 
     return isReturnTypeAnnotationLiteralUndefined || isReturnTypeAnnotationVoid || isAsyncReturnTypeAnnotationVoid;
@@ -92,9 +88,7 @@ const create = (context) => {
 
     const identifierName = _.get(functionNode, selector);
 
-    const checkRegExp = (regex) => {
-      return regex.test(identifierName);
-    };
+    const checkRegExp = (regex) => regex.test(identifierName);
 
     if (excludeMatching.length && _.some(excludeMatching, checkRegExp)) {
       return true;
@@ -117,10 +111,9 @@ const create = (context) => {
 
     const isArrow = functionNode.type === 'ArrowFunctionExpression';
     const isArrowFunctionExpression = functionNode.expression;
-    const isFunctionReturnUndefined =
-      !isArrowFunctionExpression &&
-      !functionNode.generator &&
-      (!targetNode.returnStatementNode || isUndefinedReturnType(targetNode.returnStatementNode));
+    const isFunctionReturnUndefined = !isArrowFunctionExpression
+      && !functionNode.generator
+      && (!targetNode.returnStatementNode || isUndefinedReturnType(targetNode.returnStatementNode));
     const isReturnTypeAnnotationUndefined = getIsReturnTypeAnnotationUndefined(targetNode);
 
     if (skipArrows === 'expressionsOnly' && isArrowFunctionExpression || skipArrows === true && isArrow || shouldFilterNode(functionNode)) {
@@ -130,14 +123,14 @@ const create = (context) => {
     const returnType = functionNode.returnType || isArrow && _.get(functionNode, 'parent.id.typeAnnotation');
 
     if (isFunctionReturnUndefined && isReturnTypeAnnotationUndefined && annotateUndefined === 'never') {
-      context.report({message: 'Must not annotate undefined return type.', node: functionNode});
+      context.report({ message: 'Must not annotate undefined return type.', node: functionNode });
     } else if (isFunctionReturnUndefined && !isReturnTypeAnnotationUndefined && annotateUndefined === 'always') {
-      context.report({message: 'Must annotate undefined return type.', node: functionNode});
+      context.report({ message: 'Must annotate undefined return type.', node: functionNode });
     } else if (
-      (annotateUndefined === 'always-enforce' || !isFunctionReturnUndefined && !isReturnTypeAnnotationUndefined) &&
-        annotateReturn && !returnType && !shouldFilterNode(functionNode)
+      (annotateUndefined === 'always-enforce' || !isFunctionReturnUndefined && !isReturnTypeAnnotationUndefined)
+        && annotateReturn && !returnType && !shouldFilterNode(functionNode)
     ) {
-      context.report({message: 'Missing return type annotation.', node: functionNode});
+      context.report({ message: 'Missing return type annotation.', node: functionNode });
     }
   };
 

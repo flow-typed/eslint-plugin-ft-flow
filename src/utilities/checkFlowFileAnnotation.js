@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 import isFlowFile from './isFlowFile';
 import isNoFlowFile from './isNoFlowFile';
 

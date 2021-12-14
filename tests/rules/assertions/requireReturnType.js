@@ -485,7 +485,7 @@ export default {
           schemaPath: '#/items/1/additionalProperties',
         },
       ],
-      options: ['always', {excludeOtherStuff: true}],
+      options: ['always', { excludeOtherStuff: true }],
     },
     {
       errors: [
@@ -520,7 +520,7 @@ export default {
           schemaPath: '#/items/1/properties/annotateUndefined/enum',
         },
       ],
-      options: ['always', {annotateUndefined: 'often'}],
+      options: ['always', { annotateUndefined: 'often' }],
     },
     {
       errors: [
@@ -551,7 +551,7 @@ export default {
           schemaPath: '#/items/1/properties/excludeArrowFunctions/enum',
         },
       ],
-      options: ['always', {excludeArrowFunctions: 'everything'}],
+      options: ['always', { excludeArrowFunctions: 'everything' }],
     },
     {
       errors: [
@@ -573,7 +573,7 @@ export default {
           schemaPath: '#/items/1/properties/excludeMatching/type',
         },
       ],
-      options: ['always', {excludeMatching: '^foo'}],
+      options: ['always', { excludeMatching: '^foo' }],
     },
     {
       errors: [
@@ -592,7 +592,7 @@ export default {
           schemaPath: '#/items/1/properties/includeOnlyMatching/items/type',
         },
       ],
-      options: ['always', {includeOnlyMatching: [false]}],
+      options: ['always', { includeOnlyMatching: [false] }],
     },
   ],
   valid: [

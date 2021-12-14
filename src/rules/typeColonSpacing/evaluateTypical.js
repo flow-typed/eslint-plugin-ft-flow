@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 import {
   getParameterName, quoteName,
 } from '../../utilities';
@@ -22,7 +23,7 @@ export default (context, report, typeForMessage) => {
         colon: getColon(node, typeAnnotation),
         name: quoteName(getParameterName(node, context)),
         node,
-        type: typeForMessage + ' type annotation',
+        type: `${typeForMessage} type annotation`,
       });
     }
   };

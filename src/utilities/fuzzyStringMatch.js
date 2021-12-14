@@ -6,7 +6,7 @@ const arrayPairs = (array) => {
   let ii = 0;
   const length = array.length - 1;
   let letter = array[0];
-  const pairs = Array.from({length: length < 0 ? 0 : length});
+  const pairs = Array.from({ length: length < 0 ? 0 : length });
 
   while (ii < length) {
     pairs[ii] = [letter, letter = array[++ii]];
@@ -42,6 +42,4 @@ const stringSimilarity = (str1, str2) => {
   return 0;
 };
 
-export default (needle, haystack, weight = 0.5) => {
-  return stringSimilarity(needle, haystack) >= Number(weight);
-};
+export default (needle, haystack, weight = 0.5) => stringSimilarity(needle, haystack) >= Number(weight);

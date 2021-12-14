@@ -15,7 +15,7 @@ const create = (context) => {
   const never = (context.options[0] || 'never') === 'never';
 
   return {
-    GenericTypeAnnotation (node) {
+    GenericTypeAnnotation(node) {
       const types = node.typeParameters;
 
       // Promise<foo>
@@ -36,7 +36,7 @@ const create = (context) => {
           const whiteSpaceBefore = sourceCode.text[opener.range[1]];
           if (whiteSpaceBefore !== '\n' && whiteSpaceBefore !== '\r') {
             context.report({
-              data: {name: node.id.name},
+              data: { name: node.id.name },
               fix: spacingFixers.stripSpacesAfter(opener, spacesBefore),
               message: 'There must be no space at start of "{{name}}" generic type annotation',
               node: types,
@@ -48,7 +48,7 @@ const create = (context) => {
           const whiteSpaceAfter = sourceCode.text[closer.range[0] - 1];
           if (whiteSpaceAfter !== '\n' && whiteSpaceAfter !== '\r') {
             context.report({
-              data: {name: node.id.name},
+              data: { name: node.id.name },
               fix: spacingFixers.stripSpacesAfter(lastInnerToken, spacesAfter),
               message: 'There must be no space at end of "{{name}}" generic type annotation',
               node: types,
@@ -58,14 +58,14 @@ const create = (context) => {
       } else {
         if (spacesBefore > 1) {
           context.report({
-            data: {name: node.id.name},
+            data: { name: node.id.name },
             fix: spacingFixers.stripSpacesAfter(opener, spacesBefore - 1),
             message: 'There must be one space at start of "{{name}}" generic type annotation',
             node: types,
           });
         } else if (spacesBefore === 0) {
           context.report({
-            data: {name: node.id.name},
+            data: { name: node.id.name },
             fix: spacingFixers.addSpaceAfter(opener),
             message: 'There must be a space at start of "{{name}}" generic type annotation',
             node: types,
@@ -74,14 +74,14 @@ const create = (context) => {
 
         if (spacesAfter > 1) {
           context.report({
-            data: {name: node.id.name},
+            data: { name: node.id.name },
             fix: spacingFixers.stripSpacesAfter(lastInnerToken, spacesAfter - 1),
             message: 'There must be one space at end of "{{name}}" generic type annotation',
             node: types,
           });
         } else if (spacesAfter === 0) {
           context.report({
-            data: {name: node.id.name},
+            data: { name: node.id.name },
             fix: spacingFixers.addSpaceAfter(lastInnerToken),
             message: 'There must be a space at end of "{{name}}" generic type annotation',
             node: types,

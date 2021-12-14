@@ -34,7 +34,7 @@ const create = (context) => {
     DeclareModule: markTypeAsUsed,
     DeclareVariable: markTypeAsUsed,
     GenericTypeAnnotation: markTypeAsUsedWithGenericType,
-    TypeParameterDeclaration (node) {
+    TypeParameterDeclaration(node) {
       for (const param of node.params) {
         if (param.default && param.default.typeParameters) {
           if (param.default.type === 'GenericTypeAnnotation') {

@@ -177,8 +177,8 @@ export default {
     {
       code: 'type X = any; type Y = Function; type Z = Object',
       errors: [
-        {message: 'Unexpected use of weak type "any"'},
-        {message: 'Unexpected use of weak type "Object"'},
+        { message: 'Unexpected use of weak type "any"' },
+        { message: 'Unexpected use of weak type "Object"' },
       ],
       options: [{
         Function: false,
@@ -186,7 +186,7 @@ export default {
     },
     {
       code: 'type X = any; type Y = Function; type Z = Object',
-      errors: [{message: 'Unexpected use of weak type "Function"'}],
+      errors: [{ message: 'Unexpected use of weak type "Function"' }],
       options: [{
         any: false,
         Object: false,
@@ -225,7 +225,7 @@ export default {
           schemaPath: '#/items/0/additionalProperties',
         },
       ],
-      options: [{nonExistentWeakType: false}],
+      options: [{ nonExistentWeakType: false }],
     },
     {
       errors: [
@@ -244,7 +244,7 @@ export default {
           schemaPath: '#/items/0/properties/Object/type',
         },
       ],
-      options: [{Object: 'irrelevant'}],
+      options: [{ Object: 'irrelevant' }],
     },
   ],
   valid: [
@@ -299,7 +299,7 @@ export default {
     },
     {
       code: 'type X = Function',
-      options: [{Function: false}],
+      options: [{ Function: false }],
     },
     {
       code: 'function foo(thing): Function {}',
