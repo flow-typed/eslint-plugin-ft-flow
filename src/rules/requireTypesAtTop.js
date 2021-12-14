@@ -56,7 +56,7 @@ const create = (context) => {
     }
 
     return {
-      'TypeAlias, OpaqueType': function (node) {
+      'TypeAlias, OpaqueType': (node) => {
         if (node.range[0] > regularCodeStartRange[0]) {
           context.report({
             message: 'All type declaration must be at the top of the file, after any import declarations.',

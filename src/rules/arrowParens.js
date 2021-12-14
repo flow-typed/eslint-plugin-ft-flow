@@ -10,7 +10,10 @@ const isClosingParenToken = (token) => token.value === ')' && token.type === 'Pu
 export default {
   create(context) {
     const asNeeded = context.options[0] === 'as-needed';
-    const requireForBlockBody = asNeeded && context.options[1] && context.options[1].requireForBlockBody === true;
+    const requireForBlockBody = (
+      asNeeded
+      && context.options[1] && context.options[1].requireForBlockBody === true
+    );
 
     const sourceCode = context.getSourceCode();
 
@@ -30,7 +33,10 @@ export default {
         */
         const closingParenToken = sourceCode.getTokenAfter(paramToken, isClosingParenToken);
         const asyncToken = isAsync ? sourceCode.getTokenBefore(firstTokenOfParam) : null;
-        const shouldAddSpaceForAsync = asyncToken && asyncToken.range[1] === firstTokenOfParam.range[0];
+        const shouldAddSpaceForAsync = (
+          asyncToken
+          && asyncToken.range[1] === firstTokenOfParam.range[0]
+        );
 
         return fixer.replaceTextRange([
           firstTokenOfParam.range[0],

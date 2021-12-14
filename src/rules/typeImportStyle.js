@@ -41,7 +41,7 @@ const create = (context) => {
     DeclareModule() {
       isInsideDeclareModule = true;
     },
-    'DeclareModule:exit': function () {
+    'DeclareModule:exit': () => {
       isInsideDeclareModule = false;
     },
     ImportDeclaration(node) {

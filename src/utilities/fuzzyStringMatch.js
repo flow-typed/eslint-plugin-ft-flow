@@ -9,6 +9,8 @@ const arrayPairs = (array) => {
   const pairs = Array.from({ length: length < 0 ? 0 : length });
 
   while (ii < length) {
+    // Not entirely sure what ++ii does yet
+    // eslint-disable-next-line no-plusplus
     pairs[ii] = [letter, letter = array[++ii]];
   }
 
@@ -29,17 +31,19 @@ const stringSimilarity = (str1, str2) => {
     _.forIn(pairs1, (val1) => {
       _.forIn(pairs2, (val2) => {
         if (_.isEqual(val1, val2)) {
-          hitCount++;
+          hitCount += 1;
         }
       });
     });
 
     if (hitCount > 0) {
-      return 2 * hitCount / unionLen;
+      return (2 * hitCount) / unionLen;
     }
   }
 
   return 0;
 };
 
-export default (needle, haystack, weight = 0.5) => stringSimilarity(needle, haystack) >= Number(weight);
+export default (needle, haystack, weight = 0.5) => (
+  stringSimilarity(needle, haystack) >= Number(weight)
+);

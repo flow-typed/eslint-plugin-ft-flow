@@ -6,15 +6,15 @@ const getColon = (context, objectTypeProperty) => {
   let tokenIndex = 1;
 
   if (objectTypeProperty.optional) {
-    tokenIndex++;
+    tokenIndex += 1;
   }
 
   if (objectTypeProperty.static) {
-    tokenIndex++;
+    tokenIndex += 1;
   }
 
   if (objectTypeProperty.variance) {
-    tokenIndex++;
+    tokenIndex += 1;
   }
 
   return context.getSourceCode().getFirstToken(objectTypeProperty, tokenIndex);

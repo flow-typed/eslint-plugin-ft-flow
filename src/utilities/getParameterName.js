@@ -23,15 +23,15 @@ export default (identifierNode, context) => {
     tokenIndex = 0;
 
     if (identifierNode.static) {
-      tokenIndex++;
+      tokenIndex += 1;
     }
 
     if (identifierNode.variance) {
-      tokenIndex++;
+      tokenIndex += 1;
     }
 
     if (identifierNode.kind === 'set' || identifierNode.kind === 'get') {
-      tokenIndex++;
+      tokenIndex += 1;
     }
 
     return context.getSourceCode().getFirstToken(identifierNode, tokenIndex).value;
@@ -43,14 +43,14 @@ export default (identifierNode, context) => {
     tokenIndex = 0;
 
     if (identifierNode.static) {
-      tokenIndex++;
+      tokenIndex += 1;
     }
 
     if (identifierNode.variance) {
-      tokenIndex++;
+      tokenIndex += 1;
     }
 
-    tokenIndex++;
+    tokenIndex += 1;
 
     const id = context.getSourceCode().getFirstToken(identifierNode, tokenIndex);
     const colonOrBrace = context.getSourceCode().getTokenAfter(id);

@@ -56,7 +56,10 @@ const create = (context) => {
     Program(node) {
       const firstToken = node.tokens[0];
 
-      const potentialFlowFileAnnotation = _.find(context.getSourceCode().getAllComments(), (comment) => looksLikeFlowFileAnnotation(comment.value));
+      const potentialFlowFileAnnotation = _.find(
+        context.getSourceCode().getAllComments(),
+        (comment) => looksLikeFlowFileAnnotation(comment.value),
+      );
 
       if (potentialFlowFileAnnotation) {
         if (firstToken && firstToken.range[0] < potentialFlowFileAnnotation.range[0]) {

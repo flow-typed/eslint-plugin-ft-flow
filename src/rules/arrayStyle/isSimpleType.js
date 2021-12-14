@@ -15,7 +15,8 @@
  *  - tuple type
  *  - union and intersection types
  *
- * Reminder: if you change these semantics, don't forget to modify documentation of `array-style-...` rules
+ * Reminder: if you change these semantics,
+ *  don't forget to modify documentation of `array-style-...` rules
  */
 
 const simpleTypePatterns = [

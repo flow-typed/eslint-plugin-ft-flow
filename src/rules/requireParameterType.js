@@ -39,7 +39,6 @@ const create = iterateFunctionNodes((context) => {
       return;
     }
 
-    // eslint-disable-next-line unicorn/no-array-for-each
     _.forEach(functionNode.params, (identifierNode) => {
       const parameterName = getParameterName(identifierNode, context);
 

@@ -41,7 +41,7 @@ const getAssertions = () => {
   const assertionNames = _.map(assertionFiles, (filePath) => path.basename(filePath, '.js'));
 
   const assertionCodes = _.map(assertionFiles, (filePath) => {
-    // eslint-disable-next-line import/no-dynamic-require
+    // eslint-disable-next-line global-require, import/no-dynamic-require
     const codes = require(filePath);
 
     return {

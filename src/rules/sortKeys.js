@@ -41,9 +41,11 @@ const generateOrderedList = (context, sort, properties) => {
 
     const isMethodProperty = property.value && property.value.type === 'FunctionTypeAnnotation';
     if (property.type === 'ObjectTypeSpreadProperty' || !property.value || isMethodProperty) {
-      // NOTE: It could but currently does not fix recursive generic type arguments in GenericTypeAnnotation within ObjectTypeSpreadProperty.
+      // NOTE: It could but currently does not fix recursive generic type
+      // arguments in GenericTypeAnnotation within ObjectTypeSpreadProperty.
 
-      // Maintain everything between the start of property including leading comments and the nextPunctuator `,` or `}`:
+      // Maintain everything between the start of property including leading
+      // comments and the nextPunctuator `,` or `}`:
       const nextPunctuator = source.getTokenAfter(property, {
         filter: (token) => token.type === 'Punctuator' || token.value === '|}',
       });
@@ -68,7 +70,8 @@ const generateOrderedList = (context, sort, properties) => {
       // eslint-disable-next-line no-use-before-define
       value = ` ${generateFix(property.value, context, sort)}`;
     } else {
-      // NOTE: It could but currently does not fix recursive generic type arguments in GenericTypeAnnotation.
+      // NOTE: It could but currently does not fix recursive generic
+      // type arguments in GenericTypeAnnotation.
 
       // Maintain everything between the `:` and the next Punctuator `,` or `}`:
       const nextPunctuator = source.getTokenAfter(property, {
@@ -95,9 +98,9 @@ const generateOrderedList = (context, sort, properties) => {
 
   for (const item of items) {
     if (item[0].type === 'ObjectTypeSpreadProperty') {
-      ++itemGroupIndex;
+      itemGroupIndex += 1;
       itemGroups[itemGroupIndex] = [item];
-      ++itemGroupIndex;
+      itemGroupIndex += 1;
       itemGroups[itemGroupIndex] = [];
     } else {
       itemGroups[itemGroupIndex].push(item);
@@ -170,7 +173,6 @@ const create = (context) => {
   const checkKeyOrder = (node) => {
     prev = null;
 
-    // eslint-disable-next-line unicorn/no-array-for-each
     node.properties.forEach((identifierNode) => {
       const current = getParameterName(identifierNode, context);
       const last = prev;

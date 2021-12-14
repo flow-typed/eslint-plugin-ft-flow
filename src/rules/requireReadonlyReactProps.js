@@ -40,8 +40,10 @@ const isReadOnlyObjectType = (node, { useImplicitExactTypes }) => {
   }
 
   if (node.properties.length === 0) {
-    // we consider `{}` to be ReadOnly since it's exact AND has no props (when `implicitExactTypes=true`)
-    // we consider `{||}` to be ReadOnly since it's exact AND has no props (when `implicitExactTypes=false`)
+    // we consider `{}` to be ReadOnly since it's exact
+    // AND has no props (when `implicitExactTypes=true`)
+    // we consider `{||}` to be ReadOnly since it's exact
+    // AND has no props (when `implicitExactTypes=false`)
     if (useImplicitExactTypes === true && node.exact === false) {
       return true;
     }
@@ -80,7 +82,12 @@ const create = (context) => {
   const isReadOnlyClassProp = (node) => {
     const id = node.superTypeParameters && node.superTypeParameters.params[0].id;
 
-    return id && !reReadOnly.test(id.name) && !readOnlyTypes.includes(id.name) && foundTypes.includes(id.name);
+    return (
+      id
+      && !reReadOnly.test(id.name)
+      && !readOnlyTypes.includes(id.name)
+      && foundTypes.includes(id.name)
+    );
   };
 
   for (const node of context.getSourceCode().ast.body) {
@@ -130,8 +137,8 @@ const create = (context) => {
     // functional components
     JSXElement(node) {
       let currentNode = node;
-      let identifier;
-      let typeAnnotation;
+      const { typeAnnotation } = currentNode.params[0];
+      const identifier = typeAnnotation.typeAnnotation.id;
 
       while (currentNode && currentNode.type !== 'FunctionDeclaration') {
         currentNode = currentNode.parent;
@@ -143,8 +150,8 @@ const create = (context) => {
       }
 
       if (currentNode.params[0].type === 'Identifier'
-          && (typeAnnotation = currentNode.params[0].typeAnnotation)) {
-        if ((identifier = typeAnnotation.typeAnnotation.id)
+          && typeAnnotation) {
+        if (identifier
             && foundTypes.includes(identifier.name)
             && !readOnlyTypes.includes(identifier.name)
             && !reReadOnly.test(identifier.name)) {

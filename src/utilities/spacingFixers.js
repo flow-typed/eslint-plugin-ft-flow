@@ -1,6 +1,10 @@
-export const stripSpacesBefore = (node, spaces) => (fixer) => fixer.removeRange([node.range[0] - spaces, node.range[0]]);
+export const stripSpacesBefore = (node, spaces) => (fixer) => (
+  fixer.removeRange([node.range[0] - spaces, node.range[0]])
+);
 
-export const stripSpacesAfter = (node, spaces) => (fixer) => fixer.removeRange([node.range[1], node.range[1] + spaces]);
+export const stripSpacesAfter = (node, spaces) => (fixer) => (
+  fixer.removeRange([node.range[1], node.range[1] + spaces])
+);
 
 export const addSpaceBefore = (node) => (fixer) => fixer.insertTextBefore(node, ' ');
 

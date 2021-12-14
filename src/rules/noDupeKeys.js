@@ -15,7 +15,7 @@ const create = (context) => {
     });
   };
 
-  const analizeElement = (element) => {
+  const analyzeElement = (element) => {
     const { type } = element;
     let value;
 
@@ -25,7 +25,7 @@ const create = (context) => {
         break;
       case 'ObjectTypeAnnotation':
       // eslint-disable-next-line no-use-before-define
-        value = builObjectStructure(element.properties);
+        value = buildObjectStructure(element.properties);
         break;
       case 'TupleTypeAnnotation':
       // eslint-disable-next-line no-use-before-define
@@ -42,10 +42,10 @@ const create = (context) => {
     };
   };
 
-  const buildArrayStructure = (elements) => _.map(elements, (element) => analizeElement(element));
+  const buildArrayStructure = (elements) => _.map(elements, (element) => analyzeElement(element));
 
-  const builObjectStructure = (properties) => _.map(properties, (property) => {
-    const element = analizeElement(
+  const buildObjectStructure = (properties) => _.map(properties, (property) => {
+    const element = analyzeElement(
       property.type === 'ObjectTypeSpreadProperty'
         ? property.argument
         : property.value,
@@ -67,7 +67,10 @@ const create = (context) => {
       const needle = { name: getParameterName(identifierNode, context) };
 
       if (identifierNode.value.type === 'FunctionTypeAnnotation') {
-        needle.args = _.map(identifierNode.value.params, (param) => analizeElement(param.typeAnnotation));
+        needle.args = _.map(
+          identifierNode.value.params,
+          (param) => analyzeElement(param.typeAnnotation),
+        );
       }
 
       const match = _.some(haystack, (existingNeedle) => _.isEqual(existingNeedle, needle));
