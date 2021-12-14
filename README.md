@@ -1,6 +1,13 @@
-<h1 align="center">
-  eslint-plugin-ft-flow
-</h1>
+<div align="center">
+  <a href="https://eslint.org/">
+    <img width="150" height="150" src="https://eslint.org/assets/img/logo.svg">
+  </a>
+  <a href="https://flow-typed.github.io/flow-typed/#/">
+    <img width="150" height="150" src="https://raw.githubusercontent.com/flow-typed/flow-typed/master/docs/_media/flow.svg">
+  </a>
+  <h1>eslint-plugin-ft-flow</h1>
+  <p><a href="http://flow.org/">Flowtype</a> linting rules for ESLint.</p>
+</div>
 
 <p align="center">
   <a href="https://github.com/flow-typed/eslint-plugin-ft-flow/actions/workflows/build.yml">
@@ -12,7 +19,7 @@
   </a>
 </p>
 
-[Flow type](http://flow.org/) linting rules for ESLint.
+---
 
 * [Installation](#installation)
 * [Configuration](#configuration)
