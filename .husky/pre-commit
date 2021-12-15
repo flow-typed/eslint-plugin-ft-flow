@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm run check-docs && npm run check-tests && yarn lint-staged && npm run format-json
+npm run check-docs && npm run check-tests && yarn lint-staged
