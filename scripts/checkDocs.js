@@ -20,7 +20,7 @@ const windows = (array, size) => {
 };
 
 const getDocIndexRules = () => {
-  const content = fs.readFileSync(path.resolve(__dirname, '../../.README/README.md'), 'utf-8');
+  const content = fs.readFileSync(path.resolve(__dirname, '../.README/README.md'), 'utf-8');
 
   const rules = content.split('\n').map((line) => {
     const match = /^\{"gitdown": "include", "file": "([^"]+)"\}$/u.exec(line);
