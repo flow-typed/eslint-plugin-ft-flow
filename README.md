@@ -1767,6 +1767,8 @@ const text = 'HELLO';
 The following patterns are not considered problems:
 
 ```js
+// Just a random comment
+//
 const text = 'HELLO';
 
 // $FlowFixMe[incompatible-call] TODO 48
@@ -2251,26 +2253,26 @@ The following patterns are considered problems:
 ```js
 // $FlowFixMe I am doing something evil here
 const text = 'HELLO';
-// Message: $FlowFixMe is treated as `any` and must be fixed.
+// Message: $FlowFixMe is treated as 'any' and must be fixed.
 
 // Options: ["TODO [0-9]+"]
 // $FlowFixMe I am doing something evil here
 const text = 'HELLO';
-// Message: $FlowFixMe is treated as `any` and must be fixed. Fix it or match `/TODO [0-9]+/u`.
+// Message: $FlowFixMe is treated as 'any' and must be fixed. Fix it or match '/TODO [0-9]+/u'.
 
 // Options: ["TODO [0-9]+"]
 // $FlowFixMe TODO abc 47 I am doing something evil here
 const text = 'HELLO';
-// Message: $FlowFixMe is treated as `any` and must be fixed. Fix it or match `/TODO [0-9]+/u`.
+// Message: $FlowFixMe is treated as 'any' and must be fixed. Fix it or match '/TODO [0-9]+/u'.
 
 // $$FlowFixMeProps I am doing something evil here
 const text = 'HELLO';
-// Message: $FlowFixMe is treated as `any` and must be fixed.
+// Message: $FlowFixMe is treated as 'any' and must be fixed.
 
 // Options: ["TODO [0-9]+"]
 // $FlowFixMeProps I am doing something evil here
 const text = 'HELLO';
-// Message: $FlowFixMe is treated as `any` and must be fixed. Fix it or match `/TODO [0-9]+/u`.
+// Message: $FlowFixMe is treated as 'any' and must be fixed. Fix it or match '/TODO [0-9]+/u'.
 ```
 
 The following patterns are not considered problems:
