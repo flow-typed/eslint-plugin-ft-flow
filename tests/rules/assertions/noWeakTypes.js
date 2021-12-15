@@ -192,6 +192,20 @@ export default {
         Object: false,
       }],
     },
+    {
+      code: 'const a: $FlowFixMe = 1',
+      errors: [{ message: 'Unexpected use of custom weak type "$FlowFixMe"' }],
+      options: [{
+        suppressTypes: ['$FlowFixMe'],
+      }],
+    },
+    {
+      code: 'const a: Something = 1',
+      errors: [{ message: 'Unexpected use of custom weak type "Something"' }],
+      options: [{
+        suppressTypes: ['$FlowFixMe', 'Something'],
+      }],
+    },
   ],
   misconfigured: [
     {
@@ -217,6 +231,12 @@ export default {
               },
               Object: {
                 type: 'boolean',
+              },
+              suppressTypes: {
+                items: {
+                  type: 'string',
+                },
+                type: 'array',
               },
             },
             type: 'object',
@@ -308,6 +328,18 @@ export default {
           onlyFilesWithFlowAnnotation: true,
         },
       },
+    },
+    {
+      code: '// $FlowFixMe\nconst a: string = 1',
+      options: [{
+        suppressTypes: ['$FlowFixMe'],
+      }],
+    },
+    {
+      code: 'const Foo = 1',
+      options: [{
+        suppressTypes: ['Foo'],
+      }],
     },
   ],
 };
