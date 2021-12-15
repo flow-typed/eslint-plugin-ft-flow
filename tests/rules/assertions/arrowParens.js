@@ -80,7 +80,7 @@ export default {
         type,
       }],
       output: 'a(async (foo) => { if (true) {}; });',
-      parserOptions: {ecmaVersion: 8},
+      parserOptions: { ecmaVersion: 8 },
     },
 
     // "as-needed"
@@ -107,7 +107,7 @@ export default {
       }],
       options: ['as-needed'],
       output: 'a => a',
-      parserOptions: {ecmaVersion: 8},
+      parserOptions: { ecmaVersion: 8 },
     },
     {
       code: 'async (a) => a',
@@ -120,7 +120,7 @@ export default {
       }],
       options: ['as-needed'],
       output: 'async a => a',
-      parserOptions: {ecmaVersion: 8},
+      parserOptions: { ecmaVersion: 8 },
     },
     {
       code: 'async(a) => a',
@@ -133,7 +133,7 @@ export default {
       }],
       options: ['as-needed'],
       output: 'async a => a',
-      parserOptions: {ecmaVersion: 8},
+      parserOptions: { ecmaVersion: 8 },
     },
 
     // "as-needed", { "requireForBlockBody": true }
@@ -146,7 +146,7 @@ export default {
         messageId: 'expectedParensBlock',
         type,
       }],
-      options: ['as-needed', {requireForBlockBody: true}],
+      options: ['as-needed', { requireForBlockBody: true }],
       output: '(a) => {}',
     },
     {
@@ -158,7 +158,7 @@ export default {
         messageId: 'unexpectedParensInline',
         type,
       }],
-      options: ['as-needed', {requireForBlockBody: true}],
+      options: ['as-needed', { requireForBlockBody: true }],
       output: 'a => a',
     },
     {
@@ -170,9 +170,9 @@ export default {
         messageId: 'expectedParensBlock',
         type,
       }],
-      options: ['as-needed', {requireForBlockBody: true}],
+      options: ['as-needed', { requireForBlockBody: true }],
       output: 'async (a) => {}',
-      parserOptions: {ecmaVersion: 8},
+      parserOptions: { ecmaVersion: 8 },
     },
     {
       code: 'async (a) => a',
@@ -183,9 +183,9 @@ export default {
         messageId: 'unexpectedParensInline',
         type,
       }],
-      options: ['as-needed', {requireForBlockBody: true}],
+      options: ['as-needed', { requireForBlockBody: true }],
       output: 'async a => a',
-      parserOptions: {ecmaVersion: 8},
+      parserOptions: { ecmaVersion: 8 },
     },
     {
       code: 'async(a) => a',
@@ -196,9 +196,9 @@ export default {
         messageId: 'unexpectedParensInline',
         type,
       }],
-      options: ['as-needed', {requireForBlockBody: true}],
+      options: ['as-needed', { requireForBlockBody: true }],
       output: 'async a => a',
-      parserOptions: {ecmaVersion: 8},
+      parserOptions: { ecmaVersion: 8 },
     },
   ],
 
@@ -234,103 +234,181 @@ export default {
   // ],
   valid: [
     // "always" (by default)
-    {code: '() => {}'},
-    {code: '(a) => {}'},
-    {code: '(a) => a'},
-    {code: '(a) => {\n}'},
-    {code: 'a.then((foo) => {});'},
-    {code: 'a.then((foo) => { if (true) {}; });'},
-    {code: 'a.then(async (foo) => { if (true) {}; });',
-      parserOptions: {ecmaVersion: 8}},
+    { code: '() => {}' },
+    { code: '(a) => {}' },
+    { code: '(a) => a' },
+    { code: '(a) => {\n}' },
+    { code: 'a.then((foo) => {});' },
+    { code: 'a.then((foo) => { if (true) {}; });' },
+    {
+      code: 'a.then(async (foo) => { if (true) {}; });',
+      parserOptions: { ecmaVersion: 8 },
+    },
 
     // "always" (explicit)
-    {code: '() => {}',
-      options: ['always']},
-    {code: '(a) => {}',
-      options: ['always']},
-    {code: '(a) => a',
-      options: ['always']},
-    {code: '(a) => {\n}',
-      options: ['always']},
-    {code: 'a.then((foo) => {});',
-      options: ['always']},
-    {code: 'a.then((foo) => { if (true) {}; });',
-      options: ['always']},
-    {code: 'a.then(async (foo) => { if (true) {}; });',
+    {
+      code: '() => {}',
       options: ['always'],
-      parserOptions: {ecmaVersion: 8}},
+    },
+    {
+      code: '(a) => {}',
+      options: ['always'],
+    },
+    {
+      code: '(a) => a',
+      options: ['always'],
+    },
+    {
+      code: '(a) => {\n}',
+      options: ['always'],
+    },
+    {
+      code: 'a.then((foo) => {});',
+      options: ['always'],
+    },
+    {
+      code: 'a.then((foo) => { if (true) {}; });',
+      options: ['always'],
+    },
+    {
+      code: 'a.then(async (foo) => { if (true) {}; });',
+      options: ['always'],
+      parserOptions: { ecmaVersion: 8 },
+    },
 
     // "as-needed"
-    {code: '() => {}',
-      options: ['as-needed']},
-    {code: 'a => {}',
-      options: ['as-needed']},
-    {code: 'a => a',
-      options: ['as-needed']},
-    {code: '([a, b]) => {}',
-      options: ['as-needed']},
-    {code: '({ a, b }) => {}',
-      options: ['as-needed']},
-    {code: '(a = 10) => {}',
-      options: ['as-needed']},
-    {code: '(...a) => a[0]',
-      options: ['as-needed']},
-    {code: '(a, b) => {}',
-      options: ['as-needed']},
-    {code: 'async ([a, b]) => {}',
+    {
+      code: '() => {}',
       options: ['as-needed'],
-      parserOptions: {ecmaVersion: 8}},
-    {code: 'async (a, b) => {}',
+    },
+    {
+      code: 'a => {}',
       options: ['as-needed'],
-      parserOptions: {ecmaVersion: 8}},
-    {code: '(a: T) => a',
-      options: ['as-needed']},
-    {code: '(a): T => a',
-      options: ['as-needed']},
+    },
+    {
+      code: 'a => a',
+      options: ['as-needed'],
+    },
+    {
+      code: '([a, b]) => {}',
+      options: ['as-needed'],
+    },
+    {
+      code: '({ a, b }) => {}',
+      options: ['as-needed'],
+    },
+    {
+      code: '(a = 10) => {}',
+      options: ['as-needed'],
+    },
+    {
+      code: '(...a) => a[0]',
+      options: ['as-needed'],
+    },
+    {
+      code: '(a, b) => {}',
+      options: ['as-needed'],
+    },
+    {
+      code: 'async ([a, b]) => {}',
+      options: ['as-needed'],
+      parserOptions: { ecmaVersion: 8 },
+    },
+    {
+      code: 'async (a, b) => {}',
+      options: ['as-needed'],
+      parserOptions: { ecmaVersion: 8 },
+    },
+    {
+      code: '(a: T) => a',
+      options: ['as-needed'],
+    },
+    {
+      code: '(a): T => a',
+      options: ['as-needed'],
+    },
 
     // "as-needed", { "requireForBlockBody": true }
-    {code: '() => {}',
-      options: ['as-needed', {requireForBlockBody: true}]},
-    {code: 'a => a',
-      options: ['as-needed', {requireForBlockBody: true}]},
-    {code: '([a, b]) => {}',
-      options: ['as-needed', {requireForBlockBody: true}]},
-    {code: '([a, b]) => a',
-      options: ['as-needed', {requireForBlockBody: true}]},
-    {code: '({ a, b }) => {}',
-      options: ['as-needed', {requireForBlockBody: true}]},
-    {code: '({ a, b }) => a + b',
-      options: ['as-needed', {requireForBlockBody: true}]},
-    {code: '(a = 10) => {}',
-      options: ['as-needed', {requireForBlockBody: true}]},
-    {code: '(...a) => a[0]',
-      options: ['as-needed', {requireForBlockBody: true}]},
-    {code: '(a, b) => {}',
-      options: ['as-needed', {requireForBlockBody: true}]},
-    {code: 'a => ({})',
-      options: ['as-needed', {requireForBlockBody: true}]},
-    {code: 'async a => ({})',
-      options: ['as-needed', {requireForBlockBody: true}],
-      parserOptions: {ecmaVersion: 8}},
-    {code: 'async a => a',
-      options: ['as-needed', {requireForBlockBody: true}],
-      parserOptions: {ecmaVersion: 8}},
-    {code: '(a: T) => a',
-      options: ['as-needed', {requireForBlockBody: true}]},
-    {code: '(a): T => a',
-      options: ['as-needed', {requireForBlockBody: true}]},
+    {
+      code: '() => {}',
+      options: ['as-needed', { requireForBlockBody: true }],
+    },
+    {
+      code: 'a => a',
+      options: ['as-needed', { requireForBlockBody: true }],
+    },
+    {
+      code: '([a, b]) => {}',
+      options: ['as-needed', { requireForBlockBody: true }],
+    },
+    {
+      code: '([a, b]) => a',
+      options: ['as-needed', { requireForBlockBody: true }],
+    },
+    {
+      code: '({ a, b }) => {}',
+      options: ['as-needed', { requireForBlockBody: true }],
+    },
+    {
+      code: '({ a, b }) => a + b',
+      options: ['as-needed', { requireForBlockBody: true }],
+    },
+    {
+      code: '(a = 10) => {}',
+      options: ['as-needed', { requireForBlockBody: true }],
+    },
+    {
+      code: '(...a) => a[0]',
+      options: ['as-needed', { requireForBlockBody: true }],
+    },
+    {
+      code: '(a, b) => {}',
+      options: ['as-needed', { requireForBlockBody: true }],
+    },
+    {
+      code: 'a => ({})',
+      options: ['as-needed', { requireForBlockBody: true }],
+    },
+    {
+      code: 'async a => ({})',
+      options: ['as-needed', { requireForBlockBody: true }],
+      parserOptions: { ecmaVersion: 8 },
+    },
+    {
+      code: 'async a => a',
+      options: ['as-needed', { requireForBlockBody: true }],
+      parserOptions: { ecmaVersion: 8 },
+    },
+    {
+      code: '(a: T) => a',
+      options: ['as-needed', { requireForBlockBody: true }],
+    },
+    {
+      code: '(a): T => a',
+      options: ['as-needed', { requireForBlockBody: true }],
+    },
 
     // flow-specific
-    {code: '<T>(a: T) => a',
-      options: ['always', {requireForBlockBody: true}]},
-    {code: '<T>(a: T) => { return a; }',
-      options: ['as-needed', {requireForBlockBody: false}]},
-    {code: '<T>(a: T) => { return a; }',
-      options: ['always', {requireForBlockBody: true}]},
-    {code: '<T>(a: T) => { return a; }',
-      options: ['as-needed', {requireForBlockBody: true}]},
-    {code: '(a): %checks => typeof a === "number"',
-      options: ['as-needed', {requireForBlockBody: true}]},
+    {
+      code: '<T>(a: T) => a',
+      options: ['always', { requireForBlockBody: true }],
+    },
+    {
+      code: '<T>(a: T) => { return a; }',
+      options: ['as-needed', { requireForBlockBody: false }],
+    },
+    {
+      code: '<T>(a: T) => { return a; }',
+      options: ['always', { requireForBlockBody: true }],
+    },
+    {
+      code: '<T>(a: T) => { return a; }',
+      options: ['as-needed', { requireForBlockBody: true }],
+    },
+    {
+      code: '(a): %checks => typeof a === "number"',
+      options: ['as-needed', { requireForBlockBody: true }],
+    },
 
   ],
 };

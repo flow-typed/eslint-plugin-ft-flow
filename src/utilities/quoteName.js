@@ -1,3 +1,1 @@
-export default (name) => {
-  return name ? '"' + name + '" ' : '';
-};
+export default (name) => (name ? `"${name}" ` : '');

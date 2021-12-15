@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import naturalCompare from 'string-natural-compare';
+
 import {
   getParameterName,
 } from '../utilities';
@@ -19,16 +20,12 @@ const schema = [
  * @private
  */
 const sorters = {
-  asc: (a, b) => {
-    return naturalCompare(a, b, {
-      caseInsensitive: true,
-    });
-  },
-  desc: (a, b) => {
-    return naturalCompare(b, a, {
-      caseInsensitive: true,
-    });
-  },
+  asc: (a, b) => naturalCompare(a, b, {
+    caseInsensitive: true,
+  }),
+  desc: (a, b) => naturalCompare(b, a, {
+    caseInsensitive: true,
+  }),
 };
 
 const generateOrderedList = (context, sort, properties) => {
@@ -38,19 +35,19 @@ const generateOrderedList = (context, sort, properties) => {
     const name = getParameterName(property, context);
 
     const commentsBefore = source.getCommentsBefore(property);
-    const startIndex = commentsBefore.length > 0 ?
-      commentsBefore[0].range[0] :
-      property.range[0];
+    const startIndex = commentsBefore.length > 0
+      ? commentsBefore[0].range[0]
+      : property.range[0];
 
     const isMethodProperty = property.value && property.value.type === 'FunctionTypeAnnotation';
     if (property.type === 'ObjectTypeSpreadProperty' || !property.value || isMethodProperty) {
-      // NOTE: It could but currently does not fix recursive generic type arguments in GenericTypeAnnotation within ObjectTypeSpreadProperty.
+      // NOTE: It could but currently does not fix recursive generic type
+      // arguments in GenericTypeAnnotation within ObjectTypeSpreadProperty.
 
-      // Maintain everything between the start of property including leading comments and the nextPunctuator `,` or `}`:
+      // Maintain everything between the start of property including leading
+      // comments and the nextPunctuator `,` or `}`:
       const nextPunctuator = source.getTokenAfter(property, {
-        filter: (token) => {
-          return token.type === 'Punctuator' || token.value === '|}';
-        },
+        filter: (token) => token.type === 'Punctuator' || token.value === '|}',
       });
       const beforePunctuator = source.getTokenBefore(nextPunctuator, {
         includeComments: true,
@@ -61,9 +58,7 @@ const generateOrderedList = (context, sort, properties) => {
     }
 
     const colonToken = source.getTokenBefore(property.value, {
-      filter: (token) => {
-        return token.value === ':';
-      },
+      filter: (token) => token.value === ':',
     });
 
     // Preserve all code until the colon verbatim:
@@ -73,15 +68,14 @@ const generateOrderedList = (context, sort, properties) => {
 
     if (property.value.type === 'ObjectTypeAnnotation') {
       // eslint-disable-next-line no-use-before-define
-      value = ' ' + generateFix(property.value, context, sort);
+      value = ` ${generateFix(property.value, context, sort)}`;
     } else {
-      // NOTE: It could but currently does not fix recursive generic type arguments in GenericTypeAnnotation.
+      // NOTE: It could but currently does not fix recursive generic
+      // type arguments in GenericTypeAnnotation.
 
       // Maintain everything between the `:` and the next Punctuator `,` or `}`:
       const nextPunctuator = source.getTokenAfter(property, {
-        filter: (token) => {
-          return token.type === 'Punctuator' || token.value === '|}';
-        },
+        filter: (token) => token.type === 'Punctuator' || token.value === '|}',
       });
       const beforePunctuator = source.getTokenBefore(nextPunctuator, {
         includeComments: true,
@@ -104,9 +98,9 @@ const generateOrderedList = (context, sort, properties) => {
 
   for (const item of items) {
     if (item[0].type === 'ObjectTypeSpreadProperty') {
-      ++itemGroupIndex;
+      itemGroupIndex += 1;
       itemGroups[itemGroupIndex] = [item];
-      ++itemGroupIndex;
+      itemGroupIndex += 1;
       itemGroups[itemGroupIndex] = [];
     } else {
       itemGroups[itemGroupIndex].push(item);
@@ -119,9 +113,7 @@ const generateOrderedList = (context, sort, properties) => {
       // console.log('itemGroup', itemGroup);
 
       itemGroup
-        .sort((first, second) => {
-          return sort(first[1], second[1]);
-        });
+        .sort((first, second) => sort(first[1], second[1]));
     }
 
     orderedList.push(...itemGroup.map((item) => {
@@ -129,7 +121,7 @@ const generateOrderedList = (context, sort, properties) => {
         return item[2];
       }
 
-      return item[2] + ':' + item[3];
+      return `${item[2]}:${item[3]}`;
     }));
   }
 
@@ -150,27 +142,25 @@ const generateFix = (node, context, sort) => {
 
   for (const [index, property] of node.properties.entries()) {
     const nextPunctuator = source.getTokenAfter(property, {
-      filter: (token) => {
-        return token.type === 'Punctuator' || token.value === '|}';
-      },
+      filter: (token) => token.type === 'Punctuator' || token.value === '|}',
     });
     const beforePunctuator = source.getTokenBefore(nextPunctuator, {
       includeComments: true,
     });
     const commentsBefore = source.getCommentsBefore(property);
-    const startIndex = commentsBefore.length > 0 ?
-      commentsBefore[0].range[0] :
-      property.range[0];
+    const startIndex = commentsBefore.length > 0
+      ? commentsBefore[0].range[0]
+      : property.range[0];
     const subString = source.getText().slice(
       startIndex,
       beforePunctuator.range[1],
     );
 
-    nodeText = nodeText.replace(subString, '$' + index);
+    nodeText = nodeText.replace(subString, `$${index}`);
   }
 
   for (const [index, item] of newTypes.entries()) {
-    nodeText = nodeText.replace('$' + index, item);
+    nodeText = nodeText.replace(`$${index}`, item);
   }
 
   return nodeText;
@@ -183,7 +173,6 @@ const create = (context) => {
   const checkKeyOrder = (node) => {
     prev = null;
 
-    // eslint-disable-next-line unicorn/no-array-for-each
     node.properties.forEach((identifierNode) => {
       const current = getParameterName(identifierNode, context);
       const last = prev;
@@ -204,7 +193,7 @@ const create = (context) => {
             last,
             order,
           },
-          fix (fixer) {
+          fix(fixer) {
             const nodeText = generateFix(node, context, sort);
 
             return fixer.replaceText(node, nodeText);

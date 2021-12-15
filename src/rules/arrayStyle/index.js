@@ -24,10 +24,10 @@ export default (defaultConfig, simpleType) => {
 
     return {
       // shorthand
-      ArrayTypeAnnotation (node) {
+      ArrayTypeAnnotation(node) {
         const rawElementType = context.getSourceCode().getText(node.elementType);
         const inlinedType = inlineType(rawElementType);
-        const wrappedInlinedType = needWrap(node.elementType) ? '(' + inlinedType + ')' : inlinedType;
+        const wrappedInlinedType = needWrap(node.elementType) ? `(${inlinedType})` : inlinedType;
 
         if (isSimpleType(node.elementType) === simpleType && verbose) {
           context.report({
@@ -35,8 +35,8 @@ export default (defaultConfig, simpleType) => {
               type: inlinedType,
               wrappedType: wrappedInlinedType,
             },
-            fix (fixer) {
-              return fixer.replaceText(node, 'Array<' + rawElementType + '>');
+            fix(fixer) {
+              return fixer.replaceText(node, `Array<${rawElementType}>`);
             },
             message: 'Use "Array<{{ type }}>", not "{{ wrappedType }}[]"',
             node,
@@ -45,15 +45,15 @@ export default (defaultConfig, simpleType) => {
       },
 
       // verbose
-      GenericTypeAnnotation (node) {
+      GenericTypeAnnotation(node) {
         // Don't report on un-parameterized Array annotations. There are valid cases for this,
         // but regardless, we must NOT crash when encountering them.
-        if (node.id.name === 'Array' &&
-          node.typeParameters && node.typeParameters.params.length === 1) {
+        if (node.id.name === 'Array'
+          && node.typeParameters && node.typeParameters.params.length === 1) {
           const elementTypeNode = node.typeParameters.params[0];
           const rawElementType = context.getSourceCode().getText(elementTypeNode);
           const inlinedType = inlineType(rawElementType);
-          const wrappedInlinedType = needWrap(elementTypeNode) ? '(' + inlinedType + ')' : inlinedType;
+          const wrappedInlinedType = needWrap(elementTypeNode) ? `(${inlinedType})` : inlinedType;
 
           if (isSimpleType(elementTypeNode) === simpleType && !verbose) {
             context.report({
@@ -61,12 +61,12 @@ export default (defaultConfig, simpleType) => {
                 type: inlinedType,
                 wrappedType: wrappedInlinedType,
               },
-              fix (fixer) {
+              fix(fixer) {
                 if (needWrap(elementTypeNode)) {
-                  return fixer.replaceText(node, '(' + rawElementType + ')[]');
+                  return fixer.replaceText(node, `(${rawElementType})[]`);
                 }
 
-                return fixer.replaceText(node, rawElementType + '[]');
+                return fixer.replaceText(node, `${rawElementType}[]`);
               },
               message: 'Use "{{ wrappedType }}[]", not "Array<{{ type }}>"',
               node,

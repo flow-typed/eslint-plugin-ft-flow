@@ -10,26 +10,21 @@ const create = (context) => {
     const uniqueMembers = [];
     const duplicates = [];
 
-    const source = node.types.map((type) => {
-      return {
-        node: type,
-        text: sourceCode.getText(type),
-      };
-    });
+    const source = node.types.map((type) => ({
+      node: type,
+      text: sourceCode.getText(type),
+    }));
 
     const hasComments = node.types.some((type) => {
-      const count =
-        sourceCode.getCommentsBefore(type).length +
-        sourceCode.getCommentsAfter(type).length;
+      const count = sourceCode.getCommentsBefore(type).length
+        + sourceCode.getCommentsAfter(type).length;
 
       return count > 0;
     });
 
     const fix = (fixer) => {
       const result = uniqueMembers
-        .map((t) => {
-          return t.text;
-        })
+        .map((t) => t.text)
         .join(
           node.type === 'UnionTypeAnnotation' ? ' | ' : ' & ',
         );
@@ -38,9 +33,7 @@ const create = (context) => {
     };
 
     for (const member of source) {
-      const match = uniqueMembers.find((uniqueMember) => {
-        return uniqueMember.text === member.text;
-      });
+      const match = uniqueMembers.find((uniqueMember) => uniqueMember.text === member.text);
 
       if (match) {
         duplicates.push(member);
@@ -60,27 +53,27 @@ const create = (context) => {
 
         // don't autofix if any of the types have leading/trailing comments
         // the logic for preserving them correctly is a pain - we may implement this later
-        ...hasComments ?
-          {
+        ...hasComments
+          ? {
             suggest: [
               {
                 fix,
                 messageId: 'suggestFix',
               },
             ],
-          } :
-          {fix},
+          }
+          : { fix },
       });
     }
   };
 
   return {
-    IntersectionTypeAnnotation (node) {
+    IntersectionTypeAnnotation(node) {
       if (checkIntersections === true) {
         checkForDuplicates(node);
       }
     },
-    UnionTypeAnnotation (node) {
+    UnionTypeAnnotation(node) {
       if (checkUnions === true) {
         checkForDuplicates(node);
       }

@@ -2,42 +2,42 @@ export default {
   invalid: [
     {
       code: 'type FooType = { a: number, c: number, b: string }',
-      errors: [{message: 'Expected type annotations to be in ascending order. "b" must be before "c".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "b" must be before "c".' }],
       output: 'type FooType = { a: number, b: string, c: number }',
     },
     {
       code: 'type FooType = { a: number, b: number }',
-      errors: [{message: 'Expected type annotations to be in descending order. "b" must be before "a".'}],
+      errors: [{ message: 'Expected type annotations to be in descending order. "b" must be before "a".' }],
       options: ['desc'],
       output: 'type FooType = { b: number, a: number }',
     },
     {
       code: 'type FooType = { b: number, C: number, a: string }',
-      errors: [{message: 'Expected type annotations to be in descending order. "C" must be before "b".'}],
+      errors: [{ message: 'Expected type annotations to be in descending order. "C" must be before "b".' }],
       options: ['desc'],
       output: 'type FooType = { C: number, b: number, a: string }',
     },
     {
       code: 'type FooType = { a: number, c: number, C: number, b: string }',
-      errors: [{message: 'Expected type annotations to be in ascending order. "b" must be before "C".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "b" must be before "C".' }],
       options: ['asc'],
       output: 'type FooType = { a: number, b: string, c: number, C: number }',
     },
     {
       code: 'type FooType = { a: number, C: number, c: number, b: string }',
-      errors: [{message: 'Expected type annotations to be in ascending order. "b" must be before "c".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "b" must be before "c".' }],
       options: ['asc'],
       output: 'type FooType = { a: number, b: string, C: number, c: number }',
     },
     {
       code: 'type FooType = { 1: number, 10: number, 2: boolean }',
-      errors: [{message: 'Expected type annotations to be in ascending order. "2" must be before "10".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "2" must be before "10".' }],
       options: ['asc'],
       output: 'type FooType = { 1: number, 2: boolean, 10: number }',
     },
     {
       code: 'type FooType = { a: number, c: number, b: string }',
-      errors: [{message: 'Expected type annotations to be in ascending order. "b" must be before "c".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "b" must be before "c".' }],
       output: 'type FooType = { a: number, b: string, c: number }',
     },
     {
@@ -48,7 +48,7 @@ export default {
           b: string,
         }
       `,
-      errors: [{message: 'Expected type annotations to be in ascending order. "b" must be before "c".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "b" must be before "c".' }],
       output: `
         type FooType = {
           a: number,
@@ -65,7 +65,7 @@ export default {
           b: Map<string, Array<Map<string, number>>>,
         }
       `,
-      errors: [{message: 'Expected type annotations to be in ascending order. "b" must be before "c".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "b" must be before "c".' }],
       output: `
         type FooType = {
           a: $ReadOnlyArray<number>,
@@ -100,11 +100,11 @@ export default {
         }
       `,
       errors: [
-        {message: 'Expected type annotations to be in ascending order. "x" must be before "y".'},
-        {message: 'Expected type annotations to be in ascending order. "k" must be before "l".'},
-        {message: 'Expected type annotations to be in ascending order. "b" must be before "c".'},
-        {message: 'Expected type annotations to be in ascending order. "x" must be before "y".'},
-        {message: 'Expected type annotations to be in ascending order. "k" must be before "l".'},
+        { message: 'Expected type annotations to be in ascending order. "x" must be before "y".' },
+        { message: 'Expected type annotations to be in ascending order. "k" must be before "l".' },
+        { message: 'Expected type annotations to be in ascending order. "b" must be before "c".' },
+        { message: 'Expected type annotations to be in ascending order. "x" must be before "y".' },
+        { message: 'Expected type annotations to be in ascending order. "k" must be before "l".' },
       ],
       output: `
         type FooType = {
@@ -140,7 +140,7 @@ export default {
           b: number,
         }
       `,
-      errors: [{message: 'Expected type annotations to be in ascending order. "b" must be before "c".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "b" must be before "c".' }],
       output: `
         type FooType = {
           ...BPreservesSpreadOrder,
@@ -163,8 +163,8 @@ export default {
         }
       `,
       errors: [
-        {message: 'Expected type annotations to be in ascending order. "b" must be before "c".'},
-        {message: 'Expected type annotations to be in ascending order. "d" must be before "e".'},
+        { message: 'Expected type annotations to be in ascending order. "b" must be before "c".' },
+        { message: 'Expected type annotations to be in ascending order. "d" must be before "e".' },
       ],
       output: `
         type FooType = {
@@ -187,7 +187,7 @@ export default {
           b: number,
         }
       `,
-      errors: [{message: 'Expected type annotations to be in ascending order. "b" must be before "c".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "b" must be before "c".' }],
       output: `
         type FooType = {
           ...BPreservesSpreadOrderAndTypeArgs<string, number>,
@@ -213,7 +213,7 @@ export default {
           dWithoutComma: boolean
         }
       `,
-      errors: [{message: 'Expected type annotations to be in ascending order. "b" must be before "c".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "b" must be before "c".' }],
       output: `
         type FooType = {
           /* preserves block comment before spread BType */
@@ -238,7 +238,7 @@ export default {
           b: string,
         }
       `,
-      errors: [{message: 'Expected type annotations to be in ascending order. "b" must be before "c".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "b" must be before "c".' }],
       output: `
         type FooType = {
           +a: number,
@@ -255,7 +255,7 @@ export default {
           b: string,
         }
       `,
-      errors: [{message: 'Expected type annotations to be in ascending order. "b" must be before "c".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "b" must be before "c".' }],
       output: `
         type FooType = {
           -a: number,
@@ -272,7 +272,7 @@ export default {
           b: string,
         }
       `,
-      errors: [{message: 'Expected type annotations to be in ascending order. "b" must be before "c".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "b" must be before "c".' }],
       output: `
         type FooType = {
           a?: number,
@@ -289,7 +289,7 @@ export default {
           b: (param: string) => number,
         }
       `,
-      errors: [{message: 'Expected type annotations to be in ascending order. "b" must be before "c".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "b" must be before "c".' }],
       output: `
         type FooType = {
           a: (number) => void,
@@ -306,7 +306,7 @@ export default {
           b: (param: string) => number,
         }
       `,
-      errors: [{message: 'Expected type annotations to be in ascending order. "b" must be before "c".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "b" must be before "c".' }],
       output: `
         type FooType = {
           a: number | string | boolean,
@@ -323,7 +323,7 @@ export default {
           b: (param: string) => number,
         }
       `,
-      errors: [{message: 'Expected type annotations to be in ascending order. "a" must be before "c".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "a" must be before "c".' }],
       output: `
         type FooType = {
           a: number | string | boolean,
@@ -345,8 +345,8 @@ export default {
         }
       `,
       errors: [
-        {message: 'Expected type annotations to be in ascending order. "x" must be before "z".'},
-        {message: 'Expected type annotations to be in ascending order. "a" must be before "c".'},
+        { message: 'Expected type annotations to be in ascending order. "x" must be before "z".' },
+        { message: 'Expected type annotations to be in ascending order. "a" must be before "c".' },
       ],
       output: `
         type FooType = {
@@ -377,9 +377,9 @@ export default {
         }
       `,
       errors: [
-        {message: 'Expected type annotations to be in ascending order. "k" must be before "l".'},
-        {message: 'Expected type annotations to be in ascending order. "x" must be before "z".'},
-        {message: 'Expected type annotations to be in ascending order. "a" must be before "c".'},
+        { message: 'Expected type annotations to be in ascending order. "k" must be before "l".' },
+        { message: 'Expected type annotations to be in ascending order. "x" must be before "z".' },
+        { message: 'Expected type annotations to be in ascending order. "a" must be before "c".' },
       ],
       output: `
         type FooType = {
@@ -406,8 +406,8 @@ export default {
         }
       `,
       errors: [
-        {message: 'Expected type annotations to be in ascending order. "b" must be before "c".'},
-        {message: 'Expected type annotations to be in ascending order. "a" must be before "b".'},
+        { message: 'Expected type annotations to be in ascending order. "b" must be before "c".' },
+        { message: 'Expected type annotations to be in ascending order. "a" must be before "b".' },
       ],
       output: `
         type FooType = {
@@ -426,8 +426,8 @@ export default {
         |}
       `,
       errors: [
-        {message: 'Expected type annotations to be in ascending order. "b" must be before "c".'},
-        {message: 'Expected type annotations to be in ascending order. "a" must be before "b".'},
+        { message: 'Expected type annotations to be in ascending order. "b" must be before "c".' },
+        { message: 'Expected type annotations to be in ascending order. "a" must be before "b".' },
       ],
       output: `
         type FooType = {|
@@ -447,7 +447,7 @@ export default {
           b(param: string): number,
         }
       `,
-      errors: [{message: 'Expected type annotations to be in ascending order. "b" must be before "c".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "b" must be before "c".' }],
       output: `
         type FooType = {
           a(number): void,
@@ -464,7 +464,7 @@ export default {
           b(param: string): number,
         }
       `,
-      errors: [{message: 'Expected type annotations to be in ascending order. "b" must be before "c".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "b" must be before "c".' }],
       output: `
         type FooType = {
           a: number | string | boolean,
@@ -481,7 +481,7 @@ export default {
           b(param: string): number,
         }
       `,
-      errors: [{message: 'Expected type annotations to be in ascending order. "a" must be before "c".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "a" must be before "c".' }],
       output: `
         type FooType = {
           a: number | string | boolean,
@@ -503,8 +503,8 @@ export default {
         }
       `,
       errors: [
-        {message: 'Expected type annotations to be in ascending order. "x" must be before "z".'},
-        {message: 'Expected type annotations to be in ascending order. "a" must be before "c".'},
+        { message: 'Expected type annotations to be in ascending order. "x" must be before "z".' },
+        { message: 'Expected type annotations to be in ascending order. "a" must be before "c".' },
       ],
       output: `
         type FooType = {
@@ -535,9 +535,9 @@ export default {
         }
       `,
       errors: [
-        {message: 'Expected type annotations to be in ascending order. "k" must be before "l".'},
-        {message: 'Expected type annotations to be in ascending order. "x" must be before "z".'},
-        {message: 'Expected type annotations to be in ascending order. "a" must be before "c".'},
+        { message: 'Expected type annotations to be in ascending order. "k" must be before "l".' },
+        { message: 'Expected type annotations to be in ascending order. "x" must be before "z".' },
+        { message: 'Expected type annotations to be in ascending order. "a" must be before "c".' },
       ],
       output: `
         type FooType = {
@@ -566,7 +566,7 @@ export default {
           b(param: string): number,
         }
       `,
-      errors: [{message: 'Expected type annotations to be in ascending order. "b" must be before "c".'}],
+      errors: [{ message: 'Expected type annotations to be in ascending order. "b" must be before "c".' }],
       output: `
         type FooType = {
           /* preserves block comment before a */
@@ -598,10 +598,10 @@ export default {
         |};
       `,
       errors: [
-        {message: 'Expected type annotations to be in ascending order. "code" must be before "isSuccess".'},
-        {message: 'Expected type annotations to be in ascending order. "errorMessage" must be before "message".'},
-        {message: 'Expected type annotations to be in ascending order. "ReturnText" must be before "Status".'},
-        {message: 'Expected type annotations to be in ascending order. "IncludesLegacyOrder" must be before "ReturnText".'},
+        { message: 'Expected type annotations to be in ascending order. "code" must be before "isSuccess".' },
+        { message: 'Expected type annotations to be in ascending order. "errorMessage" must be before "message".' },
+        { message: 'Expected type annotations to be in ascending order. "ReturnText" must be before "Status".' },
+        { message: 'Expected type annotations to be in ascending order. "IncludesLegacyOrder" must be before "ReturnText".' },
       ],
       output: `
         export type GroupOrdersResponseType = {|

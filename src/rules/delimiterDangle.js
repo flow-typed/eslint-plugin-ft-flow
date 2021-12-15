@@ -58,26 +58,18 @@ const create = (context) => {
     return option;
   };
 
-  const reporter = (node, message, fix) => {
-    return () => {
-      context.report({
-        fix,
-        message,
-        node,
-      });
-    };
+  const reporter = (node, message, fix) => () => {
+    context.report({
+      fix,
+      message,
+      node,
+    });
   };
 
-  const makeReporters = (node, tokenToFix) => {
-    return {
-      dangle: reporter(node, 'Unexpected trailing delimiter', (fixer) => {
-        return fixer.replaceText(tokenToFix, '');
-      }),
-      noDangle: reporter(node, 'Missing trailing delimiter', (fixer) => {
-        return fixer.insertTextAfter(tokenToFix, ',');
-      }),
-    };
-  };
+  const makeReporters = (node, tokenToFix) => ({
+    dangle: reporter(node, 'Unexpected trailing delimiter', (fixer) => fixer.replaceText(tokenToFix, '')),
+    noDangle: reporter(node, 'Missing trailing delimiter', (fixer) => fixer.insertTextAfter(tokenToFix, ',')),
+  });
 
   const evaluate = (node, lastChildNode) => {
     if (!lastChildNode && !node.inexact) {
@@ -123,11 +115,11 @@ const create = (context) => {
   };
 
   return {
-    ObjectTypeAnnotation (node) {
+    ObjectTypeAnnotation(node) {
       evaluate(node, getLast(_.last(node.properties), _.last(node.indexers)));
     },
 
-    TupleTypeAnnotation (node) {
+    TupleTypeAnnotation(node) {
       evaluate(node, _.last(node.types));
     },
   };

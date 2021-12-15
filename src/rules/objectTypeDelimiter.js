@@ -29,9 +29,9 @@ const create = (context) => {
     let lastToken;
 
     lastToken = tokens[tokens.length - 1];
-    if (lastToken.type !== 'Punctuator' ||
-        !(lastToken.value === SEMICOLON.char ||
-          lastToken.value === COMMA.char)) {
+    if (lastToken.type !== 'Punctuator'
+        || !(lastToken.value === SEMICOLON.char
+          || lastToken.value === COMMA.char)) {
       const parentTokens = sourceCode.getTokens(node.parent);
 
       lastToken = parentTokens[parentTokens.indexOf(lastToken) + 1];
@@ -39,10 +39,10 @@ const create = (context) => {
 
     if (lastToken.type === 'Punctuator' && lastToken.value === BAD.char) {
       context.report({
-        fix (fixer) {
+        fix(fixer) {
           return fixer.replaceText(lastToken, GOOD.char);
         },
-        message: 'Prefer ' + GOOD.name + 's to ' + BAD.name + 's in object and class types',
+        message: `Prefer ${GOOD.name}s to ${BAD.name}s in object and class types`,
         node: lastToken,
       });
     }

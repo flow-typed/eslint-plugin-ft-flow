@@ -2,39 +2,39 @@ export default {
   invalid: [
     {
       code: 'type x = Number',
-      errors: [{message: 'Unexpected use of Number constructor type.'}],
+      errors: [{ message: 'Unexpected use of Number constructor type.' }],
     },
     {
       code: 'type x = String',
-      errors: [{message: 'Unexpected use of String constructor type.'}],
+      errors: [{ message: 'Unexpected use of String constructor type.' }],
     },
     {
       code: 'type x = Boolean',
-      errors: [{message: 'Unexpected use of Boolean constructor type.'}],
+      errors: [{ message: 'Unexpected use of Boolean constructor type.' }],
     },
     {
       code: 'type x = { a: Number }',
-      errors: [{message: 'Unexpected use of Number constructor type.'}],
+      errors: [{ message: 'Unexpected use of Number constructor type.' }],
     },
     {
       code: 'type x = { a: String }',
-      errors: [{message: 'Unexpected use of String constructor type.'}],
+      errors: [{ message: 'Unexpected use of String constructor type.' }],
     },
     {
       code: 'type x = { a: Boolean }',
-      errors: [{message: 'Unexpected use of Boolean constructor type.'}],
+      errors: [{ message: 'Unexpected use of Boolean constructor type.' }],
     },
     {
       code: '(x: Number) => {}',
-      errors: [{message: 'Unexpected use of Number constructor type.'}],
+      errors: [{ message: 'Unexpected use of Number constructor type.' }],
     },
     {
       code: '(x: String) => {}',
-      errors: [{message: 'Unexpected use of String constructor type.'}],
+      errors: [{ message: 'Unexpected use of String constructor type.' }],
     },
     {
       code: '(x: Boolean) => {}',
-      errors: [{message: 'Unexpected use of Boolean constructor type.'}],
+      errors: [{ message: 'Unexpected use of Boolean constructor type.' }],
     },
   ],
   valid: [

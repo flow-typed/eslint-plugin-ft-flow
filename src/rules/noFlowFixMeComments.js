@@ -4,17 +4,17 @@ const schema = [
   },
 ];
 
-const message = '$FlowFixMe is treated as `any` and must be fixed.';
+const message = '$FlowFixMe is treated as \'any\' and must be fixed.';
 
-const isIdentifier = function (node, name) {
-  return node && node.type === 'Identifier' && node.name.match(name);
-};
+const isIdentifier = (node, name) => (
+  node && node.type === 'Identifier' && node.name.match(name)
+);
 
 const create = (context) => {
   const allowedPattern = context.options[0] ? new RegExp(context.options[0], 'u') : null;
-  const extraMessage = allowedPattern ? ' Fix it or match `' + allowedPattern.toString() + '`.' : '';
+  const extraMessage = allowedPattern ? ` Fix it or match '${allowedPattern.toString()}'.` : '';
 
-  const passesExtraRegex = function (value) {
+  const passesExtraRegex = (value) => {
     if (!allowedPattern) {
       return false;
     }
@@ -22,7 +22,7 @@ const create = (context) => {
     return value.match(allowedPattern);
   };
 
-  const handleComment = function (comment) {
+  const handleComment = (comment) => {
     const value = comment.value.trim();
 
     if (/\$FlowFixMe/u.test(value) && !passesExtraRegex(value)) {
@@ -34,7 +34,7 @@ const create = (context) => {
   };
 
   return {
-    GenericTypeAnnotation (node) {
+    GenericTypeAnnotation(node) {
       if (isIdentifier(node.id, /\$FlowFixMe/u)) {
         context.report({
           message,
@@ -43,13 +43,11 @@ const create = (context) => {
       }
     },
 
-    Program () {
+    Program() {
       for (const comment of context
         .getSourceCode()
         .getAllComments()
-        .filter((node) => {
-          return node.type === 'Block' || node.type === 'Line';
-        })) {
+        .filter((node) => node.type === 'Block' || node.type === 'Line')) {
         handleComment(comment);
       }
     },

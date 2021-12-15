@@ -7,21 +7,20 @@ import {
 
 const noUnusedExpressionsRule = getBuiltinRule('no-unused-expressions');
 
-const {meta} = noUnusedExpressionsRule;
+const { meta } = noUnusedExpressionsRule;
 
 const create = (context) => {
   const coreChecks = noUnusedExpressionsRule.create(context);
 
   return {
-    ExpressionStatement (node) {
+    ExpressionStatement(node) {
       if (
-        node.expression.type === 'TypeCastExpression' ||
-        node.expression.type === 'OptionalCallExpression'
+        node.expression.type === 'TypeCastExpression'
+        || node.expression.type === 'OptionalCallExpression'
       ) {
         return;
       }
 
-      // eslint-disable-next-line @babel/new-cap
       coreChecks.ExpressionStatement(node);
     },
   };

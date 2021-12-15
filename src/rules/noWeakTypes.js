@@ -18,24 +18,20 @@ const schema = [
   },
 ];
 
-const reportWeakType = (context, weakType) => {
-  return (node) => {
-    context.report({
-      data: {weakType},
-      message: 'Unexpected use of weak type "{{weakType}}"',
-      node,
-    });
-  };
+const reportWeakType = (context, weakType) => (node) => {
+  context.report({
+    data: { weakType },
+    message: 'Unexpected use of weak type "{{weakType}}"',
+    node,
+  });
 };
 
-const genericTypeEvaluator = (context, {checkFunction, checkObject}) => {
-  return (node) => {
-    const name = _.get(node, 'id.name');
+const genericTypeEvaluator = (context, { checkFunction, checkObject }) => (node) => {
+  const name = _.get(node, 'id.name');
 
-    if (checkFunction && name === 'Function' || checkObject && name === 'Object') {
-      reportWeakType(context, name)(node);
-    }
-  };
+  if ((checkFunction && name === 'Function') || (checkObject && name === 'Object')) {
+    reportWeakType(context, name)(node);
+  }
 };
 
 const create = (context) => {

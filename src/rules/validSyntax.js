@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 import {
   getParameterName,
   iterateFunctionNodes,
@@ -7,25 +8,23 @@ import {
 
 const schema = [];
 
-const create = iterateFunctionNodes((context) => {
-  return (functionNode) => {
-    for (const identifierNode of functionNode.params) {
-      const nodeType = _.get(identifierNode, 'type');
-      const isAssignmentPattern = nodeType === 'AssignmentPattern';
-      const hasTypeAnnotation = Boolean(_.get(identifierNode, 'typeAnnotation'));
-      const leftAnnotated = Boolean(_.get(identifierNode, 'left.typeAnnotation'));
+const create = iterateFunctionNodes((context) => (functionNode) => {
+  for (const identifierNode of functionNode.params) {
+    const nodeType = _.get(identifierNode, 'type');
+    const isAssignmentPattern = nodeType === 'AssignmentPattern';
+    const hasTypeAnnotation = Boolean(_.get(identifierNode, 'typeAnnotation'));
+    const leftAnnotated = Boolean(_.get(identifierNode, 'left.typeAnnotation'));
 
-      if (isAssignmentPattern && hasTypeAnnotation && !leftAnnotated) {
-        context.report({
-          data: {
-            name: quoteName(getParameterName(identifierNode, context)),
-          },
-          message: '{{name}}parameter type annotation must be placed on left-hand side of assignment.',
-          node: identifierNode,
-        });
-      }
+    if (isAssignmentPattern && hasTypeAnnotation && !leftAnnotated) {
+      context.report({
+        data: {
+          name: quoteName(getParameterName(identifierNode, context)),
+        },
+        message: '{{name}}parameter type annotation must be placed on left-hand side of assignment.',
+        node: identifierNode,
+      });
     }
-  };
+  }
 });
 
 export default {

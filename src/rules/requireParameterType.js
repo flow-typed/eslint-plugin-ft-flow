@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 import {
   getParameterName,
   iterateFunctionNodes,
@@ -34,11 +35,10 @@ const create = iterateFunctionNodes((context) => {
     const isArrowFunctionExpression = functionNode.expression;
     const functionAnnotation = isArrow && _.get(functionNode, 'parent.id.typeAnnotation');
 
-    if (skipArrows === 'expressionsOnly' && isArrowFunctionExpression || skipArrows === true && isArrow) {
+    if ((skipArrows === 'expressionsOnly' && isArrowFunctionExpression) || (skipArrows === true && isArrow)) {
       return;
     }
 
-    // eslint-disable-next-line unicorn/no-array-for-each
     _.forEach(functionNode.params, (identifierNode) => {
       const parameterName = getParameterName(identifierNode, context);
 

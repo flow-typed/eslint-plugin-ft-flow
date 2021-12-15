@@ -11,12 +11,14 @@ const create = (context) => {
     const interfaceIdentifierName = interfaceDeclarationNode.id.name;
 
     if (!pattern.test(interfaceIdentifierName)) {
-      context.report({data: {
-        name: interfaceIdentifierName,
-        pattern: pattern.toString(),
-      },
-      message: 'Interface identifier \'{{name}}\' does not match pattern \'{{pattern}}\'.',
-      node: interfaceDeclarationNode});
+      context.report({
+        data: {
+          name: interfaceIdentifierName,
+          pattern: pattern.toString(),
+        },
+        message: 'Interface identifier \'{{name}}\' does not match pattern \'{{pattern}}\'.',
+        node: interfaceDeclarationNode,
+      });
     }
   };
 

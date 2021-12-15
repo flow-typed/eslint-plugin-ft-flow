@@ -9,12 +9,12 @@ const create = (context) => {
   const longForm = (context.options[0] || 'boolean') === 'boolean';
 
   return {
-    BooleanTypeAnnotation (node) {
+    BooleanTypeAnnotation(node) {
       const diff = node.range[1] - node.range[0];
 
       if (longForm && diff === 4) {
         context.report({
-          fix (fixer) {
+          fix(fixer) {
             return fixer.replaceText(node, 'boolean');
           },
           message: 'Use "boolean", not "bool"',
@@ -24,7 +24,7 @@ const create = (context) => {
 
       if (!longForm && diff !== 4) {
         context.report({
-          fix (fixer) {
+          fix(fixer) {
             return fixer.replaceText(node, 'bool');
           },
           message: 'Use "bool", not "boolean"',

@@ -13,23 +13,23 @@ const formatCodeSnippet = (setup) => {
   const paragraphs = [];
 
   if (setup.options) {
-    paragraphs.push('// Options: ' + JSON.stringify(setup.options));
+    paragraphs.push(`// Options: ${JSON.stringify(setup.options)}`);
   }
 
   if (setup.settings) {
-    paragraphs.push('// Settings: ' + JSON.stringify(setup.settings));
+    paragraphs.push(`// Settings: ${JSON.stringify(setup.settings)}`);
   }
 
   paragraphs.push(setup.code);
 
   if (setup.errors) {
     for (const message of setup.errors) {
-      paragraphs.push('// Message: ' + message.message);
+      paragraphs.push(`// Message: ${message.message}`);
     }
   }
 
   if (setup.rules) {
-    paragraphs.push('// Additional rules: ' + JSON.stringify(setup.rules));
+    paragraphs.push(`// Additional rules: ${JSON.stringify(setup.rules)}`);
   }
 
   return paragraphs.join('\n');
@@ -38,12 +38,10 @@ const formatCodeSnippet = (setup) => {
 const getAssertions = () => {
   const assertionFiles = glob.sync(path.resolve(__dirname, '../../tests/rules/assertions/*.js'));
 
-  const assertionNames = _.map(assertionFiles, (filePath) => {
-    return path.basename(filePath, '.js');
-  });
+  const assertionNames = _.map(assertionFiles, (filePath) => path.basename(filePath, '.js'));
 
   const assertionCodes = _.map(assertionFiles, (filePath) => {
-    // eslint-disable-next-line import/no-dynamic-require
+    // eslint-disable-next-line global-require, import/no-dynamic-require
     const codes = require(filePath);
 
     return {
@@ -69,17 +67,17 @@ const updateDocuments = (assertions) => {
     const ruleAssertions = assertions[ruleName];
 
     if (!ruleAssertions) {
-      throw new Error('No assertions available for rule "' + ruleName + '".');
+      throw new Error(`No assertions available for rule "${ruleName}".`);
     }
 
     exampleBody = '';
 
     if (ruleAssertions.invalid.length) {
-      exampleBody += 'The following patterns are considered problems:\n\n```js\n' + ruleAssertions.invalid.join('\n\n') + '\n```\n\n';
+      exampleBody += `The following patterns are considered problems:\n\n\`\`\`js\n${ruleAssertions.invalid.join('\n\n')}\n\`\`\`\n\n`;
     }
 
     if (ruleAssertions.valid.length) {
-      exampleBody += 'The following patterns are not considered problems:\n\n```js\n' + ruleAssertions.valid.join('\n\n') + '\n```\n\n';
+      exampleBody += `The following patterns are not considered problems:\n\n\`\`\`js\n${ruleAssertions.valid.join('\n\n')}\n\`\`\`\n\n`;
     }
 
     return exampleBody;

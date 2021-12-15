@@ -15,7 +15,8 @@
  *  - tuple type
  *  - union and intersection types
  *
- * Reminder: if you change these semantics, don't forget to modify documentation of `array-style-...` rules
+ * Reminder: if you change these semantics,
+ *  don't forget to modify documentation of `array-style-...` rules
  */
 
 const simpleTypePatterns = [
@@ -23,8 +24,4 @@ const simpleTypePatterns = [
   /.+LiteralTypeAnnotation$/u,
 ];
 
-export default (node) => {
-  return simpleTypePatterns.some((pattern) => {
-    return pattern.test(node.type);
-  });
-};
+export default (node) => simpleTypePatterns.some((pattern) => pattern.test(node.type));

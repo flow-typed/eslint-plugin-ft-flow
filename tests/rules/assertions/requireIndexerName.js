@@ -3,7 +3,7 @@ export default {
     {
       code: 'type foo = { [string]: number };',
       errors: [
-        {message: 'All indexers must be declared with key name.'},
+        { message: 'All indexers must be declared with key name.' },
       ],
       output: 'type foo = { [key: string]: number };',
     },

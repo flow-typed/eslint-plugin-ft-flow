@@ -168,7 +168,7 @@ export default {
           schemaPath: '#/items/0/additionalProperties',
         },
       ],
-      options: [{excludeOtherStuff: true}],
+      options: [{ excludeOtherStuff: true }],
     },
     {
       errors: [
@@ -199,7 +199,7 @@ export default {
           schemaPath: '#/items/0/properties/excludeArrowFunctions/enum',
         },
       ],
-      options: [{excludeArrowFunctions: 'everything'}],
+      options: [{ excludeArrowFunctions: 'everything' }],
     },
     {
       errors: [
@@ -218,7 +218,7 @@ export default {
           schemaPath: '#/items/0/properties/excludeParameterMatch/type',
         },
       ],
-      options: [{excludeParameterMatch: 3}],
+      options: [{ excludeParameterMatch: 3 }],
     },
   ],
   valid: [

@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 import makeSpacing from './typeColonSpacing';
 
 const schema = [
@@ -17,12 +18,10 @@ const schema = [
   },
 ];
 
-const create = (context) => {
-  return makeSpacing('after', context, {
-    allowLineBreak: _.get(context, ['options', '1', 'allowLineBreak'], false),
-    always: _.get(context, ['options', '0'], 'always') === 'always',
-  });
-};
+const create = (context) => makeSpacing('after', context, {
+  allowLineBreak: _.get(context, ['options', '1', 'allowLineBreak'], false),
+  always: _.get(context, ['options', '0'], 'always') === 'always',
+});
 
 export default {
   create,

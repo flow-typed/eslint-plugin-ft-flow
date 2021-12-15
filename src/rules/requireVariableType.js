@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 import {
   isFlowFile,
   quoteName,
@@ -49,7 +50,6 @@ const create = (context) => {
         return;
       }
 
-      // eslint-disable-next-line unicorn/no-array-for-each
       _.forEach(variableDeclaration.declarations, (variableDeclarator) => {
         const identifierNode = _.get(variableDeclarator, 'id');
         const identifierName = _.get(identifierNode, 'name');

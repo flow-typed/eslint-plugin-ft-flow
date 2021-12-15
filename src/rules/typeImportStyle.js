@@ -17,7 +17,7 @@ const schema = [
 const create = (context) => {
   if (context.options[0] === 'declaration') {
     return {
-      ImportDeclaration (node) {
+      ImportDeclaration(node) {
         if (node.importKind !== 'type') {
           for (const specifier of node.specifiers) {
             if (specifier.importKind === 'type') {
@@ -33,18 +33,18 @@ const create = (context) => {
   }
 
   // Default to 'identifier'
-  const ignoreTypeDefault = context.options[1] &&
-      context.options[1].ignoreTypeDefault;
+  const ignoreTypeDefault = context.options[1]
+      && context.options[1].ignoreTypeDefault;
   let isInsideDeclareModule = false;
 
   return {
-    DeclareModule () {
+    DeclareModule() {
       isInsideDeclareModule = true;
     },
-    'DeclareModule:exit' () {
+    'DeclareModule:exit': () => {
       isInsideDeclareModule = false;
     },
-    ImportDeclaration (node) {
+    ImportDeclaration(node) {
       if (node.importKind !== 'type') {
         return;
       }
@@ -56,29 +56,29 @@ const create = (context) => {
       }
 
       if (
-        ignoreTypeDefault &&
-          node.specifiers[0] &&
-          node.specifiers[0].type === 'ImportDefaultSpecifier'
+        ignoreTypeDefault
+          && node.specifiers[0]
+          && node.specifiers[0].type === 'ImportDefaultSpecifier'
       ) {
         return;
       }
 
       context.report({
-        fix (fixer) {
+        fix(fixer) {
           const imports = node.specifiers.map((specifier) => {
             if (specifier.type === 'ImportDefaultSpecifier') {
-              return 'type default as ' + specifier.local.name;
+              return `type default as ${specifier.local.name}`;
             }
 
             if (specifier.imported.name === specifier.local.name) {
-              return 'type ' + specifier.local.name;
+              return `type ${specifier.local.name}`;
             }
 
-            return 'type ' + specifier.imported.name + ' as ' + specifier.local.name;
+            return `type ${specifier.imported.name} as ${specifier.local.name}`;
           });
           const source = node.source.value;
 
-          return fixer.replaceText(node, 'import {' + imports.join(', ') + '} from \'' + source + '\';');
+          return fixer.replaceText(node, `import {${imports.join(', ')}} from '${source}';`);
         },
         message: 'Unexpected "import type"',
         node,
