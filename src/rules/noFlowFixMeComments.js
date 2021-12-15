@@ -4,7 +4,7 @@ const schema = [
   },
 ];
 
-const message = '$FlowFixMe is treated as `any` and must be fixed.';
+const message = '$FlowFixMe is treated as \'any\' and must be fixed.';
 
 const isIdentifier = (node, name) => (
   node && node.type === 'Identifier' && node.name.match(name)
@@ -12,7 +12,7 @@ const isIdentifier = (node, name) => (
 
 const create = (context) => {
   const allowedPattern = context.options[0] ? new RegExp(context.options[0], 'u') : null;
-  const extraMessage = allowedPattern ? ` Fix it or match \`${allowedPattern.toString()}\`.` : '';
+  const extraMessage = allowedPattern ? ` Fix it or match '${allowedPattern.toString()}'.` : '';
 
   const passesExtraRegex = (value) => {
     if (!allowedPattern) {
