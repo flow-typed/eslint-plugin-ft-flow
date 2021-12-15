@@ -8,7 +8,7 @@ import {
 } from './utilities';
 
 const getTestIndexRules = () => {
-  const content = fs.readFileSync(path.resolve(__dirname, '../../tests/rules/index.js'), 'utf-8');
+  const content = fs.readFileSync(path.resolve(__dirname, '../tests/rules/index.js'), 'utf-8');
 
   const result = content.split('\n').reduce((acc, line) => {
     if (acc.inRulesArray) {
@@ -45,7 +45,7 @@ const checkTests = (rulesNames) => {
   const testIndexRules = getTestIndexRules();
 
   const invalid = rulesNames.filter((names) => {
-    const testExists = isFile(path.resolve(__dirname, '../../tests/rules/assertions', `${names[0]}.js`));
+    const testExists = isFile(path.resolve(__dirname, '../tests/rules/assertions', `${names[0]}.js`));
     const inIndex = testIndexRules.includes(names[1]);
 
     return !(testExists && inIndex);

@@ -7,29 +7,15 @@
 When making a commit, the following Pre-Commit hooks run:
 
 * test and documentation checks
-* tests
 * lint
-* commit message validation (see "Commit Messages" below)
-
-## Commit Messages
-
-All commit messages must begin with one of the following prefixes:
-
-* `fix: `
-* `feat: `
-* `refactor: `
-* `docs: `
-* `chore: `
-
-The prefix is used to bump the correct segment of the version number during the automatic release.
 
 ## Tests
 
-Run them with `npm test`.
+Run them with `yarn test`.
 
 ## Lint
 
-Run with `npm run lint`.
+Run with `yarn lint`.
 
 ## Adding a Rule
 

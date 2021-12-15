@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
-/**
+/** @flow
  * @file This script is used to inline assertions into the README.md documents.
  */
-
 import fs from 'fs';
 import path from 'path';
 import glob from 'glob';
@@ -41,7 +40,7 @@ const getAssertions = () => {
   const assertionNames = _.map(assertionFiles, (filePath) => path.basename(filePath, '.js'));
 
   const assertionCodes = _.map(assertionFiles, (filePath) => {
-    // eslint-disable-next-line global-require, import/no-dynamic-require
+    // $FlowExpectedError[unsupported-syntax]
     const codes = require(filePath);
 
     return {
@@ -62,12 +61,12 @@ const updateDocuments = (assertions) => {
   documentBody = documentBody.replace(/<!-- assertions ([a-z]+?) -->/ugi, (assertionsBlock) => {
     let exampleBody;
 
-    const ruleName = assertionsBlock.match(/assertions ([a-z]+)/ui)[1];
+    const ruleName = assertionsBlock.match(/assertions ([a-z]+)/ui)?.[1];
 
     const ruleAssertions = assertions[ruleName];
 
     if (!ruleAssertions) {
-      throw new Error(`No assertions available for rule "${ruleName}".`);
+      throw new Error(`No assertions available for rule "${ruleName ?? ''}".`);
     }
 
     exampleBody = '';
