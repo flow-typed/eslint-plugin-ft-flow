@@ -62,8 +62,8 @@ const create = (context) => {
     const isAsyncReturnTypeAnnotationVoid = _.get(targetNode, 'functionNode.async')
       && _.get(targetNode, 'functionNode.returnType.typeAnnotation.id.name') === 'Promise' && (
       _.get(targetNode, 'functionNode.returnType.typeAnnotation.typeParameters.params[0].type') === 'VoidTypeAnnotation'
-      || _.get(targetNode, 'functionNode.returnType.typeAnnotation.typeParameters.params[0].id.name') === 'undefined'
-      && _.get(targetNode, 'functionNode.returnType.typeAnnotation.typeParameters.params[0].type') === 'GenericTypeAnnotation'
+      || (_.get(targetNode, 'functionNode.returnType.typeAnnotation.typeParameters.params[0].id.name') === 'undefined'
+      && _.get(targetNode, 'functionNode.returnType.typeAnnotation.typeParameters.params[0].type') === 'GenericTypeAnnotation')
     );
 
     return (
@@ -118,18 +118,18 @@ const create = (context) => {
       && (!targetNode.returnStatementNode || isUndefinedReturnType(targetNode.returnStatementNode));
     const isReturnTypeAnnotationUndefined = getIsReturnTypeAnnotationUndefined(targetNode);
 
-    if (skipArrows === 'expressionsOnly' && isArrowFunctionExpression || skipArrows === true && isArrow || shouldFilterNode(functionNode)) {
+    if ((skipArrows === 'expressionsOnly' && isArrowFunctionExpression) || (skipArrows === true && isArrow) || shouldFilterNode(functionNode)) {
       return;
     }
 
-    const returnType = functionNode.returnType || isArrow && _.get(functionNode, 'parent.id.typeAnnotation');
+    const returnType = functionNode.returnType || (isArrow && _.get(functionNode, 'parent.id.typeAnnotation'));
 
     if (isFunctionReturnUndefined && isReturnTypeAnnotationUndefined && annotateUndefined === 'never') {
       context.report({ message: 'Must not annotate undefined return type.', node: functionNode });
     } else if (isFunctionReturnUndefined && !isReturnTypeAnnotationUndefined && annotateUndefined === 'always') {
       context.report({ message: 'Must annotate undefined return type.', node: functionNode });
     } else if (
-      (annotateUndefined === 'always-enforce' || !isFunctionReturnUndefined && !isReturnTypeAnnotationUndefined)
+      (annotateUndefined === 'always-enforce' || (!isFunctionReturnUndefined && !isReturnTypeAnnotationUndefined))
         && annotateReturn && !returnType && !shouldFilterNode(functionNode)
     ) {
       context.report({ message: 'Missing return type annotation.', node: functionNode });

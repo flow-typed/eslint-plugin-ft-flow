@@ -24,12 +24,12 @@ const isReactComponent = (node) => {
 
     // class Foo extends Component { }
     // class Foo extends PureComponent { }
-    node.superClass.type === 'Identifier' && reComponentName.test(node.superClass.name)
+    (node.superClass.type === 'Identifier' && reComponentName.test(node.superClass.name))
 
     // class Foo extends React.Component { }
     // class Foo extends React.PureComponent { }
-    || node.superClass.type === 'MemberExpression'
-    && (node.superClass.object.name === 'React' && reComponentName.test(node.superClass.property.name))
+    || (node.superClass.type === 'MemberExpression'
+    && (node.superClass.object.name === 'React' && reComponentName.test(node.superClass.property.name)))
   );
 };
 
@@ -67,9 +67,11 @@ const isReadOnlyObjectUnionType = (node, options) => {
   return node.types.every((type) => isReadOnlyObjectType(type, options));
 };
 
-const isReadOnlyType = (node, options) => node.right.id && reReadOnly.test(node.right.id.name)
-    || isReadOnlyObjectType(node.right, options)
-    || isReadOnlyObjectUnionType(node.right, options);
+const isReadOnlyType = (node, options) => (
+  (node.right.id && reReadOnly.test(node.right.id.name))
+  || isReadOnlyObjectType(node.right, options)
+  || isReadOnlyObjectUnionType(node.right, options)
+);
 
 const create = (context) => {
   const useImplicitExactTypes = _.get(context, ['options', 0, 'useImplicitExactTypes'], false);
@@ -137,8 +139,6 @@ const create = (context) => {
     // functional components
     JSXElement(node) {
       let currentNode = node;
-      const { typeAnnotation } = currentNode.params[0];
-      const identifier = typeAnnotation.typeAnnotation.id;
 
       while (currentNode && currentNode.type !== 'FunctionDeclaration') {
         currentNode = currentNode.parent;
@@ -149,8 +149,10 @@ const create = (context) => {
         return;
       }
 
-      if (currentNode.params[0].type === 'Identifier'
-          && typeAnnotation) {
+      const { typeAnnotation } = currentNode.params[0];
+
+      if (currentNode.params[0].type === 'Identifier' && typeAnnotation) {
+        const identifier = typeAnnotation.typeAnnotation.id;
         if (identifier
             && foundTypes.includes(identifier.name)
             && !readOnlyTypes.includes(identifier.name)

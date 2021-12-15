@@ -29,7 +29,7 @@ const reportWeakType = (context, weakType) => (node) => {
 const genericTypeEvaluator = (context, { checkFunction, checkObject }) => (node) => {
   const name = _.get(node, 'id.name');
 
-  if (checkFunction && name === 'Function' || checkObject && name === 'Object') {
+  if ((checkFunction && name === 'Function') || (checkObject && name === 'Object')) {
     reportWeakType(context, name)(node);
   }
 };

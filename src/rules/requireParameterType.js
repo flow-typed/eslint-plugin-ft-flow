@@ -35,7 +35,7 @@ const create = iterateFunctionNodes((context) => {
     const isArrowFunctionExpression = functionNode.expression;
     const functionAnnotation = isArrow && _.get(functionNode, 'parent.id.typeAnnotation');
 
-    if (skipArrows === 'expressionsOnly' && isArrowFunctionExpression || skipArrows === true && isArrow) {
+    if ((skipArrows === 'expressionsOnly' && isArrowFunctionExpression) || (skipArrows === true && isArrow)) {
       return;
     }
 
