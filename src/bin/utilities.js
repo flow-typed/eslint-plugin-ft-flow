@@ -4,7 +4,7 @@ import path from 'path';
 import glob from 'glob';
 import _ from 'lodash';
 
-export const getRules = () => {
+export const getRules = (): Array<Array<string>> => {
   const rulesFiles = glob.sync(path.resolve(__dirname, '../rules/*.js'));
 
   const rulesNames = rulesFiles
@@ -14,7 +14,7 @@ export const getRules = () => {
   return rulesNames;
 };
 
-export const isFile = (filepath) => {
+export const isFile = (filepath: string): boolean => {
   try {
     return fs.statSync(filepath).isFile();
   } catch {

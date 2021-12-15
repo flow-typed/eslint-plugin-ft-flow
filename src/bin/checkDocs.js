@@ -64,7 +64,12 @@ const checkDocs = (rulesNames) => {
   const docIndexRules = getDocIndexRules();
 
   const sorted = windows(docIndexRules, 2)
-    .every((chunk) => chunk[0] < chunk[1]);
+    .every((chunk) => {
+      if (!chunk[0] || !chunk[1]) {
+        return false;
+      }
+      return chunk[0] < chunk[1];
+    });
 
   if (!sorted) {
     throw new Error('Rules are not alphabetically sorted in `.README/README.md` file.');
