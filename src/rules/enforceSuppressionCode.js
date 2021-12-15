@@ -12,7 +12,8 @@ const create = (context) => {
   const isMissingSuppressionCode = (value) => {
     let failedType;
     suppressionTypes.forEach((cur) => {
-      if (value.startsWith(cur)
+      if (value
+          && value.startsWith(cur)
           && !value.startsWith(`${cur}[`)
           && !value.endsWith(']')) {
         failedType = cur;

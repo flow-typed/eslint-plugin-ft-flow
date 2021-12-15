@@ -61,7 +61,7 @@ export default {
   ],
   valid: [
     {
-      code: 'const text = \'HELLO\';',
+      code: '// Just a random comment\n//\nconst text = \'HELLO\';',
     },
     {
       code: '// $FlowFixMe[incompatible-call] TODO 48\nconst text = \'HELLO\';',
