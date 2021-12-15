@@ -1,6 +1,8 @@
 .github
 .husky
 .README
+flow-typed
+scripts
 src
 tests
 coverage
