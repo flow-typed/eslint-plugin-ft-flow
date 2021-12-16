@@ -34,12 +34,6 @@ export default {
       },
     ),
     valid(
-      '// @flow strict\n\n// $FlowExpectedError\nconst text: string = 42;',
-      {
-        $FlowExpectedError: false,
-      },
-    ),
-    valid(
       '// @flow strict-local\n\n// $FlowExpectedError\nconst text: string = 42;',
       {
         $FlowExpectedError: false,
