@@ -13,7 +13,7 @@ This rule accepts 1 option as an object to disable errors being thrown on specif
 {
   "rules": {
     "ft-flow/no-flow-fix-me-in-strict-files": [2, {
-      "FlowExpectedError": false
+      "$FlowExpectedError": false
     }]
   }
 }
