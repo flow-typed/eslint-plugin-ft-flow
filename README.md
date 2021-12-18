@@ -2298,12 +2298,14 @@ This codifies the best practices [as documented here](https://flow.org/en/docs/s
 <a name="rules-no-flow-fix-me-in-strict-files-options-4"></a>
 #### Options
 
-The rule has no options.
+This rule accepts 1 option as an object to disable errors being thrown on specific suppression error types. For example, you don't want `$FlowFixMe` but `$FlowExpectedError` you want to allow because they are expected issues that can't be solved.
 
 ```js
 {
   "rules": {
-    "flowtype/no-flow-fix-me-in-strict-files": 2,
+    "ft-flow/no-flow-fix-me-in-strict-files": [2, {
+      "$FlowExpectedError": false
+    }]
   }
 }
 ```
@@ -2311,21 +2313,31 @@ The rule has no options.
 The following patterns are considered problems:
 
 ```js
+// Options: [{}]
 // @flow strict
 
 // $FlowFixMe
 const text: string = 42;
 // Message: No suppression comments are allowed in "strict" Flow files. Either remove the error suppression, or lower the strictness of this module.
 
+// Options: [{}]
 // @flow strict-local
 
 // $FlowFixMe
 const text: string = 42;
 // Message: No suppression comments are allowed in "strict" Flow files. Either remove the error suppression, or lower the strictness of this module.
 
+// Options: [{}]
 // @flow strict
 
 // $FlowExpectedError[xxx]
+const text: string = 42;
+// Message: No suppression comments are allowed in "strict" Flow files. Either remove the error suppression, or lower the strictness of this module.
+
+// Options: [{"$FlowExpectedError":false}]
+// @flow strict
+
+// $FlowFixMe
 const text: string = 42;
 // Message: No suppression comments are allowed in "strict" Flow files. Either remove the error suppression, or lower the strictness of this module.
 ```
@@ -2333,21 +2345,36 @@ const text: string = 42;
 The following patterns are not considered problems:
 
 ```js
+// Options: [{}]
 // @flow
 
 // Error suppressions are fine in "normal" Flow files
 // $FlowFixMe
 const text: string = 42;
 
-// @flow-strict
+// Options: [{}]
+// @flow strict
 
 // Definitely nothing to suppress here
 // ...
 
-// @flow-strict-local
+// Options: [{}]
+// @flow strict-local
 
 // Definitely nothing to suppress here
 // ...
+
+// Options: [{"$FlowExpectedError":false}]
+// @flow strict
+
+// $FlowExpectedError
+const text: string = 42;
+
+// Options: [{"$FlowExpectedError":false}]
+// @flow strict-local
+
+// $FlowExpectedError
+const text: string = 42;
 ```
 
 
@@ -2869,6 +2896,14 @@ type X = any; type Y = Function; type Z = Object
 // Options: [{"any":false,"Object":false}]
 type X = any; type Y = Function; type Z = Object
 // Message: Unexpected use of weak type "Function"
+
+// Options: [{"suppressTypes":["$FlowFixMe"]}]
+const a: $FlowFixMe = 1
+// Message: Unexpected use of custom weak type "$FlowFixMe"
+
+// Options: [{"suppressTypes":["$FlowFixMe","Something"]}]
+const a: Something = 1
+// Message: Unexpected use of custom weak type "Something"
 ```
 
 The following patterns are not considered problems:
@@ -2910,6 +2945,13 @@ type X = Function
 
 // Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
 function foo(thing): Function {}
+
+// Options: [{"suppressTypes":["$FlowFixMe"]}]
+// $FlowFixMe
+const a: string = 1
+
+// Options: [{"suppressTypes":["Foo"]}]
+const Foo = 1
 ```
 
 
