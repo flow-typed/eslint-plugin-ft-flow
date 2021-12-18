@@ -19,7 +19,7 @@
   </a>
 </p>
 
-> This project was heavily based off the original [flowtype eslint plugin](https://github.com/gajus/eslint-plugin-flowtype), all credits go to the original maintainers.
+> This project was heavily based off the original [flowtype eslint plugin](https://github.com/gajus/eslint-plugin-flowtype), all credits go to the original maintainers. We duplicated the project with the intention of providing the flowtype community support and maintenance from people that actually used flowtype.
 
 ---
 
