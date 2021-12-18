@@ -5,7 +5,7 @@ Disallows use of the existential type (*). [See more](https://flow.org/en/docs/t
 ```js
 {
   "rules": {
-    "flowtype/no-existential-type": 2
+    "ft-flow/no-existential-type": 2
   }
 }
 ```

@@ -17,9 +17,10 @@ This rule has an option object.
     * `"true"`: Enable
     * `"false"`: Disable
 
+```js
 {
   "rules": {
-    "flowtype/space-after-type-colon": [
+    "ft-flow/space-after-type-colon": [
       2,
       "always", {
         "allowLineBreak": false
@@ -27,5 +28,6 @@ This rule has an option object.
     ]
   }
 }
+```
 
 <!-- assertions spaceAfterTypeColon -->

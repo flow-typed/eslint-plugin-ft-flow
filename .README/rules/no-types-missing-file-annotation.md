@@ -5,7 +5,7 @@ Disallows Flow type imports, aliases, and annotations in files missing a valid F
 ```js
 {
     "rules": {
-        "flowtype/no-types-missing-file-annotation": 2
+        "ft-flow/no-types-missing-file-annotation": 2
     }
 }
 ```

@@ -14,7 +14,7 @@ The first option specifies sort order.
 ```js
 {
   "rules": {
-    "flowtype/sort-keys": [
+    "ft-flow/sort-keys": [
       2,
       "asc"
     ]

@@ -170,7 +170,7 @@ export default {
         },
       ],
       settings: {
-        flowtype: {
+        'ft-flow': {
           onlyFilesWithFlowAnnotation: true,
         },
       },
@@ -189,7 +189,7 @@ export default {
         },
       ],
       settings: {
-        flowtype: {
+        'ft-flow': {
           onlyFilesWithFlowAnnotation: true,
         },
       },
@@ -695,7 +695,7 @@ export default {
         'always',
       ],
       settings: {
-        flowtype: {
+        'ft-flow': {
           onlyFilesWithFlowAnnotation: true,
         },
       },
@@ -715,7 +715,7 @@ export default {
         },
       ],
       settings: {
-        flowtype: {
+        'ft-flow': {
           onlyFilesWithFlowAnnotation: true,
         },
       },

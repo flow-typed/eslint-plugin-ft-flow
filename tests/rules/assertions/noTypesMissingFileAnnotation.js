@@ -48,7 +48,7 @@ export default {
         message: 'Type annotations require valid Flow declaration.',
       }],
       settings: {
-        flowtype: {
+        'ft-flow': {
           onlyFilesWithFlowAnnotation: true,
         },
       },

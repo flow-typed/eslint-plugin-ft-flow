@@ -13,7 +13,7 @@ The rule has a string option:
 ```js
 {
   "rules": {
-    "flowtype/newline-after-flow-annotation": [
+    "ft-flow/newline-after-flow-annotation": [
       2,
       "always"
     ]

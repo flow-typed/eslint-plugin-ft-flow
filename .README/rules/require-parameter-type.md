@@ -11,7 +11,7 @@ Alternatively, you can want to exclude only concise arrow functions (e.g. `x => 
 ```js
 {
     "rules": {
-        "flowtype/require-parameter-type": [
+        "ft-flow/require-parameter-type": [
             2,
             {
               "excludeArrowFunctions": true
@@ -22,7 +22,7 @@ Alternatively, you can want to exclude only concise arrow functions (e.g. `x => 
 
 {
     "rules": {
-        "flowtype/require-parameter-type": [
+        "ft-flow/require-parameter-type": [
             2,
             {
               "excludeArrowFunctions": "expressionsOnly"
