@@ -19,6 +19,8 @@
   </a>
 </p>
 
+> This project was heavily based off the original [flowtype eslint plugin](https://github.com/gajus/eslint-plugin-flowtype), all credits go to the original maintainers.
+
 ---
 
 {"gitdown": "contents"}
