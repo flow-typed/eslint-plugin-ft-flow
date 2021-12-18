@@ -42,7 +42,7 @@
     * [`no-duplicate-type-union-intersection-members`](#rules-no-duplicate-type-union-intersection-members)
     * [`no-existential-type`](#rules-no-existential-type)
     * [`no-flow-fix-me-comments`](#rules-no-flow-fix-me-comments)
-    * [`no-flow-fix-me-in-strict-files`](#rules-no-flow-fix-me-in-strict-files)
+    * [`no-flow-suppressions-in-strict-files`](#rules-no-flow-suppressions-in-strict-files)
     * [`no-internal-flow-type`](#rules-no-internal-flow-type)
     * [`no-mixed`](#rules-no-mixed)
     * [`no-mutable-array`](#rules-no-mutable-array)
@@ -2287,15 +2287,15 @@ const text = 'HELLO';
 
 
 
-<a name="rules-no-flow-fix-me-in-strict-files"></a>
-### <code>no-flow-fix-me-in-strict-files</code>
+<a name="rules-no-flow-suppressions-in-strict-files"></a>
+### <code>no-flow-suppressions-in-strict-files</code>
 
 This rule validates that no error suppression comments (e.g. `$FlowFixMe`) are used in `// @flow strict` (or `// @flow strict-local`) files.
 
 This codifies the best practices [as documented here](https://flow.org/en/docs/strict/#toc-adoption):
 
 > _"Do not add `$FlowFixMe` to suppress the new errors as they appear; just add `@flow strict` once all issues have been resolved."_
-<a name="rules-no-flow-fix-me-in-strict-files-options-4"></a>
+<a name="rules-no-flow-suppressions-in-strict-files-options-4"></a>
 #### Options
 
 This rule accepts 1 option as an object to disable errors being thrown on specific suppression error types. For example, you don't want `$FlowFixMe` but `$FlowExpectedError` you want to allow because they are expected issues that can't be solved.
@@ -2303,7 +2303,7 @@ This rule accepts 1 option as an object to disable errors being thrown on specif
 ```js
 {
   "rules": {
-    "ft-flow/no-flow-fix-me-in-strict-files": [2, {
+    "ft-flow/no-flow-suppressions-in-strict-files": [2, {
       "$FlowExpectedError": false
     }]
   }
