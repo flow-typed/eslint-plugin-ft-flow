@@ -16,6 +16,11 @@
 declare module 'eslint' {
   declare type Rule$Context = {|
     report: ({ ... }) => void,
+    getAllComments: () => Array<{|
+      type: string,
+      value: string,
+    |}>,
+    getSourceCode: () => Rule$Context,
   |};
 
   declare type Rule$Create = (context: Rule$Context) => {|
