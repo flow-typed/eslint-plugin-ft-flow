@@ -97,7 +97,7 @@ const UNION = {
     {
       code: 'type X = string| number;',
       settings: {
-        flowtype: {
+        'ft-flow': {
           onlyFilesWithFlowAnnotation: true,
         },
       },
@@ -204,7 +204,7 @@ const INTERSECTION = {
     {
       code: 'type X = string& number;',
       settings: {
-        flowtype: {
+        'ft-flow': {
           onlyFilesWithFlowAnnotation: true,
         },
       },

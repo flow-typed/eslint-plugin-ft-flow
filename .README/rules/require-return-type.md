@@ -11,7 +11,7 @@ Alternatively, you can exclude a concise arrow function (e.g. `() => 2`). Provid
 ```js
 {
     "rules": {
-        "flowtype/require-return-type": [
+        "ft-flow/require-return-type": [
             2,
             "always",
             {
@@ -23,7 +23,7 @@ Alternatively, you can exclude a concise arrow function (e.g. `() => 2`). Provid
 
 {
     "rules": {
-        "flowtype/require-return-type": [
+        "ft-flow/require-return-type": [
             2,
             "always",
             {
@@ -39,7 +39,7 @@ You can exclude or include specific tests with the `includeOnlyMatching` and `ex
 ```js
 {
     "rules": {
-        "flowtype/require-return-type": [
+        "ft-flow/require-return-type": [
             2,
             "always",
             {
@@ -54,7 +54,7 @@ You can exclude or include specific tests with the `includeOnlyMatching` and `ex
 
 {
     "rules": {
-        "flowtype/require-return-type": [
+        "ft-flow/require-return-type": [
             2,
             "always",
             {

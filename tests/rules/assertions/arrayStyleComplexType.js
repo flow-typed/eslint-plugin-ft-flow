@@ -110,7 +110,7 @@ export default {
       code: 'type X = Array<?string>',
       options: ['shorthand'],
       settings: {
-        flowtype: {
+        'ft-flow': {
           onlyFilesWithFlowAnnotation: true,
         },
       },

@@ -33,7 +33,7 @@ const schema = [
 ];
 
 const create = (context) => {
-  const checkThisFile = !_.get(context, 'settings.flowtype.onlyFilesWithFlowAnnotation') || isFlowFile(context);
+  const checkThisFile = !_.get(context, 'settings[\'ft-flow\'].onlyFilesWithFlowAnnotation') || isFlowFile(context);
 
   if (!checkThisFile) {
     return () => {};

@@ -12,7 +12,7 @@ The default pattern is `a^`, which doesn't match anything, i.e., all parameters 
 ```js
 {
     "rules": {
-        "flowtype/require-variable-type": [
+        "ft-flow/require-variable-type": [
             2,
             {
               "excludeVariableMatch": "^_"
@@ -31,7 +31,7 @@ By default, all declarations are checked.
 ```js
 {
     "rules": {
-        "flowtype/require-variable-type": [
+        "ft-flow/require-variable-type": [
             2,
             {
               "excludeVariableTypes": {

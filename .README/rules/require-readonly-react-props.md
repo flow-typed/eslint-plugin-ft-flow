@@ -73,7 +73,7 @@ class Bar extends React.Component<Props> { }
 ```js
 {
     "rules": {
-        "flowtype/require-readonly-react-props": 2
+        "ft-flow/require-readonly-react-props": 2
     }
 }
 ```
@@ -85,7 +85,7 @@ Optionally, you can enable support for [implicit exact Flow types](https://mediu
 ```js
 {
     "rules": {
-        "flowtype/require-readonly-react-props": [
+        "ft-flow/require-readonly-react-props": [
             2,
             {
                 "useImplicitExactTypes": true

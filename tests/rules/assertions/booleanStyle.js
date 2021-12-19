@@ -65,7 +65,7 @@ export default {
       code: 'type X = bool',
       options: ['boolean'],
       settings: {
-        flowtype: {
+        'ft-flow': {
           onlyFilesWithFlowAnnotation: true,
         },
       },

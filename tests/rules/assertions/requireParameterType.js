@@ -77,7 +77,7 @@ export default {
         },
       ],
       settings: {
-        flowtype: {
+        'ft-flow': {
           onlyFilesWithFlowAnnotation: true,
         },
       },
@@ -246,7 +246,7 @@ export default {
     {
       code: '(foo) => {}',
       settings: {
-        flowtype: {
+        'ft-flow': {
           onlyFilesWithFlowAnnotation: true,
         },
       },
@@ -286,7 +286,7 @@ export default {
     {
       code: '(foo) => {}',
       settings: {
-        flowtype: {
+        'ft-flow': {
           onlyFilesWithFlowAnnotation: true,
         },
       },

@@ -146,7 +146,7 @@ type Foo = $ReadOnly<{}>`,
       '\'$ReadOnly\' is not defined.',
     ],
     settings: {
-      flowtype: {
+      'ft-flow': {
         onlyFilesWithFlowAnnotation: true,
       },
     },

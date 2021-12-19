@@ -64,7 +64,7 @@ export default {
     {
       code: 'type FooType = { a: number, b: string, a: number }',
       settings: {
-        flowtype: {
+        'ft-flow': {
           onlyFilesWithFlowAnnotation: true,
         },
       },

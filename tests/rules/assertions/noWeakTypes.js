@@ -324,7 +324,7 @@ export default {
     {
       code: 'function foo(thing): Function {}',
       settings: {
-        flowtype: {
+        'ft-flow': {
           onlyFilesWithFlowAnnotation: true,
         },
       },

@@ -12,7 +12,7 @@ The rule has one string option:
 ```js
 {
   "rules": {
-    "flowtype/require-inexact-type": [
+    "ft-flow/require-inexact-type": [
       2,
       "always"
     ]
@@ -21,7 +21,7 @@ The rule has one string option:
 
 {
   "rules": {
-    "flowtype/require-inexact-type": [
+    "ft-flow/require-inexact-type": [
       2,
       "never"
     ]

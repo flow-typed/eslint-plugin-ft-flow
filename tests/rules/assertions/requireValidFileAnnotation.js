@@ -365,7 +365,7 @@ export default {
       code: 'a;',
       options: ['always'],
       settings: {
-        flowtype: {
+        'ft-flow': {
           onlyFilesWithFlowAnnotation: true,
         },
       },

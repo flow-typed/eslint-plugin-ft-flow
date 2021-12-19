@@ -14,7 +14,7 @@ The rule has a string option:
 ```js
 {
   "rules": {
-    "flowtype/require-indexer-name": [
+    "ft-flow/require-indexer-name": [
       2,
       "always"
     ]
