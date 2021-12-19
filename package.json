@@ -15,7 +15,7 @@
     "build": "rimraf ./dist && NODE_ENV=production babel ./src --out-dir ./dist --copy-files",
     "check-docs": "babel-node ./scripts/checkDocs",
     "check-tests": "babel-node ./scripts/checkTests",
-    "create-readme": "gitdown ./.README/README.md --output-file ./README.md && npm run documentation-add-assertions",
+    "create-readme": "node ./scripts/genReadme && npm run documentation-add-assertions",
     "documentation-add-assertions": "babel-node ./scripts/addAssertions",
     "lint": "eslint ./src ./tests",
     "test": "mocha --require @babel/register ./tests/rules/index.js",
