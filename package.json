@@ -15,11 +15,10 @@
     "build": "rimraf ./dist && NODE_ENV=production babel ./src --out-dir ./dist --copy-files",
     "check-docs": "babel-node ./scripts/checkDocs",
     "check-tests": "babel-node ./scripts/checkTests",
-    "create-readme": "gitdown ./.README/README.md --output-file ./README.md && npm run documentation-add-assertions",
-    "documentation-add-assertions": "babel-node ./scripts/addAssertions",
+    "create-readme": "node ./scripts/genReadme && babel-node ./scripts/addAssertions",
     "lint": "eslint ./src ./tests",
     "test": "mocha --require @babel/register ./tests/rules/index.js",
-    "prepublishOnly": "yarn documentation-add-assertions && yarn build"
+    "prepublishOnly": "yarn create-readme && yarn build"
   },
   "dependencies": {
     "lodash": "^4.17.21",
@@ -51,7 +50,6 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-testing-library": "^5.0.1",
     "flow-bin": "^0.167.1",
-    "gitdown": "^3.1.4",
     "glob": "^7.2.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.2",
