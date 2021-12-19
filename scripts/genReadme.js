@@ -6,55 +6,52 @@ const { range } = require('lodash');
 
 const readmeDir = '../.README';
 
+const generateHeader = (value) => {
+  const name = value.replace(/[#]/g, '').trim();
+  const headingSize = value.split('#').length - 1;
+
+  return `<a name="${name.toLowerCase().replace(/ /g, '-').replace(/`/g, '')}"></a>
+${range(0, headingSize).map(() => '#').join('')} ${name}`;
+};
+
 fs.readFile(path.resolve(__dirname, readmeDir, 'README.md'), 'utf-8', (err, content) => {
   if (err) {
     console.error(err);
   }
 
-  const gitdownPrefix = '{"gitdown": "include", "file": ';
-  const ruleStrings = content.split('\n').filter((o) => o.startsWith(gitdownPrefix));
+  const gitdownContents = '{"gitdown": "contents"}';
+  const gitdownRulePrefix = '{"gitdown": "include", "file": ';
+  const ruleStrings = content.split('\n').filter((o) => o.startsWith(gitdownRulePrefix));
 
-  const titles = [];
+  // Go through each rule template and replace with the rule content
+  ruleStrings.forEach((rule) => {
+    const ruleObj = JSON.parse(rule);
+    const ruleContent = fs.readFileSync(path.resolve(__dirname, readmeDir, ruleObj.file), 'utf-8');
 
-  const generateHeader = (value) => {
-    const name = value.replace(/[#]/g, '').trim();
-    const headingSize = value.split('#').length - 1;
+    content = content.replace(rule, ruleContent);
+  });
 
-    return `<a name="${name.toLowerCase().replace(/ /g, '-').replace(/`/g, '')}"></a>
-${range(0, headingSize).map(() => '#').join('')} ${name.replace('`', '<code>').replace('`', '</code>')}`;
-  };
-
+  // For each title transform to allow for linking
   content = content.split('\n').map((o) => {
     if (!o.startsWith('##')) return o;
 
     return generateHeader(o);
   }).join('\n');
 
-  ruleStrings.forEach((rule) => {
-    const ruleObj = JSON.parse(rule);
-    let ruleContent = fs.readFileSync(path.resolve(__dirname, readmeDir, ruleObj.file), 'utf-8');
-
-    const lines = ruleContent.split('\n');
-    ruleContent = lines.map((o) => {
-      if (!o.startsWith('##')) return o;
-      return generateHeader(o);
-    }).join('\n');
-
-    titles.push(lines[0].replace(/[`]/g, ''));
-    content = content.replace(rule, ruleContent);
-  });
-
+  // With all titles create the table of contents
+  const titles = content.split('\n').filter((o) => o.startsWith('##'));
   const tableOfContents = titles.reduce((acc, cur) => {
-    const name = cur.replace(/[# ]/g, '');
+    const name = cur.replace(/[#]/g, '').trim();
+    const link = `[${name}](#${name.toLowerCase().replace(/`/g, '').replace(' ', '-')})`;
     if (cur.startsWith('## ')) {
-      return `${acc}* [\`${name}\`](#rules-${name})\n`;
+      return `${acc}* ${link}\n`;
     }
     if (cur.startsWith('### ')) {
-      return `${acc}  * [\`${name}\`](#rules-${name})\n`;
+      return `${acc}  * ${link}\n`;
     }
-    return '';
+    return acc;
   }, '');
-  content = content.replace('{"gitdown": "contents"}', tableOfContents);
+  content = content.replace(gitdownContents, tableOfContents);
 
   fs.writeFile('./README.md', content, (writeErr) => {
     if (writeErr) {
