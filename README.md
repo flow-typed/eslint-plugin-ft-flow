@@ -19,6 +19,8 @@
   </a>
 </p>
 
+> This project was heavily based off the original [flowtype eslint plugin](https://github.com/gajus/eslint-plugin-flowtype), all credits go to the original maintainers. We duplicated the project with the intention of providing the flowtype community support and maintenance from people that actually used flowtype.
+
 ---
 
 * [Installation](#installation)
@@ -251,7 +253,7 @@ type X = (?string)[]
 type X = Array<string>
 
 // Options: ["shorthand"]
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 type X = Array<?string>
 ```
 
@@ -348,7 +350,7 @@ type X = Array<Array<string>>
 type X = (?string)[]
 
 // Options: ["verbose"]
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 type X = string[]
 
 type X = Array
@@ -614,7 +616,7 @@ type X = boolean
 type X = bool
 
 // Options: ["boolean"]
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 type X = bool
 ```
 
@@ -687,7 +689,7 @@ declare interface A {}
 type X = {Y<AType>(): BType}
 // Additional rules: {"no-undef":2}
 
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 
 /**
 * Copyright 2019 no corp
@@ -762,7 +764,7 @@ declare interface A {}
 type X = {Y<AType>(): BType}
 // Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
 
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 
 /**
 * Copyright 2019 no corp
@@ -1904,7 +1906,7 @@ This rule requires a text RegExp:
 ```js
 {
     "rules": {
-        "flowtype/interface-id-match": [
+        "ft-flow/interface-id-match": [
             2,
             "^([A-Z][a-z0-9]*)+Type$"
         ]
@@ -1933,7 +1935,7 @@ interface FooType {};
 // Options: ["^foo$"]
 interface foo {};
 
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 interface foo {};
 ```
 
@@ -1956,7 +1958,7 @@ The rule has a string option:
 ```js
 {
   "rules": {
-    "flowtype/newline-after-flow-annotation": [
+    "ft-flow/newline-after-flow-annotation": [
       2,
       "always"
     ]
@@ -2019,7 +2021,7 @@ This rule mirrors ESLint's [no-dupe-keys](http://eslint.org/docs/rules/no-dupe-k
 ```js
 {
     "rules": {
-        "flowtype/no-dupe-keys": 2
+        "ft-flow/no-dupe-keys": 2
     }
 }
 ```
@@ -2075,7 +2077,7 @@ The following patterns are not considered problems:
 ```js
 type FooType = { a: number, b: string, c: number }
 
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 type FooType = { a: number, b: string, a: number }
 
 type f = { get(key: "a"): string, get(key: "b"): string }
@@ -2129,7 +2131,7 @@ You can disable checking intersection types using `checkIntersections`.
 ```js
 {
   "rules": {
-    "flowtype/no-duplicate-type-union-intersection-members": [
+    "ft-flow/no-duplicate-type-union-intersection-members": [
       2,
       {
         "checkIntersections": true
@@ -2147,7 +2149,7 @@ You can disable checking union types using `checkUnions`.
 ```js
 {
   "rules": {
-    "flowtype/no-duplicate-type-union-intersection-members": [
+    "ft-flow/no-duplicate-type-union-intersection-members": [
       2,
       {
         "checkUnions": true
@@ -2197,7 +2199,7 @@ Disallows use of the existential type (*). [See more](https://flow.org/en/docs/t
 ```js
 {
   "rules": {
-    "flowtype/no-existential-type": 2
+    "ft-flow/no-existential-type": 2
   }
 }
 ```
@@ -2240,7 +2242,7 @@ This rule takes an optional RegExp that comments a text RegExp that makes the su
 ```js
 {
     "rules": {
-        "flowtype/no-flow-fix-me-comments": [
+        "ft-flow/no-flow-fix-me-comments": [
             1,
             "TODO\s+[0-9]+"
         ]
@@ -2570,12 +2572,12 @@ const values: Array<$ReadOnlyArray<string>> = Array();
 <a name="rules-no-primitive-constructor-types"></a>
 ### <code>no-primitive-constructor-types</code>
 
-Disallows use of primitive constructors as types, such as `Boolean`, `Number` and `String`. [See more](https://flowtype.org/docs/builtins.html).
+Disallows use of primitive constructors as types, such as `Boolean`, `Number` and `String`. [See more](https://flow.org/en/docs/types/primitives/).
 
 ```js
 {
     "rules": {
-        "flowtype/no-primitive-constructor-types": 2
+        "ft-flow/no-primitive-constructor-types": 2
     }
 }
 ```
@@ -2649,7 +2651,7 @@ Disallows Flow type imports, aliases, and annotations in files missing a valid F
 ```js
 {
     "rules": {
-        "flowtype/no-types-missing-file-annotation": 2
+        "ft-flow/no-types-missing-file-annotation": 2
     }
 }
 ```
@@ -2678,7 +2680,7 @@ export type {A} from "a"
 function t<T>(): T{}
 // Message: Type annotations require valid Flow declaration.
 
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 const x: number = 42;
 // Message: Type annotations require valid Flow declaration.
 ```
@@ -2779,7 +2781,7 @@ about `Object` and `Function`:
 ```js
 {
     "rules": {
-        "flowtype/no-weak-types": [2, {
+        "ft-flow/no-weak-types": [2, {
             "any": false,
             "Object": true,
             "Function": true
@@ -2791,7 +2793,7 @@ about `Object` and `Function`:
 
 {
     "rules": {
-        "flowtype/no-weak-types": [2, {
+        "ft-flow/no-weak-types": [2, {
             "any": false
         }]
     }
@@ -2943,7 +2945,7 @@ type X = any; type Y = Object
 // Options: [{"Function":false}]
 type X = Function
 
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 function foo(thing): Function {}
 
 // Options: [{"suppressTypes":["$FlowFixMe"]}]
@@ -3217,7 +3219,7 @@ declare class Foo { (): Foo; }
 declare class Foo { (): Foo, }
 
 // Options: ["semicolon"]
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 type Foo = { a: Foo, b: Bar }
 ```
 
@@ -3400,7 +3402,7 @@ The rule has one string option:
 ```js
 {
   "rules": {
-    "flowtype/require-exact-type": [
+    "ft-flow/require-exact-type": [
       2,
       "always"
     ]
@@ -3409,7 +3411,7 @@ The rule has one string option:
 
 {
   "rules": {
-    "flowtype/require-exact-type": [
+    "ft-flow/require-exact-type": [
       2,
       "never"
     ]
@@ -3558,7 +3560,7 @@ The rule has a string option:
 ```js
 {
   "rules": {
-    "flowtype/require-indexer-name": [
+    "ft-flow/require-indexer-name": [
       2,
       "always"
     ]
@@ -3603,7 +3605,7 @@ The rule has one string option:
 ```js
 {
   "rules": {
-    "flowtype/require-inexact-type": [
+    "ft-flow/require-inexact-type": [
       2,
       "always"
     ]
@@ -3612,7 +3614,7 @@ The rule has one string option:
 
 {
   "rules": {
-    "flowtype/require-inexact-type": [
+    "ft-flow/require-inexact-type": [
       2,
       "never"
     ]
@@ -3711,7 +3713,7 @@ Alternatively, you can want to exclude only concise arrow functions (e.g. `x => 
 ```js
 {
     "rules": {
-        "flowtype/require-parameter-type": [
+        "ft-flow/require-parameter-type": [
             2,
             {
               "excludeArrowFunctions": true
@@ -3722,7 +3724,7 @@ Alternatively, you can want to exclude only concise arrow functions (e.g. `x => 
 
 {
     "rules": {
-        "flowtype/require-parameter-type": [
+        "ft-flow/require-parameter-type": [
             2,
             {
               "excludeArrowFunctions": "expressionsOnly"
@@ -3778,7 +3780,7 @@ function x(foo) {}
 ({foo = 1} = {}) => {}
 // Message: Missing "{foo = 1}" parameter type annotation.
 
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 // @flow
 (foo) => {}
 // Message: Missing "foo" parameter type annotation.
@@ -3818,7 +3820,7 @@ const f: Foo = (a, b) => 42;
 type fn = (a: string, b: number) => number;
 const f: fn = (a, b) => {}
 
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 (foo) => {}
 
 // Options: [{"excludeArrowFunctions":true}]
@@ -3833,7 +3835,7 @@ const f: fn = (a, b) => {}
 // Options: [{"excludeParameterMatch":"^_"}]
 (_foo: number, bar: string) => {}
 
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 (foo) => {}
 ```
 
@@ -3915,7 +3917,7 @@ class Bar extends React.Component<Props> { }
 ```js
 {
     "rules": {
-        "flowtype/require-readonly-react-props": 2
+        "ft-flow/require-readonly-react-props": 2
     }
 }
 ```
@@ -3927,7 +3929,7 @@ Optionally, you can enable support for [implicit exact Flow types](https://mediu
 ```js
 {
     "rules": {
-        "flowtype/require-readonly-react-props": [
+        "ft-flow/require-readonly-react-props": [
             2,
             {
                 "useImplicitExactTypes": true
@@ -4083,7 +4085,7 @@ Alternatively, you can exclude a concise arrow function (e.g. `() => 2`). Provid
 ```js
 {
     "rules": {
-        "flowtype/require-return-type": [
+        "ft-flow/require-return-type": [
             2,
             "always",
             {
@@ -4095,7 +4097,7 @@ Alternatively, you can exclude a concise arrow function (e.g. `() => 2`). Provid
 
 {
     "rules": {
-        "flowtype/require-return-type": [
+        "ft-flow/require-return-type": [
             2,
             "always",
             {
@@ -4111,7 +4113,7 @@ You can exclude or include specific tests with the `includeOnlyMatching` and `ex
 ```js
 {
     "rules": {
-        "flowtype/require-return-type": [
+        "ft-flow/require-return-type": [
             2,
             "always",
             {
@@ -4126,7 +4128,7 @@ You can exclude or include specific tests with the `includeOnlyMatching` and `ex
 
 {
     "rules": {
-        "flowtype/require-return-type": [
+        "ft-flow/require-return-type": [
             2,
             "always",
             {
@@ -4200,13 +4202,13 @@ The following patterns are considered problems:
 (foo) => { return void 0; }
 // Message: Must annotate undefined return type.
 
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 // @flow
 (foo) => { return 1; }
 // Message: Missing return type annotation.
 
 // Options: ["always",{"annotateUndefined":"always"}]
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 // @flow
  (foo) => { return undefined; }
 // Message: Must annotate undefined return type.
@@ -4329,7 +4331,7 @@ const f: fn = (a, b) => { return 42; }
 (foo): void => { return void 0; }
 
 // Options: ["always"]
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 (foo) => { return 1; }
 
 // Options: ["always"]
@@ -4337,7 +4339,7 @@ const f: fn = (a, b) => { return 42; }
 (foo) => { return 1; }
 
 // Options: ["always",{"annotateUndefined":"always"}]
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 (foo) => { return undefined; }
 
 // Options: ["always",{"annotateUndefined":"always"}]
@@ -4534,7 +4536,7 @@ This rule has an object option:
 ```js
 {
   "rules": {
-    "flowtype/require-valid-file-annotation": [
+    "ft-flow/require-valid-file-annotation": [
       2,
       "always"
     ]
@@ -4543,7 +4545,7 @@ This rule has an object option:
 
 {
   "rules": {
-    "flowtype/require-valid-file-annotation": [
+    "ft-flow/require-valid-file-annotation": [
       2,
       "always", {
         "annotationStyle": "block",
@@ -4676,7 +4678,7 @@ a;
 a;
 
 // Options: ["always"]
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 a;
 
 // Options: ["always",{"annotationStyle":"line"}]
@@ -4716,7 +4718,7 @@ The default pattern is `a^`, which doesn't match anything, i.e., all parameters 
 ```js
 {
     "rules": {
-        "flowtype/require-variable-type": [
+        "ft-flow/require-variable-type": [
             2,
             {
               "excludeVariableMatch": "^_"
@@ -4735,7 +4737,7 @@ By default, all declarations are checked.
 ```js
 {
     "rules": {
-        "flowtype/require-variable-type": [
+        "ft-flow/require-variable-type": [
             2,
             {
               "excludeVariableTypes": {
@@ -4857,7 +4859,7 @@ type FooType = { a: number;
 // Options: ["never"]
 type FooType = {}
 
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 type FooType = {}
 
 opaque type FooType = {};
@@ -4883,7 +4885,7 @@ The first option specifies sort order.
 ```js
 {
   "rules": {
-    "flowtype/sort-keys": [
+    "ft-flow/sort-keys": [
       2,
       "asc"
     ]
@@ -5240,7 +5242,7 @@ type FooType = { C: number, b: string, a: {} }
 // Options: ["desc"]
 type FooType = { 10: number, 2: number, 1: boolean }
 
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 type FooType = { b: number, a: number }
 
 type FooType = { a: string, b(): number, c: boolean }
@@ -5268,7 +5270,7 @@ You can specify the sort order using `order`.
 ```js
 {
   "rules": {
-    "flowtype/sort-type-union-intersection-members": [
+    "ft-flow/sort-type-union-intersection-members": [
       2,
       {
         "order": "asc"
@@ -5286,7 +5288,7 @@ You can disable checking intersection types using `checkIntersections`.
 ```js
 {
   "rules": {
-    "flowtype/sort-type-union-intersection-members": [
+    "ft-flow/sort-type-union-intersection-members": [
       2,
       {
         "checkIntersections": true
@@ -5304,7 +5306,7 @@ You can disable checking union types using `checkUnions`.
 ```js
 {
   "rules": {
-    "flowtype/sort-type-union-intersection-members": [
+    "ft-flow/sort-type-union-intersection-members": [
       2,
       {
         "checkUnions": true
@@ -5332,7 +5334,7 @@ The ordering of groups is determined by this option.
 ```js
 {
   "rules": {
-    "flowtype/sort-type-union-intersection-members": [
+    "ft-flow/sort-type-union-intersection-members": [
       2,
       {
         "groupOrder": [
@@ -5453,9 +5455,10 @@ This rule has an option object.
     * `"true"`: Enable
     * `"false"`: Disable
 
+```js
 {
   "rules": {
-    "flowtype/space-after-type-colon": [
+    "ft-flow/space-after-type-colon": [
       2,
       "always", {
         "allowLineBreak": false
@@ -5463,6 +5466,7 @@ This rule has an option object.
     ]
   }
 }
+```
 
 The following patterns are considered problems:
 
@@ -6816,7 +6820,7 @@ This rule requires a text RegExp:
 ```js
 {
     "rules": {
-        "flowtype/type-id-match": [
+        "ft-flow/type-id-match": [
             2,
             "^([A-Z][a-z0-9]*)+Type$"
         ]
@@ -6848,7 +6852,7 @@ type FooType = {};
 // Options: ["^foo$"]
 type foo = {};
 
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 type foo = {};
 ```
 
@@ -7053,7 +7057,7 @@ type X =
 | number
 }
 
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 type X = string| number;
 
 type X = string & number;
@@ -7077,7 +7081,7 @@ type X =
 & number
 }
 
-// Settings: {"flowtype":{"onlyFilesWithFlowAnnotation":true}}
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 type X = string& number;
 ```
 
