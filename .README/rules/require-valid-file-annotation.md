@@ -25,7 +25,7 @@ This rule has an object option:
 ```js
 {
   "rules": {
-    "flowtype/require-valid-file-annotation": [
+    "ft-flow/require-valid-file-annotation": [
       2,
       "always"
     ]
@@ -34,7 +34,7 @@ This rule has an object option:
 
 {
   "rules": {
-    "flowtype/require-valid-file-annotation": [
+    "ft-flow/require-valid-file-annotation": [
       2,
       "always", {
         "annotationStyle": "block",

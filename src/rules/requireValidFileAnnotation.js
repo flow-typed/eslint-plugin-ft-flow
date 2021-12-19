@@ -106,7 +106,7 @@ const create = (context) => {
         } else {
           context.report({ message: 'Malformed Flow file annotation.', node: potentialFlowFileAnnotation });
         }
-      } else if (always && !_.get(context, 'settings.flowtype.onlyFilesWithFlowAnnotation')) {
+      } else if (always && !_.get(context, 'settings[\'ft-flow\'].onlyFilesWithFlowAnnotation')) {
         context.report({
           fix: (fixer) => {
             let annotation;

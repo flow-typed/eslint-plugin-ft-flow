@@ -14,7 +14,7 @@ You can specify the sort order using `order`.
 ```js
 {
   "rules": {
-    "flowtype/sort-type-union-intersection-members": [
+    "ft-flow/sort-type-union-intersection-members": [
       2,
       {
         "order": "asc"
@@ -32,7 +32,7 @@ You can disable checking intersection types using `checkIntersections`.
 ```js
 {
   "rules": {
-    "flowtype/sort-type-union-intersection-members": [
+    "ft-flow/sort-type-union-intersection-members": [
       2,
       {
         "checkIntersections": true
@@ -50,7 +50,7 @@ You can disable checking union types using `checkUnions`.
 ```js
 {
   "rules": {
-    "flowtype/sort-type-union-intersection-members": [
+    "ft-flow/sort-type-union-intersection-members": [
       2,
       {
         "checkUnions": true
@@ -78,7 +78,7 @@ The ordering of groups is determined by this option.
 ```js
 {
   "rules": {
-    "flowtype/sort-type-union-intersection-members": [
+    "ft-flow/sort-type-union-intersection-members": [
       2,
       {
         "groupOrder": [

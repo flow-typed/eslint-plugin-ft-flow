@@ -54,7 +54,7 @@ export default {
     {
       code: 'interface foo {};',
       settings: {
-        flowtype: {
+        'ft-flow': {
           onlyFilesWithFlowAnnotation: true,
         },
       },

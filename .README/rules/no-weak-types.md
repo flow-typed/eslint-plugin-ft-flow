@@ -11,7 +11,7 @@ about `Object` and `Function`:
 ```js
 {
     "rules": {
-        "flowtype/no-weak-types": [2, {
+        "ft-flow/no-weak-types": [2, {
             "any": false,
             "Object": true,
             "Function": true
@@ -23,7 +23,7 @@ about `Object` and `Function`:
 
 {
     "rules": {
-        "flowtype/no-weak-types": [2, {
+        "ft-flow/no-weak-types": [2, {
             "any": false
         }]
     }

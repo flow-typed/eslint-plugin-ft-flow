@@ -127,7 +127,7 @@ export default {
       code: 'type X = string[]',
       options: ['verbose'],
       settings: {
-        flowtype: {
+        'ft-flow': {
           onlyFilesWithFlowAnnotation: true,
         },
       },

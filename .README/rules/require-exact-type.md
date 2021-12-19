@@ -14,7 +14,7 @@ The rule has one string option:
 ```js
 {
   "rules": {
-    "flowtype/require-exact-type": [
+    "ft-flow/require-exact-type": [
       2,
       "always"
     ]
@@ -23,7 +23,7 @@ The rule has one string option:
 
 {
   "rules": {
-    "flowtype/require-exact-type": [
+    "ft-flow/require-exact-type": [
       2,
       "never"
     ]

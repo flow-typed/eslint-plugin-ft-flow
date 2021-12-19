@@ -9,7 +9,7 @@ This rule requires a text RegExp:
 ```js
 {
     "rules": {
-        "flowtype/type-id-match": [
+        "ft-flow/type-id-match": [
             2,
             "^([A-Z][a-z0-9]*)+Type$"
         ]

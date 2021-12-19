@@ -11,7 +11,7 @@ This rule takes an optional RegExp that comments a text RegExp that makes the su
 ```js
 {
     "rules": {
-        "flowtype/no-flow-fix-me-comments": [
+        "ft-flow/no-flow-fix-me-comments": [
             1,
             "TODO\s+[0-9]+"
         ]

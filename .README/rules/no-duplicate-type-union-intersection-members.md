@@ -14,7 +14,7 @@ You can disable checking intersection types using `checkIntersections`.
 ```js
 {
   "rules": {
-    "flowtype/no-duplicate-type-union-intersection-members": [
+    "ft-flow/no-duplicate-type-union-intersection-members": [
       2,
       {
         "checkIntersections": true
@@ -32,7 +32,7 @@ You can disable checking union types using `checkUnions`.
 ```js
 {
   "rules": {
-    "flowtype/no-duplicate-type-union-intersection-members": [
+    "ft-flow/no-duplicate-type-union-intersection-members": [
       2,
       {
         "checkUnions": true

@@ -178,7 +178,7 @@ export default {
       code: 'type Foo = { a: Foo, b: Bar }',
       options: ['semicolon'],
       settings: {
-        flowtype: {
+        'ft-flow': {
           onlyFilesWithFlowAnnotation: true,
         },
       },
