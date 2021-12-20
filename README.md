@@ -25,59 +25,59 @@
 
 * [Installation](#installation)
 * [Configuration](#configuration)
-    * [Shareable configurations](#configuration-shareable-configurations)
+  * [Shareable configurations](#shareable-configurations)
 * [Settings](#settings)
-    * [`onlyFilesWithFlowAnnotation`](#settings-onlyfileswithflowannotation)
+  * [`onlyFilesWithFlowAnnotation`](#onlyfileswithflowannotation)
 * [Rules](#rules)
-    * [`array-style-complex-type`](#rules-array-style-complex-type)
-    * [`array-style-simple-type`](#rules-array-style-simple-type)
-    * [`arrow-parens`](#rules-arrow-parens)
-    * [`boolean-style`](#rules-boolean-style)
-    * [`define-flow-type`](#rules-define-flow-type)
-    * [`delimiter-dangle`](#rules-delimiter-dangle)
-    * [`enforce-line-break`](#rules-enforce-line-break)
-    * [`enforce-suppression-code`](#rules-enforce-suppression-code)
-    * [`generic-spacing`](#rules-generic-spacing)
-    * [`interface-id-match`](#rules-interface-id-match)
-    * [`newline-after-flow-annotation`](#rules-newline-after-flow-annotation)
-    * [`no-dupe-keys`](#rules-no-dupe-keys)
-    * [`no-duplicate-type-union-intersection-members`](#rules-no-duplicate-type-union-intersection-members)
-    * [`no-existential-type`](#rules-no-existential-type)
-    * [`no-flow-fix-me-comments`](#rules-no-flow-fix-me-comments)
-    * [`no-flow-fix-me-in-strict-files`](#rules-no-flow-fix-me-in-strict-files)
-    * [`no-internal-flow-type`](#rules-no-internal-flow-type)
-    * [`no-mixed`](#rules-no-mixed)
-    * [`no-mutable-array`](#rules-no-mutable-array)
-    * [`no-primitive-constructor-types`](#rules-no-primitive-constructor-types)
-    * [`no-types-missing-file-annotation`](#rules-no-types-missing-file-annotation)
-    * [`no-unused-expressions`](#rules-no-unused-expressions)
-    * [`no-weak-types`](#rules-no-weak-types)
-    * [`object-type-curly-spacing`](#rules-object-type-curly-spacing)
-    * [`object-type-delimiter`](#rules-object-type-delimiter)
-    * [`quotes`](#rules-quotes)
-    * [`require-compound-type-alias`](#rules-require-compound-type-alias)
-    * [`require-exact-type`](#rules-require-exact-type)
-    * [`require-indexer-name`](#rules-require-indexer-name)
-    * [`require-inexact-type`](#rules-require-inexact-type)
-    * [`require-parameter-type`](#rules-require-parameter-type)
-    * [`require-readonly-react-props`](#rules-require-readonly-react-props)
-    * [`require-return-type`](#rules-require-return-type)
-    * [`require-types-at-top`](#rules-require-types-at-top)
-    * [`require-valid-file-annotation`](#rules-require-valid-file-annotation)
-    * [`require-variable-type`](#rules-require-variable-type)
-    * [`semi`](#rules-semi)
-    * [`sort-keys`](#rules-sort-keys)
-    * [`sort-type-union-intersection-members`](#rules-sort-type-union-intersection-members)
-    * [`space-after-type-colon`](#rules-space-after-type-colon)
-    * [`space-before-generic-bracket`](#rules-space-before-generic-bracket)
-    * [`space-before-type-colon`](#rules-space-before-type-colon)
-    * [`spread-exact-type`](#rules-spread-exact-type)
-    * [`type-id-match`](#rules-type-id-match)
-    * [`type-import-style`](#rules-type-import-style)
-    * [`union-intersection-spacing`](#rules-union-intersection-spacing)
-    * [`use-flow-type`](#rules-use-flow-type)
-    * [`use-read-only-spread`](#rules-use-read-only-spread)
-    * [`valid-syntax`](#rules-valid-syntax)
+  * [`array-style-complex-type`](#array-style-complex-type)
+  * [`array-style-simple-type`](#array-style-simple-type)
+  * [`arrow-parens`](#arrow-parens)
+  * [`boolean-style`](#boolean-style)
+  * [`define-flow-type`](#define-flow-type)
+  * [`delimiter-dangle`](#delimiter-dangle)
+  * [`enforce-line-break`](#enforce-line-break)
+  * [`enforce-suppression-code`](#enforce-suppression-code)
+  * [`generic-spacing`](#generic-spacing)
+  * [`interface-id-match`](#interface-id-match)
+  * [`newline-after-flow-annotation`](#newline-after-flow-annotation)
+  * [`no-dupe-keys`](#no-dupe-keys)
+  * [`no-duplicate-type-union-intersection-members`](#no-duplicate-type-union-intersection-members)
+  * [`no-existential-type`](#no-existential-type)
+  * [`no-flow-fix-me-comments`](#no-flow-fix-me-comments)
+  * [`no-flow-suppressions-in-strict-files`](#no-flow-suppressions-in-strict-files)
+  * [`no-internal-flow-type`](#no-internal-flow-type)
+  * [`no-mixed`](#no-mixed)
+  * [`no-mutable-array`](#no-mutable-array)
+  * [`no-primitive-constructor-types`](#no-primitive-constructor-types)
+  * [`no-types-missing-file-annotation`](#no-types-missing-file-annotation)
+  * [`no-unused-expressions`](#no-unused-expressions)
+  * [`no-weak-types`](#no-weak-types)
+  * [`object-type-curly-spacing`](#object-type-curly-spacing)
+  * [`object-type-delimiter`](#object-type-delimiter)
+  * [`quotes`](#quotes)
+  * [`require-compound-type-alias`](#require-compound-type-alias)
+  * [`require-exact-type`](#require-exact-type)
+  * [`require-indexer-name`](#require-indexer-name)
+  * [`require-inexact-type`](#require-inexact-type)
+  * [`require-parameter-type`](#require-parameter-type)
+  * [`require-readonly-react-props`](#require-readonly-react-props)
+  * [`require-return-type`](#require-return-type)
+  * [`require-types-at-top`](#require-types-at-top)
+  * [`require-valid-file-annotation`](#require-valid-file-annotation)
+  * [`require-variable-type`](#require-variable-type)
+  * [`semi`](#semi)
+  * [`sort-keys`](#sort-keys)
+  * [`sort-type-union-intersection-members`](#sort-type-union-intersection-members)
+  * [`space-after-type-colon`](#space-after-type-colon)
+  * [`space-before-generic-bracket`](#space-before-generic-bracket)
+  * [`space-before-type-colon`](#space-before-type-colon)
+  * [`spread-exact-type`](#spread-exact-type)
+  * [`type-id-match`](#type-id-match)
+  * [`type-import-style`](#type-import-style)
+  * [`union-intersection-spacing`](#union-intersection-spacing)
+  * [`use-flow-type`](#use-flow-type)
+  * [`use-read-only-spread`](#use-read-only-spread)
+  * [`valid-syntax`](#valid-syntax)
 
 
 <a name="installation"></a>
@@ -120,10 +120,10 @@ yarn add -D eslint-plugin-ft-flow eslint @babel/eslint-parser @babel/plugin-synt
 }
 ```
 
-<a name="configuration-shareable-configurations"></a>
+<a name="shareable-configurations"></a>
 ### Shareable configurations
 
-<a name="configuration-shareable-configurations-recommended"></a>
+<a name="recommended"></a>
 #### Recommended
 
 This plugin exports a [recommended configuration](./src/configs/recommended.json) that enforces Flowtype best practices.
@@ -146,8 +146,8 @@ See [ESLint documentation](http://eslint.org/docs/user-guide/configuring#extendi
 <a name="settings"></a>
 ## Settings
 
-<a name="settings-onlyfileswithflowannotation"></a>
-### <code>onlyFilesWithFlowAnnotation</code>
+<a name="onlyfileswithflowannotation"></a>
+### `onlyFilesWithFlowAnnotation`
 
 When `true`, only checks files with a [`@flow` annotation](http://flow.org/docs/about-flow.html#gradual) in the first comment.
 
@@ -166,8 +166,8 @@ When `true`, only checks files with a [`@flow` annotation](http://flow.org/docs/
 
 <!-- Rules are sorted alphabetically. -->
 
-<a name="rules-array-style-complex-type"></a>
-### <code>array-style-complex-type</code>
+<a name="array-style-complex-type"></a>
+### `array-style-complex-type`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
@@ -259,8 +259,8 @@ type X = Array<?string>
 
 
 
-<a name="rules-array-style-simple-type"></a>
-### <code>array-style-simple-type</code>
+<a name="array-style-simple-type"></a>
+### `array-style-simple-type`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
@@ -360,8 +360,8 @@ type X = typeof Array
 
 
 
-<a name="rules-arrow-parens"></a>
-### <code>arrow-parens</code>
+<a name="arrow-parens"></a>
+### `arrow-parens`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
@@ -576,8 +576,8 @@ async a => a
 
 
 
-<a name="rules-boolean-style"></a>
-### <code>boolean-style</code>
+<a name="boolean-style"></a>
+### `boolean-style`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
@@ -622,8 +622,8 @@ type X = bool
 
 
 
-<a name="rules-define-flow-type"></a>
-### <code>define-flow-type</code>
+<a name="define-flow-type"></a>
+### `define-flow-type`
 
 Marks Flow type identifiers as defined.
 
@@ -785,8 +785,8 @@ enum Status { Active = 1, Paused = 2 }
 
 
 
-<a name="rules-delimiter-dangle"></a>
-### <code>delimiter-dangle</code>
+<a name="delimiter-dangle"></a>
+### `delimiter-dangle`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
@@ -1632,8 +1632,8 @@ type X = []
 
 
 
-<a name="rules-enforce-line-break"></a>
-### <code>enforce-line-break</code>
+<a name="enforce-line-break"></a>
+### `enforce-line-break`
 
 This rule enforces line breaks between type definitions.
 
@@ -1730,8 +1730,8 @@ type A = string
 
 
 
-<a name="rules-enforce-suppression-code"></a>
-### <code>enforce-suppression-code</code>
+<a name="enforce-suppression-code"></a>
+### `enforce-suppression-code`
 
 This rule enforces a suppression code on flow suppression comments such as `$FlowFixMe` and `$FlowExpectedError`.
 
@@ -1796,8 +1796,8 @@ const text = 'HELLO';
 
 
 
-<a name="rules-generic-spacing"></a>
-### <code>generic-spacing</code>
+<a name="generic-spacing"></a>
+### `generic-spacing`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
@@ -1893,12 +1893,12 @@ type X = Promise< (foo), bar, (((baz))) >
 
 
 
-<a name="rules-interface-id-match"></a>
-### <code>interface-id-match</code>
+<a name="interface-id-match"></a>
+### `interface-id-match`
 
 Enforces a consistent naming pattern for interfaces.
 
-<a name="rules-interface-id-match-options"></a>
+<a name="options"></a>
 #### Options
 
 This rule requires a text RegExp:
@@ -1914,7 +1914,7 @@ This rule requires a text RegExp:
 }
 ```
 
-`'^([A-Z][a-z0-9]*)+Type$$'` is the default pattern.
+`'^([A-Z][a-z0-9]*)+Type$'` is the default pattern.
 
 The following patterns are considered problems:
 
@@ -1941,12 +1941,12 @@ interface foo {};
 
 
 
-<a name="rules-newline-after-flow-annotation"></a>
-### <code>newline-after-flow-annotation</code>
+<a name="newline-after-flow-annotation"></a>
+### `newline-after-flow-annotation`
 
 This rule requires an empty line after the Flow annotation.
 
-<a name="rules-newline-after-flow-annotation-options-1"></a>
+<a name="options"></a>
 #### Options
 
 The rule has a string option:
@@ -2011,8 +2011,8 @@ import Foo from './foo';
 
 
 
-<a name="rules-no-dupe-keys"></a>
-### <code>no-dupe-keys</code>
+<a name="no-dupe-keys"></a>
+### `no-dupe-keys`
 
 Checks for duplicate properties in Object annotations.
 
@@ -2113,14 +2113,14 @@ export interface Foo { get foo(): boolean; get bar(): string; }
 
 
 
-<a name="rules-no-duplicate-type-union-intersection-members"></a>
-### <code>no-duplicate-type-union-intersection-members</code>
+<a name="no-duplicate-type-union-intersection-members"></a>
+### `no-duplicate-type-union-intersection-members`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
 Checks for duplicate members of a type union/intersection.
 
-<a name="rules-no-duplicate-type-union-intersection-members-options-2"></a>
+<a name="options"></a>
 #### Options
 
 You can disable checking intersection types using `checkIntersections`.
@@ -2191,8 +2191,8 @@ type C = A & B;
 
 
 
-<a name="rules-no-existential-type"></a>
-### <code>no-existential-type</code>
+<a name="no-existential-type"></a>
+### `no-existential-type`
 
 Disallows use of the existential type (*). [See more](https://flow.org/en/docs/types/utilities/#toc-existential-type)
 
@@ -2227,14 +2227,14 @@ type T = string | null
 
 
 
-<a name="rules-no-flow-fix-me-comments"></a>
-### <code>no-flow-fix-me-comments</code>
+<a name="no-flow-fix-me-comments"></a>
+### `no-flow-fix-me-comments`
 
 Disallows `$FlowFixMe` comment suppressions.
 
 This is especially useful as a warning to ensure instances of `$FlowFixMe` in your codebase get fixed over time.
 
-<a name="rules-no-flow-fix-me-comments-options-3"></a>
+<a name="options"></a>
 #### Options
 
 This rule takes an optional RegExp that comments a text RegExp that makes the supression valid.
@@ -2289,15 +2289,15 @@ const text = 'HELLO';
 
 
 
-<a name="rules-no-flow-fix-me-in-strict-files"></a>
-### <code>no-flow-fix-me-in-strict-files</code>
+<a name="no-flow-suppressions-in-strict-files"></a>
+### `no-flow-suppressions-in-strict-files`
 
 This rule validates that no error suppression comments (e.g. `$FlowFixMe`) are used in `// @flow strict` (or `// @flow strict-local`) files.
 
 This codifies the best practices [as documented here](https://flow.org/en/docs/strict/#toc-adoption):
 
 > _"Do not add `$FlowFixMe` to suppress the new errors as they appear; just add `@flow strict` once all issues have been resolved."_
-<a name="rules-no-flow-fix-me-in-strict-files-options-4"></a>
+<a name="options"></a>
 #### Options
 
 This rule accepts 1 option as an object to disable errors being thrown on specific suppression error types. For example, you don't want `$FlowFixMe` but `$FlowExpectedError` you want to allow because they are expected issues that can't be solved.
@@ -2305,7 +2305,7 @@ This rule accepts 1 option as an object to disable errors being thrown on specif
 ```js
 {
   "rules": {
-    "ft-flow/no-flow-fix-me-in-strict-files": [2, {
+    "ft-flow/no-flow-suppressions-in-strict-files": [2, {
       "$FlowExpectedError": false
     }]
   }
@@ -2381,8 +2381,8 @@ const text: string = 42;
 
 
 
-<a name="rules-no-internal-flow-type"></a>
-### <code>no-internal-flow-type</code>
+<a name="no-internal-flow-type"></a>
+### `no-internal-flow-type`
 
 Warns against using internal Flow types such as `React$Node`, `React$Ref` and others and suggests using public alternatives instead (`React.Node`, `React.Ref`, …).
 
@@ -2463,8 +2463,8 @@ type X = React$Rocks
 
 
 
-<a name="rules-no-mixed"></a>
-### <code>no-mixed</code>
+<a name="no-mixed"></a>
+### `no-mixed`
 
 Warns against "mixed" type annotations.
 These types are not strict enough and could often be made more specific.
@@ -2518,8 +2518,8 @@ class Foo { props: string }
 
 
 
-<a name="rules-no-mutable-array"></a>
-### <code>no-mutable-array</code>
+<a name="no-mutable-array"></a>
+### `no-mutable-array`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
@@ -2569,8 +2569,8 @@ const values: Array<$ReadOnlyArray<string>> = Array();
 
 
 
-<a name="rules-no-primitive-constructor-types"></a>
-### <code>no-primitive-constructor-types</code>
+<a name="no-primitive-constructor-types"></a>
+### `no-primitive-constructor-types`
 
 Disallows use of primitive constructors as types, such as `Boolean`, `Number` and `String`. [See more](https://flow.org/en/docs/types/primitives/).
 
@@ -2643,8 +2643,8 @@ type x = MyBoolean
 
 
 
-<a name="rules-no-types-missing-file-annotation"></a>
-### <code>no-types-missing-file-annotation</code>
+<a name="no-types-missing-file-annotation"></a>
+### `no-types-missing-file-annotation`
 
 Disallows Flow type imports, aliases, and annotations in files missing a valid Flow file declaration (or a @noflow annotation).
 
@@ -2713,8 +2713,8 @@ export type {A} from "a"
 
 
 
-<a name="rules-no-unused-expressions"></a>
-### <code>no-unused-expressions</code>
+<a name="no-unused-expressions"></a>
+### `no-unused-expressions`
 
 An extension of [ESLint's `no-unused-expressions`](https://eslint.org/docs/rules/no-unused-expressions).
 This rule ignores type cast expressions and optional call expressions, but otherwise behaves the same as ESLint's
@@ -2767,8 +2767,8 @@ x?.y()
 
 
 
-<a name="rules-no-weak-types"></a>
-### <code>no-weak-types</code>
+<a name="no-weak-types"></a>
+### `no-weak-types`
 
 Warns against weak type annotations *any*, *Object* and *Function*.
 These types can cause flow to silently skip over portions of your code,
@@ -2958,14 +2958,14 @@ const Foo = 1
 
 
 
-<a name="rules-object-type-curly-spacing"></a>
-### <code>object-type-curly-spacing</code>
+<a name="object-type-curly-spacing"></a>
+### `object-type-curly-spacing`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
 This rule enforces consistent spacing inside braces of object types.
 
-<a name="rules-object-type-curly-spacing-options-5"></a>
+<a name="options"></a>
 #### Options
 
 The rule has a string option:
@@ -3096,8 +3096,8 @@ type obj = {
 
 
 
-<a name="rules-object-type-delimiter"></a>
-### <code>object-type-delimiter</code>
+<a name="object-type-delimiter"></a>
+### `object-type-delimiter`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
@@ -3225,12 +3225,12 @@ type Foo = { a: Foo, b: Bar }
 
 
 
-<a name="rules-quotes"></a>
-### <code>quotes</code>
+<a name="quotes"></a>
+### `quotes`
 
 Enforces single quotes or double quotes around string literals.
 
-<a name="rules-quotes-options-6"></a>
+<a name="options"></a>
 #### Options
 
 The rule has string options of:
@@ -3292,12 +3292,12 @@ type T = { test: 'hello' | 'test', t: 'hello' }
 
 
 
-<a name="rules-require-compound-type-alias"></a>
-### <code>require-compound-type-alias</code>
+<a name="require-compound-type-alias"></a>
+### `require-compound-type-alias`
 
 Requires to make a type alias for all [union](https://flow.org/en/docs/types/unions/) and [intersection](https://flow.org/en/docs/types/intersections/) types. If these are used in "raw" forms it might be tempting to just copy & paste them around the code. However, this brings sort of a source code pollution and unnecessary changes on several parts when these compound types need to be changed.
 
-<a name="rules-require-compound-type-alias-options-7"></a>
+<a name="options"></a>
 #### Options
 
 The rule has two options:
@@ -3384,14 +3384,14 @@ function foo(bar: { n: number } & { s: string }) {}
 
 
 
-<a name="rules-require-exact-type"></a>
-### <code>require-exact-type</code>
+<a name="require-exact-type"></a>
+### `require-exact-type`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
 This rule enforces [exact object types](https://flow.org/en/docs/types/objects/#toc-exact-object-types).
 
-<a name="rules-require-exact-type-options-8"></a>
+<a name="options"></a>
 #### Options
 
 The rule has one string option:
@@ -3542,14 +3542,14 @@ type A = { a: string, ... }
 
 
 
-<a name="rules-require-indexer-name"></a>
-### <code>require-indexer-name</code>
+<a name="require-indexer-name"></a>
+### `require-indexer-name`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
 This rule validates Flow object indexer name.
 
-<a name="rules-require-indexer-name-options-9"></a>
+<a name="options"></a>
 #### Options
 
 The rule has a string option:
@@ -3589,12 +3589,12 @@ type foo = { [string]: number };
 
 
 
-<a name="rules-require-inexact-type"></a>
-### <code>require-inexact-type</code>
+<a name="require-inexact-type"></a>
+### `require-inexact-type`
 
 This rule enforces explicit inexact object types.
 
-<a name="rules-require-inexact-type-options-10"></a>
+<a name="options"></a>
 #### Options
 
 The rule has one string option:
@@ -3698,12 +3698,12 @@ type foo = number;
 
 
 
-<a name="rules-require-parameter-type"></a>
-### <code>require-parameter-type</code>
+<a name="require-parameter-type"></a>
+### `require-parameter-type`
 
 Requires that all function parameters have type annotations.
 
-<a name="rules-require-parameter-type-options-11"></a>
+<a name="options"></a>
 #### Options
 
 You can skip all arrow functions by providing the `excludeArrowFunctions` option with `true`.
@@ -3841,8 +3841,8 @@ const f: fn = (a, b) => {}
 
 
 
-<a name="rules-require-readonly-react-props"></a>
-### <code>require-readonly-react-props</code>
+<a name="require-readonly-react-props"></a>
+### `require-readonly-react-props`
 
 This rule validates that React props are marked as `$ReadOnly`. React props are immutable and modifying them could lead to unexpected results. Marking prop shapes as `$ReadOnly` avoids these issues.
 
@@ -4070,12 +4070,12 @@ function Foo(props: {}) { return <p /> }
 
 
 
-<a name="rules-require-return-type"></a>
-### <code>require-return-type</code>
+<a name="require-return-type"></a>
+### `require-return-type`
 
 Requires that functions have return type annotation.
 
-<a name="rules-require-return-type-options-12"></a>
+<a name="options"></a>
 #### Options
 
 You can skip all arrow functions by providing the `excludeArrowFunctions` option with `true`.
@@ -4432,12 +4432,12 @@ async function * foo(): AsyncIterable<number> { yield 2; }
 
 
 
-<a name="rules-require-types-at-top"></a>
-### <code>require-types-at-top</code>
+<a name="require-types-at-top"></a>
+### `require-types-at-top`
 
 Requires all type declarations to be at the top of the file, after any import declarations.
 
-<a name="rules-require-types-at-top-options-13"></a>
+<a name="options"></a>
 #### Options
 
 The rule has a string option:
@@ -4507,14 +4507,14 @@ type Foo = number;
 
 
 
-<a name="rules-require-valid-file-annotation"></a>
-### <code>require-valid-file-annotation</code>
+<a name="require-valid-file-annotation"></a>
+### `require-valid-file-annotation`
 
 This rule validates Flow file annotations.
 
 This rule can optionally report missing or missed placed annotations, common typos (e.g. `// @floww`), and enforce a consistent annotation style.
 
-<a name="rules-require-valid-file-annotation-options-14"></a>
+<a name="options"></a>
 #### Options
 
 The rule has a string option:
@@ -4702,12 +4702,12 @@ a;
 
 
 
-<a name="rules-require-variable-type"></a>
-### <code>require-variable-type</code>
+<a name="require-variable-type"></a>
+### `require-variable-type`
 
 Requires that all variable declarators have type annotations.
 
-<a name="rules-require-variable-type-options-15"></a>
+<a name="options"></a>
 #### Options
 
 You can exclude variables that match a certain regex by using `excludeVariableMatch`.
@@ -4790,8 +4790,8 @@ var foo = "bar", bar = 1; const oob : string = "oob"; let hey = "yah"
 
 
 
-<a name="rules-semi"></a>
-### <code>semi</code>
+<a name="semi"></a>
+### `semi`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
@@ -4867,14 +4867,14 @@ opaque type FooType = {};
 
 
 
-<a name="rules-sort-keys"></a>
-### <code>sort-keys</code>
+<a name="sort-keys"></a>
+### `sort-keys`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
 Enforces natural, case-insensitive sorting of Object annotations.
 
-<a name="rules-sort-keys-options-16"></a>
+<a name="options"></a>
 #### Options
 
 The first option specifies sort order.
@@ -5252,14 +5252,14 @@ type FooType = { a(): string, b: number, c: boolean }
 
 
 
-<a name="rules-sort-type-union-intersection-members"></a>
-### <code>sort-type-union-intersection-members</code>
+<a name="sort-type-union-intersection-members"></a>
+### `sort-type-union-intersection-members`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
 Enforces that members of a type union/intersection are sorted alphabetically.
 
-<a name="rules-sort-type-union-intersection-members-options-17"></a>
+<a name="options"></a>
 #### Options
 
 You can specify the sort order using `order`.
@@ -5434,14 +5434,14 @@ type T3 = [1, 2, 3] & [1, 2, 4];
 
 
 
-<a name="rules-space-after-type-colon"></a>
-### <code>space-after-type-colon</code>
+<a name="space-after-type-colon"></a>
+### `space-after-type-colon`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
 Enforces consistent spacing after the type annotation colon.
 
-<a name="rules-space-after-type-colon-options-18"></a>
+<a name="options"></a>
 #### Options
 
 This rule has a string argument.
@@ -6162,8 +6162,8 @@ var x: number = 42;
 
 
 
-<a name="rules-space-before-generic-bracket"></a>
-### <code>space-before-generic-bracket</code>
+<a name="space-before-generic-bracket"></a>
+### `space-before-generic-bracket`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
@@ -6206,8 +6206,8 @@ type X = Promise <string>
 
 
 
-<a name="rules-space-before-type-colon"></a>
-### <code>space-before-type-colon</code>
+<a name="space-before-type-colon"></a>
+### `space-before-type-colon`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
@@ -6782,8 +6782,8 @@ var x :number = 42;
 
 
 
-<a name="rules-spread-exact-type"></a>
-### <code>spread-exact-type</code>
+<a name="spread-exact-type"></a>
+### `spread-exact-type`
 
 Enforce object types, that are spread to be exact type explicitly.
 
@@ -6807,12 +6807,12 @@ type foo = {test: number}; type bar = {...$Exact<foo>}
 
 
 
-<a name="rules-type-id-match"></a>
-### <code>type-id-match</code>
+<a name="type-id-match"></a>
+### `type-id-match`
 
 Enforces a consistent naming pattern for type aliases.
 
-<a name="rules-type-id-match-options-19"></a>
+<a name="options"></a>
 #### Options
 
 This rule requires a text RegExp:
@@ -6828,7 +6828,7 @@ This rule requires a text RegExp:
 }
 ```
 
-`'^([A-Z][a-z0-9]*)+Type$$'` is the default pattern.
+`'^([A-Z][a-z0-9]*)+Type$'` is the default pattern.
 
 The following patterns are considered problems:
 
@@ -6858,8 +6858,8 @@ type foo = {};
 
 
 
-<a name="rules-type-import-style"></a>
-### <code>type-import-style</code>
+<a name="type-import-style"></a>
+### `type-import-style`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
@@ -6873,7 +6873,7 @@ import {type T, type U, type V} from '...';
 import type {T, U, V} from '...';
 ```
 
-<a name="rules-type-import-style-options-20"></a>
+<a name="options"></a>
 #### Options
 
 The rule has a string option:
@@ -6934,8 +6934,8 @@ declare module "m" { import type A from 'a'; }
 
 
 
-<a name="rules-union-intersection-spacing"></a>
-### <code>union-intersection-spacing</code>
+<a name="union-intersection-spacing"></a>
+### `union-intersection-spacing`
 
 _The `--fix` option on the command line automatically fixes problems reported by this rule._
 
@@ -7087,8 +7087,8 @@ type X = string& number;
 
 
 
-<a name="rules-use-flow-type"></a>
-### <code>use-flow-type</code>
+<a name="use-flow-type"></a>
+### `use-flow-type`
 
 Marks Flow [type alias](https://flowtype.org/docs/type-aliases.html) declarations as used.
 
@@ -7121,8 +7121,8 @@ import type A from "a"; type X<B = A<string>> = { b: B }; let x: X; console.log(
 
 
 
-<a name="rules-use-read-only-spread"></a>
-### <code>use-read-only-spread</code>
+<a name="use-read-only-spread"></a>
+### `use-read-only-spread`
 
 Warns against accidentally creating an object which is no longer read-only because of how spread operator works in Flow. Imagine the following code:
 
@@ -7220,8 +7220,8 @@ type Identifier = $ReadOnly<{|
 
 
 
-<a name="rules-valid-syntax"></a>
-### <code>valid-syntax</code>
+<a name="valid-syntax"></a>
+### `valid-syntax`
 
 **Deprecated** Babylon (the Babel parser) v6.10.0 fixes parsing of the invalid syntax this plugin warned against.
 
