@@ -44,7 +44,7 @@
   * [`no-duplicate-type-union-intersection-members`](#no-duplicate-type-union-intersection-members)
   * [`no-existential-type`](#no-existential-type)
   * [`no-flow-fix-me-comments`](#no-flow-fix-me-comments)
-  * [`no-flow-fix-me-in-strict-files`](#no-flow-fix-me-in-strict-files)
+  * [`no-flow-suppressions-in-strict-files`](#no-flow-suppressions-in-strict-files)
   * [`no-internal-flow-type`](#no-internal-flow-type)
   * [`no-mixed`](#no-mixed)
   * [`no-mutable-array`](#no-mutable-array)
@@ -2289,8 +2289,8 @@ const text = 'HELLO';
 
 
 
-<a name="no-flow-fix-me-in-strict-files"></a>
-### `no-flow-fix-me-in-strict-files`
+<a name="no-flow-suppressions-in-strict-files"></a>
+### `no-flow-suppressions-in-strict-files`
 
 This rule validates that no error suppression comments (e.g. `$FlowFixMe`) are used in `// @flow strict` (or `// @flow strict-local`) files.
 
@@ -2305,7 +2305,7 @@ This rule accepts 1 option as an object to disable errors being thrown on specif
 ```js
 {
   "rules": {
-    "ft-flow/no-flow-fix-me-in-strict-files": [2, {
+    "ft-flow/no-flow-suppressions-in-strict-files": [2, {
       "$FlowExpectedError": false
     }]
   }

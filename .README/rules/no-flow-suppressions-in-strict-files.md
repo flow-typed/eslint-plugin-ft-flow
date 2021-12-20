@@ -1,4 +1,4 @@
-### `no-flow-fix-me-in-strict-files`
+### `no-flow-suppressions-in-strict-files`
 
 This rule validates that no error suppression comments (e.g. `$FlowFixMe`) are used in `// @flow strict` (or `// @flow strict-local`) files.
 
@@ -12,11 +12,11 @@ This rule accepts 1 option as an object to disable errors being thrown on specif
 ```js
 {
   "rules": {
-    "ft-flow/no-flow-fix-me-in-strict-files": [2, {
+    "ft-flow/no-flow-suppressions-in-strict-files": [2, {
       "$FlowExpectedError": false
     }]
   }
 }
 ```
 
-<!-- assertions noFlowFixMeInStrictFiles -->
+<!-- assertions noFlowSuppressionsInStrictFiles -->
