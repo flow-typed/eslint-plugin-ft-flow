@@ -17,7 +17,7 @@
     "check-tests": "babel-node ./scripts/checkTests",
     "create-readme": "node ./scripts/genReadme && babel-node ./scripts/addAssertions",
     "lint": "eslint ./src ./tests",
-    "test": "mocha --require @babel/register ./tests/rules/index.js",
+    "test": "yarn jest && mocha --require @babel/register ./tests/rules/index.js",
     "prepublishOnly": "yarn create-readme && yarn build"
   },
   "dependencies": {
