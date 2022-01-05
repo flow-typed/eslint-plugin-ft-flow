@@ -44,6 +44,10 @@
       2,
       "never"
     ],
+    "ft-flow/type-annotation-spacing": [
+      "warn",
+      "never"
+    ],
     "ft-flow/type-id-match": 0,
     "ft-flow/union-intersection-spacing": [
       2,
