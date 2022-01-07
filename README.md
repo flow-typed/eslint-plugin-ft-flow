@@ -84,17 +84,17 @@
 ## Installation
 
 ```bash
-npm install eslint-plugin-ft-flow eslint @babel/eslint-parser @babel/plugin-syntax-flow @babel/plugin-syntax-jsx  --save-dev
+npm install eslint-plugin-ft-flow eslint @babel/eslint-parser --save-dev
 
 # or with yarn
-yarn add -D eslint-plugin-ft-flow eslint @babel/eslint-parser @babel/plugin-syntax-flow @babel/plugin-syntax-jsx
+yarn add -D eslint-plugin-ft-flow eslint @babel/eslint-parser
 ```
 
 <a name="configuration"></a>
 ## Configuration
 
 1. Set `parser` property to `@babel/eslint-parser`.
-2. Add `plugins` section and specify `eslint-plugin-ft-flow` as a plugin.
+2. Add `plugins` section and specify `ft-flow` as a plugin.
 3. Enable rules.
 
 <!-- -->
@@ -134,12 +134,11 @@ To enable this configuration use the extends property in your `.eslintrc` config
 {
   "extends": [
     "plugin:ft-flow/recommended"
-  ],
-  "plugins": [
-    "ft-flow"
   ]
 }
 ```
+
+By default this recommended config also comes preloaded with `@babel/eslint-parser` which means for eslint to analyze your flow code it relies your babel config (`babel.config.js`, `.babelrc`, `.babelrc.js`). You should already have this setup as part of running/testing your code but if you don't you can learn more [here](https://flow.org/en/docs/tools/babel/)
 
 See [ESLint documentation](http://eslint.org/docs/user-guide/configuring#extending-configuration-files) for more information about extending configuration files.
 

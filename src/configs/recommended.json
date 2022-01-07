@@ -1,18 +1,13 @@
 {
   "parser": "@babel/eslint-parser",
-  "parserOptions": {
-    "babelOptions": {
-      "parserOpts": {
-        "plugins": [
-          "flow",
-          "jsx"
-        ]
-      }
-    }
-  },
   "plugins": [
     "ft-flow"
   ],
+  "settings": {
+    "ft-flow": {
+      "onlyFilesWithFlowAnnotation": false
+    }
+  },
   "rules": {
     "ft-flow/boolean-style": [
       2,
@@ -50,10 +45,5 @@
       "always"
     ],
     "ft-flow/use-flow-type": 1
-  },
-  "settings": {
-    "ft-flow": {
-      "onlyFilesWithFlowAnnotation": false
-    }
   }
 }
