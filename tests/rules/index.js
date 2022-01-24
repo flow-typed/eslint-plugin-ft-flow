@@ -1,3 +1,4 @@
+// @flow
 import assert from 'assert';
 import Ajv from 'ajv';
 import {
@@ -9,18 +10,7 @@ import {
 
 import plugin from '../../src';
 
-const ruleTester = new RuleTester({
-  parserOptions: {
-    babelOptions: {
-      plugins: [
-        'babel-plugin-transform-flow-enums',
-        '@babel/plugin-transform-react-jsx',
-        '@babel/plugin-syntax-flow',
-      ],
-    },
-    requireConfigFile: false,
-  },
-});
+const ruleTester = new RuleTester();
 
 const reportingRules = [
   'array-style-complex-type',
