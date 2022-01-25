@@ -1,16 +1,11 @@
 {
   "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "targets": {
-          "node": 12
-        }
-      }
-    ],
-    "@babel/preset-flow"
+    "@babel/preset-env",
+    "@babel/preset-flow",
+    "@babel/preset-react"
   ],
   "plugins": [
+    "babel-plugin-transform-flow-enums",
     "add-module-exports"
   ]
 }

@@ -27,5 +27,18 @@ declare module 'eslint' {
     [key: string]: any,
   |};
 
-  declare module.exports: any;
+  declare class RuleTester {
+    constructor(config?: {|
+      [key: string]: any,
+    |}): this;
+
+    static describe(title: string, fn: () => void): void;
+    static it(title: string, fn: () => void): void;
+
+    run(...args: Array<any>): this;
+  }
+
+  declare module.exports: {|
+    RuleTester: typeof RuleTester,
+  |};
 }

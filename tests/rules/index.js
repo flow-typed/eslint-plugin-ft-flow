@@ -1,3 +1,4 @@
+// @flow
 import assert from 'assert';
 import Ajv from 'ajv';
 import {
@@ -10,16 +11,7 @@ import {
 import plugin from '../../src';
 
 const ruleTester = new RuleTester({
-  parserOptions: {
-    babelOptions: {
-      plugins: [
-        'babel-plugin-transform-flow-enums',
-        '@babel/plugin-transform-react-jsx',
-        '@babel/plugin-syntax-flow',
-      ],
-    },
-    requireConfigFile: false,
-  },
+  parser: require.resolve('@babel/eslint-parser'),
 });
 
 const reportingRules = [
@@ -74,7 +66,6 @@ const reportingRules = [
   'valid-syntax',
 ];
 
-const parser = require.resolve('@babel/eslint-parser');
 const ajv = new Ajv({
   verbose: true,
 });
@@ -110,20 +101,6 @@ for (const ruleName of reportingRules) {
       });
     }
   }
-
-  assertions.invalid = assertions.invalid.map((assertion) => {
-    // eslint-disable-next-line no-param-reassign
-    assertion.parser = parser;
-
-    return assertion;
-  });
-
-  assertions.valid = assertions.valid.map((assertion) => {
-    // eslint-disable-next-line no-param-reassign
-    assertion.parser = parser;
-
-    return assertion;
-  });
 
   ruleTester.run(ruleName, plugin.rules[ruleName], assertions);
 }
