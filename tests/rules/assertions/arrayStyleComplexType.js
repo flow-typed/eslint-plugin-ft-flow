@@ -115,14 +115,5 @@ export default {
         },
       },
     },
-    // {
-    //   code: 'const [state, setState] = useState< ?string >(null)',
-    //   options: ['shorthand'],
-    //   settings: {
-    //     'ft-flow': {
-    //       onlyFilesWithFlowAnnotation: true,
-    //     },
-    //   },
-    // },
   ],
 };
