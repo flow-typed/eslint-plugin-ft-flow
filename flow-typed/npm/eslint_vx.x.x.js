@@ -38,7 +38,7 @@ declare module 'eslint' {
     run(...args: Array<any>): this;
   }
 
-  declare module.exports: {
+  declare module.exports: {|
     RuleTester: typeof RuleTester,
-  };
+  |};
 }
