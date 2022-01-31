@@ -12,7 +12,8 @@
     "node": ">=12.22.0"
   },
   "scripts": {
-    "build": "rimraf ./dist && NODE_ENV=production babel ./src --out-dir ./dist --copy-files",
+    "build:flow": "flow-copy-source --ignore '*.spec.*' src dist",
+    "build": "rimraf ./dist && NODE_ENV=production babel ./src --out-dir ./dist --copy-files && yarn build:flow",
     "check-docs": "babel-node ./scripts/checkDocs",
     "check-tests": "babel-node ./scripts/checkTests",
     "create-readme": "node ./scripts/genReadme && babel-node ./scripts/addAssertions",
@@ -51,6 +52,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-testing-library": "^5.0.1",
     "flow-bin": "^0.167.1",
+    "flow-copy-source": "^2.0.9",
     "glob": "^7.2.0",
     "husky": "^7.0.4",
     "jest": "^27.4.5",

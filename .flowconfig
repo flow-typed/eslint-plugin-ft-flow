@@ -1,21 +1,35 @@
 [ignore]
 .*dist/.*
 .*node_modules/.*
+!.*node_modules/react-native/.*
+.*node_modules/react-native/Libraries/polyfills/.*
 !.*node_modules/@.*
+!.*node_modules/date-fns/.*
+!.*node_modules/tiny-invariant/.*
+!.*node_modules/key-commander/.*
+!.*node_modules/react-ld/.*
 
 [include]
+
+[untyped]
 
 [libs]
 
 [lints]
-ambiguous-object-type=error
 deprecated-type=error
 deprecated-utility=error
 unnecessary-optional-chain=error
+ambiguous-object-type=error
 
 [options]
+enums=true
 format.bracket_spacing=true
 format.single_quotes=true
+exact_by_default=true
 include_warnings=true
 
 [strict]
+
+[version]
+
+[declarations]
