@@ -1,4 +1,4 @@
-// @flow
+// @flow strict-local
 import assert from 'assert';
 import Ajv from 'ajv';
 import {
@@ -8,10 +8,12 @@ import {
   camelCase,
 } from 'lodash';
 
+// $FlowIgnore[untyped-import] - TODO
 import plugin from '../../src';
+import type { RuleTestAssertionsT } from './types';
 
 const ruleTester = new RuleTester({
-  parser: require.resolve('@babel/eslint-parser'),
+  parser: require.resolve('hermes-eslint'),
 });
 
 const reportingRules = [
@@ -72,10 +74,10 @@ const ajv = new Ajv({
 
 for (const ruleName of reportingRules) {
   // eslint-disable-next-line global-require, import/no-dynamic-require
-  const assertions = require(`./assertions/${camelCase(ruleName)}`);
+  const { misconfigured, ...assertions }: RuleTestAssertionsT<> = require(`./assertions/${camelCase(ruleName)}`);
 
-  if (assertions.misconfigured) {
-    for (const misconfiguration of assertions.misconfigured) {
+  if (misconfigured) {
+    for (const misconfiguration of misconfigured) {
       RuleTester.describe(ruleName, () => {
         RuleTester.describe('misconfigured', () => {
           RuleTester.it(JSON.stringify(misconfiguration.options), () => {

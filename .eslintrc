@@ -1,8 +1,13 @@
 {
   "extends": ["eslint-config-bzc"],
+  "parser": "hermes-eslint",
   "rules": {
     "global-require": 0,
     "import/no-dynamic-require": 0,
-    "no-restricted-syntax": 0
+    "no-restricted-syntax": 0,
+    "ft-flow/define-flow-type": 0,
+    "ft-flow/use-flow-type": 0,
+    "no-undef": 0,
+    "no-use-before-define": 0
   }
 }

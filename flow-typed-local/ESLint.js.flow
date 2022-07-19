@@ -1,0 +1,740 @@
+// @flow strict-local
+/**
+ *
+ * IMPORTANT NOTE
+ *
+ * This file intentionally uses interfaces and `+` for readonly.
+ *
+ * - $ReadOnly is an "evaluated type" in flow, meaning it's not completely optimised.
+ *   So we instead annotate every property with `+` manually.
+ *
+ * - You cannot preserve property readonly-ness via `...Type` spreads.
+ *   Extending an interface, on the other hand, does preserve readonlyness of properties.
+ *
+ * Please ensure all properties are marked as readonly!
+ */
+
+/* eslint-disable ft-flow/type-id-match */
+
+import type { Scope, ScopeManager, Variable } from 'hermes-eslint';
+import typeof { VisitorKeys } from 'hermes-eslint';
+import type {
+  Comment,
+  ESNode,
+  ESQueryNodeSelectors,
+  ESQueryNodeSelectorsWithoutFallback,
+  Position,
+  Program,
+  Range,
+  SourceLocation,
+  Token,
+} from 'hermes-estree';
+
+export type {
+  Definition,
+  Reference,
+  Scope,
+  ScopeManager,
+  Variable,
+  VisitorKeys,
+} from 'hermes-eslint';
+
+export type SourceCode = {
+  +text: string,
+  +ast: Program,
+  +lines: $ReadOnlyArray<string>,
+  +hasBOM: boolean,
+  +parserServices: ParserServices,
+  +scopeManager: ScopeManager,
+  +visitorKeys: VisitorKeys,
+
+  // static splitLines(text: string): $ReadOnlyArray<string>;
+
+  +getText: (
+    node?: ESNode | Comment,
+    beforeCount?: number,
+    afterCount?: number
+  ) => string,
+
+  +getLines: () => $ReadOnlyArray<string>,
+
+  +getAllComments: () => $ReadOnlyArray<Comment>,
+
+  +getComments: (node: ESNode) => {
+    +leading: $ReadOnlyArray<Comment>,
+    +trailing: $ReadOnlyArray<Comment>,
+  },
+
+  +getJSDocComment: (node: ESNode) => ?Comment,
+
+  +getNodeByRangeIndex: (index: number) => ?ESNode,
+
+  +isSpaceBetweenTokens: (first: Token, second: Token) => boolean,
+
+  +getLocFromIndex: (index: number) => Position,
+
+  +getIndexFromLoc: (location: Position) => number,
+
+  // Inherited methods from TokenStore
+  // ---------------------------------
+
+  +getTokenByRangeStart: (
+    offset: number,
+    options?: {
+      +includeComments?: boolean,
+    }
+  ) => ?Token,
+
+  +getFirstToken: (node: ESNode, options?: CursorWithSkipOptions) => ?Token,
+
+  +getFirstTokens: (
+    node: ESNode,
+    options?: CursorWithCountOptions
+  ) => $ReadOnlyArray<Token>,
+
+  +getLastToken: (node: ESNode, options?: CursorWithSkipOptions) => ?Token,
+
+  +getLastTokens: (
+    node: ESNode,
+    options?: CursorWithCountOptions
+  ) => $ReadOnlyArray<Token>,
+
+  +getTokenBefore: (
+    node: ESNode | Token | Comment,
+    options?: CursorWithSkipOptions
+  ) => ?Token,
+
+  +getTokensBefore: (
+    node: ESNode | Token | Comment,
+    options?: CursorWithCountOptions
+  ) => $ReadOnlyArray<Token>,
+
+  +getTokenAfter: (
+    node: ESNode | Token | Comment,
+    options?: CursorWithSkipOptions
+  ) => ?Token,
+
+  +getTokensAfter: (
+    node: ESNode | Token | Comment,
+    options?: CursorWithCountOptions
+  ) => $ReadOnlyArray<Token>,
+
+  +getFirstTokenBetween: (
+    left: ESNode | Token | Comment,
+    right: ESNode | Token | Comment,
+    options?: CursorWithSkipOptions
+  ) => ?Token,
+
+  +getFirstTokensBetween: (
+    left: ESNode | Token | Comment,
+    right: ESNode | Token | Comment,
+    options?: CursorWithCountOptions
+  ) => $ReadOnlyArray<Token>,
+
+  +getLastTokenBetween: (
+    left: ESNode | Token | Comment,
+    right: ESNode | Token | Comment,
+    options?: CursorWithSkipOptions
+  ) => ?Token,
+
+  +getLastTokensBetween: (
+    left: ESNode | Token | Comment,
+    right: ESNode | Token | Comment,
+    options?: CursorWithCountOptions
+  ) => $ReadOnlyArray<Token>,
+
+  +getTokensBetween: (
+    left: ESNode | Token | Comment,
+    right: ESNode | Token | Comment,
+    padding?: number | FilterPredicate | CursorWithCountOptions
+  ) => $ReadOnlyArray<Token>,
+
+  +getTokens: (
+    node: ESNode,
+    beforeCount?: number,
+    afterCount?: number
+  ) => $ReadOnlyArray<Token>,
+  +getTokens: (
+    node: ESNode,
+    options?: FilterPredicate | CursorWithCountOptions
+  ) => $ReadOnlyArray<Token>,
+
+  +commentsExistBetween: (
+    left: ESNode | Token,
+    right: ESNode | Token
+  ) => boolean,
+
+  +getCommentsBefore: (nodeOrToken: ESNode | Token) => $ReadOnlyArray<Comment>,
+
+  +getCommentsAfter: (nodeOrToken: ESNode | Token) => $ReadOnlyArray<Comment>,
+
+  +getCommentsInside: (node: ESNode) => $ReadOnlyArray<Comment>,
+};
+
+// flow parser provides no services
+type ParserServices = void;
+
+type FilterPredicate = (tokenOrComment: Token | Comment) => boolean;
+
+type CursorWithSkipOptions =
+  | number
+  | FilterPredicate
+  | {
+      +includeComments?: boolean,
+      +filter?: FilterPredicate,
+      +skip?: number,
+    };
+
+type CursorWithCountOptions =
+  | number
+  | FilterPredicate
+  | {
+      +includeComments?: boolean,
+      +filter?: FilterPredicate,
+      +count?: number,
+    };
+
+/// / Rule
+
+type RuleCreateFunction<TOptions: $ReadOnlyArray<$FlowFixMe> = []> = (
+  context: RuleContext<TOptions>
+) => RuleListener;
+
+export type RuleModule<TOptions: $ReadOnlyArray<$FlowFixMe> = []> = {
+  +create: RuleCreateFunction<TOptions>,
+  +meta?: RuleMetaData,
+};
+
+export type NodeListenerWithoutFallbackIndexer =
+  ESQueryNodeSelectorsWithoutFallback;
+
+export type NodeListener = ESQueryNodeSelectors;
+
+export type RuleListener = {
+  ...$ReadOnly<NodeListener>,
+
+  +onCodePathStart?: (codePath: CodePath, node: ESNode) => void,
+
+  +onCodePathEnd?: (codePath: CodePath, node: ESNode) => void,
+
+  +onCodePathSegmentStart?: (segment: CodePathSegment, node: ESNode) => void,
+
+  +onCodePathSegmentEnd?: (segment: CodePathSegment, node: ESNode) => void,
+
+  +onCodePathSegmentLoop?: (
+    fromSegment: CodePathSegment,
+    toSegment: CodePathSegment,
+    node: ESNode
+  ) => void,
+};
+
+export type CodePath = {
+  +id: string,
+  +initialSegment: CodePathSegment,
+  +finalSegments: $ReadOnlyArray<CodePathSegment>,
+  +returnedSegments: $ReadOnlyArray<CodePathSegment>,
+  +thrownSegments: $ReadOnlyArray<CodePathSegment>,
+  +currentSegments: $ReadOnlyArray<CodePathSegment>,
+  +upper: ?CodePath,
+  +childCodePaths: $ReadOnlyArray<CodePath>,
+};
+
+type CodePathSegment = {
+  +id: string,
+  +nextSegments: $ReadOnlyArray<CodePathSegment>,
+  +prevSegments: $ReadOnlyArray<CodePathSegment>,
+  +reachable: boolean,
+};
+
+export type RuleFixType = 'problem' | 'suggestion' | 'layout' | 'directive';
+
+export type RuleMetaData = {
+  +docs?: {
+    /** provides the short description of the rule in the [rules index](https://org/docs/rules/) */
+    +description?: string,
+    /** specifies the heading under which the rule is listed in the [rules index](https://org/docs/rules/) */
+    +category?: string,
+    /** is whether the `"extends": "eslint:recommended"` property in a [configuration file](https://org/docs/user-guide/configuring#extending-configuration-files) enables the rule */
+    +recommended?: boolean,
+    /** specifies the URL at which the full documentation can be accessed */
+    +url?: string,
+    /** @deprecated - use meta.hasSuggestions instead */
+    // +suggestion?: boolean,
+  },
+  +messages?: {
+    +[messageId: string]: string,
+  },
+  +fixable?: 'code' | 'whitespace',
+  +hasSuggestions?: boolean,
+  // TODO - we could probably strictly type this
+  +schema?: $ReadOnly<{ ... }> | $ReadOnlyArray<$ReadOnly<{ ... }>>,
+  +deprecated?: boolean,
+  +type?: RuleFixType,
+};
+
+export type RuleContext<TOptions: $ReadOnlyArray<$FlowFixMe> = []> = {
+  +id: string,
+  +options: TOptions,
+  +settings: {
+    +[name: string]: mixed,
+  },
+  +parserPath: string,
+  +parserOptions: ParserOptions,
+  +parserServices: ParserServices,
+
+  +getAncestors: () => $ReadOnlyArray<ESNode>,
+
+  +getDeclaredVariables: (node: ESNode) => $ReadOnlyArray<Variable>,
+
+  +getFilename: () => string,
+
+  +getScope: () => Scope,
+
+  +getSourceCode: () => SourceCode,
+
+  +markVariableAsUsed: (name: string) => boolean,
+
+  +report: (descriptor: ReportDescriptor) => void,
+};
+
+type ReportDescriptorOptionsBase = {
+  +data?: {
+    +[key: string]: string | number,
+  },
+  +fix?: ?(fixer: RuleFixer) => ?(
+    | Fix
+    // iterable because ESLint support generators
+    | $Iterable<?Fix, void, void>
+  ),
+};
+
+export type SuggestionReportDescriptor = {
+  ...$ReadOnly<ReportDescriptorOptionsBase>,
+  +messageId: string,
+  // we don't want people to use this - instead they should use messageId
+  // it's better and easier to test and enforces placeholder usage as well
+  // +desc: string
+};
+
+type ReportDescriptorOptions = {
+  ...$ReadOnly<ReportDescriptorOptionsBase>,
+  +suggest?: ?$ReadOnlyArray<SuggestionReportDescriptor>,
+};
+
+type ReportDescriptorLocationNode = {
+  +node: ESNode | Comment | Token,
+};
+
+type ReportDescriptorLocationLoc = {
+  +loc: SourceLocation | Position,
+};
+
+export type ReportDescriptor =
+  | {
+      +messageId: string,
+      ...$ReadOnly<ReportDescriptorLocationNode>,
+      ...$ReadOnly<ReportDescriptorOptions>,
+    }
+  | {
+      +messageId: string,
+      ...$ReadOnly<ReportDescriptorLocationLoc>,
+      ...$ReadOnly<ReportDescriptorOptions>,
+    };
+
+// we don't want people to use this - instead they should use messageId
+// it's better and easier to test and enforces placeholder usage as well
+// +message: string
+
+export type RuleFixer = {
+  +insertTextAfter: (nodeOrToken: ESNode | Token, text: string) => Fix,
+
+  +insertTextAfterRange: (range: Range, text: string) => Fix,
+
+  +insertTextBefore: (nodeOrToken: ESNode | Token, text: string) => Fix,
+
+  +insertTextBeforeRange: (range: Range, text: string) => Fix,
+
+  +remove: (nodeOrToken: ESNode | Token) => Fix,
+
+  +removeRange: (range: Range) => Fix,
+
+  +replaceText: (nodeOrToken: ESNode | Token, text: string) => Fix,
+
+  +replaceTextRange: (range: Range, text: string) => Fix,
+};
+
+export type Fix = {
+  +range: Range,
+  +text: string,
+};
+
+/// / Linter
+
+declare export class Linter {
+  static +version: string,
+
+  +version: string,
+
+  constructor(options?: {
+    +cwd?: string,
+  }): Linter,
+
+  verify(
+    code: SourceCode | string,
+    config: LinterConfig<>,
+    filename?: string
+  ): $ReadOnlyArray<LintMessage>,
+  verify(
+    code: SourceCode | string,
+    config: LinterConfig<>,
+    options: LintOptions
+  ): $ReadOnlyArray<LintMessage>,
+
+  verifyAndFix(
+    code: string,
+    config: LinterConfig<>,
+    filename?: string
+  ): FixReport,
+  verifyAndFix(
+    code: string,
+    config: LinterConfig<>,
+    options: FixOptions
+  ): FixReport,
+
+  getSourceCode(): SourceCode,
+
+  defineRule<TOptions: $ReadOnlyArray<$FlowFixMe> = []>(
+    name: string,
+    rule: RuleModule<TOptions>
+  ): void,
+
+  defineRules(rules: {
+    +[name: string]: RuleModule<>,
+  }): void,
+
+  getRules(): $ReadOnlyMap<string, RuleModule<>>,
+
+  defineParser(name: string, parser: ParserModule): void,
+}
+
+type Severity = 0 | 1 | 2;
+
+type RuleLevel = Severity | 'off' | 'warn' | 'error';
+
+// flow doesn't support variadic tuples
+// type RuleLevelAndOptions = [RuleLevel, ...mixed];
+type RuleLevelAndOptions = $ReadOnlyArray<mixed>;
+
+type RuleEntry = RuleLevel | RuleLevelAndOptions;
+
+export type RulesRecord = {
+  +[rule: string]: RuleEntry,
+};
+
+type HasRules<Rules: RulesRecord = RulesRecord> = {
+  +rules?: $Partial<Rules>,
+};
+
+type BaseConfig<Rules: RulesRecord = RulesRecord> = {
+  ...$ReadOnly<HasRules<Rules>>,
+  +$schema?: string,
+  +env?: { [name: string]: boolean },
+  +extends?: string | $ReadOnlyArray<string>,
+  +globals?: {
+    [name: string]: boolean | 'readonly' | 'readable' | 'writable' | 'writable',
+  },
+  +noInlineConfig?: boolean,
+  +overrides?: $ReadOnlyArray<ConfigOverride<>>,
+  +parser?: string,
+  +parserOptions?: ParserOptions,
+  +plugins?: $ReadOnlyArray<string>,
+  +processor?: string,
+  +reportUnusedDisableDirectives?: boolean,
+  +settings?: { [name: string]: mixed },
+};
+
+type ConfigOverride<Rules: RulesRecord = RulesRecord> = {
+  ...$ReadOnly<BaseConfig<Rules>>,
+  +excludedFiles?: string | $ReadOnlyArray<string>,
+  +files: string | $ReadOnlyArray<string>,
+};
+
+// https://github.com/eslint/eslint/blob/v6.8.0/conf/config-schema.js
+export type LinterConfig<Rules: RulesRecord = RulesRecord> = {
+  ...$ReadOnly<BaseConfig<Rules>>,
+  +ignorePatterns?: string | $ReadOnlyArray<string>,
+  +root?: boolean,
+};
+
+export type ParserOptions = {
+  +ecmaVersion?: | 3
+    | 5
+    | 6
+    | 7
+    | 8
+    | 9
+    | 10
+    | 11
+    | 2015
+    | 2016
+    | 2017
+    | 2018
+    | 2019
+    | 2020,
+  +sourceType?: 'script' | 'module',
+  +ecmaFeatures?: {
+    +globalReturn?: boolean,
+    +impliedStrict?: boolean,
+    +jsx?: boolean,
+    +experimentalObjectRestSpread?: boolean,
+    +[key: string]: mixed,
+  },
+  +[key: string]: mixed,
+};
+
+type LintOptions = {
+  +filename?: string,
+  +preprocess?: (code: string) => $ReadOnlyArray<string>,
+  +postprocess?: (
+    problemLists: $ReadOnlyArray<LintMessage>
+  ) => $ReadOnlyArray<LintMessage>,
+  +filterCodeBlock?: boolean,
+  +disableFixes?: boolean,
+  +allowInlineConfig?: boolean,
+  +reportUnusedDisableDirectives?: boolean,
+};
+
+type LintSuggestion = {
+  +desc: string,
+  +fix: Fix,
+  +messageId?: string,
+};
+
+type FatalLintMessage = {
+  +column: number,
+  +line: number,
+  +endColumn?: void,
+  +endLine?: void,
+  +ruleId: null,
+  +message: string,
+  +fatal: true,
+  +severity: Severity,
+};
+
+type GoodLintMessage = {
+  +column: number,
+  +line: number,
+  +endColumn?: number,
+  +endLine?: number,
+  +ruleId: string,
+  +message: string,
+  +messageId?: string,
+  +nodeType?: string,
+  +fatal?: void,
+  +severity: Severity,
+  +fix?: Fix,
+  +suggestions?: $ReadOnlyArray<LintSuggestion>,
+};
+
+export type LintMessage = FatalLintMessage | GoodLintMessage;
+
+type FixOptions = {
+  ...$ReadOnly<LintOptions>,
+  +fix?: boolean,
+};
+
+type FixReport = {
+  +fixed: boolean,
+  +output: string,
+  +messages: $ReadOnlyArray<LintMessage>,
+};
+
+type ParserModule =
+  | {
+      parse(text: string, options?: mixed): Program,
+    }
+  | {
+      parseForESLint(text: string, options?: mixed): ESLintParseResult,
+    };
+
+type ESLintParseResult = {
+  +ast: Program,
+  +parserServices?: ParserServices,
+  +scopeManager?: ScopeManager,
+  +visitorKeys?: VisitorKeys,
+};
+
+/// / ESLint
+
+declare export class ESLint {
+  static +version: string,
+
+  static outputFixes(results: $ReadOnlyArray<LintResult>): Promise<void>,
+
+  static getErrorResults(
+    results: $ReadOnlyArray<LintResult>
+  ): $ReadOnlyArray<LintResult>,
+
+  constructor(options: ESLintOptions): ESLint,
+
+  lintFiles(
+    patterns: string | $ReadOnlyArray<string>
+  ): Promise<$ReadOnlyArray<LintResult>>,
+
+  lintText(
+    code: string,
+    options?: {
+      +filePath?: string,
+      +warnIgnored?: boolean,
+    }
+  ): Promise<$ReadOnlyArray<LintResult>>,
+
+  calculateConfigForFile(filePath: string): Promise<LinterConfig<>>,
+
+  isPathIgnored(filePath: string): Promise<boolean>,
+
+  loadFormatter(nameOrPath?: string): Promise<Formatter>,
+}
+
+export type ESLintOptions = {
+  // File enumeration
+  +cwd?: string,
+  +errorOnUnmatchedPattern?: boolean,
+  +extensions?: $ReadOnlyArray<string>,
+  +globInputPaths?: boolean,
+  +ignore?: boolean,
+  +ignorePath?: string,
+
+  // Linting
+  +allowInlineConfig?: boolean,
+  +baseConfig?: LinterConfig<>,
+  +overrideConfig?: LinterConfig<>,
+  +overrideConfigFile?: string,
+  +plugins?: {
+    +[name: string]: mixed,
+  },
+  +reportUnusedDisableDirectives?: RuleLevel,
+  +resolvePluginsRelativeTo?: string,
+  +rulePaths?: $ReadOnlyArray<string>,
+  +useEslintrc?: boolean,
+
+  // Autofix
+  +fix?: boolean | ((message: LintMessage) => boolean),
+  +fixTypes?: $ReadOnlyArray<RuleFixType>,
+
+  // Cache-related
+  +cache?: boolean,
+  +cacheLocation?: string,
+  +cacheStrategy?: 'content' | 'metadata',
+};
+
+export type LintResult = {
+  +filePath: string,
+  +messages: $ReadOnlyArray<LintMessage>,
+  +errorCount: number,
+  +warningCount: number,
+  +fixableErrorCount: number,
+  +fixableWarningCount: number,
+  +output?: string,
+  +source?: string,
+  +usedDeprecatedRules: $ReadOnlyArray<DeprecatedRuleUse>,
+};
+
+type LintResultData = {
+  +rulesMeta: {
+    +[ruleId: string]: RuleMetaData,
+  },
+};
+
+type DeprecatedRuleUse = {
+  +ruleId: string,
+  +replacedBy: $ReadOnlyArray<string>,
+};
+
+type Formatter = {
+  +format: (
+    results: $ReadOnlyArray<LintResult>,
+    data?: LintResultData
+  ) => string,
+};
+
+/// / RuleTester
+
+export type RuleTesterTests<TOptions: $ReadOnlyArray<$FlowFixMe> = []> = {
+  +valid?: $ReadOnlyArray<string | ValidTestCase<TOptions>>,
+  +invalid?: $ReadOnlyArray<InvalidTestCase<TOptions>>,
+};
+
+declare export class RuleTester {
+  constructor(config?: BaseConfig<>): RuleTester,
+
+  run<TOptions: $ReadOnlyArray<$FlowFixMe> = []>(
+    name: string,
+    rule: RuleModule<TOptions>,
+    tests: RuleTesterTests<TOptions>
+  ): void,
+
+  linter: Linter,
+
+  static setDefaultConfig(config: BaseConfig<>): void,
+
+  static describe: (text: string, callback: () => void) => void,
+  static it: (text: string, callback: () => void) => void,
+}
+
+export type ValidTestCase<TOptions: $ReadOnlyArray<$FlowFixMe> = []> = {
+  +code: string,
+  +options?: TOptions,
+  +filename?: string,
+  +parserOptions?: ParserOptions,
+  +settings?: {
+    +[name: string]: mixed,
+  },
+  +parser?: string,
+  +globals?: {
+    +[name: string]: boolean,
+  },
+};
+
+type SuggestionOutput = {
+  // we don't want people to use this - instead they should use messageId
+  // it's better and easier to test and enforces placeholder usage as well
+  // +desc?: string;
+  +messageId?: string,
+  +data?: {
+    +[key: string]: mixed,
+  },
+  +output: string,
+};
+
+export type InvalidTestCase<TOptions: $ReadOnlyArray<$FlowFixMe> = []> = {
+  ...$ReadOnly<ValidTestCase<TOptions>>,
+
+  // we don't allow the `errors: 1` form because it's lazy - the test assserts
+  // nothing useful and promotes not expecting exact placeholders and such
+  // it will also match exceptions, which is obviously undesirable.
+  //
+  // we don't allow the errors: ['message'] from because we want people to use
+  // messageIds as they are easier to manage and are resilient to wording changes
+  +errors: $ReadOnlyArray<TestCaseError>,
+  +output?: string | null,
+  // can be used to force a test.only() run - i.e. skipping all other tests
+  +only?: boolean,
+};
+
+export type TestCaseError = {
+  // we don't want people to use this - instead they should use messageId
+  // it's better and easier to test and enforces placeholder usage as well
+  // +message?: string | RegExp;
+
+  // we enforce the messageId exists so people don't get lazy and do
+  // `errors: [{}]` or `errors: [{ruleId: 'my-rule'}]`
+  +messageId: string,
+  +type?: string,
+  +data?: mixed,
+  +line?: number,
+  +column?: number,
+  +endLine?: number,
+  +endColumn?: number,
+  +suggestions?: ?$ReadOnlyArray<SuggestionOutput>,
+};

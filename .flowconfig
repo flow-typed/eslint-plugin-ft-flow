@@ -8,6 +8,9 @@
 !.*node_modules/tiny-invariant/.*
 !.*node_modules/key-commander/.*
 !.*node_modules/react-ld/.*
+!.*node_modules/hermes-eslint/.*
+!.*node_modules/hermes-estree/.*
+!.*node_modules/hermes-parser/.*
 
 [include]
 
@@ -18,8 +21,17 @@
 [lints]
 deprecated-type=error
 deprecated-utility=error
+untyped-type-import=error
+unclear-type=error
 unnecessary-optional-chain=error
-ambiguous-object-type=error
+
+; ES6 module lints
+invalid-import-star-use=error
+non-const-var-export=error
+this-in-exported-function=error
+mixed-import-and-require=error
+export-renamed-default=error
+default-import-access=error
 
 [options]
 enums=true
@@ -28,7 +40,13 @@ format.single_quotes=true
 exact_by_default=true
 include_warnings=true
 
+# this is a dirty hack to allow us to declare "libs" that reference non "libs" types
+module.name_mapper='^eslint$' -> '<PROJECT_ROOT>/flow-typed-local/ESLint.js.flow'
+
 [strict]
+nonstrict-import
+sketchy-null
+untyped-import
 
 [version]
 
