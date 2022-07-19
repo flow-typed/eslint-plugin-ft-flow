@@ -1,210 +1,330 @@
-export default {
+// @flow strict-local
+import type { OptionsT } from '../../../src/rules/noWeakTypes';
+import type { RuleTestAssertionsT } from '../types';
+
+export default ({
   invalid: [
     {
       code: 'function foo(thing): any {}',
-      errors: [{
-        message: 'Unexpected use of weak type "any"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'any' },
+        },
+      ],
     },
     {
       code: 'function foo(thing): Promise<any> {}',
-      errors: [{
-        message: 'Unexpected use of weak type "any"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'any' },
+        },
+      ],
     },
     {
       code: 'function foo(thing): Promise<Promise<any>> {}',
-      errors: [{
-        message: 'Unexpected use of weak type "any"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'any' },
+        },
+      ],
     },
     {
       code: 'function foo(thing): Object {}',
-      errors: [{
-        message: 'Unexpected use of weak type "Object"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'Object' },
+        },
+      ],
     },
     {
       code: 'function foo(thing): Promise<Object> {}',
-      errors: [{
-        message: 'Unexpected use of weak type "Object"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'Object' },
+        },
+      ],
     },
     {
       code: 'function foo(thing): Promise<Promise<Object>> {}',
-      errors: [{
-        message: 'Unexpected use of weak type "Object"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'Object' },
+        },
+      ],
     },
     {
       code: 'function foo(thing): Function {}',
-      errors: [{
-        message: 'Unexpected use of weak type "Function"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'Function' },
+        },
+      ],
     },
     {
       code: 'function foo(thing): Promise<Function> {}',
-      errors: [{
-        message: 'Unexpected use of weak type "Function"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'Function' },
+        },
+      ],
     },
     {
       code: 'function foo(thing): Promise<Promise<Function>> {}',
-      errors: [{
-        message: 'Unexpected use of weak type "Function"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'Function' },
+        },
+      ],
     },
     {
       code: '(foo: any) => {}',
-      errors: [{
-        message: 'Unexpected use of weak type "any"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'any' },
+        },
+      ],
     },
     {
       code: '(foo: Function) => {}',
-      errors: [{
-        message: 'Unexpected use of weak type "Function"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'Function' },
+        },
+      ],
     },
     {
       code: '(foo?: any) => {}',
-      errors: [{
-        message: 'Unexpected use of weak type "any"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'any' },
+        },
+      ],
     },
     {
       code: '(foo?: Function) => {}',
-      errors: [{
-        message: 'Unexpected use of weak type "Function"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'Function' },
+        },
+      ],
     },
     {
       code: '(foo: { a: any }) => {}',
-      errors: [{
-        message: 'Unexpected use of weak type "any"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'any' },
+        },
+      ],
     },
     {
       code: '(foo: { a: Object }) => {}',
-      errors: [{
-        message: 'Unexpected use of weak type "Object"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'Object' },
+        },
+      ],
     },
     {
       code: '(foo: any[]) => {}',
-      errors: [{
-        message: 'Unexpected use of weak type "any"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'any' },
+        },
+      ],
     },
     {
       code: 'type Foo = any',
-      errors: [{
-        message: 'Unexpected use of weak type "any"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'any' },
+        },
+      ],
     },
     {
       code: 'type Foo = Function',
-      errors: [{
-        message: 'Unexpected use of weak type "Function"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'Function' },
+        },
+      ],
     },
     {
       code: 'type Foo = { a: any }',
-      errors: [{
-        message: 'Unexpected use of weak type "any"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'any' },
+        },
+      ],
     },
     {
       code: 'type Foo = { a: Object }',
-      errors: [{
-        message: 'Unexpected use of weak type "Object"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'Object' },
+        },
+      ],
     },
     {
       code: 'type Foo = { (a: Object): string }',
-      errors: [{
-        message: 'Unexpected use of weak type "Object"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'Object' },
+        },
+      ],
     },
     {
       code: 'type Foo = { (a: string): Function }',
-      errors: [{
-        message: 'Unexpected use of weak type "Function"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'Function' },
+        },
+      ],
     },
     {
       code: 'function foo(thing: any) {}',
-      errors: [{
-        message: 'Unexpected use of weak type "any"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'any' },
+        },
+      ],
     },
     {
       code: 'function foo(thing: Object) {}',
-      errors: [{
-        message: 'Unexpected use of weak type "Object"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'Object' },
+        },
+      ],
     },
     {
       code: 'var foo: Function',
-      errors: [{
-        message: 'Unexpected use of weak type "Function"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'Function' },
+        },
+      ],
     },
     {
       code: 'var foo: Object',
-      errors: [{
-        message: 'Unexpected use of weak type "Object"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'Object' },
+        },
+      ],
     },
     {
       code: 'class Foo { props: any }',
-      errors: [{
-        message: 'Unexpected use of weak type "any"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'any' },
+        },
+      ],
     },
     {
       code: 'class Foo { props: Object }',
-      errors: [{
-        message: 'Unexpected use of weak type "Object"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'Object' },
+        },
+      ],
     },
     {
       code: 'var foo: any',
-      errors: [{
-        message: 'Unexpected use of weak type "any"',
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'any' },
+        },
+      ],
     },
     {
       code: 'type X = any; type Y = Function; type Z = Object',
       errors: [
-        { message: 'Unexpected use of weak type "any"' },
-        { message: 'Unexpected use of weak type "Object"' },
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'any' },
+        },
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: 'Object' },
+        },
       ],
-      options: [{
-        Function: false,
-      }],
+      options: [
+        {
+          Function: false,
+        },
+      ],
     },
     {
       code: 'type X = any; type Y = Function; type Z = Object',
-      errors: [{ message: 'Unexpected use of weak type "Function"' }],
-      options: [{
-        any: false,
-        Object: false,
-      }],
+      errors: [
+        {
+          messageId: 'noWeakTypes',
+          data: { weakType: [{ message: 'Function' }] },
+        },
+      ],
+      options: [
+        {
+          any: false,
+          Object: false,
+        },
+      ],
     },
     {
       code: 'const a: $FlowFixMe = 1',
-      errors: [{ message: 'Unexpected use of custom weak type "$FlowFixMe"' }],
-      options: [{
-        suppressTypes: ['$FlowFixMe'],
-      }],
+      errors: [
+        {
+          messageId: 'noCustomWeakTypes',
+          data: { weakType: '$FlowFixMe' },
+        },
+      ],
+      options: [
+        {
+          suppressTypes: ['$FlowFixMe'],
+        },
+      ],
     },
     {
       code: 'const a: Something = 1',
-      errors: [{ message: 'Unexpected use of custom weak type "Something"' }],
-      options: [{
-        suppressTypes: ['$FlowFixMe', 'Something'],
-      }],
+      errors: [
+        {
+          messageId: 'noCustomWeakTypes',
+          data: { weakType: 'Something' },
+        },
+      ],
+      options: [
+        {
+          suppressTypes: ['$FlowFixMe', 'Something'],
+        },
+      ],
     },
   ],
   misconfigured: [
@@ -264,7 +384,12 @@ export default {
           schemaPath: '#/items/0/properties/Object/type',
         },
       ],
-      options: [{ Object: 'irrelevant' }],
+      options: [
+        // $FlowIgnore[incompatible-cast] - intentionally bad schema
+        {
+          Object: 'irrelevant',
+        },
+      ],
     },
   ],
   valid: [
@@ -312,10 +437,12 @@ export default {
     },
     {
       code: 'type X = any; type Y = Object',
-      options: [{
-        any: false,
-        Object: false,
-      }],
+      options: [
+        {
+          any: false,
+          Object: false,
+        },
+      ],
     },
     {
       code: 'type X = Function',
@@ -331,15 +458,19 @@ export default {
     },
     {
       code: '// $FlowFixMe\nconst a: string = 1',
-      options: [{
-        suppressTypes: ['$FlowFixMe'],
-      }],
+      options: [
+        {
+          suppressTypes: ['$FlowFixMe'],
+        },
+      ],
     },
     {
       code: 'const Foo = 1',
-      options: [{
-        suppressTypes: ['Foo'],
-      }],
+      options: [
+        {
+          suppressTypes: ['Foo'],
+        },
+      ],
     },
   ],
-};
+}: RuleTestAssertionsT<OptionsT>);

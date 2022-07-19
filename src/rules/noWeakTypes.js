@@ -1,81 +1,91 @@
-// @flow
-import type { Rule$Create } from 'eslint';
-import _ from 'lodash';
+// @flow strict-local
+import type { RuleListener, RuleModule } from 'eslint';
 
-const schema = [
+export type OptionsT = [
   {
-    additionalProperties: false,
-    properties: {
-      any: {
-        type: 'boolean',
-      },
-      Function: {
-        type: 'boolean',
-      },
-      Object: {
-        type: 'boolean',
-      },
-      suppressTypes: {
-        items: {
-          type: 'string',
-        },
-        type: 'array',
-      },
-    },
-    type: 'object',
-  },
+    any?: boolean,
+    Function?: boolean,
+    Object?: boolean,
+    suppressTypes?: $ReadOnlyArray<string>,
+    [string]: boolean,
+  } | void,
 ];
 
-const reportWeakType = (context, weakType, custom = false) => (node) => {
-  context.report({
-    data: { weakType },
-    message: `Unexpected use of${custom ? ' custom' : ''} weak type "{{weakType}}"`,
-    node,
-  });
-};
-
-const genericTypeEvaluator = (
-  context,
-  {
-    checkFunction,
-    checkObject,
-    suppressTypes,
+export default ({
+  meta: {
+    messages: {
+      noWeakTypes: 'Unexpected use of weak type "{{weakType}}"',
+      noCustomWeakTypes: 'Unexpected use of custom weak type "{{weakType}}"',
+    },
+    schema: [
+      {
+        additionalProperties: false,
+        properties: {
+          any: {
+            type: 'boolean',
+          },
+          Function: {
+            type: 'boolean',
+          },
+          Object: {
+            type: 'boolean',
+          },
+          suppressTypes: {
+            items: {
+              type: 'string',
+            },
+            type: 'array',
+          },
+        },
+        type: 'object',
+      },
+    ],
   },
-) => (node) => {
-  const name = _.get(node, 'id.name');
+  create(context) {
+    const checkAny = context.options[0]?.any === true;
+    const checkFunction = context.options[0]?.Function === true;
+    const checkObject = context.options[0]?.Object === true;
+    const suppressTypes = context.options[0]?.suppressTypes ?? [];
 
-  if ((checkFunction && name === 'Function') || (checkObject && name === 'Object')) {
-    reportWeakType(context, name)(node);
-  }
-  if (suppressTypes.includes(name)) {
-    reportWeakType(context, name, true)(node);
-  }
-};
+    const checks: RuleListener = {};
 
-const create: Rule$Create = (context) => {
-  const checkAny = _.get(context, 'options[0].any', true) === true;
-  const checkFunction = _.get(context, 'options[0].Function', true) === true;
-  const checkObject = _.get(context, 'options[0].Object', true) === true;
-  const suppressTypes = _.get(context, 'options[0].suppressTypes', []);
+    if (checkAny) {
+      checks.AnyTypeAnnotation = (node) => {
+        context.report({
+          data: { style: '', weakType: 'any' },
+          messageId: 'noWeakType',
+          node,
+        });
+      };
+    }
 
-  const checks = {};
+    if (checkFunction || checkObject || suppressTypes.length > 0) {
+      checks.GenericTypeAnnotation = (node) => {
+        if (node.id.type === 'QualifiedTypeIdentifier') {
+          return;
+        }
+        const { name } = node.id;
 
-  if (checkAny) {
-    checks.AnyTypeAnnotation = reportWeakType(context, 'any');
-  }
+        if (
+          (checkFunction && name === 'Function')
+          || (checkObject && name === 'Object')
+        ) {
+          context.report({
+            data: { weakType: name },
+            messageId: 'noWeakType',
+            node,
+          });
+        }
+        if (suppressTypes.includes(name)) {
+          context.report({
+            data: { weakType: name },
+            messageId: 'noCustomWeakType',
+            node,
+          });
+        }
+      };
+    }
 
-  if (checkFunction || checkObject || suppressTypes.length > 0) {
-    checks.GenericTypeAnnotation = genericTypeEvaluator(context, {
-      checkFunction,
-      checkObject,
-      suppressTypes,
-    });
-  }
-
-  return checks;
-};
-
-export default {
-  create,
-  schema,
-};
+    return checks;
+  },
+}: RuleModule<OptionsT>);

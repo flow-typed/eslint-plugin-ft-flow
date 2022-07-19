@@ -3019,6 +3019,27 @@ he@1.2.0:
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
 
+hermes-eslint@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/hermes-eslint/-/hermes-eslint-0.9.0.tgz#f1423abe3dfd959257430d61a9bccd4700b59e09"
+  integrity sha512-rlkK51UpGwo0ZWg8hu8DVICth7RfGSvaEJzFflos8bDOYm/d842/J3IXi0lB9R9waOp4VGGSc8VDmh+a9p2Q2w==
+  dependencies:
+    esrecurse "^4.3.0"
+    hermes-estree "0.9.0"
+    hermes-parser "0.9.0"
+
+hermes-estree@0.9.0, hermes-estree@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/hermes-estree/-/hermes-estree-0.9.0.tgz#026e0abe6db1dcf50a81a79014b779a83db3b814"
+  integrity sha512-5DZ7Y0CbHVk8zPqgRCvqp8iw+P05svnQDI1aJFjdqCfXJ/1CZ+8aYpGlhJ29zCG5SE5duGTzSxogAYYI4QqXqw==
+
+hermes-parser@0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/hermes-parser/-/hermes-parser-0.9.0.tgz#ede3044d50479c61843cef5bbdcea83933d4e4ec"
+  integrity sha512-IcvJIlAn+9tpHkP+HTsxWKrIdQPp0gvGrrQmxlL4XnNS+Oh6R/Fpxbcoflm2kY3zgQjEvxZxLiK/2+k3/5wsrw==
+  dependencies:
+    hermes-estree "0.9.0"
+
 homedir-polyfill@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/homedir-polyfill/-/homedir-polyfill-1.0.3.tgz#743298cef4e5af3e194161fbadcc2151d3a058e8"
