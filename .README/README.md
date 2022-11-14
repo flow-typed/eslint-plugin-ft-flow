@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://eslint.org/">
-    <img width="150" height="150" src="https://eslint.org/assets/img/logo.svg">
+    <img width="150" height="150" src="https://eslint.org/icon-512.png">
   </a>
   <a href="https://flow-typed.github.io/flow-typed/#/">
     <img width="150" height="150" src="https://raw.githubusercontent.com/flow-typed/flow-typed/master/docs/_media/flow.svg">
