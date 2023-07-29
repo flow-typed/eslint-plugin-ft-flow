@@ -48,7 +48,11 @@ const create = iterateFunctionNodes((context) => {
 
       let typeAnnotation;
 
-      typeAnnotation = _.get(identifierNode, 'typeAnnotation') || _.get(identifierNode, 'left.typeAnnotation');
+      typeAnnotation = (
+        _.get(identifierNode, 'typeAnnotation')
+        || _.get(identifierNode, 'left.typeAnnotation')
+        || _.get(identifierNode, 'argument.typeAnnotation')
+      );
 
       if (isArrow && functionAnnotation) {
         typeAnnotation = true;

@@ -112,8 +112,6 @@ for (const ruleName of reportingRules) {
       parser: require.resolve(parser),
     });
 
-    console.info(`Running ${ruleName} with ${parser} parser`);
-
-    ruleTester.run(ruleName, plugin.rules[ruleName], assertions);
+    ruleTester.run(`${ruleName} with ${parser} parser`, plugin.rules[ruleName], assertions);
   });
 }
