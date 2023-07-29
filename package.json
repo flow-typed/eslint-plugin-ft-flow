@@ -17,7 +17,7 @@
     "check-docs": "babel-node ./scripts/checkDocs",
     "check-tests": "babel-node ./scripts/checkTests",
     "create-readme": "node ./scripts/genReadme && babel-node ./scripts/addAssertions",
-    "lint": "eslint ./src ./tests",
+    "lint": "eslint .",
     "test:rules": "mocha --require @babel/register ./tests/rules/index.js",
     "test": "yarn jest && yarn test:rules",
     "prepublishOnly": "yarn create-readme && yarn build"
@@ -40,7 +40,7 @@
     "ajv": "^8.6.3",
     "babel-plugin-add-module-exports": "^1.0.4",
     "babel-plugin-transform-flow-enums": "^0.0.2",
-    "eslint": "^8.4.1",
+    "eslint": "^8.46.0",
     "eslint-config-airbnb": "^19.0.2",
     "eslint-config-bzc": "^1.0.5",
     "eslint-plugin-fb-flow": "^0.0.4",

@@ -10,10 +10,6 @@ import {
 
 import plugin from '../../src';
 
-const ruleTester = new RuleTester({
-  parser: require.resolve('hermes-eslint'),
-});
-
 const reportingRules = [
   'array-style-complex-type',
   'array-style-simple-type',
@@ -71,7 +67,7 @@ const ajv = new Ajv({
 });
 
 for (const ruleName of reportingRules) {
-  // eslint-disable-next-line global-require, import/no-dynamic-require
+  // $FlowExpectedError[unsupported-syntax]
   const assertions = require(`./assertions/${camelCase(ruleName)}`);
 
   if (assertions.misconfigured) {
@@ -102,5 +98,13 @@ for (const ruleName of reportingRules) {
     }
   }
 
-  ruleTester.run(ruleName, plugin.rules[ruleName], assertions);
+  ['@babel/eslint-parser', 'hermes-eslint'].forEach((parser) => {
+    const ruleTester = new RuleTester({
+      parser: require.resolve(parser),
+    });
+
+    console.info(`Running ${ruleName} with ${parser} parser`);
+
+    ruleTester.run(ruleName, plugin.rules[ruleName], assertions);
+  });
 }
