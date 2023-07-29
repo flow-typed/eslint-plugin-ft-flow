@@ -11,7 +11,7 @@ import {
 import plugin from '../../src';
 
 const ruleTester = new RuleTester({
-  parser: require.resolve('@babel/eslint-parser'),
+  parser: require.resolve('hermes-eslint'),
 });
 
 const reportingRules = [

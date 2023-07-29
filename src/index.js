@@ -1,6 +1,8 @@
 import _ from 'lodash';
 
 import recommended from './configs/recommended.json';
+import babelParser from './configs/babel-parser.json';
+
 import arrayStyleComplexType from './rules/arrayStyleComplexType';
 import arrayStyleSimpleType from './rules/arrayStyleSimpleType';
 import arrowParens from './rules/arrowParens';
@@ -109,6 +111,7 @@ const rules = {
 export default {
   configs: {
     recommended,
+    'babel-parser': babelParser,
   },
   rules: _.mapValues(rules, (rule, key) => {
     if (['no-types-missing-file-annotation', 'require-valid-file-annotation'].includes(key)) {

@@ -19,7 +19,7 @@
   </a>
 </p>
 
-> This project was heavily based off the original [flowtype eslint plugin](https://github.com/gajus/eslint-plugin-flowtype), all credits go to the original maintainers. We duplicated the project with the intention of providing the flowtype community support and maintenance from people that actually used flowtype.
+> This project was heavily based off the original [flowtype eslint plugin](https://github.com/gajus/eslint-plugin-flowtype), all credits go to the original maintainers. We duplicated the project with the intention of providing the flowtype community support and maintenance for people that continue to use flowtype.
 
 ---
 
@@ -84,10 +84,13 @@
 ## Installation
 
 ```bash
-npm install eslint-plugin-ft-flow eslint @babel/eslint-parser --save-dev
+npm install eslint-plugin-ft-flow eslint hermes-eslint --save-dev
 
 # or with yarn
-yarn add -D eslint-plugin-ft-flow eslint @babel/eslint-parser
+yarn add -D eslint-plugin-ft-flow eslint hermes-eslint
+
+# or with pnpm
+pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
 ```
 
 <a name="configuration"></a>
@@ -101,7 +104,7 @@ yarn add -D eslint-plugin-ft-flow eslint @babel/eslint-parser
 
 ```json
 {
-  "parser": "@babel/eslint-parser",
+  "parser": "hermes-eslint",
   "plugins": [
     "ft-flow"
   ],
@@ -128,7 +131,7 @@ yarn add -D eslint-plugin-ft-flow eslint @babel/eslint-parser
 
 This plugin exports a [recommended configuration](./src/configs/recommended.json) that enforces Flowtype best practices.
 
-To enable this configuration use the extends property in your `.eslintrc` config file:
+To enable this configuration use the `extends` property in your `.eslintrc` config file in place of the above suggested properties:
 
 ```json
 {
@@ -137,8 +140,6 @@ To enable this configuration use the extends property in your `.eslintrc` config
   ]
 }
 ```
-
-By default this recommended config also comes preloaded with `@babel/eslint-parser` which means for eslint to analyze your flow code it relies your babel config (`babel.config.js`, `.babelrc`, `.babelrc.js`). You should already have this setup as part of running/testing your code but if you don't you can learn more [here](https://flow.org/en/docs/tools/babel/)
 
 See [ESLint documentation](http://eslint.org/docs/user-guide/configuring#extending-configuration-files) for more information about extending configuration files.
 
@@ -623,6 +624,8 @@ type X = bool
 
 <a name="define-flow-type"></a>
 ### `define-flow-type`
+
+> @deprecated type that is no longer needed with the current recommended config but keeping around in people want to continue using it with `@babel/eslint-parser`.
 
 Marks Flow type identifiers as defined.
 
@@ -7088,6 +7091,8 @@ type X = string& number;
 
 <a name="use-flow-type"></a>
 ### `use-flow-type`
+
+> @deprecated type that is no longer needed with the current recommended config but keeping around in people want to continue using it with `@babel/eslint-parser`.
 
 Marks Flow [type alias](https://flowtype.org/docs/type-aliases.html) declarations as used.
 
