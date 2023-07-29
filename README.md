@@ -141,6 +141,17 @@ To enable this configuration use the `extends` property in your `.eslintrc` conf
 }
 ```
 
+<a name="babel-parser"></a>
+#### Babel parser
+
+Alternatively, if you can't yet use `hermes-eslint`, prior to version 3.0.0 ft-flow shipped a recommended config that used `@babel/eslint-parser` which is still available under the `"plugin:ft-flow/babel-parser"` extension.
+
+Though it's recommended to switch to the recommended extension when possible as `babel-parser` may be removed in a future version.
+
+> By default this config also comes preloaded with `@babel/eslint-parser` which means for eslint to analyze your flow code it relies your babel config (`babel.config.js`, `.babelrc`, `.babelrc.js`). You should already have this setup as part of running/testing your code but if you don't you can learn more [here](https://flow.org/en/docs/tools/babel/)
+
+---
+
 See [ESLint documentation](http://eslint.org/docs/user-guide/configuring#extending-configuration-files) for more information about extending configuration files.
 
 <a name="settings"></a>
@@ -625,7 +636,7 @@ type X = bool
 <a name="define-flow-type"></a>
 ### `define-flow-type`
 
-> @deprecated type that is no longer needed with the current recommended config but keeping around in people want to continue using it with `@babel/eslint-parser`.
+> @deprecated rule that is no longer needed with the current recommended config but kept around in case people want to continue using it with `@babel/eslint-parser` such as the `babel-parser` extension.
 
 Marks Flow type identifiers as defined.
 
@@ -4930,7 +4941,7 @@ type FooType = { a: number, c: number, b: string }
           c: number,
           b: string,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -4939,7 +4950,7 @@ type FooType = { a: number, c: number, b: string }
           c: $ReadOnlyMap<string, number>,
           b: Map<string, Array<Map<string, number>>>,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -4965,7 +4976,7 @@ type FooType = { a: number, c: number, b: string }
             },
           }>>>,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "x" must be before "y".
 // Message: Expected type annotations to be in ascending order. "k" must be before "l".
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
@@ -4979,7 +4990,7 @@ type FooType = { a: number, c: number, b: string }
           c: string,
           b: number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -4992,7 +5003,7 @@ type FooType = { a: number, c: number, b: string }
           e: string,
           d: number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 // Message: Expected type annotations to be in ascending order. "d" must be before "e".
 
@@ -5003,7 +5014,7 @@ type FooType = { a: number, c: number, b: string }
           c: string,
           b: number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -5020,7 +5031,7 @@ type FooType = { a: number, c: number, b: string }
           b: number,
           dWithoutComma: boolean
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -5029,7 +5040,7 @@ type FooType = { a: number, c: number, b: string }
           c: number,
           b: string,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -5038,7 +5049,7 @@ type FooType = { a: number, c: number, b: string }
           c: number,
           b: string,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -5047,7 +5058,7 @@ type FooType = { a: number, c: number, b: string }
           c: ?number,
           b: string,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -5056,7 +5067,7 @@ type FooType = { a: number, c: number, b: string }
           c: number,
           b: (param: string) => number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -5065,7 +5076,7 @@ type FooType = { a: number, c: number, b: string }
           c: number,
           b: (param: string) => number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -5074,7 +5085,7 @@ type FooType = { a: number, c: number, b: string }
           a: number | string | boolean,
           b: (param: string) => number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "a" must be before "c".
 
 
@@ -5087,7 +5098,7 @@ type FooType = { a: number, c: number, b: string }
           a: number | string | boolean,
           b: (param: string) => number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "x" must be before "z".
 // Message: Expected type annotations to be in ascending order. "a" must be before "c".
 
@@ -5105,7 +5116,7 @@ type FooType = { a: number, c: number, b: string }
           a: number | string | boolean,
           b: (param: string) => number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "k" must be before "l".
 // Message: Expected type annotations to be in ascending order. "x" must be before "z".
 // Message: Expected type annotations to be in ascending order. "a" must be before "c".
@@ -5116,7 +5127,7 @@ type FooType = { a: number, c: number, b: string }
           -b: number,
           a: number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 // Message: Expected type annotations to be in ascending order. "a" must be before "b".
 
@@ -5126,7 +5137,7 @@ type FooType = { a: number, c: number, b: string }
           -b: number,
           a: number,
         |}
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 // Message: Expected type annotations to be in ascending order. "a" must be before "b".
 
@@ -5136,7 +5147,7 @@ type FooType = { a: number, c: number, b: string }
           c: number,
           b(param: string): number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -5145,7 +5156,7 @@ type FooType = { a: number, c: number, b: string }
           c: number,
           b(param: string): number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -5154,7 +5165,7 @@ type FooType = { a: number, c: number, b: string }
           a: number | string | boolean,
           b(param: string): number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "a" must be before "c".
 
 
@@ -5167,7 +5178,7 @@ type FooType = { a: number, c: number, b: string }
           a: number | string | boolean,
           b(param: string): number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "x" must be before "z".
 // Message: Expected type annotations to be in ascending order. "a" must be before "c".
 
@@ -5185,7 +5196,7 @@ type FooType = { a: number, c: number, b: string }
           a: number | string | boolean,
           b(param: string): number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "k" must be before "l".
 // Message: Expected type annotations to be in ascending order. "x" must be before "z".
 // Message: Expected type annotations to be in ascending order. "a" must be before "c".
@@ -5199,7 +5210,7 @@ type FooType = { a: number, c: number, b: string }
           /* preserves block comment before b */
           b(param: string): number,
         }
-
+      
 // Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
@@ -5217,7 +5228,7 @@ type FooType = { a: number, c: number, b: string }
             IncludesLegacyOrder: boolean
           |}
         |};
-
+      
 // Message: Expected type annotations to be in ascending order. "code" must be before "isSuccess".
 // Message: Expected type annotations to be in ascending order. "errorMessage" must be before "message".
 // Message: Expected type annotations to be in ascending order. "ReturnText" must be before "Status".
@@ -5386,7 +5397,7 @@ type T3 = [1, 2, 4] & [1, 2, 3];
           | A
           | string
           | any;
-
+      
 // Message: Expected union members to be in ascending order. "[1, 2, 3]" should be before "[1, 2, 4]".
 // Message: Expected union members to be in ascending order. "{ b: string }" should be before "[1, 2, 3]".
 // Message: Expected union members to be in ascending order. "{ a: string }" should be before "{ b: string }".
@@ -5431,7 +5442,7 @@ type T3 = [1, 2, 3] & [1, 2, 4];
           | { b: string }
           | [1, 2, 3]
           | [1, 2, 4];
-
+      
 ```
 
 
@@ -5523,7 +5534,7 @@ The following patterns are considered problems:
 { a: string, b: number }) => {}
 // Message: There must not be a line break after "foo" parameter type annotation colon.
 
-(foo:
+(foo: 
 { a: string, b: number }) => {}
 // Message: There must not be a line break after "foo" parameter type annotation colon.
 
@@ -7092,7 +7103,7 @@ type X = string& number;
 <a name="use-flow-type"></a>
 ### `use-flow-type`
 
-> @deprecated type that is no longer needed with the current recommended config but keeping around in people want to continue using it with `@babel/eslint-parser`.
+> @deprecated rule that is no longer needed with the current recommended config but kept around in case people want to continue using it with `@babel/eslint-parser` such as the `babel-parser` extension.
 
 Marks Flow [type alias](https://flowtype.org/docs/type-aliases.html) declarations as used.
 
