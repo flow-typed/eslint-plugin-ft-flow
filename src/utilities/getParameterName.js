@@ -1,7 +1,8 @@
 import _ from 'lodash';
 
 export default (identifierNode, context) => {
-  if (_.has(identifierNode, 'name')) {
+  if (_.has(identifierNode, 'name')
+      && identifierNode.type !== 'FunctionTypeParam') {
     return identifierNode.name;
   }
 
