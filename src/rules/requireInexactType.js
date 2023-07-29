@@ -12,7 +12,9 @@ const create = (context) => {
     ObjectTypeAnnotation(node) {
       const { inexact, exact } = node;
 
-      if (!Object.prototype.hasOwnProperty.call(node, 'inexact')) {
+      // Only type objects can specify exactness
+      if (node?.parent?.type === 'InterfaceDeclaration'
+          || node?.parent?.type === 'DeclareClass') {
         return;
       }
 
