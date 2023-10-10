@@ -63,7 +63,7 @@
   },
   "peerDependencies": {
     "eslint": "^8.1.0",
-    "hermes-eslint": "^0.15.0"
+    "hermes-eslint": "^0.15.0 || ^0.16.0"
   },
   "keywords": [
     "eslint",
