@@ -96,7 +96,7 @@ pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
 <a name="configuration"></a>
 ## Configuration
 
-1. Set `parser` property to `@babel/eslint-parser`.
+1. Set `parser` property to `hermes-eslint`.
 2. Add `plugins` section and specify `ft-flow` as a plugin.
 3. Enable rules.
 

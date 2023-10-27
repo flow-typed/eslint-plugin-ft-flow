@@ -39,7 +39,7 @@ pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
 
 ## Configuration
 
-1. Set `parser` property to `@babel/eslint-parser`.
+1. Set `parser` property to `hermes-eslint`.
 2. Add `plugins` section and specify `ft-flow` as a plugin.
 3. Enable rules.
 
@@ -48,14 +48,9 @@ pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
 ```json
 {
   "parser": "hermes-eslint",
-  "plugins": [
-    "ft-flow"
-  ],
+  "plugins": ["ft-flow"],
   "rules": {
-    "ft-flow/boolean-style": [
-      2,
-      "boolean"
-    ],
+    "ft-flow/boolean-style": [2, "boolean"]
     // ... more rules
   },
   "settings": {
@@ -76,9 +71,7 @@ To enable this configuration use the `extends` property in your `.eslintrc` conf
 
 ```json
 {
-  "extends": [
-    "plugin:ft-flow/recommended"
-  ]
+  "extends": ["plugin:ft-flow/recommended"]
 }
 ```
 
