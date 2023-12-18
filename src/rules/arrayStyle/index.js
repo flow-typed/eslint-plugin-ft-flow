@@ -81,7 +81,7 @@ export default (defaultConfig, simpleType) => {
     create,
     meta: {
       fixable: 'code',
+      schema,
     },
-    schema,
   };
 };

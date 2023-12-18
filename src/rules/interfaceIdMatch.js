@@ -29,5 +29,7 @@ const create = (context) => {
 
 export default {
   create,
-  schema,
+  meta: {
+    schema,
+  },
 };

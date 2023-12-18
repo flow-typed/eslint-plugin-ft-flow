@@ -73,5 +73,7 @@ const create = iterateFunctionNodes((context) => {
 
 export default {
   create,
-  schema,
+  meta: {
+    schema,
+  },
 };

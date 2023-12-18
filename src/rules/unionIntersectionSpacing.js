@@ -79,6 +79,6 @@ export default {
   create,
   meta: {
     fixable: 'code',
+    schema,
   },
-  schema,
 };

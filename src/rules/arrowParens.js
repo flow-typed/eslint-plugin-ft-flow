@@ -155,21 +155,21 @@ export default {
     },
 
     type: 'layout',
-  },
 
-  schema: [
-    {
-      enum: ['always', 'as-needed'],
-    },
-    {
-      additionalProperties: false,
-      properties: {
-        requireForBlockBody: {
-          default: false,
-          type: 'boolean',
-        },
+    schema: [
+      {
+        enum: ['always', 'as-needed'],
       },
-      type: 'object',
-    },
-  ],
+      {
+        additionalProperties: false,
+        properties: {
+          requireForBlockBody: {
+            default: false,
+            type: 'boolean',
+          },
+        },
+        type: 'object',
+      },
+    ],
+  },
 };

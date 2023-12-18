@@ -61,5 +61,7 @@ const create: Rule$Create = (context) => {
 
 export default {
   create,
-  schema,
+  meta: {
+    schema,
+  },
 };
