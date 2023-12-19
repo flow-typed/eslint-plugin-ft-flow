@@ -75,7 +75,7 @@ for (const ruleName of reportingRules) {
       RuleTester.describe(ruleName, () => {
         RuleTester.describe('misconfigured', () => {
           RuleTester.it(JSON.stringify(misconfiguration.options), () => {
-            const schema = plugin.rules[ruleName].schema && plugin.rules[ruleName].schema;
+            const schema = plugin.rules[ruleName].meta && plugin.rules[ruleName].meta.schema && plugin.rules[ruleName].meta.schema;
 
             if (!schema) {
               throw new Error('No schema.');

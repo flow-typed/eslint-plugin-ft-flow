@@ -1,11 +1,3 @@
-const meta = {
-  messages: {
-    readonlySpread:
-      'Flow type with spread property and all readonly properties must be '
-    + 'wrapped in \'$ReadOnly<…>\' to prevent accidental loss of readonly-ness.',
-  },
-};
-
 const create = (context) => ({
   TypeAlias(node) {
     if (node.right.type === 'GenericTypeAnnotation' && node.right.id.name === '$ReadOnly') {
@@ -39,5 +31,11 @@ const create = (context) => ({
 
 export default {
   create,
-  meta,
+  meta: {
+    messages: {
+      readonlySpread:
+        'Flow type with spread property and all readonly properties must be '
+      + 'wrapped in \'$ReadOnly<…>\' to prevent accidental loss of readonly-ness.',
+    },
+  },
 };

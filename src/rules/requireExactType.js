@@ -5,10 +5,6 @@ const schema = [
   },
 ];
 
-const meta = {
-  fixable: 'code',
-};
-
 const create = (context) => {
   const always = (context.options[0] || 'always') === 'always';
   const sourceCode = context.getSourceCode();
@@ -48,6 +44,8 @@ const create = (context) => {
 
 export default {
   create,
-  meta,
-  schema,
+  meta: {
+    fixable: 'code',
+    schema,
+  },
 };

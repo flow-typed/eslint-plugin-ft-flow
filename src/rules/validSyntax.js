@@ -31,6 +31,6 @@ export default {
   create,
   meta: {
     deprecated: true,
+    schema,
   },
-  schema,
 };

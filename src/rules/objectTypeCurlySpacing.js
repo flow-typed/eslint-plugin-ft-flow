@@ -9,10 +9,6 @@ const schema = [
   },
 ];
 
-const meta = {
-  fixable: 'code',
-};
-
 const sameLine = (left, right) => left.loc.end.line === right.loc.start.line;
 
 const create = (context) => {
@@ -86,6 +82,8 @@ const create = (context) => {
 
 export default {
   create,
-  meta,
-  schema,
+  meta: {
+    fixable: 'code',
+    schema,
+  },
 };
