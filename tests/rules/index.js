@@ -104,10 +104,6 @@ for (const ruleName of reportingRules) {
   ].forEach((parser) => {
     const babelParserOnlyRules = ['define-flow-type', 'use-flow-type'];
 
-    // if (parser === '@babel/eslint-parser' && babelParserOnlyRules.includes(ruleName)) {
-    //   return;
-    // }
-
     const ruleTester = new RuleTester({
       parser: require.resolve(parser),
     });
