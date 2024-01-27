@@ -29,15 +29,6 @@ const create = (context) => {
   //       const variable = globalScope.set.get(typeName);
   //       console.log(variable);
 
-  //       if (!variable) {
-  //         globalScope.variables.push({
-  //           name: typeName,
-  //           identifiers: [],
-  //           references: []
-  //         });
-  //         globalScope.set.set(typeName, { defs: [], references: [] });
-  //       }
-
   //       // variable.writeable = false;
 
   //       // // "through" contains all references whose definition cannot be found
@@ -51,19 +42,19 @@ const create = (context) => {
 
   const makeDefined = (variableName) => {
     // Add the variable to the global scope
-    globalScope.through = globalScope.through.filter(ref => {
+    globalScope.through = globalScope.through.filter((ref) => {
       if (ref.identifier.name === variableName) {
-          globalScope.variables.push({
-              name: variableName,
-              identifiers: [ref.identifier],
-              references: [ref],
-              defs: [],
-          });
-          return false;
+        globalScope.variables.push({
+          name: variableName,
+          identifiers: [ref.identifier],
+          references: [ref],
+          defs: [],
+        });
+        return false;
       }
       return true;
     });
-  }
+  };
 
   // NOTE: For future contributors, if you ever need to add support for a new identifier,
   // use `Identifier(node) {}` to find out which identifiers should be handled.
@@ -96,11 +87,11 @@ const create = (context) => {
         let qid;
 
         qid = node.id;
-        do {
+        while (qid.qualification) {
           qid = qid.qualification;
-        } while (qid.qualification);
+        }
 
-        makeDefined(node.id.name);
+        makeDefined(qid.name);
       }
     },
 
@@ -120,7 +111,7 @@ const create = (context) => {
     },
     TypeParameterDeclaration(node) {
       for (const param of node.params) {
-        makeDefined(node.id.name);
+        makeDefined(param.name);
       }
     },
   };
