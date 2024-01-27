@@ -78,8 +78,13 @@ const create = (context) => {
         makeDefined(node.id);
       }
     },
-    Program() {
-      globalScope = context.getScope();
+    Program(node) {
+      const newGetScope = context.sourceCode.getScope;
+      if (newGetScope) {
+        globalScope = context.sourceCode.getScope(node);
+      } else {
+        globalScope = context.getScope();
+      }
     },
     TypeParameterDeclaration(node) {
       for (const param of node.params) {

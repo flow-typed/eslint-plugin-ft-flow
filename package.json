@@ -40,7 +40,7 @@
     "ajv": "^8.6.3",
     "babel-plugin-add-module-exports": "^1.0.4",
     "babel-plugin-transform-flow-enums": "^0.0.2",
-    "eslint": "^8.46.0",
+    "eslint": "^8.56.0",
     "eslint-config-airbnb": "^19.0.2",
     "eslint-config-bzc": "^1.0.5",
     "eslint-plugin-fb-flow": "^0.0.4",
@@ -54,7 +54,7 @@
     "flow-bin": "^0.167.1",
     "flow-copy-source": "^2.0.9",
     "glob": "^7.2.0",
-    "hermes-eslint": "^0.15.0",
+    "hermes-eslint": "^0.18.2",
     "husky": "^7.0.4",
     "jest": "^27.4.5",
     "lint-staged": "^12.1.2",
@@ -62,7 +62,7 @@
     "rimraf": "^3.0.2"
   },
   "peerDependencies": {
-    "eslint": "^8.1.0",
+    "eslint": "^8.56.0",
     "hermes-eslint": ">=0.15.0"
   },
   "keywords": [
