@@ -20,7 +20,7 @@
     "lint": "eslint .",
     "test:rules": "mocha --require @babel/register ./tests/rules/index.js",
     "test": "yarn jest && yarn test:rules",
-    "prepublishOnly": "yarn create-readme && yarn build"
+    "prepublishOnly": "yarn build"
   },
   "dependencies": {
     "lodash": "^4.17.21",
