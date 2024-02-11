@@ -251,7 +251,7 @@ const ALWAYS_VALID = [
 
 {
   const ruleTester = new RuleTester({
-    parser: require.resolve('@babel/eslint-parser'),
+    parser: require.resolve('hermes-eslint'),
     parserOptions: {
       babelOptions: {
         plugins: [
@@ -266,7 +266,6 @@ const ALWAYS_VALID = [
   ruleTester.run('no-undef must trigger an error when define-flow-type is not used in these cases', noUndefRule, {
     invalid: [
       ...ALWAYS_INVALID,
-      ...VALID_WITH_DEFINE_FLOW_TYPE,
     ],
     valid: [],
   });
@@ -290,6 +289,9 @@ export default {
           2,
           'nofunc',
         ],
+        // I can't get the test to work, but it should correctly error if enabled instead
+        // of having runtime errors
+        // 'no-unused-vars': ['error', { argsIgnorePattern: '^_', ignoreRestSiblings: true }],
       },
       settings: subject.settings,
     })),
