@@ -59,6 +59,7 @@
     "jest": "^27.4.5",
     "lint-staged": "^12.1.2",
     "mocha": "^10.1.0",
+    "regenerator-runtime": "^0.14.1",
     "rimraf": "^3.0.2"
   },
   "peerDependencies": {

@@ -1,4 +1,5 @@
 // @flow
+import 'regenerator-runtime';
 import assert from 'assert';
 import Ajv from 'ajv';
 import {
@@ -66,46 +67,53 @@ const ajv = new Ajv({
   verbose: true,
 });
 
-for (const ruleName of reportingRules) {
-  // $FlowExpectedError[unsupported-syntax]
-  const assertions = require(`./assertions/${camelCase(ruleName)}`);
+(async () => {
+  for (const ruleName of reportingRules) {
+    // $FlowExpectedError[unsupported-syntax]
+    const assertions = require(`./assertions/${camelCase(ruleName)}`);
 
-  if (assertions.misconfigured) {
-    for (const misconfiguration of assertions.misconfigured) {
-      RuleTester.describe(ruleName, () => {
-        RuleTester.describe('misconfigured', () => {
-          RuleTester.it(JSON.stringify(misconfiguration.options), () => {
-            const schema = plugin.rules[ruleName].meta && plugin.rules[ruleName].meta.schema && plugin.rules[ruleName].meta.schema;
+    if (assertions.misconfigured) {
+      for (const misconfiguration of assertions.misconfigured) {
+        RuleTester.describe(ruleName, () => {
+          RuleTester.describe('misconfigured', () => {
+            RuleTester.it(JSON.stringify(misconfiguration.options), () => {
+              const schema = plugin.rules[ruleName].meta && plugin.rules[ruleName].meta.schema && plugin.rules[ruleName].meta.schema;
 
-            if (!schema) {
-              throw new Error('No schema.');
-            }
+              if (!schema) {
+                throw new Error('No schema.');
+              }
 
-            const validateSchema = ajv.compile({
-              items: schema,
-              type: 'array',
+              const validateSchema = ajv.compile({
+                items: schema,
+                type: 'array',
+              });
+
+              validateSchema(misconfiguration.options);
+              if (!validateSchema.errors) {
+                throw new Error('Schema was valid.');
+              }
+
+              assert.deepStrictEqual(validateSchema.errors, misconfiguration.errors);
             });
-
-            validateSchema(misconfiguration.options);
-            if (!validateSchema.errors) {
-              throw new Error('Schema was valid.');
-            }
-
-            assert.deepStrictEqual(validateSchema.errors, misconfiguration.errors);
           });
         });
-      });
+      }
     }
+
+    await Promise.all(
+      [
+        '@babel/eslint-parser',
+        'hermes-eslint',
+      ].map(async (parser) => {
+        const ruleTester = new RuleTester({
+          parser: require.resolve(parser),
+        });
+
+        if (assertions.customRunners && parser === 'hermes-eslint') {
+          await assertions.customRunners(parser);
+        }
+        ruleTester.run(`${ruleName} with ${parser} parser`, plugin.rules[ruleName], assertions);
+      })
+    )
   }
-
-  [
-    '@babel/eslint-parser',
-    'hermes-eslint',
-  ].forEach((parser) => {
-    const ruleTester = new RuleTester({
-      parser: require.resolve(parser),
-    });
-
-    ruleTester.run(`${ruleName} with ${parser} parser`, plugin.rules[ruleName], assertions);
-  });
-}
+})();
