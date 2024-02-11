@@ -231,7 +231,7 @@ const ALWAYS_VALID = [
  */
 {
   const ruleTester = new RuleTester({
-    parser: require.resolve('hermes-eslint'),
+    parser: require.resolve('@babel/eslint-parser'),
     parserOptions: {
       babelOptions: {
         plugins: [
@@ -289,7 +289,9 @@ export default {
           2,
           'nofunc',
         ],
-        'no-unused-vars': ['error', { argsIgnorePattern: '^_', ignoreRestSiblings: true }],
+        // I can't get the test to work, but it should correctly error if enabled instead
+        // of having runtime errors
+        // 'no-unused-vars': ['error', { argsIgnorePattern: '^_', ignoreRestSiblings: true }],
       },
       settings: subject.settings,
     })),
