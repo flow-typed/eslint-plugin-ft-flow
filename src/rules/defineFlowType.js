@@ -7,13 +7,6 @@ const create = (context) => {
     // Add the variable to the global scope
     globalScope.through = globalScope.through.filter((ref) => {
       if (ref.identifier.name === variableName) {
-        // globalScope.variables.push({
-        //   name: variableName,
-        //   identifiers: [],
-        //   references: [ref],
-        //   defs: [],
-        // });
-        // globalScope.set.set(variableName, variableName);
         return false;
       }
       return true;

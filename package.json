@@ -1,7 +1,7 @@
 {
   "name": "eslint-plugin-ft-flow",
   "description": "Flowtype linting rules for ESLint by flow-typed",
-  "version": "3.0.4-alpha-0",
+  "version": "3.0.4",
   "license": "MIT",
   "main": "./dist/index.js",
   "repository": {
@@ -20,7 +20,7 @@
     "lint": "eslint .",
     "test:rules": "mocha --require @babel/register ./tests/rules/index.js",
     "test": "yarn jest && yarn test:rules",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn create-readme && yarn build"
   },
   "dependencies": {
     "lodash": "^4.17.21",
