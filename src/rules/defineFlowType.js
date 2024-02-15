@@ -59,8 +59,7 @@ const create = (context) => {
       }
     },
     Program(node) {
-      const newGetScope = context.sourceCode.getScope;
-      if (newGetScope) {
+      if (context.sourceCode?.getScope) {
         globalScope = context.sourceCode.getScope(node);
       } else {
         globalScope = context.getScope();
