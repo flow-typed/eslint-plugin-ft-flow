@@ -105,14 +105,9 @@ pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
 ```json
 {
   "parser": "hermes-eslint",
-  "plugins": [
-    "ft-flow"
-  ],
+  "plugins": ["ft-flow"],
   "rules": {
-    "ft-flow/boolean-style": [
-      2,
-      "boolean"
-    ],
+    "ft-flow/boolean-style": [2, "boolean"]
     // ... more rules
   },
   "settings": {
@@ -135,9 +130,7 @@ To enable this configuration use the `extends` property in your `.eslintrc` conf
 
 ```json
 {
-  "extends": [
-    "plugin:ft-flow/recommended"
-  ]
+  "extends": ["plugin:ft-flow/recommended"]
 }
 ```
 
@@ -3946,6 +3939,23 @@ Optionally, you can enable support for [implicit exact Flow types](https://mediu
             2,
             {
                 "useImplicitExactTypes": true
+            }
+        ]
+    }
+}
+```
+
+
+If you’re using [experimental TypeScript syntax](https://github.com/facebook/flow/blob/main/Changelog.md#02290) via the `experimental.ts_syntax=true` Flow option, you can adjust this lint rule to check for that syntax, e.g., `Readonly` versus `$ReadOnly`.
+
+
+```js
+{
+    "rules": {
+        "ft-flow/require-readonly-react-props": [
+            2,
+            {
+                "useExperimentalTypeScriptSyntax": true
             }
         ]
     }
