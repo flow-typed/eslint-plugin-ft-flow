@@ -33,6 +33,6 @@ Run with `yarn lint`.
   * Use [./.README/rules/require-valid-file-annotation.md](./.README/rules/require-valid-file-annotation.md) as a template.
   * Ensure that rule documentation document includes `<!-- assertions spaceAfterTypeColon -->` declaration.
 2. Update [./.README/README.md](/.README/README.md) to include the new rule.
-3. Run `npm run create-readme` to generate the new `README.md` (you must be on `master` branch for this command to work)
+3. Run `yarn create-readme` to generate the new `README.md` (you must be on `master` branch for this command to work)
 
 Note: Sections "The following patterns are considered problems:" and "The following patterns are not considered problems:" are **generated automatically** using the test cases.

@@ -7,6 +7,9 @@ const schema = [
       useImplicitExactTypes: {
         type: 'boolean',
       },
+      useExperimentalTypeScriptSyntax: {
+        type: 'boolean',
+      },
     },
     type: 'object',
   },
@@ -14,6 +17,7 @@ const schema = [
 
 const reComponentName = /^(Pure)?Component$/u;
 const reReadOnly = /^\$(ReadOnly|FlowFixMe)$/u;
+const reReadOnlyTypeScript = /^(Readonly|$FlowFixMe)$/u;
 
 const isReactComponent = (node) => {
   if (!node.superClass) {
@@ -67,14 +71,17 @@ const isReadOnlyObjectUnionType = (node, options) => {
   return node.types.every((type) => isReadOnlyObjectType(type, options));
 };
 
+const isReadOnlyName = (name, { useExperimentalTypeScriptSyntax }) => (useExperimentalTypeScriptSyntax ? reReadOnlyTypeScript.test(name) : reReadOnly.test(name));
+
 const isReadOnlyType = (node, options) => (
-  (node.right.id && reReadOnly.test(node.right.id.name))
+  (node.right.id && isReadOnlyName(node.right.id.name, options))
   || isReadOnlyObjectType(node.right, options)
   || isReadOnlyObjectUnionType(node.right, options)
 );
 
 const create = (context) => {
   const useImplicitExactTypes = _.get(context, ['options', 0, 'useImplicitExactTypes'], false);
+  const useExperimentalTypeScriptSyntax = _.get(context, ['options', 0, 'useExperimentalTypeScriptSyntax'], false);
   const options = { useImplicitExactTypes };
 
   const readOnlyTypes = [];
@@ -86,7 +93,7 @@ const create = (context) => {
 
     return (
       id
-      && !reReadOnly.test(id.name)
+      && !isReadOnlyName(id.name, options)
       && !readOnlyTypes.includes(id.name)
       && foundTypes.includes(id.name)
     );
@@ -117,20 +124,22 @@ const create = (context) => {
     }
   }
 
+  const typeName = useExperimentalTypeScriptSyntax ? 'Readonly' : '$ReadOnly';
+
   return {
 
     // class components
     ClassDeclaration(node) {
       if (isReactComponent(node) && isReadOnlyClassProp(node)) {
         context.report({
-          message: `${node.superTypeParameters.params[0].id.name} must be $ReadOnly`,
+          message: `${node.superTypeParameters.params[0].id.name} must be ${typeName}`,
           node,
         });
       } else if (node.superTypeParameters
                 && node.superTypeParameters.params[0].type === 'ObjectTypeAnnotation'
                 && !isReadOnlyObjectType(node.superTypeParameters.params[0], options)) {
         context.report({
-          message: `${node.id.name} class props must be $ReadOnly`,
+          message: `${node.id.name} class props must be ${typeName}`,
           node,
         });
       }
@@ -156,13 +165,13 @@ const create = (context) => {
         if (identifier
             && foundTypes.includes(identifier.name)
             && !readOnlyTypes.includes(identifier.name)
-            && !reReadOnly.test(identifier.name)) {
+            && !isReadOnlyName(identifier.name, options)) {
           if (reportedFunctionalComponents.includes(identifier)) {
             return;
           }
 
           context.report({
-            message: `${identifier.name} must be $ReadOnly`,
+            message: `${identifier.name} must be ${typeName}`,
             node: identifier,
           });
 
@@ -174,7 +183,7 @@ const create = (context) => {
         if (typeAnnotation.typeAnnotation.type === 'ObjectTypeAnnotation'
             && !isReadOnlyObjectType(typeAnnotation.typeAnnotation, options)) {
           context.report({
-            message: `${currentNode.id.name} component props must be $ReadOnly`,
+            message: `${currentNode.id.name} component props must be ${typeName}`,
             node,
           });
         }

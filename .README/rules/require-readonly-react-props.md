@@ -96,4 +96,21 @@ Optionally, you can enable support for [implicit exact Flow types](https://mediu
 ```
 
 
+If you’re using [experimental TypeScript syntax](https://github.com/facebook/flow/blob/main/Changelog.md#02290) via the `experimental.ts_syntax=true` Flow option, you can adjust this lint rule to check for that syntax, e.g., `Readonly` versus `$ReadOnly`.
+
+
+```js
+{
+    "rules": {
+        "ft-flow/require-readonly-react-props": [
+            2,
+            {
+                "useExperimentalTypeScriptSyntax": true
+            }
+        ]
+    }
+}
+```
+
+
 <!-- assertions requireReadonlyReactProps -->
