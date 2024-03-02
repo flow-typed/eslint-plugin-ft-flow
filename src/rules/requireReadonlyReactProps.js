@@ -82,7 +82,7 @@ const isReadOnlyType = (node, options) => (
 const create = (context) => {
   const useImplicitExactTypes = _.get(context, ['options', 0, 'useImplicitExactTypes'], false);
   const useExperimentalTypeScriptSyntax = _.get(context, ['options', 0, 'useExperimentalTypeScriptSyntax'], false);
-  const options = { useImplicitExactTypes };
+  const options = { useImplicitExactTypes, useExperimentalTypeScriptSyntax };
 
   const readOnlyTypes = [];
   const foundTypes = [];
