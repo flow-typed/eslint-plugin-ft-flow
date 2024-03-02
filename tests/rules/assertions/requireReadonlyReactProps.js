@@ -24,6 +24,14 @@ export default {
       ],
     },
     {
+      code: 'type Props = Readonly<{ }>; class Foo extends React.Component<Props> { }',
+      errors: [
+        {
+          message: 'Props must be $ReadOnly',
+        },
+      ],
+    },
+    {
       code: 'type OtherProps = { foo: string }; class Foo extends React.Component<OtherProps> { }',
       errors: [
         {
@@ -146,6 +154,19 @@ export default {
       options: [
         {
           useExperimentalTypeScriptSyntax: true,
+        },
+      ],
+    },
+    {
+      //                                                     vvvvv
+      code: 'type Props = Readonly<{ }>; function Foo(props: Props) { return <p /> }',
+      errors: [
+        {
+          column: 49,
+          endColumn: 54,
+          endLine: 1,
+          line: 1,
+          message: 'Props must be $ReadOnly',
         },
       ],
     },
