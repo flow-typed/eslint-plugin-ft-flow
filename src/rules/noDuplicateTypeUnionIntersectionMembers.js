@@ -102,5 +102,6 @@ export default {
         type: 'object',
       },
     ],
+    hasSuggestions: true,
   },
 };
