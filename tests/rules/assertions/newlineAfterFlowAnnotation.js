@@ -23,6 +23,22 @@ export default {
       options: ['never'],
       output: '// @flow\n',
     },
+    {
+      code: `/*
+* @flow
+*
+* something multi lined
+*/
+const text: string = 42;`,
+      errors: [{ message: 'Expected newline after flow annotation' }],
+      output: `/*
+* @flow
+*
+* something multi lined
+*/
+
+const text: string = 42;`,
+    },
   ],
   valid: [
     {
@@ -36,6 +52,16 @@ export default {
     {
       code: '// @flow\nimport Foo from \'./foo\';',
       options: ['never'],
+    },
+    {
+      code: `/*
+* @flow
+*
+* something multi lined
+*/
+
+const text: string = 42;`,
+      options: ['always'],
     },
   ],
 };

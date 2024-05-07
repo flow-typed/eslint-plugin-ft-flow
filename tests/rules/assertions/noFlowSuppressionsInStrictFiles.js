@@ -16,6 +16,23 @@ export default {
     invalid('// @flow strict\n\n// $FlowFixMe\nconst text: string = 42;'),
     invalid('// @flow strict-local\n\n// $FlowFixMe\nconst text: string = 42;'),
     invalid('// @flow strict\n\n// $FlowExpectedError[xxx]\nconst text: string = 42;'),
+    invalid('/* @flow strict */\n\n// $FlowExpectedError[xxx]\nconst text: string = 42;'),
+    invalid(`/*
+* @flow strict
+*
+* something multi lined
+*/
+
+// $FlowExpectedError[xxx]
+const text: string = 42;`),
+    invalid(`/*
+* @flow strict
+*
+* something multi lined
+*/
+
+/* $FlowIgnore[xxx] */
+const text: string = 42;`),
     invalid(
       '// @flow strict\n\n// $FlowFixMe\nconst text: string = 42;',
       {
