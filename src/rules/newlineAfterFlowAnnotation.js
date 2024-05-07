@@ -1,6 +1,4 @@
-import _ from 'lodash';
-
-const looksLikeFlowFileAnnotation = (comment) => /@(?:no)?flo/ui.test(comment);
+const looksLikeFlowFileAnnotation = (comment) => /^\s*.*@(?:no)?flow(.|\s)*/u.test(comment);
 
 const schema = [
   {
@@ -19,8 +17,7 @@ const create = (context) => {
     Program(node) {
       const sourceCode = context.getSourceCode();
 
-      const potentialFlowFileAnnotation = _.find(
-        context.getSourceCode().getAllComments(),
+      const potentialFlowFileAnnotation = sourceCode.getAllComments().find(
         (comment) => looksLikeFlowFileAnnotation(comment.value),
       );
 
