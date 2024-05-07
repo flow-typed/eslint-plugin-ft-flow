@@ -25,6 +25,14 @@ export default {
 
 // $FlowExpectedError[xxx]
 const text: string = 42;`),
+    invalid(`/*
+* @flow strict
+*
+* something multi lined
+*/
+
+/* $FlowIgnore[xxx] */
+const text: string = 42;`),
     invalid(
       '// @flow strict\n\n// $FlowFixMe\nconst text: string = 42;',
       {
