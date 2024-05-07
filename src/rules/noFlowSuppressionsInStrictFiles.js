@@ -4,7 +4,7 @@ import type { Rule$Create } from 'eslint';
 
 import { suppressionTypes } from '../utilities';
 
-const FLOW_STRICT_MATCHER = /^\s*@(?:no)?flow\s*strict(?:-local)?\s*$/u;
+const FLOW_STRICT_MATCHER = /^\s*.*@(?:no)?flow\s*strict(?:-local)?\s*.*/u;
 
 const isStrictFlowFile = (context) => context
   .getAllComments()
