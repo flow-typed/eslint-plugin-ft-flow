@@ -1,5 +1,4 @@
 // @flow
-// eslint-disable-next-line import/no-namespace
 import * as spacingFixers from './spacingFixers';
 
 export {
