@@ -7,6 +7,7 @@ import { suppressionTypes } from '../utilities';
 const FLOW_STRICT_MATCHER = /^\s*.*@(?:no)?flow\s*strict(?:-local)?\s*.*/u;
 
 const isStrictFlowFile = (context) => context
+  .getSourceCode()
   .getAllComments()
   .some((comment) => FLOW_STRICT_MATCHER.test(comment.value));
 
