@@ -1,7 +1,6 @@
 export default {
   invalid: [
     // Never
-
     {
       code: 'type X = Promise< string>',
       errors: [{ message: 'There must be no space at start of "Promise" generic type annotation' }],
@@ -91,6 +90,68 @@ export default {
       options: ['always'],
       output: 'type X = Promise< (foo), bar, (((baz))) >',
     },
+
+    // Type annotations
+    {
+      code: 'const [state, setState] = useState<?string >(null)',
+      errors: [{ message: 'There must be no space at start of type annotations' }],
+      output: 'const [state, setState] = useState<?string>(null)',
+    },
+    {
+      code: 'const [state, setState] = useState<?string > (null)',
+      errors: [{ message: 'There must be no space at start of type annotations' }],
+      output: 'const [state, setState] = useState<?string>(null)',
+    },
+    {
+      code: 'const [state, setState] = useState< ?string>(null)',
+      errors: [{ message: 'There must be no space at start of type annotations' }],
+      output: 'const [state, setState] = useState<?string>(null)',
+    },
+    {
+      code: 'const [state, setState] = useState < ?string>(null)',
+      errors: [{ message: 'There must be no space at start of type annotations' }],
+      output: 'const [state, setState] = useState<?string>(null)',
+    },
+    {
+      code: 'const [state, setState] = useState<? string>(null)',
+      errors: [{ message: 'There must be no space at start of type annotations' }],
+      output: 'const [state, setState] = useState<?string>(null)',
+    },
+    {
+      code: 'const [state, setState] = useState< ? string>(null)',
+      errors: [{ message: 'There must be no space at start of type annotations' }],
+      output: 'const [state, setState] = useState<?string>(null)',
+    },
+    {
+      code: 'const [state, setState] = useState< ? string >(null)',
+      errors: [{ message: 'There must be no space at start of type annotations' }],
+      output: 'const [state, setState] = useState<?string>(null)',
+    },
+    {
+      code: 'const [state, setState] = useState < ? string > (null)',
+      errors: [{ message: 'There must be no space at start of type annotations' }],
+      output: 'const [state, setState] = useState<?string>(null)',
+    },
+    {
+      code: 'const [state, setState] = useState < ? string > ()',
+      errors: [{ message: 'There must be no space at start of type annotations' }],
+      output: 'const [state, setState] = useState<?string>(null)',
+    },
+    {
+      code: 'useState<string >(null)',
+      errors: [{ message: 'There must be no space at start of type annotations' }],
+      output: 'useState<string>(null)',
+    },
+    {
+      code: 'useState< string>(null)',
+      errors: [{ message: 'There must be no space at start of type annotations' }],
+      output: 'useState<string>(null)',
+    },
+    {
+      code: 'useState< string >(null)',
+      errors: [{ message: 'There must be no space at start of type annotations' }],
+      output: 'useState<string>(null)',
+    },
   ],
   misconfigured: [
     {
@@ -131,7 +192,7 @@ export default {
     { code: 'type X = Promise<(foo), bar, (((baz)))>' },
     {
       code:
-`type X = Promise<
+        `type X = Promise<
   (foo),
   bar,
   (((baz)))
@@ -152,6 +213,44 @@ export default {
     {
       code: 'type X = Promise< (foo), bar, (((baz))) >',
       options: ['always'],
+    },
+    {
+      code: 'const [state, setState] = useState< string >("")',
+      options: ['always'],
+    },
+    {
+      code: 'const [state, setState] = useState< ?string >(null)',
+      options: ['always'],
+    },
+    {
+      code: 'const [state, setState] = useState< string | null >(null)',
+      options: ['always'],
+    },
+    {
+      code: 'const [state, setState] = useState< string | number >(2)',
+      options: ['always'],
+    },
+
+    // Never
+    {
+      code: 'const [state, setState] = useState(null)',
+      options: ['never'],
+    },
+    {
+      code: 'const [state, setState] = useState<string>("")',
+      options: ['never'],
+    },
+    {
+      code: 'const [state, setState] = useState<?string>(null)',
+      options: ['never'],
+    },
+    {
+      code: 'const [state, setState] = useState<string | null>(null)',
+      options: ['never'],
+    },
+    {
+      code: 'const [state, setState] = useState<string | number>(2)',
+      options: ['never'],
     },
   ],
 };
