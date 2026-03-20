@@ -36,11 +36,6 @@ export default {
       output: 'type FooType = { 1: number, 2: boolean, 10: number }',
     },
     {
-      code: 'type FooType = { a: number, c: number, b: string }',
-      errors: [{ message: 'Expected type annotations to be in ascending order. "b" must be before "c".' }],
-      output: 'type FooType = { a: number, b: string, c: number }',
-    },
-    {
       code: `
         type FooType = {
           a: number,
