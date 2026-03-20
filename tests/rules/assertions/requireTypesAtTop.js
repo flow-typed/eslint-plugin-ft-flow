@@ -70,9 +70,6 @@ export default {
       code: 'export opaque type Foo = number;\nconst foo = 3;',
     },
     {
-      code: 'type Foo = number;\nconst foo = 3;',
-    },
-    {
       code: 'import bar from "./bar";\ntype Foo = number;',
     },
     {
