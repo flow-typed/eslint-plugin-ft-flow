@@ -5,7 +5,7 @@ import {
 } from '../../utilities';
 
 export default (context, report, typeForMessage) => {
-  const sourceCode = context.getSourceCode();
+  const { sourceCode } = context;
 
   const getColon = (node, typeAnnotation) => {
     if (node.type === 'FunctionTypeParam') {

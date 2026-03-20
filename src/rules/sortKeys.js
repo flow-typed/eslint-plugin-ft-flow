@@ -29,7 +29,7 @@ const sorters = {
 };
 
 const generateOrderedList = (context, sort, properties) => {
-  const source = context.getSourceCode();
+  const source = context.sourceCode;
 
   const items = properties.map((property) => {
     const name = getParameterName(property, context);

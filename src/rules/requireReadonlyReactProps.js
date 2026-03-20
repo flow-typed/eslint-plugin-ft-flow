@@ -99,7 +99,7 @@ const create = (context) => {
     );
   };
 
-  for (const node of context.getSourceCode().ast.body) {
+  for (const node of context.sourceCode.ast.body) {
     let idName;
     let typeNode;
 

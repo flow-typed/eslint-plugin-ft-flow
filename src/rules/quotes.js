@@ -7,7 +7,7 @@ const schema = [
 
 const create = (context) => {
   const double = (context.options[0] || 'double') === 'double';
-  const sourceCode = context.getSourceCode();
+  const { sourceCode } = context;
 
   return {
     StringLiteralTypeAnnotation(node) {

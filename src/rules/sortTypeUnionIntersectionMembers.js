@@ -76,7 +76,7 @@ const sorters = {
 };
 
 const create = (context) => {
-  const sourceCode = context.getSourceCode();
+  const { sourceCode } = context;
 
   const {
     checkIntersections = true,

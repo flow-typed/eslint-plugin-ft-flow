@@ -17,7 +17,7 @@ const getColon = (context, objectTypeProperty) => {
     tokenIndex += 1;
   }
 
-  return context.getSourceCode().getFirstToken(objectTypeProperty, tokenIndex);
+  return context.sourceCode.getFirstToken(objectTypeProperty, tokenIndex);
 };
 
 // 1) type X = { foo(): A; }

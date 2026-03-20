@@ -5,7 +5,7 @@ import {
 } from '../../utilities';
 
 export default (context, report) => {
-  const sourceCode = context.getSourceCode();
+  const { sourceCode } = context;
 
   return (node) => {
     const declarations = _.get(node, 'declarations', []);

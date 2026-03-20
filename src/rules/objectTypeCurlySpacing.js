@@ -13,7 +13,7 @@ const sameLine = (left, right) => left.loc.end.line === right.loc.start.line;
 
 const create = (context) => {
   const never = (context?.options[0] ?? 'never') === 'never';
-  const sourceCode = context.getSourceCode();
+  const { sourceCode } = context;
 
   return {
     ObjectTypeAnnotation(node) {

@@ -15,7 +15,7 @@ const create = (context) => {
 
   return {
     Program(node) {
-      const sourceCode = context.getSourceCode();
+      const { sourceCode } = context;
 
       const potentialFlowFileAnnotation = sourceCode.getAllComments().find(
         (comment) => looksLikeFlowFileAnnotation(comment.value),

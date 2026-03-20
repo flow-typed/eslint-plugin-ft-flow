@@ -11,7 +11,7 @@ const create = (context) => {
   const always = (context.options[0] || 'always') === 'always';
 
   if (always) {
-    const sourceCode = context.getSourceCode();
+    const { sourceCode } = context;
 
     // nodes representing type and import declarations
     const ignoredNodes = [

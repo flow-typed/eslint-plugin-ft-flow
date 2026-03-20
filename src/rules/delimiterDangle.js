@@ -44,7 +44,7 @@ const create = (context) => {
   const option = context.options[0] || 'never';
   const interfaceOption = context.options[1] || option;
   const inexactNotationOption = context.options[2] || 'never';
-  const sourceCode = context.getSourceCode();
+  const { sourceCode } = context;
 
   const getNodeOption = (node) => {
     if (node.parent.type === 'InterfaceDeclaration') {

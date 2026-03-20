@@ -9,7 +9,7 @@ const isSemicolon = (token) => token.type === 'Punctuator' && token.value === ';
 
 const create = (context) => {
   const never = (context.options[0] || 'always') === 'never';
-  const sourceCode = context.getSourceCode();
+  const { sourceCode } = context;
 
   const report = (node, missing) => {
     const lastToken = sourceCode.getLastToken(node);

@@ -57,7 +57,7 @@ const create = (context) => {
       const firstToken = node.tokens[0];
 
       const potentialFlowFileAnnotation = _.find(
-        context.getSourceCode().getAllComments(),
+        context.sourceCode.getAllComments(),
         (comment) => looksLikeFlowFileAnnotation(comment.value),
       );
 

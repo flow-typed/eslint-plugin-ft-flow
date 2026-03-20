@@ -4,7 +4,7 @@ const breakLineMessage = (direction) => `New line required ${direction} type dec
 
 const create = (context) => ({
   TypeAlias(node) {
-    const sourceCode = context.getSourceCode();
+    const { sourceCode } = context;
     if (sourceCode.lines.length === 1) {
       return;
     }

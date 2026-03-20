@@ -35,7 +35,7 @@ export default (identifierNode, context) => {
       tokenIndex += 1;
     }
 
-    return context.getSourceCode().getFirstToken(identifierNode, tokenIndex).value;
+    return context.sourceCode.getFirstToken(identifierNode, tokenIndex).value;
   }
 
   if (identifierNode.type === 'ObjectTypeIndexer') {
@@ -53,8 +53,8 @@ export default (identifierNode, context) => {
 
     tokenIndex += 1;
 
-    const id = context.getSourceCode().getFirstToken(identifierNode, tokenIndex);
-    const colonOrBrace = context.getSourceCode().getTokenAfter(id);
+    const id = context.sourceCode.getFirstToken(identifierNode, tokenIndex);
+    const colonOrBrace = context.sourceCode.getTokenAfter(id);
     if (colonOrBrace.value === ':') {
       return id.value;
     }
@@ -63,21 +63,21 @@ export default (identifierNode, context) => {
   }
 
   if (identifierNode.type === 'FunctionTypeParam') {
-    return context.getSourceCode().getFirstToken(identifierNode).value;
+    return context.sourceCode.getFirstToken(identifierNode).value;
   }
 
   if (identifierNode.type === 'ObjectPattern' || identifierNode.type === 'ArrayPattern') {
-    const text = context.getSourceCode().getText(identifierNode);
+    const text = context.sourceCode.getText(identifierNode);
 
     if (identifierNode.typeAnnotation) {
-      return text.replace(context.getSourceCode().getText(identifierNode.typeAnnotation), '').trim();
+      return text.replace(context.sourceCode.getText(identifierNode.typeAnnotation), '').trim();
     }
 
     return text;
   }
 
   if (_.get(identifierNode, 'left.type') === 'ObjectPattern') {
-    return context.getSourceCode().getText(identifierNode.left);
+    return context.sourceCode.getText(identifierNode.left);
   }
 
   return null;

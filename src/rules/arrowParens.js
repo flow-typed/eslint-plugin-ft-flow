@@ -15,7 +15,7 @@ export default {
       && context.options[1] && context.options[1].requireForBlockBody === true
     );
 
-    const sourceCode = context.getSourceCode();
+    const { sourceCode } = context;
 
     // Determines whether a arrow function argument end with `)`
     // eslint-disable-next-line complexity
