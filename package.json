@@ -21,7 +21,7 @@
     "prepublishOnly": "yarn create-readme && yarn build"
   },
   "dependencies": {
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "string-natural-compare": "^3.0.1"
   },
   "devDependencies": {
@@ -48,17 +48,17 @@
     "eslint-plugin-jest": "^29.15.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^4.3.0",
-    "eslint-plugin-testing-library": "^7.16.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-testing-library": "^7.16.1",
     "eslint-plugin-unicorn": "^51.0.1",
     "flow-bin": "^0.167.1",
     "flow-copy-source": "^2.0.9",
     "glob": "^7.2.0",
     "hermes-eslint": "^0.18.2",
     "husky": "^7.0.4",
-    "jest": "^27.4.5",
-    "lint-staged": "^12.1.2",
-    "mocha": "^10.1.0",
+    "jest": "^27.5.1",
+    "lint-staged": "^12.5.0",
+    "mocha": "^10.8.2",
     "rimraf": "^3.0.2"
   },
   "peerDependencies": {
