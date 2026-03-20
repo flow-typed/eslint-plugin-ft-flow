@@ -61,8 +61,17 @@
     "rimraf": "^3.0.2"
   },
   "peerDependencies": {
+    "@babel/eslint-parser": "^7.16.5",
     "eslint": "^8.56.0 || ^9.0.0",
     "hermes-eslint": ">=0.15.0"
+  },
+  "peerDependenciesMeta": {
+    "@babel/eslint-parser": {
+      "optional": true
+    },
+    "hermes-eslint": {
+      "optional": true
+    }
   },
   "keywords": [
     "eslint",
