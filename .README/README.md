@@ -37,11 +37,11 @@ yarn add -D eslint-plugin-ft-flow eslint hermes-eslint
 pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
 ```
 
-## Configuration (Flat Config)
+## Flat Configuration
 
 ### Shared flat configurations
 
-This plugin exports a recommended configuration that enforced Flowtype best practices.
+This plugin exports a recommended configuration that enforces Flowtype best practices.
 
 To enable this configuration in the ESLint flat config, use:
 
@@ -105,7 +105,13 @@ export default defineConfig({
 });
 ```
 
-## Legacy Configuration (eslintrc)
+Alternatively, you may set `parser` using `import babelESLintParser from '@babel/eslint-parser'` if you can't yet use `hermes-eslint`.
+When using the Babel parser, you may need to enable the following deprecated rules, which patch in behavior that `hermes-eslint` does automatically:
+
+- `ft-flow/use-flow-type`
+- `ft-flow/define-flow-type`
+
+## Legacy Configuration
 
 ### Shared legacy configurations
 

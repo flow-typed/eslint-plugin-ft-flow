@@ -24,10 +24,10 @@
 ---
 
 * [Installation](#installation)
-* [Configuration (Flat Config)](#configuration-(flat config))
+* [Flat Configuration](#flat-configuration)
   * [Shared flat configurations](#shared-flat configurations)
   * [Manual flat setup](#manual-flat setup)
-* [Legacy Configuration (eslintrc)](#legacy-configuration (eslintrc))
+* [Legacy Configuration](#legacy-configuration)
   * [Shared legacy configurations](#shared-legacy configurations)
   * [Manual legacy setup](#manual-legacy setup)
 * [Settings](#settings)
@@ -97,13 +97,13 @@ yarn add -D eslint-plugin-ft-flow eslint hermes-eslint
 pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
 ```
 
-<a name="configuration-(flat-config)"></a>
-## Configuration (Flat Config)
+<a name="flat-configuration"></a>
+## Flat Configuration
 
 <a name="shared-flat-configurations"></a>
 ### Shared flat configurations
 
-This plugin exports a recommended configuration that enforced Flowtype best practices.
+This plugin exports a recommended configuration that enforces Flowtype best practices.
 
 To enable this configuration in the ESLint flat config, use:
 
@@ -168,8 +168,14 @@ export default defineConfig({
 });
 ```
 
-<a name="legacy-configuration-(eslintrc)"></a>
-## Legacy Configuration (eslintrc)
+Alternatively, you may set `parser` using `import babelESLintParser from '@babel/eslint-parser'` if you can't yet use `hermes-eslint`.
+When using the Babel parser, you may need to enable the following deprecated rules, which patch in behavior that `hermes-eslint` does automatically:
+
+- `ft-flow/use-flow-type`
+- `ft-flow/define-flow-type`
+
+<a name="legacy-configuration"></a>
+## Legacy Configuration
 
 <a name="shared-legacy-configurations"></a>
 ### Shared legacy configurations
