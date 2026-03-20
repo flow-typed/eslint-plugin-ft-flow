@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import recommended from './configs/recommended.json';
-import babelParser from './configs/babel-parser.json';
+import recommendedJson from './configs/recommended.json';
+import babelParserJson from './configs/babel-parser.json';
 
 import arrayStyleComplexType from './rules/arrayStyleComplexType';
 import arrayStyleSimpleType from './rules/arrayStyleSimpleType';
@@ -108,11 +108,7 @@ const rules = {
   'valid-syntax': validSyntax,
 };
 
-export default {
-  configs: {
-    recommended,
-    'babel-parser': babelParser,
-  },
+const plugin = {
   rules: _.mapValues(rules, (rule, key) => {
     if (['no-types-missing-file-annotation', 'require-valid-file-annotation'].includes(key)) {
       return rule;
@@ -159,3 +155,39 @@ export default {
     'valid-syntax': 0,
   },
 };
+
+const ftFlow = {
+  ...plugin,
+  configs: {
+    recommended: recommendedJson,
+    'babel-parser': babelParserJson,
+    'flat/recommended': {
+      name: 'ft-flow/recommended',
+      plugins: {
+        'ft-flow': plugin,
+      },
+      languageOptions: {
+        get parser() {
+          return require('hermes-eslint');
+        },
+      },
+      settings: recommendedJson.settings,
+      rules: recommendedJson.rules,
+    },
+    'flat/babel-parser': {
+      name: 'ft-flow/babel-parser',
+      plugins: {
+        'ft-flow': plugin,
+      },
+      languageOptions: {
+        get parser() {
+          return require('@babel/eslint-parser');
+        },
+      },
+      settings: babelParserJson.settings,
+      rules: babelParserJson.rules,
+    },
+  },
+};
+
+export default ftFlow;
