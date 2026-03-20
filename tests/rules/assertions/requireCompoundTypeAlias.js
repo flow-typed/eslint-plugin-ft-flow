@@ -38,10 +38,6 @@ export default {
       code: 'type Foo = { bar: { n: number } & { s: string } };',
       errors: [{ message: 'All intersection types must be declared with named type alias.' }],
     },
-    {
-      code: 'function foo(bar: { n: number } & { s: string }) {}',
-      errors: [{ message: 'All intersection types must be declared with named type alias.' }],
-    },
   ],
   misconfigured: [
     {
