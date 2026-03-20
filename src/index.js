@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import packageJson from '../package.json';
 import recommendedJson from './configs/recommended.json';
 import babelParserJson from './configs/babel-parser.json';
 
@@ -109,6 +110,11 @@ const rules = {
 };
 
 const plugin = {
+  meta: {
+    name: packageJson.name,
+    version: packageJson.version,
+    namespace: 'ft-flow',
+  },
   rules: _.mapValues(rules, (rule, key) => {
     if (['no-types-missing-file-annotation', 'require-valid-file-annotation'].includes(key)) {
       return rule;
