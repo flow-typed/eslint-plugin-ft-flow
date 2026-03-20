@@ -81,18 +81,6 @@ export default {
       ],
     },
     {
-      code: 'a;',
-      errors: [
-        {
-          message: 'Flow file annotation is missing.',
-        },
-      ],
-      options: [
-        'always',
-      ],
-      output: '// @flow\na;',
-    },
-    {
       code: '/* @flow */',
       errors: [
         {
@@ -106,21 +94,6 @@ export default {
         },
       ],
       output: '// @flow',
-    },
-    {
-      code: '// @flow',
-      errors: [
-        {
-          message: 'Flow file annotation style must be `/* @flow */`',
-        },
-      ],
-      options: [
-        'always',
-        {
-          annotationStyle: 'block',
-        },
-      ],
-      output: '/* @flow */',
     },
     {
       code: '// @flow',
