@@ -11,16 +11,13 @@ export default {
   valid: [
     {
       code: 'type foo = { [key: string]: number };',
-      errors: [],
     },
     {
       code: 'type foo = { [key: string]: number };',
-      errors: [],
       options: ['never'],
     },
     {
       code: 'type foo = { [string]: number };',
-      errors: [],
       options: ['never'],
     },
   ],
