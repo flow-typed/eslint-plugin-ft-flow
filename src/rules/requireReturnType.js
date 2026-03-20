@@ -105,7 +105,6 @@ const create = (context) => {
     return false;
   };
 
-  // eslint-disable-next-line complexity
   const evaluateFunction = (functionNode) => {
     const targetNode = targetNodes.pop();
 

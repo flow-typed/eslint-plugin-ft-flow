@@ -11,7 +11,6 @@ const groups = {
   unknown: 'unknown',
 };
 
-// eslint-disable-next-line complexity
 const getGroup = (node) => {
   // eslint-disable-next-line default-case
   switch (node.type) {
