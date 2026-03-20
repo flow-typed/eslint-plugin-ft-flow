@@ -3,3 +3,10 @@ coverage
 dist
 *.log
 package-lock.json
+
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
