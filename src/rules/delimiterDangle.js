@@ -120,7 +120,8 @@ const create = (context) => {
     },
 
     TupleTypeAnnotation(node) {
-      evaluate(node, _.last(node.types));
+      // hermes-parser 0.33+ uses `elementTypes`; keep 0.32 `types` backward compatibility.
+      evaluate(node, _.last(node.types || node.elementTypes));
     },
   };
 };
