@@ -4040,22 +4040,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-ft-flow@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "eslint-plugin-ft-flow@npm:1.1.0"
-  dependencies:
-    lodash: "npm:^4.17.21"
-    string-natural-compare: "npm:^3.0.1"
-  peerDependencies:
-    "@babel/eslint-parser": ^7.12.0
-    "@babel/plugin-syntax-flow": ^7.14.5
-    "@babel/plugin-syntax-jsx": ^7.16.0
-    eslint: ^8.1.0
-  checksum: 10c0/4acaf02814f78f65441bb46b187c819215ad4a171b1c77734fe874801a7c369395b1afabb5e3812d99d9680c37fa21623f6b33c141a01fb15a33a5f2f23ba45f
-  languageName: node
-  linkType: hard
-
-"eslint-plugin-ft-flow@workspace:.":
+"eslint-plugin-ft-flow@workspace:*, eslint-plugin-ft-flow@workspace:.":
   version: 0.0.0-use.local
   resolution: "eslint-plugin-ft-flow@workspace:."
   dependencies:
@@ -4077,7 +4062,7 @@ __metadata:
     eslint-config-airbnb: "npm:^19.0.2"
     eslint-config-bzc: "npm:^1.0.5"
     eslint-plugin-fb-flow: "npm:^0.0.4"
-    eslint-plugin-ft-flow: "npm:^1.1.0"
+    eslint-plugin-ft-flow: "workspace:*"
     eslint-plugin-import: "npm:^2.32.0"
     eslint-plugin-jest: "npm:^25.3.2"
     eslint-plugin-jsx-a11y: "npm:^6.5.1"
