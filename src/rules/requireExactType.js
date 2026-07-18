@@ -7,7 +7,7 @@ const schema = [
 
 const create = (context) => {
   const always = (context.options[0] || 'always') === 'always';
-  const sourceCode = context.getSourceCode();
+  const { sourceCode } = context;
 
   return {
     ObjectTypeAnnotation(node) {

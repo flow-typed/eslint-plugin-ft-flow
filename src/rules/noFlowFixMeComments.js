@@ -45,7 +45,7 @@ const create = (context) => {
 
     Program() {
       for (const comment of context
-        .getSourceCode()
+        .sourceCode
         .getAllComments()
         .filter((node) => node.type === 'Block' || node.type === 'Line')) {
         handleComment(comment);

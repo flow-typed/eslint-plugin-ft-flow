@@ -24,7 +24,7 @@ const create = (context) => {
   }
 
   const requireProperPunctuation = (node) => {
-    const sourceCode = context.getSourceCode();
+    const { sourceCode } = context;
     const tokens = sourceCode.getTokens(node);
     let lastToken;
 

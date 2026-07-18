@@ -73,6 +73,10 @@ const isReadOnlyObjectUnionType = (node, options) => {
 
 const isReadOnlyName = (name, { useExperimentalTypeScriptSyntax }) => (useExperimentalTypeScriptSyntax ? reReadOnlyTypeScript.test(name) : reReadOnly.test(name));
 
+// hermes-parser 0.33+ renamed `superTypeParameters` -> `superTypeArguments`.
+// Read both to remain backward compatible with 0.32.
+const getSuperTypeParams = (node) => _.get(node, 'superTypeParameters.params') || _.get(node, 'superTypeArguments.params') || [];
+
 const isReadOnlyType = (node, options) => (
   (node.right.id && isReadOnlyName(node.right.id.name, options))
   || isReadOnlyObjectType(node.right, options)
@@ -89,7 +93,7 @@ const create = (context) => {
   const reportedFunctionalComponents = [];
 
   const isReadOnlyClassProp = (node) => {
-    const id = node.superTypeParameters && node.superTypeParameters.params[0].id;
+    const id = _.get(getSuperTypeParams(node), '[0].id');
 
     return (
       id
@@ -99,7 +103,7 @@ const create = (context) => {
     );
   };
 
-  for (const node of context.getSourceCode().ast.body) {
+  for (const node of context.sourceCode.ast.body) {
     let idName;
     let typeNode;
 
@@ -130,14 +134,16 @@ const create = (context) => {
 
     // class components
     ClassDeclaration(node) {
+      const firstSuperTypeParam = getSuperTypeParams(node)[0];
+
       if (isReactComponent(node) && isReadOnlyClassProp(node)) {
         context.report({
-          message: `${node.superTypeParameters.params[0].id.name} must be ${typeName}`,
+          message: `${firstSuperTypeParam.id.name} must be ${typeName}`,
           node,
         });
-      } else if (node.superTypeParameters
-                && node.superTypeParameters.params[0].type === 'ObjectTypeAnnotation'
-                && !isReadOnlyObjectType(node.superTypeParameters.params[0], options)) {
+      } else if (firstSuperTypeParam
+                && firstSuperTypeParam.type === 'ObjectTypeAnnotation'
+                && !isReadOnlyObjectType(firstSuperTypeParam, options)) {
         context.report({
           message: `${node.id.name} class props must be ${typeName}`,
           node,

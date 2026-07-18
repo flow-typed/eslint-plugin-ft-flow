@@ -30,7 +30,7 @@ const create = (context) => ({
     if (!isAnnotationOfEmptyArrayInit(node)) {
       context.report({
         fix(fixer) {
-          const rawElementType = context.getSourceCode().getText(node.elementType);
+          const rawElementType = context.sourceCode.getText(node.elementType);
 
           return fixer.replaceText(node, `$ReadOnlyArray<${rawElementType}>`);
         },

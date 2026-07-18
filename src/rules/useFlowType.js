@@ -2,13 +2,15 @@ const schema = [];
 
 const create = (context) => {
   const markTypeAsUsed = (node) => {
-    context.markVariableAsUsed(node.id.name);
+    if (context.sourceCode?.markVariableAsUsed) {
+      context.sourceCode.markVariableAsUsed(node.id.name, node);
+    } else {
+      context.markVariableAsUsed(node.id.name);
+    }
   };
 
   const markTypeAsUsedWithGenericType = (node) => {
     let typeId;
-    let scope;
-    let variable;
 
     if (node.id.type === 'Identifier') {
       typeId = node.id;
@@ -19,12 +21,14 @@ const create = (context) => {
       } while (typeId.qualification);
     }
 
-    for (scope = context.getScope(); scope; scope = scope.upper) {
-      variable = scope.set.get(typeId.name);
-      if (variable && variable.defs.length) {
-        context.markVariableAsUsed(typeId.name);
-        break;
-      }
+    if (!typeId || !typeId.name) {
+      return;
+    }
+
+    if (context.sourceCode?.markVariableAsUsed) {
+      context.sourceCode.markVariableAsUsed(typeId.name, typeId);
+    } else {
+      context.markVariableAsUsed(typeId.name);
     }
   };
 

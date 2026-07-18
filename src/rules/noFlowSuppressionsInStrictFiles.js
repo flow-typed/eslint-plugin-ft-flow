@@ -7,7 +7,7 @@ import { suppressionTypes } from '../utilities';
 const FLOW_STRICT_MATCHER = /^\s*.*@(?:no)?flow\s*strict(?:-local)?\s*.*/u;
 
 const isStrictFlowFile = (context) => context
-  .getSourceCode()
+  .sourceCode
   .getAllComments()
   .some((comment) => FLOW_STRICT_MATCHER.test(comment.value));
 
@@ -38,7 +38,7 @@ const create: Rule$Create = (context) => {
   return {
     Program: () => {
       const comments = context
-        .getSourceCode()
+        .sourceCode
         .getAllComments()
         .filter((node) => node.type === 'Block' || node.type === 'Line');
 

@@ -10,7 +10,7 @@ const schema = [
 ];
 
 const create = (context) => {
-  const sourceCode = context.getSourceCode();
+  const { sourceCode } = context;
 
   const always = (context.options[0] || 'always') === 'always';
 

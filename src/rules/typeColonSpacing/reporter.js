@@ -3,7 +3,7 @@ import {
 } from '../../utilities';
 
 const hasLineBreak = (direction, colon, context) => {
-  const sourceCode = context.getSourceCode();
+  const { sourceCode } = context;
 
   if (direction === 'before') {
     return colon.loc.start.line !== sourceCode.getTokenBefore(colon).loc.end.line;
@@ -13,7 +13,7 @@ const hasLineBreak = (direction, colon, context) => {
 };
 
 const getSpaces = (direction, colon, context) => {
-  const sourceCode = context.getSourceCode();
+  const { sourceCode } = context;
 
   if (direction === 'before') {
     return colon.range[0] - sourceCode.getTokenBefore(colon).range[1];

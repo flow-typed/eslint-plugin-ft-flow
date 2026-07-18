@@ -2,6 +2,7 @@
 import assert from 'assert';
 import Ajv from 'ajv';
 import {
+  ESLint,
   RuleTester,
 } from 'eslint';
 import {
@@ -103,7 +104,34 @@ for (const ruleName of reportingRules) {
     'hermes-eslint',
   ].forEach((parser) => {
     const ruleTester = new RuleTester({
-      parser: require.resolve(parser),
+      ...(assertions.otherRules ? { rules: assertions.otherRules } : {}),
+      ...(ESLint.version.startsWith('8.')
+        ? {
+          parser: require.resolve(parser),
+          ...(parser === '@babel/eslint-parser'
+            ? {
+              parserOptions: {
+                babelOptions: {
+                  parserOpts: { allowReturnOutsideFunction: true },
+                },
+              },
+            }
+            : {}),
+        }
+        : {
+          languageOptions: {
+            parser: require(parser),
+            ...(parser === '@babel/eslint-parser'
+              ? {
+                parserOptions: {
+                  babelOptions: {
+                    parserOpts: { allowReturnOutsideFunction: true },
+                  },
+                },
+              }
+              : {}),
+          },
+        }),
     });
 
     ruleTester.run(`${ruleName} with ${parser} parser`, plugin.rules[ruleName], assertions);

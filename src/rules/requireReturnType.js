@@ -38,6 +38,11 @@ const schema = [
 const makeRegExp = (str) => new RegExp(str, 'u');
 
 const isUndefinedReturnType = (returnNode) => returnNode.argument === null || returnNode.argument.name === 'undefined' || returnNode.argument.operator === 'void';
+// hermes-parser 0.33+ emits `UndefinedTypeAnnotation`;
+// 0.32 used `GenericTypeAnnotation` with `id.name === 'undefined'`.
+const isUndefinedTypeAnnotation = (typeAnnotation) => typeAnnotation
+  && (typeAnnotation.type === 'UndefinedTypeAnnotation'
+    || (typeAnnotation.type === 'GenericTypeAnnotation' && _.get(typeAnnotation, 'id.name') === 'undefined'));
 
 const create = (context) => {
   const annotateReturn = (_.get(context, 'options[0]') || 'always') === 'always';
@@ -56,14 +61,14 @@ const create = (context) => {
   };
 
   const getIsReturnTypeAnnotationUndefined = (targetNode) => {
-    const isReturnTypeAnnotationLiteralUndefined = _.get(targetNode, 'functionNode.returnType.typeAnnotation.id.name') === 'undefined'
-      && _.get(targetNode, 'functionNode.returnType.typeAnnotation.type') === 'GenericTypeAnnotation';
-    const isReturnTypeAnnotationVoid = _.get(targetNode, 'functionNode.returnType.typeAnnotation.type') === 'VoidTypeAnnotation';
+    const returnTypeAnnotation = _.get(targetNode, 'functionNode.returnType.typeAnnotation');
+    const isReturnTypeAnnotationLiteralUndefined = isUndefinedTypeAnnotation(returnTypeAnnotation);
+    const isReturnTypeAnnotationVoid = _.get(returnTypeAnnotation, 'type') === 'VoidTypeAnnotation';
+    const asyncReturnType = _.get(returnTypeAnnotation, 'typeParameters.params[0]');
     const isAsyncReturnTypeAnnotationVoid = _.get(targetNode, 'functionNode.async')
-      && _.get(targetNode, 'functionNode.returnType.typeAnnotation.id.name') === 'Promise' && (
-      _.get(targetNode, 'functionNode.returnType.typeAnnotation.typeParameters.params[0].type') === 'VoidTypeAnnotation'
-      || (_.get(targetNode, 'functionNode.returnType.typeAnnotation.typeParameters.params[0].id.name') === 'undefined'
-      && _.get(targetNode, 'functionNode.returnType.typeAnnotation.typeParameters.params[0].type') === 'GenericTypeAnnotation')
+      && _.get(returnTypeAnnotation, 'id.name') === 'Promise' && (
+      _.get(asyncReturnType, 'type') === 'VoidTypeAnnotation'
+      || isUndefinedTypeAnnotation(asyncReturnType)
     );
 
     return (
@@ -103,7 +108,6 @@ const create = (context) => {
     return false;
   };
 
-  // eslint-disable-next-line complexity
   const evaluateFunction = (functionNode) => {
     const targetNode = targetNodes.pop();
 

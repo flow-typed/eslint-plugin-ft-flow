@@ -24,8 +24,12 @@
 ---
 
 * [Installation](#installation)
-* [Configuration](#configuration)
-  * [Shareable configurations](#shareable-configurations)
+* [Flat Configuration](#flat-configuration)
+  * [Shared flat configurations](#shared-flat configurations)
+  * [Manual flat setup](#manual-flat setup)
+* [Legacy Configuration](#legacy-configuration)
+  * [Shared legacy configurations](#shared-legacy configurations)
+  * [Manual legacy setup](#manual-legacy setup)
 * [Settings](#settings)
   * [`onlyFilesWithFlowAnnotation`](#onlyfileswithflowannotation)
 * [Rules](#rules)
@@ -93,14 +97,119 @@ yarn add -D eslint-plugin-ft-flow eslint hermes-eslint
 pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
 ```
 
-<a name="configuration"></a>
-## Configuration
+> [!IMPORTANT]
+> ESLint 10 requires `hermes-eslint` >=0.37 or `@babel/eslint-parser` >=8 for Flow parsing.
+> Earlier versions of these parsers do not support ESLint 10.
+
+<a name="flat-configuration"></a>
+## Flat Configuration
+
+<a name="shared-flat-configurations"></a>
+### Shared flat configurations
+
+This plugin exports a recommended configuration that enforces Flowtype best practices.
+
+To enable this configuration in the ESLint flat config, use:
+
+```diff
+import { defineConfig } from 'eslint/config';
++import ftFlow from 'eslint-plugin-ft-flow';
+
+export default defineConfig({
+  extends: [
++   ftFlow.configs['flat/recommended'],
+  ],
+});
+```
+
+Alternatively, you may prefer the Babel ESLint parser-enabled configuration:
+
+```diff
+import { defineConfig } from 'eslint/config';
++import ftFlow from 'eslint-plugin-ft-flow';
+
+export default defineConfig({
+  extends: [
++   ftFlow.configs['flat/babel-parser'],
+  ],
+});
+```
+
+> [!NOTE]
+> When using `@babel/eslint-parser`, in order for ESLint to analyze your flow code, it relies your babel config (`babel.config.js`, `.babelrc`, `.babelrc.js`).
+> You should already have this setup as part of running/testing your code but if you don't you can [learn more here](https://flow.org/en/docs/tools/babel/).
+
+<a name="manual-flat-setup"></a>
+### Manual flat setup
+
+To set this plugin up without using a shared configuration:
+
+1. Set `languageOptions.parser` to your chosen parser.
+2. Add the `plugins` section and set `ft-flow` to this plugin.
+3. Enable rules.
+
+```diff
+import { defineConfig } from 'eslint/config';
++import hermesESLintParser from 'hermes-eslint';
++import ftFlow from 'eslint-plugin-ft-flow';
+
+export default defineConfig({
+  plugins: {
++   'ft-flow': ftFlow,
+  },
+  languageOptions: {
++   parser: hermesESLintParser,
+  },
+  settings: {
++   'ft-flow': {
++     onlyFilesWithFlowAnnotation: false,
++   },
+  },
+  rules: {
++   'ft-flow/boolean-style': ['error', 'boolean'],
+    // ... more rules
+  },
+});
+```
+
+Alternatively, you may set `parser` using `import babelESLintParser from '@babel/eslint-parser'` if you can't yet use `hermes-eslint`.
+When using the Babel parser, you may need to enable the following deprecated rules, which patch in behavior that `hermes-eslint` does automatically:
+
+- `ft-flow/use-flow-type`
+- `ft-flow/define-flow-type`
+
+<a name="legacy-configuration"></a>
+## Legacy Configuration
+
+<a name="shared-legacy-configurations"></a>
+### Shared legacy configurations
+
+This plugin exports a [recommended configuration](./src/configs/recommended.json) that enforces Flowtype best practices.
+
+To enable this configuration, use the `extends` property in your `.eslintrc` config file:
+
+```json
+{
+  "extends": ["plugin:ft-flow/recommended"]
+}
+```
+
+Alternatively, if you can't yet use `hermes-eslint`, prior to version 3.0.0, ft-flow shipped a recommended config that used `@babel/eslint-parser` which is still available under the `"plugin:ft-flow/babel-parser"` extension.
+
+Though it's recommended to switch to the recommended extension when possible as `babel-parser` may be removed in a future version.
+
+```json
+{
+  "extends": ["plugin:ft-flow/babel-parser"]
+}
+```
+
+<a name="manual-legacy-setup"></a>
+### Manual legacy setup
 
 1. Set `parser` property to `hermes-eslint`.
 2. Add `plugins` section and specify `ft-flow` as a plugin.
 3. Enable rules.
-
-<!-- -->
 
 ```json
 {
@@ -118,30 +227,11 @@ pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
 }
 ```
 
-<a name="shareable-configurations"></a>
-### Shareable configurations
+Alternatively, you may set `parser` to `@babel/eslint-parser` if you can't yet use `hermes-eslint`.
+When using the Babel parser, you may need to enable the following deprecated rules, which patch in behavior that `hermes-eslint` does automatically:
 
-<a name="recommended"></a>
-#### Recommended
-
-This plugin exports a [recommended configuration](./src/configs/recommended.json) that enforces Flowtype best practices.
-
-To enable this configuration use the `extends` property in your `.eslintrc` config file in place of the above suggested properties:
-
-```json
-{
-  "extends": ["plugin:ft-flow/recommended"]
-}
-```
-
-<a name="babel-parser"></a>
-#### Babel parser
-
-Alternatively, if you can't yet use `hermes-eslint`, prior to version 3.0.0 ft-flow shipped a recommended config that used `@babel/eslint-parser` which is still available under the `"plugin:ft-flow/babel-parser"` extension.
-
-Though it's recommended to switch to the recommended extension when possible as `babel-parser` may be removed in a future version.
-
-> By default this config also comes preloaded with `@babel/eslint-parser` which means for eslint to analyze your flow code it relies your babel config (`babel.config.js`, `.babelrc`, `.babelrc.js`). You should already have this setup as part of running/testing your code but if you don't you can learn more [here](https://flow.org/en/docs/tools/babel/)
+- `ft-flow/use-flow-type`
+- `ft-flow/define-flow-type`
 
 ---
 
@@ -1796,8 +1886,6 @@ const text = 'HELLO';
 /**
  * $FlowIgnore[incompatible-call] TODO 48
  */
-
-/* $FlowIgnore[incompatible-call] TODO 48 */
 ```
 
 
@@ -1995,6 +2083,14 @@ import Foo from './foo';
 
 
 // Message: Expected no newline after flow annotation
+
+/*
+* @flow
+*
+* something multi lined
+*/
+const text: string = 42;
+// Message: Expected newline after flow annotation
 ```
 
 The following patterns are not considered problems:
@@ -2013,6 +2109,15 @@ import Foo from './foo';
 // Options: ["never"]
 // @flow
 import Foo from './foo';
+
+// Options: ["always"]
+/*
+* @flow
+*
+* something multi lined
+*/
+
+const text: string = 42;
 ```
 
 
@@ -2099,8 +2204,6 @@ type f = { get(key: ["a", 1]): string, get(key: ["a", 2]): string }
 type f = { get(key: ["a", ["b", 1]]): string, get(key: ["a", ["b", 2]]): string }
 
 type f = { a: number, b: string, c: number }
-
-type f = { get(key: "a"): string, get(key: "b"): string }
 
 type f = { get(key: "a"): string, get(key: "a", key2: "b"): string }
 
@@ -2339,6 +2442,35 @@ const text: string = 42;
 // @flow strict
 
 // $FlowExpectedError[xxx]
+const text: string = 42;
+// Message: No suppression comments are allowed in "strict" Flow files. Either remove the error suppression, or lower the strictness of this module.
+
+// Options: [{}]
+/* @flow strict */
+
+// $FlowExpectedError[xxx]
+const text: string = 42;
+// Message: No suppression comments are allowed in "strict" Flow files. Either remove the error suppression, or lower the strictness of this module.
+
+// Options: [{}]
+/*
+* @flow strict
+*
+* something multi lined
+*/
+
+// $FlowExpectedError[xxx]
+const text: string = 42;
+// Message: No suppression comments are allowed in "strict" Flow files. Either remove the error suppression, or lower the strictness of this module.
+
+// Options: [{}]
+/*
+* @flow strict
+*
+* something multi lined
+*/
+
+/* $FlowIgnore[xxx] */
 const text: string = 42;
 // Message: No suppression comments are allowed in "strict" Flow files. Either remove the error suppression, or lower the strictness of this module.
 
@@ -3158,10 +3290,6 @@ declare class Foo { a: Foo; }
 declare class Foo { [a: string]: Foo, }
 // Message: Prefer semicolons to commas in object and class types
 
-// Options: ["comma"]
-declare class Foo { a: Foo; }
-// Message: Prefer commas to semicolons in object and class types
-
 // Options: ["semicolon"]
 declare class Foo { (): Foo, }
 // Message: Prefer semicolons to commas in object and class types
@@ -3358,9 +3486,6 @@ const foo: { n: number } & { s: string } = { n: 0, s: "" };
 
 type Foo = { bar: { n: number } & { s: string } };
 // Message: All intersection types must be declared with named type alias.
-
-function foo(bar: { n: number } & { s: string }) {}
-// Message: All intersection types must be declared with named type alias.
 ```
 
 The following patterns are not considered problems:
@@ -3534,14 +3659,6 @@ type foo = Array<{bar: string}>;
 
 // Options: ["never"]
 type foo = number;
-
-// Options: ["always"]
-interface StackFrame {
-          colno?: number;
-          lineno?: number;
-          filename?: string;
-          function?: {| name: string |};
-      }
 
 type A = { a: string, ... }
 ```
@@ -3840,9 +3957,6 @@ const f: fn = (a, b) => {}
 
 // Options: [{"excludeParameterMatch":"^_"}]
 (_foo: number, bar: string) => {}
-
-// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
-(foo) => {}
 ```
 
 
@@ -3969,6 +4083,17 @@ The following patterns are considered problems:
 type Props = { }; class Foo extends React.Component<Props> { }
 // Message: Props must be $ReadOnly
 
+// Options: [{"useExperimentalTypeScriptSyntax":true}]
+type Props = { }; class Foo extends React.Component<Props> { }
+// Message: Props must be Readonly
+
+// Options: [{"useExperimentalTypeScriptSyntax":false}]
+type Props = Readonly<{ }>; class Foo extends React.Component<Props> { }
+// Message: Props must be $ReadOnly
+
+type Props = Readonly<{ }>; class Foo extends React.Component<Props> { }
+// Message: Props must be $ReadOnly
+
 type OtherProps = { foo: string }; class Foo extends React.Component<OtherProps> { }
 // Message: OtherProps must be $ReadOnly
 
@@ -4006,6 +4131,17 @@ type Props = {| +foo: string, -bar: number |}; class Foo extends Component<Props
 type Props = { }; function Foo(props: Props) { return <p /> }
 // Message: Props must be $ReadOnly
 
+// Options: [{"useExperimentalTypeScriptSyntax":true}]
+type Props = { }; function Foo(props: Props) { return <p /> }
+// Message: Props must be Readonly
+
+// Options: [{"useExperimentalTypeScriptSyntax":false}]
+type Props = Readonly<{ }>; function Foo(props: Props) { return <p /> }
+// Message: Props must be $ReadOnly
+
+type Props = Readonly<{ }>; function Foo(props: Props) { return <p /> }
+// Message: Props must be $ReadOnly
+
 type Props = { }; function Foo(props: Props) { return foo ? <p /> : <span /> }
 // Message: Props must be $ReadOnly
 
@@ -4020,6 +4156,9 @@ The following patterns are not considered problems:
 
 ```js
 class Foo extends React.Component<$ReadOnly<{}>> { }
+
+// Options: [{"useExperimentalTypeScriptSyntax":true}]
+class Foo extends React.Component<Readonly<{}>> { }
 
 type Props = $ReadOnly<{}>; class Foo extends React.Component<Props> { }
 
@@ -4075,6 +4214,9 @@ import { type Props } from "file"; class Foo extends React.Component<Props> { }
 type Props = {}; function Foo() { }
 
 type Props = $ReadOnly<{}>; function Foo(props: Props) { }
+
+// Options: [{"useExperimentalTypeScriptSyntax":true}]
+type Props = Readonly<{}>; function Foo(props: Props) { }
 
 type Props = {}; function Foo(props: OtherProps) { }
 
@@ -4514,9 +4656,6 @@ const foo = 3;
 export opaque type Foo = number;
 const foo = 3;
 
-type Foo = number;
-const foo = 3;
-
 import bar from "./bar";
 type Foo = number;
 
@@ -4613,17 +4752,9 @@ a;
 // @nofloweeeeeee
 // Message: Misspelled or malformed Flow file annotation.
 
-// Options: ["always"]
-a;
-// Message: Flow file annotation is missing.
-
 // Options: ["always",{"annotationStyle":"line"}]
 /* @flow */
 // Message: Flow file annotation style must be `// @flow`
-
-// Options: ["always",{"annotationStyle":"block"}]
-// @flow
-// Message: Flow file annotation style must be `/* @flow */`
 
 // Options: ["always",{"annotationStyle":"block"}]
 // @flow
@@ -4941,9 +5072,6 @@ type FooType = { a: number, C: number, c: number, b: string }
 // Options: ["asc"]
 type FooType = { 1: number, 10: number, 2: boolean }
 // Message: Expected type annotations to be in ascending order. "2" must be before "10".
-
-type FooType = { a: number, c: number, b: string }
-// Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
         type FooType = {

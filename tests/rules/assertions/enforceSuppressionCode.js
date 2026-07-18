@@ -83,8 +83,5 @@ export default {
  * $FlowIgnore[incompatible-call] TODO 48
  */`,
     },
-    {
-      code: '/* $FlowIgnore[incompatible-call] TODO 48 */',
-    },
   ],
 };

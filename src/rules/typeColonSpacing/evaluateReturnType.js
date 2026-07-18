@@ -1,5 +1,5 @@
 export default (context, report) => {
-  const sourceCode = context.getSourceCode();
+  const { sourceCode } = context;
 
   return (functionNode) => {
     // skip FunctionTypeAnnotation, possibly another rule as it's an arrow, not a colon?

@@ -38,7 +38,7 @@ const create = (context) => {
   return {
     Program() {
       context
-        .getSourceCode()
+        .sourceCode
         .getAllComments()
         .filter((comment) => comment.type === 'Block' || comment.type === 'Line')
         .forEach(handleComment);

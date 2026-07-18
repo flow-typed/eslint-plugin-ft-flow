@@ -20,7 +20,7 @@ export const getBuiltinRule = (id) => {
   try {
     // eslint-disable-next-line import/no-unresolved
     return require('eslint/use-at-your-own-risk').builtinRules.get(id);
-  } catch (e) {
+  } catch {
     return require(`eslint/lib/rules/${id}`);
   }
 };

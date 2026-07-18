@@ -1,5 +1,3 @@
-const type = 'ArrowFunctionExpression';
-
 export default {
   invalid: [
 
@@ -11,7 +9,6 @@ export default {
         endColumn: 2,
         line: 1,
         messageId: 'expectedParens',
-        type,
       }],
       output: '(a) => {}',
     },
@@ -22,7 +19,6 @@ export default {
         endColumn: 2,
         line: 1,
         messageId: 'expectedParens',
-        type,
       }],
       output: '(a) => a',
     },
@@ -33,7 +29,6 @@ export default {
         endColumn: 2,
         line: 1,
         messageId: 'expectedParens',
-        type,
       }],
       output: '(a) => {\n}',
     },
@@ -44,7 +39,6 @@ export default {
         endColumn: 11,
         line: 1,
         messageId: 'expectedParens',
-        type,
       }],
       output: 'a.then((foo) => {});',
     },
@@ -55,7 +49,6 @@ export default {
         endColumn: 11,
         line: 1,
         messageId: 'expectedParens',
-        type,
       }],
       output: 'a.then((foo) => a);',
     },
@@ -66,7 +59,6 @@ export default {
         endColumn: 6,
         line: 1,
         messageId: 'expectedParens',
-        type,
       }],
       output: 'a((foo) => { if (true) {}; });',
     },
@@ -77,10 +69,8 @@ export default {
         endColumn: 12,
         line: 1,
         messageId: 'expectedParens',
-        type,
       }],
       output: 'a(async (foo) => { if (true) {}; });',
-      parserOptions: { ecmaVersion: 8 },
     },
 
     // "as-needed"
@@ -91,7 +81,6 @@ export default {
         endColumn: 3,
         line: 1,
         messageId: 'unexpectedParens',
-        type,
       }],
       options: ['as-needed'],
       output: 'a => a',
@@ -103,11 +92,9 @@ export default {
         endColumn: 3,
         line: 1,
         messageId: 'unexpectedParens',
-        type,
       }],
       options: ['as-needed'],
       output: 'a => a',
-      parserOptions: { ecmaVersion: 8 },
     },
     {
       code: 'async (a) => a',
@@ -116,11 +103,9 @@ export default {
         endColumn: 9,
         line: 1,
         messageId: 'unexpectedParens',
-        type,
       }],
       options: ['as-needed'],
       output: 'async a => a',
-      parserOptions: { ecmaVersion: 8 },
     },
     {
       code: 'async(a) => a',
@@ -129,11 +114,9 @@ export default {
         endColumn: 8,
         line: 1,
         messageId: 'unexpectedParens',
-        type,
       }],
       options: ['as-needed'],
       output: 'async a => a',
-      parserOptions: { ecmaVersion: 8 },
     },
 
     // "as-needed", { "requireForBlockBody": true }
@@ -144,7 +127,6 @@ export default {
         endColumn: 2,
         line: 1,
         messageId: 'expectedParensBlock',
-        type,
       }],
       options: ['as-needed', { requireForBlockBody: true }],
       output: '(a) => {}',
@@ -156,7 +138,6 @@ export default {
         endColumn: 3,
         line: 1,
         messageId: 'unexpectedParensInline',
-        type,
       }],
       options: ['as-needed', { requireForBlockBody: true }],
       output: 'a => a',
@@ -168,11 +149,9 @@ export default {
         endColumn: 8,
         line: 1,
         messageId: 'expectedParensBlock',
-        type,
       }],
       options: ['as-needed', { requireForBlockBody: true }],
       output: 'async (a) => {}',
-      parserOptions: { ecmaVersion: 8 },
     },
     {
       code: 'async (a) => a',
@@ -181,11 +160,9 @@ export default {
         endColumn: 9,
         line: 1,
         messageId: 'unexpectedParensInline',
-        type,
       }],
       options: ['as-needed', { requireForBlockBody: true }],
       output: 'async a => a',
-      parserOptions: { ecmaVersion: 8 },
     },
     {
       code: 'async(a) => a',
@@ -194,11 +171,9 @@ export default {
         endColumn: 8,
         line: 1,
         messageId: 'unexpectedParensInline',
-        type,
       }],
       options: ['as-needed', { requireForBlockBody: true }],
       output: 'async a => a',
-      parserOptions: { ecmaVersion: 8 },
     },
   ],
 
@@ -242,7 +217,6 @@ export default {
     { code: 'a.then((foo) => { if (true) {}; });' },
     {
       code: 'a.then(async (foo) => { if (true) {}; });',
-      parserOptions: { ecmaVersion: 8 },
     },
 
     // "always" (explicit)
@@ -273,7 +247,6 @@ export default {
     {
       code: 'a.then(async (foo) => { if (true) {}; });',
       options: ['always'],
-      parserOptions: { ecmaVersion: 8 },
     },
 
     // "as-needed"
@@ -312,12 +285,10 @@ export default {
     {
       code: 'async ([a, b]) => {}',
       options: ['as-needed'],
-      parserOptions: { ecmaVersion: 8 },
     },
     {
       code: 'async (a, b) => {}',
       options: ['as-needed'],
-      parserOptions: { ecmaVersion: 8 },
     },
     {
       code: '(a: T) => a',
@@ -372,12 +343,10 @@ export default {
     {
       code: 'async a => ({})',
       options: ['as-needed', { requireForBlockBody: true }],
-      parserOptions: { ecmaVersion: 8 },
     },
     {
       code: 'async a => a',
       options: ['as-needed', { requireForBlockBody: true }],
-      parserOptions: { ecmaVersion: 8 },
     },
     {
       code: '(a: T) => a',

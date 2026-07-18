@@ -9,7 +9,7 @@ import isNoFlowFileAnnotation from './isNoFlowFileAnnotation';
  *  is set to false, the function returns true if the flag has @noflow also.
  */
 export default (context, strict = true) => {
-  const comments = context.getSourceCode().getAllComments();
+  const comments = context.sourceCode.getAllComments();
 
   if (!comments.length) {
     return false;

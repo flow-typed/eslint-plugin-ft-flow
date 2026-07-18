@@ -177,21 +177,12 @@ export default {
           function?: {| name: string |};
       }`,
       options: ['always'],
-      output: `interface StackFrame {
-          colno?: number;
-          lineno?: number;
-          filename?: string;
-          function?: {| name: string |};
-      }`,
     },
     {
       code: `declare class MyEvent extends Event {
         key: string
       }`,
       options: ['always'],
-      output: `declare class MyEvent extends Event {
-        key: string
-      }`,
     },
 
     // Never
@@ -215,22 +206,6 @@ export default {
     {
       code: 'type foo = number;',
       options: ['never'],
-    },
-
-    {
-      code: `interface StackFrame {
-          colno?: number;
-          lineno?: number;
-          filename?: string;
-          function?: {| name: string |};
-      }`,
-      options: ['always'],
-      output: `interface StackFrame {
-          colno?: number;
-          lineno?: number;
-          filename?: string;
-          function?: {| name: string |};
-      }`,
     },
 
     // Explicit inexact

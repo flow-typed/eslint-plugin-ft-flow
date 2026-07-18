@@ -16,7 +16,7 @@ const create = (context) => {
     return {
       ObjectTypeIndexer(node) {
         const id = getParameterName(node, context);
-        const rawKeyType = context.getSourceCode().getText(node.key);
+        const rawKeyType = context.sourceCode.getText(node.key);
         if (id === null) {
           context.report({
             fix(fixer) {

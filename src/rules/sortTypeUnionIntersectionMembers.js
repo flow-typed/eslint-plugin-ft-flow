@@ -11,7 +11,6 @@ const groups = {
   unknown: 'unknown',
 };
 
-// eslint-disable-next-line complexity
 const getGroup = (node) => {
   // eslint-disable-next-line default-case
   switch (node.type) {
@@ -76,7 +75,7 @@ const sorters = {
 };
 
 const create = (context) => {
-  const sourceCode = context.getSourceCode();
+  const { sourceCode } = context;
 
   const {
     checkIntersections = true,

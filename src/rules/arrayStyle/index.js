@@ -25,7 +25,7 @@ export default (defaultConfig, simpleType) => {
     return {
       // shorthand
       ArrayTypeAnnotation(node) {
-        const rawElementType = context.getSourceCode().getText(node.elementType);
+        const rawElementType = context.sourceCode.getText(node.elementType);
         const inlinedType = inlineType(rawElementType);
         const wrappedInlinedType = needWrap(node.elementType) ? `(${inlinedType})` : inlinedType;
 
@@ -51,7 +51,7 @@ export default (defaultConfig, simpleType) => {
         if (node.id.name === 'Array'
           && node.typeParameters && node.typeParameters.params.length === 1) {
           const elementTypeNode = node.typeParameters.params[0];
-          const rawElementType = context.getSourceCode().getText(elementTypeNode);
+          const rawElementType = context.sourceCode.getText(elementTypeNode);
           const inlinedType = inlineType(rawElementType);
           const wrappedInlinedType = needWrap(elementTypeNode) ? `(${inlinedType})` : inlinedType;
 

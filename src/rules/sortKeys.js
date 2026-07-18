@@ -29,7 +29,7 @@ const sorters = {
 };
 
 const generateOrderedList = (context, sort, properties) => {
-  const source = context.getSourceCode();
+  const source = context.sourceCode;
 
   const items = properties.map((property) => {
     const name = getParameterName(property, context);
@@ -134,7 +134,7 @@ const generateFix = (node, context, sort) => {
   // maintain code style in a much nicer way
   let nodeText;
   const newTypes = generateOrderedList(context, sort, node.properties);
-  const source = context.getSourceCode(node);
+  const source = context.sourceCode;
 
   const originalSubstring = source.getText(node);
 

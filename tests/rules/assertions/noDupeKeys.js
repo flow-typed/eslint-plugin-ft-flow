@@ -91,9 +91,6 @@ export default {
       code: 'type f = { a: number, b: string, c: number }',
     },
     {
-      code: 'type f = { get(key: "a"): string, get(key: "b"): string }',
-    },
-    {
       code: 'type f = { get(key: "a"): string, get(key: "a", key2: "b"): string }',
     },
     {

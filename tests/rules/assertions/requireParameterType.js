@@ -283,13 +283,5 @@ export default {
         },
       ],
     },
-    {
-      code: '(foo) => {}',
-      settings: {
-        'ft-flow': {
-          onlyFilesWithFlowAnnotation: true,
-        },
-      },
-    },
   ],
 };

@@ -8,13 +8,14 @@
     "type": "git",
     "url": "https://github.com/flow-typed/eslint-plugin-ft-flow"
   },
+  "packageManager": "yarn@4.17.1+sha512.ccbfabf7d7b6b32075088be9386fb9a2e00bb6887ef07fa56effabc890a56d53da1ccc4128d62db245fcbd3961b236d75335bdf7d5320ed6eafb7588b7ad4697",
   "scripts": {
     "build:flow": "flow-copy-source --ignore '*.spec.*' src dist",
     "build": "rimraf ./dist && NODE_ENV=production babel ./src --out-dir ./dist --copy-files && yarn build:flow",
-    "check-docs": "babel-node ./scripts/checkDocs",
-    "check-tests": "babel-node ./scripts/checkTests",
-    "create-readme": "node ./scripts/genReadme && babel-node ./scripts/addAssertions",
-    "lint": "eslint .",
+    "check-docs": "node --require @babel/register ./scripts/checkDocs",
+    "check-tests": "node --require @babel/register ./scripts/checkTests",
+    "create-readme": "node ./scripts/genReadme && node --require @babel/register ./scripts/addAssertions",
+    "lint": "yarn build && eslint",
     "test:rules": "mocha --require @babel/register ./tests/rules/index.js",
     "test": "yarn jest && yarn test:rules",
     "prepublishOnly": "yarn create-readme && yarn build"
@@ -24,34 +25,34 @@
     "string-natural-compare": "^3.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.15.7",
-    "@babel/core": "^7.16.5",
-    "@babel/eslint-parser": "^7.16.5",
-    "@babel/node": "^7.15.8",
-    "@babel/plugin-syntax-flow": "^7.16.5",
-    "@babel/plugin-transform-react-jsx": "^7.16.5",
-    "@babel/preset-env": "^7.16.5",
-    "@babel/preset-flow": "^7.16.0",
-    "@babel/preset-react": "^7.16.7",
-    "@babel/register": "^7.15.3",
+    "@babel/cli": "^8.0.4",
+    "@babel/core": "^8.0.1",
+    "@babel/eslint-parser": "^8.0.1",
+    "@babel/plugin-syntax-flow": "^8.0.1",
+    "@babel/plugin-transform-react-jsx": "^8.0.1",
+    "@babel/preset-env": "^8.0.2",
+    "@babel/preset-flow": "^8.0.1",
+    "@babel/preset-react": "^8.0.1",
+    "@babel/register": "^8.0.1",
+    "@eslint/eslintrc": "^3.3.3",
     "ajv": "^8.6.3",
     "babel-plugin-add-module-exports": "^1.0.4",
-    "babel-plugin-transform-flow-enums": "^0.0.2",
-    "eslint": "^8.57.0",
-    "eslint-config-airbnb": "^19.0.2",
-    "eslint-config-bzc": "^1.0.5",
-    "eslint-plugin-fb-flow": "^0.0.4",
-    "eslint-plugin-ft-flow": "^1.1.0",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-jest": "^25.3.2",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-react-hooks": "^4.3.0",
-    "eslint-plugin-testing-library": "^5.0.1",
+    "eslint": "^10.7.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-bzc": "^1.0.14",
+    "eslint-plugin-fb-flow": "^0.0.5",
+    "eslint-plugin-ft-flow": "workspace:*",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jest": "^29.15.4",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-testing-library": "^7.16.2",
+    "eslint-plugin-unicorn": "^51.0.1",
     "flow-bin": "^0.167.1",
     "flow-copy-source": "^2.0.9",
     "glob": "^7.2.0",
-    "hermes-eslint": "^0.18.2",
+    "hermes-eslint": "~0.37.0",
     "husky": "^7.0.4",
     "jest": "^27.4.5",
     "lint-staged": "^12.1.2",
@@ -59,8 +60,20 @@
     "rimraf": "^3.0.2"
   },
   "peerDependencies": {
-    "eslint": "^8.56.0 || ^9.0.0",
-    "hermes-eslint": ">=0.15.0"
+    "@babel/eslint-parser": "^7.16.5 || ^8.0.0",
+    "eslint": "^8.57.0 || ^9.0.0 || ^10.0.0",
+    "hermes-eslint": ">=0.15.0 <0.38.0"
+  },
+  "peerDependenciesMeta": {
+    "@babel/eslint-parser": {
+      "optional": true
+    },
+    "hermes-eslint": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
   },
   "keywords": [
     "eslint",

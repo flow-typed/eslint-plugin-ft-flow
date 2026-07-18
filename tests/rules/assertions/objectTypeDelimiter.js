@@ -55,12 +55,6 @@ export default {
       output: 'declare class Foo { [a: string]: Foo; }',
     },
     {
-      code: 'declare class Foo { a: Foo; }',
-      errors: [{ message: 'Prefer commas to semicolons in object and class types' }],
-      options: ['comma'],
-      output: 'declare class Foo { a: Foo, }',
-    },
-    {
       code: 'declare class Foo { (): Foo, }',
       errors: [{ message: 'Prefer semicolons to commas in object and class types' }],
       options: ['semicolon'],

@@ -1,5 +1,5 @@
 export default (context, report) => {
-  const sourceCode = context.getSourceCode();
+  const { sourceCode } = context;
 
   return (typeCastExpression) => {
     report({

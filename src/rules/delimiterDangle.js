@@ -44,7 +44,7 @@ const create = (context) => {
   const option = context.options[0] || 'never';
   const interfaceOption = context.options[1] || option;
   const inexactNotationOption = context.options[2] || 'never';
-  const sourceCode = context.getSourceCode();
+  const { sourceCode } = context;
 
   const getNodeOption = (node) => {
     if (node.parent.type === 'InterfaceDeclaration') {
@@ -120,7 +120,8 @@ const create = (context) => {
     },
 
     TupleTypeAnnotation(node) {
-      evaluate(node, _.last(node.types));
+      // hermes-parser 0.33+ uses `elementTypes`; keep 0.32 `types` backward compatible.
+      evaluate(node, _.last(node.types || node.elementTypes));
     },
   };
 };
