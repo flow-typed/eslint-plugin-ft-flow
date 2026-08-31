@@ -1,5 +1,5 @@
 {
-  "parser": "hermes-eslint",
+  "parser": "flow-eslint",
   "plugins": [
     "ft-flow"
   ],

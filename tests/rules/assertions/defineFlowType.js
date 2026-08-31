@@ -251,7 +251,7 @@ const ALWAYS_VALID = [
 
 {
   const ruleTester = new RuleTester({
-    parser: require.resolve('hermes-eslint'),
+    parser: require.resolve('flow-eslint'),
     parserOptions: {
       babelOptions: {
         plugins: [

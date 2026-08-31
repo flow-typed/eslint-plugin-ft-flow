@@ -84,19 +84,19 @@
 ## Installation
 
 ```bash
-npm install eslint-plugin-ft-flow eslint hermes-eslint --save-dev
+npm install eslint-plugin-ft-flow eslint flow-eslint --save-dev
 
 # or with yarn
-yarn add -D eslint-plugin-ft-flow eslint hermes-eslint
+yarn add -D eslint-plugin-ft-flow eslint flow-eslint
 
 # or with pnpm
-pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
+pnpm add -D eslint-plugin-ft-flow eslint flow-eslint
 ```
 
 <a name="configuration"></a>
 ## Configuration
 
-1. Set `parser` property to `hermes-eslint`.
+1. Set `parser` property to `flow-eslint`.
 2. Add `plugins` section and specify `ft-flow` as a plugin.
 3. Enable rules.
 
@@ -104,7 +104,7 @@ pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
 
 ```json
 {
-  "parser": "hermes-eslint",
+  "parser": "flow-eslint",
   "plugins": ["ft-flow"],
   "rules": {
     "ft-flow/boolean-style": [2, "boolean"]
@@ -137,7 +137,7 @@ To enable this configuration use the `extends` property in your `.eslintrc` conf
 <a name="babel-parser"></a>
 #### Babel parser
 
-Alternatively, if you can't yet use `hermes-eslint`, prior to version 3.0.0 ft-flow shipped a recommended config that used `@babel/eslint-parser` which is still available under the `"plugin:ft-flow/babel-parser"` extension.
+Alternatively, if you can't yet use `flow-eslint`, prior to version 3.0.0 ft-flow shipped a recommended config that used `@babel/eslint-parser` which is still available under the `"plugin:ft-flow/babel-parser"` extension.
 
 Though it's recommended to switch to the recommended extension when possible as `babel-parser` may be removed in a future version.
 
@@ -1995,6 +1995,14 @@ import Foo from './foo';
 
 
 // Message: Expected no newline after flow annotation
+
+/*
+* @flow
+*
+* something multi lined
+*/
+const text: string = 42;
+// Message: Expected newline after flow annotation
 ```
 
 The following patterns are not considered problems:
@@ -2013,6 +2021,15 @@ import Foo from './foo';
 // Options: ["never"]
 // @flow
 import Foo from './foo';
+
+// Options: ["always"]
+/*
+* @flow
+*
+* something multi lined
+*/
+
+const text: string = 42;
 ```
 
 
@@ -2339,6 +2356,35 @@ const text: string = 42;
 // @flow strict
 
 // $FlowExpectedError[xxx]
+const text: string = 42;
+// Message: No suppression comments are allowed in "strict" Flow files. Either remove the error suppression, or lower the strictness of this module.
+
+// Options: [{}]
+/* @flow strict */
+
+// $FlowExpectedError[xxx]
+const text: string = 42;
+// Message: No suppression comments are allowed in "strict" Flow files. Either remove the error suppression, or lower the strictness of this module.
+
+// Options: [{}]
+/*
+* @flow strict
+*
+* something multi lined
+*/
+
+// $FlowExpectedError[xxx]
+const text: string = 42;
+// Message: No suppression comments are allowed in "strict" Flow files. Either remove the error suppression, or lower the strictness of this module.
+
+// Options: [{}]
+/*
+* @flow strict
+*
+* something multi lined
+*/
+
+/* $FlowIgnore[xxx] */
 const text: string = 42;
 // Message: No suppression comments are allowed in "strict" Flow files. Either remove the error suppression, or lower the strictness of this module.
 
@@ -3969,6 +4015,17 @@ The following patterns are considered problems:
 type Props = { }; class Foo extends React.Component<Props> { }
 // Message: Props must be $ReadOnly
 
+// Options: [{"useExperimentalTypeScriptSyntax":true}]
+type Props = { }; class Foo extends React.Component<Props> { }
+// Message: Props must be Readonly
+
+// Options: [{"useExperimentalTypeScriptSyntax":false}]
+type Props = Readonly<{ }>; class Foo extends React.Component<Props> { }
+// Message: Props must be $ReadOnly
+
+type Props = Readonly<{ }>; class Foo extends React.Component<Props> { }
+// Message: Props must be $ReadOnly
+
 type OtherProps = { foo: string }; class Foo extends React.Component<OtherProps> { }
 // Message: OtherProps must be $ReadOnly
 
@@ -4006,6 +4063,17 @@ type Props = {| +foo: string, -bar: number |}; class Foo extends Component<Props
 type Props = { }; function Foo(props: Props) { return <p /> }
 // Message: Props must be $ReadOnly
 
+// Options: [{"useExperimentalTypeScriptSyntax":true}]
+type Props = { }; function Foo(props: Props) { return <p /> }
+// Message: Props must be Readonly
+
+// Options: [{"useExperimentalTypeScriptSyntax":false}]
+type Props = Readonly<{ }>; function Foo(props: Props) { return <p /> }
+// Message: Props must be $ReadOnly
+
+type Props = Readonly<{ }>; function Foo(props: Props) { return <p /> }
+// Message: Props must be $ReadOnly
+
 type Props = { }; function Foo(props: Props) { return foo ? <p /> : <span /> }
 // Message: Props must be $ReadOnly
 
@@ -4020,6 +4088,9 @@ The following patterns are not considered problems:
 
 ```js
 class Foo extends React.Component<$ReadOnly<{}>> { }
+
+// Options: [{"useExperimentalTypeScriptSyntax":true}]
+class Foo extends React.Component<Readonly<{}>> { }
 
 type Props = $ReadOnly<{}>; class Foo extends React.Component<Props> { }
 
@@ -4075,6 +4146,9 @@ import { type Props } from "file"; class Foo extends React.Component<Props> { }
 type Props = {}; function Foo() { }
 
 type Props = $ReadOnly<{}>; function Foo(props: Props) { }
+
+// Options: [{"useExperimentalTypeScriptSyntax":true}]
+type Props = Readonly<{}>; function Foo(props: Props) { }
 
 type Props = {}; function Foo(props: OtherProps) { }
 

@@ -28,18 +28,18 @@
 ## Installation
 
 ```bash
-npm install eslint-plugin-ft-flow eslint hermes-eslint --save-dev
+npm install eslint-plugin-ft-flow eslint flow-eslint --save-dev
 
 # or with yarn
-yarn add -D eslint-plugin-ft-flow eslint hermes-eslint
+yarn add -D eslint-plugin-ft-flow eslint flow-eslint
 
 # or with pnpm
-pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
+pnpm add -D eslint-plugin-ft-flow eslint flow-eslint
 ```
 
 ## Configuration
 
-1. Set `parser` property to `hermes-eslint`.
+1. Set `parser` property to `flow-eslint`.
 2. Add `plugins` section and specify `ft-flow` as a plugin.
 3. Enable rules.
 
@@ -47,7 +47,7 @@ pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
 
 ```json
 {
-  "parser": "hermes-eslint",
+  "parser": "flow-eslint",
   "plugins": ["ft-flow"],
   "rules": {
     "ft-flow/boolean-style": [2, "boolean"]
@@ -77,7 +77,7 @@ To enable this configuration use the `extends` property in your `.eslintrc` conf
 
 #### Babel parser
 
-Alternatively, if you can't yet use `hermes-eslint`, prior to version 3.0.0 ft-flow shipped a recommended config that used `@babel/eslint-parser` which is still available under the `"plugin:ft-flow/babel-parser"` extension.
+Alternatively, if you can't yet use `flow-eslint`, prior to version 3.0.0 ft-flow shipped a recommended config that used `@babel/eslint-parser` which is still available under the `"plugin:ft-flow/babel-parser"` extension.
 
 Though it's recommended to switch to the recommended extension when possible as `babel-parser` may be removed in a future version.
 
