@@ -2984,6 +2984,27 @@ flow-copy-source@^2.0.9:
     kefir "^3.7.3"
     yargs "^15.0.1"
 
+flow-eslint@^0.329.0:
+  version "0.329.0"
+  resolved "https://registry.yarnpkg.com/flow-eslint/-/flow-eslint-0.329.0.tgz#a5bfe19d9c62b0a00146602086cfbb5726d52067"
+  integrity sha512-HA4qLKV6al7uFGNbINaZeH0yQiuTD8vAzuZ++PbFMR7qKUkIPaQ4/wvfwX4SKOVdUTnNZF9rFcMGmDzp66snJw==
+  dependencies:
+    esrecurse "^4.3.0"
+    flow-estree "0.329.0"
+    flow-parser "0.329.0"
+
+flow-estree@0.329.0:
+  version "0.329.0"
+  resolved "https://registry.yarnpkg.com/flow-estree/-/flow-estree-0.329.0.tgz#ed436662a2fe5a93bed6f986a6894a0a99de55da"
+  integrity sha512-Stv2+LumW7n6DUrV+KlqB4HikeyQtLFUpd9iVexISblopKiYFjNYMmTGUcN5at8NKEmkhjAV5UGps3Z8QqK1lw==
+
+flow-parser@0.329.0:
+  version "0.329.0"
+  resolved "https://registry.yarnpkg.com/flow-parser/-/flow-parser-0.329.0.tgz#de484cac74c5c8389206fe0b63851164d042fcc1"
+  integrity sha512-skMH3HUOF3+JSlIKt4F/LITfzMGEPpJ0S+Gu7HcmxOjWeYEO5PUZJi5WpLw+L4MZaNcMEkzUtoN+M2fAbiutWA==
+  dependencies:
+    flow-estree "0.329.0"
+
 form-data@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/form-data/-/form-data-3.0.1.tgz#ebd53791b78356a99af9a300d4282c4d5eb9755f"
@@ -3162,27 +3183,6 @@ he@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
-
-hermes-eslint@^0.18.2:
-  version "0.18.2"
-  resolved "https://registry.yarnpkg.com/hermes-eslint/-/hermes-eslint-0.18.2.tgz#af09ea1700eb32502caf135b181ffed6091ccb72"
-  integrity sha512-FWKVoHyHaXRjOfjoTgoc4OTkC+KThYdhLFyggoXIYLMDHF9hkg5yHSih3cyK3hT73te6+aaGHePzwaOai69uoA==
-  dependencies:
-    esrecurse "^4.3.0"
-    hermes-estree "0.18.2"
-    hermes-parser "0.18.2"
-
-hermes-estree@0.18.2:
-  version "0.18.2"
-  resolved "https://registry.yarnpkg.com/hermes-estree/-/hermes-estree-0.18.2.tgz#fd450fa1659cf074ceaa2ddeeb21674f3b2342f3"
-  integrity sha512-KoLsoWXJ5o81nit1wSyEZnWUGy9cBna9iYMZBR7skKh7okYAYKqQ9/OczwpMHn/cH0hKDyblulGsJ7FknlfVxQ==
-
-hermes-parser@0.18.2:
-  version "0.18.2"
-  resolved "https://registry.yarnpkg.com/hermes-parser/-/hermes-parser-0.18.2.tgz#50f15e2fcd559a48c68cd7af259d4292298bd14d"
-  integrity sha512-1eQfvib+VPpgBZ2zYKQhpuOjw1tH+Emuib6QmjkJWJMhyjM8xnXMvA+76o9LhF0zOAJDZgPfQhg43cyXEyl5Ew==
-  dependencies:
-    hermes-estree "0.18.2"
 
 homedir-polyfill@^1.0.1:
   version "1.0.3"

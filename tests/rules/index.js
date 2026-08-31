@@ -100,7 +100,7 @@ for (const ruleName of reportingRules) {
 
   [
     '@babel/eslint-parser',
-    'hermes-eslint',
+    'flow-eslint',
   ].forEach((parser) => {
     const ruleTester = new RuleTester({
       parser: require.resolve(parser),

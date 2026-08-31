@@ -50,8 +50,8 @@
     "eslint-plugin-testing-library": "^5.0.1",
     "flow-bin": "^0.167.1",
     "flow-copy-source": "^2.0.9",
+    "flow-eslint": "^0.329.0",
     "glob": "^7.2.0",
-    "hermes-eslint": "^0.18.2",
     "husky": "^7.0.4",
     "jest": "^27.4.5",
     "lint-staged": "^12.1.2",
@@ -60,7 +60,7 @@
   },
   "peerDependencies": {
     "eslint": "^8.56.0 || ^9.0.0",
-    "hermes-eslint": ">=0.15.0"
+    "flow-eslint": ">=0.323.0"
   },
   "keywords": [
     "eslint",
